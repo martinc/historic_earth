@@ -24,16 +24,6 @@
 		5B20C93F1022C9740003FE62 /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B20C93A1022C9740003FE62 /* 3.png */; };
 		5B20C9401022C9740003FE62 /* 4.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B20C93B1022C9740003FE62 /* 4.png */; };
 		5B20C9411022C9740003FE62 /* 5.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B20C93C1022C9740003FE62 /* 5.png */; };
-		5B2F6DC81026173D00676DBD /* libThree20.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B2F6DC71026172A00676DBD /* libThree20.a */; };
-		5B2F6DDB1026177800676DBD /* Three20.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5B2F6DDA1026177800676DBD /* Three20.bundle */; };
-		5B2F6E2410261D4500676DBD /* LocateMapsSource.m in Resources */ = {isa = PBXBuildFile; fileRef = 5B2F6E2310261D4500676DBD /* LocateMapsSource.m */; };
-		5B2F6EE7102625AF00676DBD /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B2F6EDC102625AF00676DBD /* NSObject+SBJSON.m */; };
-		5B2F6EE8102625AF00676DBD /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B2F6EDE102625AF00676DBD /* NSString+SBJSON.m */; };
-		5B2F6EE9102625AF00676DBD /* SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B2F6EE0102625AF00676DBD /* SBJSON.m */; };
-		5B2F6EEA102625AF00676DBD /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B2F6EE2102625AF00676DBD /* SBJsonBase.m */; };
-		5B2F6EEB102625AF00676DBD /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B2F6EE4102625AF00676DBD /* SBJsonParser.m */; };
-		5B2F6EEC102625AF00676DBD /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B2F6EE6102625AF00676DBD /* SBJsonWriter.m */; };
-		5B2F6F3010262D2A00676DBD /* LocateMapsSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B2F6E2310261D4500676DBD /* LocateMapsSource.m */; };
 		5BCD483D1025538D0066772E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BCD483C1025538D0066772E /* QuartzCore.framework */; };
 		5BCD503F102554980066772E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BCD503E102554980066772E /* CoreLocation.framework */; };
 		5BCD504A102555D00066772E /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BCD5049102555D00066772E /* MapViewController.m */; };
@@ -42,20 +32,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		5B2F6DC61026172A00676DBD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5B2F6DBF1026172A00676DBD /* Three20.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = BEF31F3A0F352DF5000DE5D2;
-			remoteInfo = Three20;
-		};
-		5B2F6DD61026175900676DBD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5B2F6DBF1026172A00676DBD /* Three20.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = BEF31F390F352DF5000DE5D2;
-			remoteInfo = Three20;
-		};
 		5BCD5038102554840066772E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5BCD502A102554840066772E /* MapView.xcodeproj */;
@@ -102,23 +78,6 @@
 		5B20C93A1022C9740003FE62 /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
 		5B20C93B1022C9740003FE62 /* 4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4.png; sourceTree = "<group>"; };
 		5B20C93C1022C9740003FE62 /* 5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 5.png; sourceTree = "<group>"; };
-		5B2F6DBF1026172A00676DBD /* Three20.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Three20.xcodeproj; path = ../three20/src/Three20.xcodeproj; sourceTree = SOURCE_ROOT; };
-		5B2F6DDA1026177800676DBD /* Three20.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Three20.bundle; path = ../three20/src/Three20.bundle; sourceTree = SOURCE_ROOT; };
-		5B2F6E2210261D4500676DBD /* LocateMapsSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocateMapsSource.h; sourceTree = "<group>"; };
-		5B2F6E2310261D4500676DBD /* LocateMapsSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocateMapsSource.m; sourceTree = "<group>"; };
-		5B2F6EDA102625AF00676DBD /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = SOURCE_ROOT; };
-		5B2F6EDB102625AF00676DBD /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = SOURCE_ROOT; };
-		5B2F6EDC102625AF00676DBD /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJSON.m"; sourceTree = SOURCE_ROOT; };
-		5B2F6EDD102625AF00676DBD /* NSString+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBJSON.h"; sourceTree = SOURCE_ROOT; };
-		5B2F6EDE102625AF00676DBD /* NSString+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SBJSON.m"; sourceTree = SOURCE_ROOT; };
-		5B2F6EDF102625AF00676DBD /* SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJSON.h; sourceTree = SOURCE_ROOT; };
-		5B2F6EE0102625AF00676DBD /* SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJSON.m; sourceTree = SOURCE_ROOT; };
-		5B2F6EE1102625AF00676DBD /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = SOURCE_ROOT; };
-		5B2F6EE2102625AF00676DBD /* SBJsonBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonBase.m; sourceTree = SOURCE_ROOT; };
-		5B2F6EE3102625AF00676DBD /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = SOURCE_ROOT; };
-		5B2F6EE4102625AF00676DBD /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = SOURCE_ROOT; };
-		5B2F6EE5102625AF00676DBD /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = SOURCE_ROOT; };
-		5B2F6EE6102625AF00676DBD /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = SOURCE_ROOT; };
 		5BCD483C1025538D0066772E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		5BCD502A102554840066772E /* MapView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MapView.xcodeproj; path = ../routemeNT/MapView/MapView.xcodeproj; sourceTree = SOURCE_ROOT; };
 		5BCD503E102554980066772E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -140,7 +99,6 @@
 				5BCD483D1025538D0066772E /* QuartzCore.framework in Frameworks */,
 				5BCD503F102554980066772E /* CoreLocation.framework in Frameworks */,
 				5BCD507110255B880066772E /* libMapView.a in Frameworks */,
-				5B2F6DC81026173D00676DBD /* libThree20.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,8 +116,6 @@
 				28D7ACF70DDB3853001CB0EB /* SearchResultsController.m */,
 				5BCD5048102555D00066772E /* MapViewController.h */,
 				5BCD5049102555D00066772E /* MapViewController.m */,
-				5B2F6E2210261D4500676DBD /* LocateMapsSource.h */,
-				5B2F6E2310261D4500676DBD /* LocateMapsSource.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -175,13 +131,10 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				5B2F6ED91026259A00676DBD /* json */,
-				5B2F6DBF1026172A00676DBD /* Three20.xcodeproj */,
 				5BCD502A102554840066772E /* MapView.xcodeproj */,
 				5B20C8D71022BBC90003FE62 /* paperbackground.png */,
 				5B20C8EA1022BCE60003FE62 /* CustomButton.h */,
 				5B20C8EB1022BCE60003FE62 /* CustomButton.m */,
-				5B2F6DDA1026177800676DBD /* Three20.bundle */,
 				5B20C8CF1022BA500003FE62 /* Images */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -237,34 +190,6 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
-		5B2F6DC01026172A00676DBD /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				5B2F6DC71026172A00676DBD /* libThree20.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		5B2F6ED91026259A00676DBD /* json */ = {
-			isa = PBXGroup;
-			children = (
-				5B2F6EDA102625AF00676DBD /* JSON.h */,
-				5B2F6EDB102625AF00676DBD /* NSObject+SBJSON.h */,
-				5B2F6EDC102625AF00676DBD /* NSObject+SBJSON.m */,
-				5B2F6EDD102625AF00676DBD /* NSString+SBJSON.h */,
-				5B2F6EDE102625AF00676DBD /* NSString+SBJSON.m */,
-				5B2F6EDF102625AF00676DBD /* SBJSON.h */,
-				5B2F6EE0102625AF00676DBD /* SBJSON.m */,
-				5B2F6EE1102625AF00676DBD /* SBJsonBase.h */,
-				5B2F6EE2102625AF00676DBD /* SBJsonBase.m */,
-				5B2F6EE3102625AF00676DBD /* SBJsonParser.h */,
-				5B2F6EE4102625AF00676DBD /* SBJsonParser.m */,
-				5B2F6EE5102625AF00676DBD /* SBJsonWriter.h */,
-				5B2F6EE6102625AF00676DBD /* SBJsonWriter.m */,
-			);
-			name = json;
-			sourceTree = "<group>";
-		};
 		5BCD502B102554840066772E /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -289,7 +214,6 @@
 			);
 			dependencies = (
 				5BCD503D1025548F0066772E /* PBXTargetDependency */,
-				5B2F6DD71026175900676DBD /* PBXTargetDependency */,
 			);
 			name = History;
 			productName = History;
@@ -311,10 +235,6 @@
 					ProductGroup = 5BCD502B102554840066772E /* Products */;
 					ProjectRef = 5BCD502A102554840066772E /* MapView.xcodeproj */;
 				},
-				{
-					ProductGroup = 5B2F6DC01026172A00676DBD /* Products */;
-					ProjectRef = 5B2F6DBF1026172A00676DBD /* Three20.xcodeproj */;
-				},
 			);
 			projectRoot = "";
 			targets = (
@@ -324,13 +244,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		5B2F6DC71026172A00676DBD /* libThree20.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libThree20.a;
-			remoteRef = 5B2F6DC61026172A00676DBD /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		5BCD5039102554840066772E /* libMapView.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -362,8 +275,6 @@
 				5B20C93F1022C9740003FE62 /* 3.png in Resources */,
 				5B20C9401022C9740003FE62 /* 4.png in Resources */,
 				5B20C9411022C9740003FE62 /* 5.png in Resources */,
-				5B2F6DDB1026177800676DBD /* Three20.bundle in Resources */,
-				5B2F6E2410261D4500676DBD /* LocateMapsSource.m in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -374,30 +285,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5B2F6F3010262D2A00676DBD /* LocateMapsSource.m in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* HistoryAppDelegate.m in Sources */,
 				28D7ACF80DDB3853001CB0EB /* SearchResultsController.m in Sources */,
 				5B20C8EC1022BCE60003FE62 /* CustomButton.m in Sources */,
 				5BCD504A102555D00066772E /* MapViewController.m in Sources */,
 				5BCD51BB102570360066772E /* MainMenuController.m in Sources */,
-				5B2F6EE7102625AF00676DBD /* NSObject+SBJSON.m in Sources */,
-				5B2F6EE8102625AF00676DBD /* NSString+SBJSON.m in Sources */,
-				5B2F6EE9102625AF00676DBD /* SBJSON.m in Sources */,
-				5B2F6EEA102625AF00676DBD /* SBJsonBase.m in Sources */,
-				5B2F6EEB102625AF00676DBD /* SBJsonParser.m in Sources */,
-				5B2F6EEC102625AF00676DBD /* SBJsonWriter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		5B2F6DD71026175900676DBD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Three20;
-			targetProxy = 5B2F6DD61026175900676DBD /* PBXContainerItemProxy */;
-		};
 		5BCD503D1025548F0066772E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = MapView;
@@ -415,10 +314,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = History_Prefix.pch;
-				HEADER_SEARCH_PATHS = (
-					"../three20/src/**",
-					"../routemeNT/MapView/**",
-				);
+				HEADER_SEARCH_PATHS = "../routemeNT/MapView/**";
 				INFOPLIST_FILE = "History-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -438,10 +334,7 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = History_Prefix.pch;
-				HEADER_SEARCH_PATHS = (
-					"../three20/src/**",
-					"../routemeNT/MapView/**",
-				);
+				HEADER_SEARCH_PATHS = "../routemeNT/MapView/**";
 				INFOPLIST_FILE = "History-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -462,10 +355,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = (
-					"../three20/src/**",
-					"../routemeNT/MapView/**",
-				);
+				HEADER_SEARCH_PATHS = "../routemeNT/MapView/**";
 				PREBINDING = NO;
 				SDKROOT = iphoneos3.0;
 			};
@@ -479,10 +369,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = (
-					"../three20/src/**",
-					"../routemeNT/MapView/**",
-				);
+				HEADER_SEARCH_PATHS = "../routemeNT/MapView/**";
 				PREBINDING = NO;
 				SDKROOT = iphoneos3.0;
 			};

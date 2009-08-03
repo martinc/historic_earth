@@ -7,18 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Three20/Three20.h"
-
 #import "CustomButton.h"
-#import "LocateMapsSource.h"
 #import "MapViewController.h"
 
-@interface SearchResultsController : TTTableViewController {
+@interface SearchResultsController : UITableViewController {
 	MapViewController *mapController;
 	NSMutableArray *listOfItems;
 }
 
-//- (UIImage *)scaleImage:(UIImage *) image maxWidth:(float) maxWidth maxHeight:(float) maxHeight;
+- (UIImage *)scaleImage:(UIImage *) image maxWidth:(float) maxWidth maxHeight:(float) maxHeight;
 
 
 @end
