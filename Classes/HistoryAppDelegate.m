@@ -18,6 +18,9 @@
     
 	[application setStatusBarHidden:YES animated:NO];
 	
+	[[TTURLRequestQueue mainQueue] setMaxContentLength:0];
+
+	
 	MainMenuController* main = [[MainMenuController alloc] initWithStyle:UITableViewStyleGrouped];
 	
 	navController = [[UINavigationController alloc] initWithRootViewController: main];

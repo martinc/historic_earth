@@ -30,7 +30,7 @@
 	
 	self.hidesBottomBarWhenPushed = YES;
 	
-	searchController = [[SearchResultsController alloc] initWithStyle:UITableViewStyleGrouped];
+	searchController = [[SearchResultsController alloc] init];
 	
 	//self.tableView.backgroundColor = [UIColor blueColor];
 

@@ -42,11 +42,12 @@
 	
 	
 	self.navigationController.toolbar.barStyle = self.navigationController.navigationBar.barStyle;
+	self.navigationController.toolbar.translucent = self.navigationController.navigationBar.translucent;
 	self.navigationController.toolbar.tintColor = self.navigationController.navigationBar.tintColor;
 	
 	
 	//UISlider* slider = [[UISlider alloc] init];
-	UISlider* slider = [[UISlider alloc] initWithFrame:CGRectMake(0,0,170,20)];
+	UISlider* slider = [[UISlider alloc] initWithFrame:CGRectMake(0,0,100,20)];
 	
 	slider.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 
@@ -61,11 +62,13 @@
 	//item.customView.bounds = CGRectMake(0, 0, 100, 100);
 	//item.width = 170;
 	
+	UIBarButtonItem* back = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRewind target:nil action:NULL];
+	UIBarButtonItem* forward = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFastForward target:nil action:NULL];
 
 	UIBarButtonItem* space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:NULL];
 							  
 	
-	NSArray* items = [[NSArray alloc] initWithObjects: past, space, item, space, present, nil ];
+	NSArray* items = [[NSArray alloc] initWithObjects: past, item, present, nil ];
 	
 	[self setToolbarItems:items animated: NO ];
 	self.hidesBottomBarWhenPushed = NO;

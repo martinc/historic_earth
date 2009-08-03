@@ -7,6 +7,8 @@
 //
 
 #import "SearchResultsController.h"
+#import "Three20/Three20.h"
+
 
 @implementation SearchResultsController
 
@@ -31,15 +33,25 @@
 */
 
 
+- (id) init {
+
+	if(self = [super init]){
+	
+		self.title = @"Results";
+		
+		self.dataSource = [LocateMapsSource dataSourceWithItems:nil];
+
+		
+	}
+	
+	return self;
+}
+
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-	
-	self.title = @"Results";
-	
-	self.tableView.backgroundColor = [UIColor clearColor];
-	
+
 	//self.tableView.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.4];
 
 	
@@ -68,11 +80,20 @@
 	
 	
 	
-//	UITableView* tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStyleGrouped];
+	TTTableView* tableView = [[TTTableView alloc] initWithFrame:self.view.frame style:UITableViewStyleGrouped];
 //UITableView* tableView = [[UITableView alloc] initWithFrame:tableFrame style:UITableViewStyleGrouped];
 
+	tableView.backgroundColor = [UIColor clearColor];
+	tableView.separatorColor = [UIColor blackColor];
+	tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	
-	self.tableView.separatorColor = [UIColor blackColor];
+	self.variableHeightRows = NO;
+	
+	tableView.dataSource = [self createDataSource];
+	
+
+	
+	[self.view addSubview:tableView];
 //	self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 	
 	
@@ -87,6 +108,21 @@
 	self.tableView.tableFooterView = thebutton;
 	
 	*/	
+}
+
+- (id<TTTableViewDataSource>)createDataSource {
+	
+	NSLog(@"creating datasource");
+
+	LocateMapsSource *dataSource = [[[LocateMapsSource alloc] init] autorelease];
+	[dataSource load:TTURLRequestCachePolicyNoCache nextPage:NO];
+
+	return dataSource;
+	
+}
+
+- (UIImage*)imageForError:(NSError*)error {
+	return [UIImage imageNamed:@"Three20.bundle/images/error.png"];
 }
 
 
@@ -118,6 +154,8 @@
 
 
 #pragma mark Table view methods
+
+/*
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -157,11 +195,11 @@
 	
 	//white text on dark
 	
-	/*
-	cell.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.5];
-	cell.textLabel.textColor = [UIColor whiteColor];
-	cell.detailTextLabel.textColor = [UIColor lightGrayColor];
-	 */
+	
+	//cell.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.5];
+	//cell.textLabel.textColor = [UIColor whiteColor];
+	//cell.detailTextLabel.textColor = [UIColor lightGrayColor];
+	 
 	
 	
 	cell.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.4];
@@ -187,6 +225,7 @@
 	return 130.0;
 }
 
+ */
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -208,7 +247,7 @@
 
 
 
-
+/*
 - (UIImage *)scaleImage:(UIImage *) image maxWidth:(float) maxWidth maxHeight:(float) maxHeight
 {
 	CGImageRef imgRef = image.CGImage;
@@ -255,7 +294,7 @@
 	
 	return imageCopy;
 }
-
+*/
 
 
 @end
