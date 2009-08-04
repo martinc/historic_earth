@@ -33,6 +33,12 @@
 }
 */
 
+- (void) viewWillAppear:(BOOL)animated {
+	
+	[self.navigationController setNavigationBarHidden:NO animated: YES];
+
+}
+
 
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -128,6 +134,8 @@
 	
 }
 
+# pragma mark Loading JSON Data
+
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
     // this method is called when the server has determined that it
@@ -172,6 +180,8 @@
 	
 	NSArray* jsonData = [dataString JSONValue];
 	
+	[dataString release];
+	
 	//NSLog(@"json object is : %@",jsonData);
 	
 	for(NSDictionary* mapData in jsonData){
@@ -186,7 +196,7 @@
 		
 		TTURLRequest* request = [TTURLRequest requestWithURL:theimage delegate:self];
 		
-		request.userInfo = [[NSNumber numberWithInt:[listOfItems count]-1] autorelease];
+		request.userInfo = [NSNumber numberWithInt:[listOfItems count]-1];
 		request.response = [[[TTURLImageResponse alloc] init] autorelease];
 
 		
@@ -205,6 +215,8 @@
     [receivedData release];
 }
 
+#pragma mark Loaded Image
+
 - (void)requestDidFinishLoad:(TTURLRequest*)request
 {
 	
@@ -216,12 +228,13 @@
 	[listOfImages insertObject:imageLoaded atIndex: rowloaded];
 	
 	
-	NSIndexPath  *indx =  [NSIndexPath indexPathForRow:rowloaded inSection:0];
+//	NSIndexPath  *indx =  [NSIndexPath indexPathForRow:rowloaded inSection:0];
 
-	/*
-	[self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject: indx]
-						  withRowAnimation:UITableViewRowAnimationFade];
-	*/
+//	NSLog(@"index is %@", indx);
+	
+//	[self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject: indx]
+//						  withRowAnimation:UITableViewRowAnimationFade];
+	
 	[self.tableView reloadData];
 
 	
@@ -267,11 +280,9 @@
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	
-	if(loadingResults)
-		return 0;
-	else {
+
 		return [listOfItems count];
-	}
+
 
 }
 

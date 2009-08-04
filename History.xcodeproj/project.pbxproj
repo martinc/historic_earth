@@ -44,14 +44,14 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 5B2F72791026C59C00676DBD /* Three20.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = BEF31F3A0F352DF5000DE5D2 /* libThree20.a */;
+			remoteGlobalIDString = BEF31F3A0F352DF5000DE5D2;
 			remoteInfo = Three20;
 		};
 		5B2F72801026C5B400676DBD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5B2F72791026C59C00676DBD /* Three20.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = BEF31F390F352DF5000DE5D2 /* Three20 */;
+			remoteGlobalIDString = BEF31F390F352DF5000DE5D2;
 			remoteInfo = Three20;
 		};
 		5BCD5038102554840066772E /* PBXContainerItemProxy */ = {
@@ -458,7 +458,10 @@
 					"../three20/src/**",
 					"../routemeNT/MapView/**",
 				);
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				PREBINDING = NO;
 				SDKROOT = iphoneos3.0;
 			};
@@ -476,7 +479,10 @@
 					"../three20/src/**",
 					"../routemeNT/MapView/**",
 				);
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				PREBINDING = NO;
 				SDKROOT = iphoneos3.0;
 			};

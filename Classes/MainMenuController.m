@@ -11,18 +11,51 @@
 
 @implementation MainMenuController
 
-/*
+
 - (id)initWithStyle:(UITableViewStyle)style {
     // Override initWithStyle: if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
     if (self = [super initWithStyle:style]) {
+		
+		//self.tableView.frame = CGRectMake(40, 0, 240, 480);
+		
+		searchController = [[SearchResultsController alloc] initWithStyle:UITableViewStyleGrouped];
+
+		
+		mainMenuData = [[NSMutableArray alloc] initWithObjects:
+						[NSMutableArray arrayWithObjects:
+						 [NSMutableDictionary dictionaryWithObjectsAndKeys:
+						  @"Map Your Location", @"name",
+						  searchController, @"controller",
+						  nil],
+						 [NSMutableDictionary dictionaryWithObjectsAndKeys:
+						  @"Featured Collections", @"name",
+						  [NSNull null], @"controller",
+						  nil],
+						 nil],
+						[NSMutableArray arrayWithObjects:
+						 [NSMutableDictionary dictionaryWithObjectsAndKeys:
+						  @"Settings", @"name",
+						  [NSNull null], @"controller",
+						  nil],
+						 [NSMutableDictionary dictionaryWithObjectsAndKeys:
+						  @"Unlock Content", @"name",
+						  [NSNull null], @"controller",
+						  nil],
+						 nil],
+						nil];
+		
+
     }
     return self;
 }
-*/
+
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+	
+
+	
 	
 	self.title = @"Historic Earth";
 	
@@ -30,21 +63,34 @@
 	
 	self.hidesBottomBarWhenPushed = YES;
 	
-	searchController = [[SearchResultsController alloc] initWithStyle:UITableViewStyleGrouped];
+	
+	
+	UILabel* headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 200)];
+	headerLabel.text = @"Historic Earth";
+	headerLabel.font = [UIFont fontWithName:@"Georgia" size:28];
+	headerLabel.backgroundColor = [UIColor clearColor];
+	headerLabel.textAlignment = UITextAlignmentCenter;
+	self.tableView.tableHeaderView = headerLabel;
+	[headerLabel release];
 	
 	//self.tableView.backgroundColor = [UIColor blueColor];
 
 
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+	
+	
+	
+
 }
 
 
-/*
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+	[self.navigationController setNavigationBarHidden:YES animated: animated];
 }
-*/
+
 /*
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -85,13 +131,13 @@
 #pragma mark Table view methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return [mainMenuData count];
 }
 
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
+    return [[mainMenuData objectAtIndex:section] count];
 }
 
 
@@ -102,13 +148,13 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
     // Set up the cell...
-	
-	if(indexPath.row == 0) cell.textLabel.text =  @"find your location";
-	else if(indexPath.row == 1) cell.textLabel.text = @"featured collections";
+	NSLog(@"setting up cell %d, %d", indexPath.section, indexPath.row);
+	cell.textLabel.text = [[[mainMenuData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"name"];
+
 	
 //	cell.detailTextLabel.backgroundColor = [UIColor clearColor];
 //	cell.backgroundColor = [UIColor clearColor];
@@ -124,6 +170,8 @@
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 	cell.textLabel.backgroundColor = [UIColor clearColor];
 	
+	cell.textLabel.font = [UIFont fontWithName:@"Georgia" size:16.0];
+	
 
     return cell;
 }
@@ -131,10 +179,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	
-	if(indexPath.row == 0){
+	if(indexPath.section == 0 && indexPath.row == 0){
 		
 		[self.navigationController pushViewController:searchController animated:YES];
-		
+
 		
 	}
     // Navigation logic may go here. Create and push another view controller.

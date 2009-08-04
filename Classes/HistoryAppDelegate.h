@@ -13,7 +13,7 @@
 @interface HistoryAppDelegate : NSObject <UIApplicationDelegate> {
     UIWindow *window;
 	UINavigationController* navController;
-	MainMenuController* menu;
+	MainMenuController* main;
 
 }
 

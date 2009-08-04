@@ -16,9 +16,16 @@
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {    
     
+	
+	if(
+	   getenv("NSZombieEnabled") || getenv("NSAutoreleaseFreedObjectCheckEnabled")
+	   ) {
+		NSLog(@"NSZombieEnabled/NSAutoreleaseFreedObjectCheckEnabled enabled!");
+	}
+	
 	[application setStatusBarHidden:YES animated:NO];
 	
-	MainMenuController* main = [[MainMenuController alloc] initWithStyle:UITableViewStyleGrouped];
+	main = [[MainMenuController alloc] initWithStyle:UITableViewStyleGrouped];
 	
 	navController = [[UINavigationController alloc] initWithRootViewController: main];
 	
@@ -37,13 +44,14 @@
 	UIImage *bgImage = [UIImage imageNamed:@"paperbackground.png"];
 	UIImageView *bg = [[UIImageView alloc] initWithImage:bgImage];
 	[window	addSubview:bg];
+	[bg release];
     [window addSubview:navController.view];
     [window makeKeyAndVisible];
 }
 
 
 - (void)dealloc {
-   // [viewController release];
+	[main release];
     [window release];
     [super dealloc];
 }

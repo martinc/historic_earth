@@ -58,6 +58,7 @@
 	UIBarButtonItem* present = [[UIBarButtonItem alloc] initWithTitle:@"2009" style:UIBarButtonItemStylePlain target:nil action:NULL];
 
 	UIBarButtonItem* item = [[UIBarButtonItem alloc] initWithCustomView: slider];
+	
 	//item.customView.bounds = CGRectMake(0, 0, 100, 100);
 	//item.width = 170;
 	
@@ -67,7 +68,15 @@
 	
 	NSArray* items = [[NSArray alloc] initWithObjects: past, space, item, space, present, nil ];
 	
+	[space release];
+	[item release];
+	[past release];
+	[present release];
+	[slider release];
+	
 	[self setToolbarItems:items animated: NO ];
+	
+	[items release];
 	self.hidesBottomBarWhenPushed = NO;
 	
 //	[self.navigationController setToolbarHidden:NO animated: YES];

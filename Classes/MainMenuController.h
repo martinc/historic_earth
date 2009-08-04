@@ -13,8 +13,7 @@
 @interface MainMenuController : UITableViewController {
 	
 	SearchResultsController *searchController;
-
-
+	NSMutableArray* mainMenuData;
 }
 
 @end
