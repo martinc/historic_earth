@@ -14,6 +14,7 @@
 @interface SearchResultsController : UITableViewController <TTURLRequestDelegate> {
 	MapViewController *mapController;
 	NSMutableArray *listOfItems;
+	NSMutableArray *listOfNames;
 	NSMutableArray *listOfImages;
 	UIActivityIndicatorView *loadingSpinner;  
 	

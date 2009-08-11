@@ -73,6 +73,8 @@
 	
 	listOfImages = [[NSMutableArray alloc] init];
 	
+	listOfNames = [[NSMutableArray alloc] init];
+	
 	//Add items
 	/*
 	[listOfItems addObject:@"1864"];
@@ -95,7 +97,7 @@
 //UITableView* tableView = [[UITableView alloc] initWithFrame:tableFrame style:UITableViewStyleGrouped];
 
 	
-	self.tableView.separatorColor = [UIColor blackColor];
+	self.tableView.separatorColor = [UIColor brownColor];
 //	self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 	
 	
@@ -186,8 +188,11 @@
 	
 	for(NSDictionary* mapData in jsonData){
 	
+		NSString* theyear = [[mapData objectForKey:@"year"] stringValue];
+
 		NSString* thename = [mapData objectForKey:@"name"];
-		[listOfItems addObject:thename];
+		[listOfItems addObject:theyear];
+		[listOfNames addObject:thename];
 		[listOfImages addObject:[NSNull null]];
 		
 		NSString* theimage = [mapData objectForKey:@"image"];
@@ -317,8 +322,8 @@
 	
 	NSString *cellValue = [listOfItems objectAtIndex:indexPath.row];
 	cell.textLabel.text = cellValue;
-	cell.detailTextLabel.text = @"New York State Atlas";
-	
+	//cell.detailTextLabel.text = @"New York State Atlas";
+	cell.detailTextLabel.text = [listOfNames objectAtIndex:indexPath.row];
 	
 	//cell.backgroundView.backgroundColor = [UIColor redColor];
 	//cell.backgroundColor = [UIColor redColor];

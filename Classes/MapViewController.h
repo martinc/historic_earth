@@ -15,6 +15,8 @@
 @interface MapViewController : UIViewController {
 	
 	RMMapView *mapView;
+	
+	float currentRoation;
 
 }
 

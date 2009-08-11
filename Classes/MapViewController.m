@@ -43,6 +43,22 @@
 	
 	self.navigationController.toolbar.barStyle = self.navigationController.navigationBar.barStyle;
 	self.navigationController.toolbar.tintColor = self.navigationController.navigationBar.tintColor;
+	self.navigationController.toolbar.translucent = self.navigationController.navigationBar.translucent;
+	
+	
+	NSString *backarrow = @"▲";
+	NSString *forwardarrow = @"▼";
+	NSArray *itemArray = [NSArray arrayWithObjects: backarrow, forwardarrow, nil];
+	
+	UISegmentedControl* segmented = [[UISegmentedControl alloc] initWithItems:itemArray];
+	//segmented.segmentedControlStyle = UISegmentedControlStylePlain;
+	//segmented.segmentedControlStyle = UISegmentedControlStyleBordered;
+	segmented.segmentedControlStyle = UISegmentedControlStyleBar;
+
+	UIBarButtonItem* backForward = [[UIBarButtonItem alloc] initWithCustomView:segmented];
+	
+	 self.navigationItem.rightBarButtonItem = backForward;
+
 	
 	
 	//UISlider* slider = [[UISlider alloc] init];
@@ -78,6 +94,12 @@
 	
 	[items release];
 	self.hidesBottomBarWhenPushed = NO;
+	
+	
+	/*
+	currentRoation = 0;	
+	[NSTimer scheduledTimerWithTimeInterval:1/30.0  target:self selector:@selector(rotate) userInfo:nil repeats:YES];
+	 */
 	
 //	[self.navigationController setToolbarHidden:NO animated: YES];
 	
@@ -131,6 +153,13 @@
 
 - (void)dealloc {
     [super dealloc];
+}
+
+
+- (void)rotate
+{
+	currentRoation += .01;
+	mapView.transform = CGAffineTransformMakeRotation(currentRoation);	
 }
 
 
