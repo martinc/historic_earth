@@ -19,6 +19,8 @@
 		//self.tableView.frame = CGRectMake(40, 0, 240, 480);
 		
 		searchController = [[SearchResultsController alloc] initWithStyle:UITableViewStyleGrouped];
+		
+		unlockController = [[UnlockController alloc] initWithStyle:UITableViewStyleGrouped];
 
 		
 		mainMenuData = [[NSMutableArray alloc] initWithObjects:
@@ -39,11 +41,21 @@
 						  nil],
 						 [NSMutableDictionary dictionaryWithObjectsAndKeys:
 						  @"Unlock Content", @"name",
-						  [NSNull null], @"controller",
+						  unlockController, @"controller",
 						  nil],
 						 nil],
 						nil];
 		
+		if([[NSUserDefaults standardUserDefaults] boolForKey:@"searchEnabled"])
+		{
+		
+			[[mainMenuData objectAtIndex:0] insertObject:
+												 [NSMutableDictionary dictionaryWithObjectsAndKeys:
+												  @"Search by Address", @"name",
+												  [NSNull null], @"controller",
+												  nil]
+												 atIndex:2];
+		}
 
     }
     return self;
@@ -179,12 +191,18 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	
-	if(indexPath.section == 0 && indexPath.row == 0){
+	//if(indexPath.section == 0 && indexPath.row == 0){
 		
-		[self.navigationController pushViewController:searchController animated:YES];
+	//	[self.navigationController pushViewController:searchController animated:YES];
+		
+		id theController = [[[mainMenuData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"controller"];
+		
+		if(theController != [NSNull null]){
+			[self.navigationController pushViewController:(UIViewController *)theController animated:YES];
+		}
 
 		
-	}
+	//}
     // Navigation logic may go here. Create and push another view controller.
 	// AnotherViewController *anotherViewController = [[AnotherViewController alloc] initWithNibName:@"AnotherView" bundle:nil];
 	// [self.navigationController pushViewController:anotherViewController];

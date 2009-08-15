@@ -32,11 +32,16 @@
 		5B2F723E10268EE100676DBD /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B2F723810268EE100676DBD /* SBJsonWriter.m */; };
 		5B2F727F1026C5A500676DBD /* libThree20.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B2F727E1026C59C00676DBD /* libThree20.a */; };
 		5B2F728F1026C98000676DBD /* Three20.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5B2F728E1026C98000676DBD /* Three20.bundle */; };
+		5B63EF0B103480CD005E4CA7 /* Images in Resources */ = {isa = PBXBuildFile; fileRef = 5B63EF07103480CD005E4CA7 /* Images */; };
+		5B7F3E1A10360CE500114D2D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B7F3E1910360CE500114D2D /* StoreKit.framework */; };
+		5B7F3E2310360D2600114D2D /* UnlockController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7F3E2210360D2600114D2D /* UnlockController.m */; };
 		5BCD483D1025538D0066772E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BCD483C1025538D0066772E /* QuartzCore.framework */; };
 		5BCD503F102554980066772E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BCD503E102554980066772E /* CoreLocation.framework */; };
 		5BCD504A102555D00066772E /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BCD5049102555D00066772E /* MapViewController.m */; };
 		5BCD507110255B880066772E /* libMapView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BCD5039102554840066772E /* libMapView.a */; };
 		5BCD51BB102570360066772E /* MainMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BCD51BA102570360066772E /* MainMenuController.m */; };
+		5BF87E5B10366A3800787B2A /* PurchaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BF87E5A10366A3800787B2A /* PurchaseController.m */; };
+		5BF87E8B1036783300787B2A /* StoreObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BF87E8A1036783300787B2A /* StoreObserver.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +120,10 @@
 		5B2F723810268EE100676DBD /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
 		5B2F72791026C59C00676DBD /* Three20.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Three20.xcodeproj; path = ../three20/src/Three20.xcodeproj; sourceTree = SOURCE_ROOT; };
 		5B2F728E1026C98000676DBD /* Three20.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Three20.bundle; path = ../three20/src/Three20.bundle; sourceTree = SOURCE_ROOT; };
+		5B63EF07103480CD005E4CA7 /* Images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Images; sourceTree = "<group>"; };
+		5B7F3E1910360CE500114D2D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		5B7F3E2110360D2600114D2D /* UnlockController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnlockController.h; sourceTree = "<group>"; };
+		5B7F3E2210360D2600114D2D /* UnlockController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnlockController.m; sourceTree = "<group>"; };
 		5BCD483C1025538D0066772E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		5BCD502A102554840066772E /* MapView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MapView.xcodeproj; path = ../routemeNT/MapView/MapView.xcodeproj; sourceTree = SOURCE_ROOT; };
 		5BCD503E102554980066772E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -122,6 +131,10 @@
 		5BCD5049102555D00066772E /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		5BCD51B9102570360066772E /* MainMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuController.h; sourceTree = "<group>"; };
 		5BCD51BA102570360066772E /* MainMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuController.m; sourceTree = "<group>"; };
+		5BF87E5910366A3800787B2A /* PurchaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PurchaseController.h; sourceTree = "<group>"; };
+		5BF87E5A10366A3800787B2A /* PurchaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurchaseController.m; sourceTree = "<group>"; };
+		5BF87E891036783300787B2A /* StoreObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreObserver.h; sourceTree = "<group>"; };
+		5BF87E8A1036783300787B2A /* StoreObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreObserver.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* History-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "History-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -137,6 +150,7 @@
 				5BCD503F102554980066772E /* CoreLocation.framework in Frameworks */,
 				5BCD507110255B880066772E /* libMapView.a in Frameworks */,
 				5B2F727F1026C5A500676DBD /* libThree20.a in Frameworks */,
+				5B7F3E1A10360CE500114D2D /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,6 +160,10 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				5BF87E891036783300787B2A /* StoreObserver.h */,
+				5BF87E8A1036783300787B2A /* StoreObserver.m */,
+				5BF87E5910366A3800787B2A /* PurchaseController.h */,
+				5BF87E5A10366A3800787B2A /* PurchaseController.m */,
 				5BCD51B9102570360066772E /* MainMenuController.h */,
 				5BCD51BA102570360066772E /* MainMenuController.m */,
 				1D3623240D0F684500981E51 /* HistoryAppDelegate.h */,
@@ -154,6 +172,8 @@
 				28D7ACF70DDB3853001CB0EB /* SearchResultsController.m */,
 				5BCD5048102555D00066772E /* MapViewController.h */,
 				5BCD5049102555D00066772E /* MapViewController.m */,
+				5B7F3E2110360D2600114D2D /* UnlockController.h */,
+				5B7F3E2210360D2600114D2D /* UnlockController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -169,6 +189,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				5B63EF07103480CD005E4CA7 /* Images */,
 				5B2F728E1026C98000676DBD /* Three20.bundle */,
 				5B2F72791026C59C00676DBD /* Three20.xcodeproj */,
 				5B2F723F10268EE500676DBD /* JSON */,
@@ -184,6 +205,7 @@
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				5BCD483C1025538D0066772E /* QuartzCore.framework */,
 				5BCD503E102554980066772E /* CoreLocation.framework */,
+				5B7F3E1910360CE500114D2D /* StoreKit.framework */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -271,9 +293,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1D6058900D05DD3D006BFB54 /* History */ = {
+		1D6058900D05DD3D006BFB54 /* Historic Earth */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "History" */;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Historic Earth" */;
 			buildPhases = (
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
@@ -285,7 +307,7 @@
 				5BCD503D1025548F0066772E /* PBXTargetDependency */,
 				5B2F72811026C5B400676DBD /* PBXTargetDependency */,
 			);
-			name = History;
+			name = "Historic Earth";
 			productName = History;
 			productReference = 1D6058910D05DD3D006BFB54 /* History.app */;
 			productType = "com.apple.product-type.application";
@@ -312,7 +334,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				1D6058900D05DD3D006BFB54 /* History */,
+				1D6058900D05DD3D006BFB54 /* Historic Earth */,
 			);
 		};
 /* End PBXProject section */
@@ -357,6 +379,7 @@
 				5B20C9401022C9740003FE62 /* 4.png in Resources */,
 				5B20C9411022C9740003FE62 /* 5.png in Resources */,
 				5B2F728F1026C98000676DBD /* Three20.bundle in Resources */,
+				5B63EF0B103480CD005E4CA7 /* Images in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -379,6 +402,9 @@
 				5B2F723C10268EE100676DBD /* SBJsonBase.m in Sources */,
 				5B2F723D10268EE100676DBD /* SBJsonParser.m in Sources */,
 				5B2F723E10268EE100676DBD /* SBJsonWriter.m in Sources */,
+				5B7F3E2310360D2600114D2D /* UnlockController.m in Sources */,
+				5BF87E5B10366A3800787B2A /* PurchaseController.m in Sources */,
+				5BF87E8B1036783300787B2A /* StoreObserver.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -450,7 +476,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Martin Ceperley (64RP86GBX7)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Martin Ceperley (64RP86GBX7)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -463,6 +490,8 @@
 					"-all_load",
 				);
 				PREBINDING = NO;
+				PROVISIONING_PROFILE = "1CA9826C-2579-421A-B781-7DF01693F331";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1CA9826C-2579-421A-B781-7DF01693F331";
 				SDKROOT = iphoneos3.0;
 			};
 			name = Debug;
@@ -471,7 +500,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Martin Ceperley (64RP86GBX7)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Martin Ceperley (64RP86GBX7)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -484,6 +514,8 @@
 					"-all_load",
 				);
 				PREBINDING = NO;
+				PROVISIONING_PROFILE = "1CA9826C-2579-421A-B781-7DF01693F331";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1CA9826C-2579-421A-B781-7DF01693F331";
 				SDKROOT = iphoneos3.0;
 			};
 			name = Release;
@@ -491,7 +523,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "History" */ = {
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Historic Earth" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,

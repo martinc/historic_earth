@@ -7,13 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <StoreKit/StoreKit.h>
 #import "MainMenuController.h"
+#import "StoreObserver.h"
 
 
 @interface HistoryAppDelegate : NSObject <UIApplicationDelegate> {
     UIWindow *window;
 	UINavigationController* navController;
 	MainMenuController* main;
+	StoreObserver *observer;
+	
 
 }
 

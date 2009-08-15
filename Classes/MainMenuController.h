@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "SearchResultsController.h"
+#import "UnlockController.h"
 
 
 @interface MainMenuController : UITableViewController {
 	
 	SearchResultsController *searchController;
+	UnlockController *unlockController;
 	NSMutableArray* mainMenuData;
 }
 

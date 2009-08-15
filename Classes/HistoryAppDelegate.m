@@ -16,6 +16,8 @@
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {    
     
+	[application setStatusBarHidden:YES animated:NO];
+
 	
 	if(
 	   getenv("NSZombieEnabled") || getenv("NSAutoreleaseFreedObjectCheckEnabled")
@@ -23,7 +25,13 @@
 		NSLog(@"NSZombieEnabled/NSAutoreleaseFreedObjectCheckEnabled enabled!");
 	}
 	
-	[application setStatusBarHidden:YES animated:NO];
+	observer = [[StoreObserver alloc] init];
+	[[SKPaymentQueue defaultQueue] addTransactionObserver:observer];
+	
+	
+	
+	
+	
 	
 	main = [[MainMenuController alloc] initWithStyle:UITableViewStyleGrouped];
 	

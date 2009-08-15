@@ -46,8 +46,8 @@
 	self.navigationController.toolbar.translucent = self.navigationController.navigationBar.translucent;
 	
 	
-	NSString *backarrow = @"▲";
-	NSString *forwardarrow = @"▼";
+	NSString *backarrow = @"◀";
+	NSString *forwardarrow = @"▶";
 	NSArray *itemArray = [NSArray arrayWithObjects: backarrow, forwardarrow, nil];
 	
 	UISegmentedControl* segmented = [[UISegmentedControl alloc] initWithItems:itemArray];
@@ -71,8 +71,17 @@
 	//UISlider* slider = [[UISlider alloc] init];
 	
 	UIBarButtonItem* past = [[UIBarButtonItem alloc] initWithTitle:@"1776" style:UIBarButtonItemStylePlain target:nil action:NULL];
-	UIBarButtonItem* present = [[UIBarButtonItem alloc] initWithTitle:@"2009" style:UIBarButtonItemStylePlain target:nil action:NULL];
 
+	//get current year for toolbar
+	NSDate *today = [NSDate date];
+	NSCalendar *gregorian = [[NSCalendar alloc]
+							 initWithCalendarIdentifier:NSGregorianCalendar];
+	NSDateComponents *weekdayComponents =
+	[gregorian components: NSYearCalendarUnit fromDate:today];
+	NSInteger year = [weekdayComponents year];
+	
+	
+	UIBarButtonItem* present = [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:@"%d",year] style:UIBarButtonItemStylePlain target:nil action:NULL];
 	UIBarButtonItem* item = [[UIBarButtonItem alloc] initWithCustomView: slider];
 	
 	//item.customView.bounds = CGRectMake(0, 0, 100, 100);

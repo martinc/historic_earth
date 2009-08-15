@@ -325,6 +325,15 @@
 	//cell.detailTextLabel.text = @"New York State Atlas";
 	cell.detailTextLabel.text = [listOfNames objectAtIndex:indexPath.row];
 	
+	cell.textLabel.textColor = [UIColor brownColor];
+
+	cell.textLabel.font = [UIFont fontWithName:@"Georgia" size:26.0];
+	cell.detailTextLabel.textColor = [UIColor grayColor];
+
+	cell.detailTextLabel.font = [UIFont fontWithName:@"Georgia" size:14.0];
+
+	
+	
 	//cell.backgroundView.backgroundColor = [UIColor redColor];
 	//cell.backgroundColor = [UIColor redColor];
 
