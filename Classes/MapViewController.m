@@ -132,6 +132,8 @@
 		oldMapView = [[RMMapView alloc] initWithFrame:self.view.frame];
 		modernMapView = [[RMMapView alloc] initWithFrame:self.view.frame];
 		
+		mapViews = [[NSMutableArray alloc] initWithObjects:oldMapView,modernMapView, nil];
+		
 		
 		//WMS Settings
 		
@@ -161,15 +163,27 @@
 		 initWithAccessKey:@"0155d705a5a05e6988534761f6fd2ca5"
 		 styleNumber:5260];
 		 
+		
+//UIView* interactionView = [[UIView alloc] initWithFrame:self.view.frame];
+
 		 
 		oldMapView.backgroundColor = [UIColor clearColor];
 		modernMapView.backgroundColor = [UIColor clearColor];
-
-		oldMapView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-		modernMapView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+		//interactionView.backgroundColor = [UIColor clearColor];
 
 		
+		oldMapView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+		modernMapView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+		//interactionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+
+		
+		modernMapView.userInteractionEnabled = NO;
+		oldMapView.userInteractionEnabled = NO;
+		
+		
+		[self.view addSubview: modernMapView];
 		[self.view addSubview: oldMapView];
+		//[self.view addSubview: interactionView];
 		
 	}
 	
@@ -178,6 +192,37 @@
 	
 	
 	
+}
+
+
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	//NSLog(@"touchesBegan");
+	for (RMMapView* mv in mapViews){
+		[mv touchesBegan:touches withEvent:event];
+	}
+}
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	//NSLog(@"touchesMoved");
+	for (RMMapView* mv in mapViews){
+		[mv touchesMoved:touches withEvent:event];
+	}
+}
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	//NSLog(@"touchesEnded");
+	for (RMMapView* mv in mapViews){
+		[mv touchesEnded:touches withEvent:event];
+	}
+}
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	//NSLog(@"touchesCancelled");
+	for (RMMapView* mv in mapViews){
+		[mv touchesCancelled:touches withEvent:event];
+	}
 }
 
 

@@ -23,6 +23,8 @@
 	NSMutableArray *maps;
 	
 	int currentMapIndex;
+	
+	NSMutableArray *mapViews;
 
 }
 
