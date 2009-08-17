@@ -18,7 +18,9 @@
 		
 		//self.tableView.frame = CGRectMake(40, 0, 240, 480);
 		
-		searchController = [[SearchResultsController alloc] initWithStyle:UITableViewStyleGrouped];
+		locationController = [[LocationController alloc] initWithStyle:UITableViewStyleGrouped];
+		searchController = [[SearchController alloc] initWithStyle:UITableViewStyleGrouped];
+
 		
 		unlockController = [[UnlockController alloc] initWithStyle:UITableViewStyleGrouped];
 
@@ -27,7 +29,7 @@
 						[NSMutableArray arrayWithObjects:
 						 [NSMutableDictionary dictionaryWithObjectsAndKeys:
 						  @"Map Your Location", @"name",
-						  searchController, @"controller",
+						  locationController, @"controller",
 						  nil],
 						 [NSMutableDictionary dictionaryWithObjectsAndKeys:
 						  @"Featured Collections", @"name",
@@ -45,14 +47,15 @@
 						  nil],
 						 nil],
 						nil];
-		
-		if([[NSUserDefaults standardUserDefaults] boolForKey:@"searchEnabled"])
+		//Enable search always for development
+		//if([[NSUserDefaults standardUserDefaults] boolForKey:@"searchEnabled"])
+		if(1)
 		{
 		
 			[[mainMenuData objectAtIndex:0] insertObject:
 												 [NSMutableDictionary dictionaryWithObjectsAndKeys:
 												  @"Search by Address", @"name",
-												  [NSNull null], @"controller",
+												  searchController, @"controller",
 												  nil]
 												 atIndex:2];
 		}
@@ -193,7 +196,7 @@
 	
 	//if(indexPath.section == 0 && indexPath.row == 0){
 		
-	//	[self.navigationController pushViewController:searchController animated:YES];
+	//	[self.navigationController pushViewController:locationController animated:YES];
 		
 		id theController = [[[mainMenuData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"controller"];
 		

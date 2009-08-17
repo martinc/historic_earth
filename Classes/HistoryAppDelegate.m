@@ -7,7 +7,7 @@
 //
 
 #import "HistoryAppDelegate.h"
-#import "SearchResultsController.h"
+#import "AbstractMapListController.h"
 
 @implementation HistoryAppDelegate
 

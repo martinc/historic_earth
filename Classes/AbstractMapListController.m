@@ -6,12 +6,12 @@
 //  Copyright __MyCompanyName__ 2009. All rights reserved.
 //
 
-#import "SearchResultsController.h"
+#import "AbstractMapListController.h"
 #import "JSON.h"
 #import "Three20/Three20.h"
 #import "UIKit/UITableView.h"
 
-@implementation SearchResultsController
+@implementation AbstractMapListController
 
 
 /*
@@ -45,6 +45,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
+	dataLoaded = NO;
+	loadingResults = NO;
+
+	
 	
 	self.title = @"Results";
 	
@@ -59,9 +63,9 @@
 	loadingSpinner.center = CGPointMake(320/2, 480/2);
 	//loadingSpinner.transform = CGAffineTransformMakeScale(4.0, 4.0);
 
-	[loadingSpinner startAnimating];
 	
 	[self.view addSubview:loadingSpinner];
+	
 	
 	mapController = [[MapViewController alloc] initWithNibName:nil bundle:nil];
 
@@ -113,12 +117,12 @@
 	
 	*/	
 	
+}
+
+- (void) loadDataWithRequest: (NSURLRequest *) theRequest
+{
 	
 	
-	// create the request
-	NSURLRequest *theRequest=[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://oldmapapp.com/test/sample.json"]
-											  cachePolicy:NSURLRequestUseProtocolCachePolicy
-										  timeoutInterval:15.0];
 	// create the connection with the request
 	// and start loading the data
 	NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
@@ -127,14 +131,16 @@
 		// the received data
 		// receivedData is declared as a method instance elsewhere
 		receivedData=[[NSMutableData data] retain];
-		
 		loadingResults = YES;
+		[loadingSpinner startAnimating];
 
+		
 	} else {
 		// inform the user that the download could not be made
 	}
 	
 }
+
 
 # pragma mark Loading JSON Data
 
@@ -195,22 +201,26 @@
 		[listOfNames addObject:thename];
 		[listOfImages addObject:[NSNull null]];
 		
-		NSString* theimage = [mapData objectForKey:@"image"];
 		
-//		NSLog(theimage);
 		
+		
+		//let's not do images now
+		/*
+		 
+		 NSString* theimage = [mapData objectForKey:@"image"];
+		 //		NSLog(theimage);
+		 
 		TTURLRequest* request = [TTURLRequest requestWithURL:theimage delegate:self];
-		
 		request.userInfo = [NSNumber numberWithInt:[listOfItems count]-1];
 		request.response = [[[TTURLImageResponse alloc] init] autorelease];
-
-		
 		[[TTURLRequestQueue mainQueue]  sendRequest: request];
-
+		 */
 		
 	}
 	
 	loadingResults = NO;
+	dataLoaded = YES;
+
 	[loadingSpinner stopAnimating];
 	
 	[self.tableView reloadData];	
@@ -309,6 +319,8 @@
 								  maxHeight: 120];
 	*/
 	
+	//let's not do images now
+	/*
 	if( indexPath.row < [listOfImages count] &&
 	   [listOfImages objectAtIndex:indexPath.row] != [NSNull null])
 	{
@@ -318,6 +330,8 @@
 									  maxHeight: 120];
 		
 	}
+	 
+	 */
 	
 	
 	NSString *cellValue = [listOfItems objectAtIndex:indexPath.row];

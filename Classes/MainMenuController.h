@@ -7,13 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SearchResultsController.h"
+#import "LocationController.h"
+#import "SearchController.h"
 #import "UnlockController.h"
 
 
 @interface MainMenuController : UITableViewController {
 	
-	SearchResultsController *searchController;
+	LocationController *locationController;
+	SearchController *searchController;
+	
 	UnlockController *unlockController;
 	NSMutableArray* mainMenuData;
 }

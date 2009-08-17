@@ -14,7 +14,9 @@
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		2899E5220DE3E06400AC0155 /* HistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* HistoryViewController.xib */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
-		28D7ACF80DDB3853001CB0EB /* SearchResultsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* SearchResultsController.m */; };
+		28D7ACF80DDB3853001CB0EB /* AbstractMapListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* AbstractMapListController.m */; };
+		5B03BCD310390DBD00D6E9DD /* LocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B03BCD210390DBD00D6E9DD /* LocationController.m */; };
+		5B03BCD810390E2B00D6E9DD /* SearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B03BCD710390E2B00D6E9DD /* SearchController.m */; };
 		5B20C8D81022BBC90003FE62 /* paperbackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B20C8D71022BBC90003FE62 /* paperbackground.png */; };
 		5B20C8EC1022BCE60003FE62 /* CustomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B20C8EB1022BCE60003FE62 /* CustomButton.m */; };
 		5B20C8F31022BD600003FE62 /* custombuttonpressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B20C8F11022BD600003FE62 /* custombuttonpressed.png */; };
@@ -91,10 +93,14 @@
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		2899E5210DE3E06400AC0155 /* HistoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryViewController.xib; sourceTree = "<group>"; };
 		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
-		28D7ACF60DDB3853001CB0EB /* SearchResultsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultsController.h; sourceTree = "<group>"; };
-		28D7ACF70DDB3853001CB0EB /* SearchResultsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultsController.m; sourceTree = "<group>"; };
+		28D7ACF60DDB3853001CB0EB /* AbstractMapListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractMapListController.h; sourceTree = "<group>"; };
+		28D7ACF70DDB3853001CB0EB /* AbstractMapListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractMapListController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* History_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = History_Prefix.pch; sourceTree = "<group>"; };
+		5B03BCD110390DBD00D6E9DD /* LocationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationController.h; sourceTree = "<group>"; };
+		5B03BCD210390DBD00D6E9DD /* LocationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationController.m; sourceTree = "<group>"; };
+		5B03BCD610390E2B00D6E9DD /* SearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchController.h; sourceTree = "<group>"; };
+		5B03BCD710390E2B00D6E9DD /* SearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchController.m; sourceTree = "<group>"; };
 		5B20C8D71022BBC90003FE62 /* paperbackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = paperbackground.png; sourceTree = "<group>"; };
 		5B20C8EA1022BCE60003FE62 /* CustomButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomButton.h; sourceTree = "<group>"; };
 		5B20C8EB1022BCE60003FE62 /* CustomButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomButton.m; sourceTree = "<group>"; };
@@ -160,6 +166,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				5B98EB0E10390FF700079D2F /* Search Results */,
 				5BF87E891036783300787B2A /* StoreObserver.h */,
 				5BF87E8A1036783300787B2A /* StoreObserver.m */,
 				5BF87E5910366A3800787B2A /* PurchaseController.h */,
@@ -168,8 +175,6 @@
 				5BCD51BA102570360066772E /* MainMenuController.m */,
 				1D3623240D0F684500981E51 /* HistoryAppDelegate.h */,
 				1D3623250D0F684500981E51 /* HistoryAppDelegate.m */,
-				28D7ACF60DDB3853001CB0EB /* SearchResultsController.h */,
-				28D7ACF70DDB3853001CB0EB /* SearchResultsController.m */,
 				5BCD5048102555D00066772E /* MapViewController.h */,
 				5BCD5049102555D00066772E /* MapViewController.m */,
 				5B7F3E2110360D2600114D2D /* UnlockController.h */,
@@ -279,6 +284,19 @@
 				5B2F727E1026C59C00676DBD /* libThree20.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		5B98EB0E10390FF700079D2F /* Search Results */ = {
+			isa = PBXGroup;
+			children = (
+				5B03BCD110390DBD00D6E9DD /* LocationController.h */,
+				5B03BCD210390DBD00D6E9DD /* LocationController.m */,
+				5B03BCD610390E2B00D6E9DD /* SearchController.h */,
+				5B03BCD710390E2B00D6E9DD /* SearchController.m */,
+				28D7ACF60DDB3853001CB0EB /* AbstractMapListController.h */,
+				28D7ACF70DDB3853001CB0EB /* AbstractMapListController.m */,
+			);
+			name = "Search Results";
 			sourceTree = "<group>";
 		};
 		5BCD502B102554840066772E /* Products */ = {
@@ -392,7 +410,7 @@
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* HistoryAppDelegate.m in Sources */,
-				28D7ACF80DDB3853001CB0EB /* SearchResultsController.m in Sources */,
+				28D7ACF80DDB3853001CB0EB /* AbstractMapListController.m in Sources */,
 				5B20C8EC1022BCE60003FE62 /* CustomButton.m in Sources */,
 				5BCD504A102555D00066772E /* MapViewController.m in Sources */,
 				5BCD51BB102570360066772E /* MainMenuController.m in Sources */,
@@ -405,6 +423,8 @@
 				5B7F3E2310360D2600114D2D /* UnlockController.m in Sources */,
 				5BF87E5B10366A3800787B2A /* PurchaseController.m in Sources */,
 				5BF87E8B1036783300787B2A /* StoreObserver.m in Sources */,
+				5B03BCD310390DBD00D6E9DD /* LocationController.m in Sources */,
+				5B03BCD810390E2B00D6E9DD /* SearchController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

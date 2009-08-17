@@ -11,7 +11,7 @@
 #import "MapViewController.h"
 #import "Three20/Three20.h"
 
-@interface SearchResultsController : UITableViewController <TTURLRequestDelegate> {
+@interface AbstractMapListController : UITableViewController <TTURLRequestDelegate> {
 	MapViewController *mapController;
 	NSMutableArray *listOfItems;
 	NSMutableArray *listOfNames;
@@ -21,7 +21,11 @@
 	NSMutableData *receivedData;
 	
 	BOOL loadingResults;
+	BOOL dataLoaded;
 }
+
+
+- (void) loadDataWithRequest: (NSURLRequest *) theRequest;
 
 - (UIImage *)scaleImage:(UIImage *) image maxWidth:(float) maxWidth maxHeight:(float) maxHeight;
 
