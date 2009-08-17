@@ -10,7 +10,10 @@
 #import "AbstractMapListController.h"
 
 
+
 @interface LocationController : AbstractMapListController {
+
+	NSString *REQUEST_URL;
 
 }
 

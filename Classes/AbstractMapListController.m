@@ -14,6 +14,16 @@
 @implementation AbstractMapListController
 
 
+NSString * const kMAP_ATLAS_NAME = @"Atlas Name";
+NSString * const kMAP_BL = @"BL";
+NSString * const kMAP_TR = @"TR";
+NSString * const kMAP_LAYER = @"Layer";
+NSString * const kMAP_NAME = @"Name";
+NSString * const kMAP_YEAR = @"Year";
+NSString * const kMAP_MIN_ZOOM = @"MinZoom";
+
+
+
 /*
 
 // The designated initializer. Override to perform setup that is required before the view is loaded.
@@ -73,11 +83,7 @@
 	self.hidesBottomBarWhenPushed = YES;
 	
 	//Initialize the array.
-	listOfItems = [[NSMutableArray alloc] init];
-	
-	listOfImages = [[NSMutableArray alloc] init];
-	
-	listOfNames = [[NSMutableArray alloc] init];
+	maps = [[NSMutableArray alloc] init];
 	
 	//Add items
 	/*
@@ -187,23 +193,81 @@
 						  encoding: NSUTF8StringEncoding];
 	
 	NSArray* jsonData = [dataString JSONValue];
-	
 	[dataString release];
+	
+	if(jsonData){
 	
 	//NSLog(@"json object is : %@",jsonData);
 	
-	for(NSDictionary* mapData in jsonData){
-	
-		NSString* theyear = [[mapData objectForKey:@"year"] stringValue];
+		for(NSDictionary* mapDataShell in jsonData){
+			NSDictionary* mapData = [mapDataShell objectForKey:@"Map"];
+			if(mapData){
+				
 
-		NSString* thename = [mapData objectForKey:@"name"];
-		[listOfItems addObject:theyear];
-		[listOfNames addObject:thename];
-		[listOfImages addObject:[NSNull null]];
+				
+				NSString* theAtlasName = [mapData objectForKey:kMAP_ATLAS_NAME]; 
+				NSString* theBL = [mapData objectForKey:kMAP_BL];
+				NSString* theTR = [mapData objectForKey:kMAP_TR];
+				NSString* theLayer = [mapData objectForKey:kMAP_LAYER];
+				NSString* theName = [mapData objectForKey:kMAP_NAME];
+				
+				NSNumber* theYear = [mapData objectForKey:kMAP_YEAR];
+				NSNumber* theMinZoom = [mapData objectForKey:kMAP_MIN_ZOOM];
+										
+						
+				if(theAtlasName && theBL && theTR && theLayer && theName && theYear && theMinZoom){
+				
+					
+					Map* theMap = [[Map alloc] init];
+					
+					theMap.layerID = theLayer;
+					theMap.atlasName = theAtlasName;
+					theMap.name = theName;
+					theMap.year = [theYear intValue];
+					theMap.minZoom = [theMinZoom intValue];
+					
+					
+					NSArray* southWestStrings = [theBL componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+					NSArray* northEastStrings = [theTR componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+					
+
+					if([southWestStrings count] == 2 && [northEastStrings count] == 2)
+					{
+						
+						RMSphericalTrapezium mapBounds;
+						mapBounds.southwest.longitude = [[southWestStrings objectAtIndex:0] doubleValue];
+						mapBounds.southwest.latitude = [[southWestStrings objectAtIndex:1] doubleValue];
+						mapBounds.northeast.longitude = [[northEastStrings objectAtIndex:0] doubleValue];
+						mapBounds.northeast.latitude = [[northEastStrings objectAtIndex:1] doubleValue];
+						NSLog(@"set corners to %f,%f %f,%f", mapBounds.southwest.latitude, mapBounds.southwest.longitude, mapBounds.northeast.latitude, mapBounds.northeast.longitude);
+						theMap.mapBounds = mapBounds;
+						
+					}
+					else{
+						NSLog(@"error parsing latlong bounds");
+					}
+
+					[maps addObject:theMap];
+					NSLog(@"added map");
+				}
+				else{
+					NSLog(@"didn't get all required values for map");
+				}
+			}
+			else {
+				NSLog(@"error reading map object");
+			}
+			
+		}//end for loop
 		
+	}
+	else{
+		NSLog(@"error parsing json file");
 		
-		
-		
+	}
+	
+	
+	
 		//let's not do images now
 		/*
 		 
@@ -216,13 +280,13 @@
 		[[TTURLRequestQueue mainQueue]  sendRequest: request];
 		 */
 		
-	}
 	
 	loadingResults = NO;
 	dataLoaded = YES;
 
 	[loadingSpinner stopAnimating];
 	
+	self.tableView.scrollEnabled = [maps count] > 0;
 	[self.tableView reloadData];	
 	
     // release the connection, and the data object
@@ -232,6 +296,7 @@
 
 #pragma mark Loaded Image
 
+	/*
 - (void)requestDidFinishLoad:(TTURLRequest*)request
 {
 	
@@ -251,11 +316,10 @@
 //						  withRowAnimation:UITableViewRowAnimationFade];
 	
 	[self.tableView reloadData];
-
-	
 	
 	
 }
+	 */
 
 
 
@@ -296,7 +360,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	
 
-		return [listOfItems count];
+		return [maps count];
 
 
 }
@@ -333,11 +397,10 @@
 	 
 	 */
 	
+	Map* theMap = [maps objectAtIndex:indexPath.row];
 	
-	NSString *cellValue = [listOfItems objectAtIndex:indexPath.row];
-	cell.textLabel.text = cellValue;
-	//cell.detailTextLabel.text = @"New York State Atlas";
-	cell.detailTextLabel.text = [listOfNames objectAtIndex:indexPath.row];
+	cell.textLabel.text = [NSString stringWithFormat:@"%d",theMap.year];
+	cell.detailTextLabel.text = [NSString stringWithFormat:@"%@: %@",theMap.name,theMap.layerID];
 	
 	cell.textLabel.textColor = [UIColor brownColor];
 
@@ -381,7 +444,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	return 130.0;
+	return 100.0;
 }
 
 
@@ -393,7 +456,7 @@
 	NSUInteger row = indexPath.row;
     if (row != NSNotFound) {
 		
-        mapController.title = [listOfItems objectAtIndex:indexPath.row];
+        mapController.title = [NSString stringWithFormat:@"%d",((Map *)[maps objectAtIndex:indexPath.row]).year];
         [[self navigationController] pushViewController:mapController animated:YES];
 		
     }

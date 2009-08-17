@@ -10,13 +10,13 @@
 #import "CustomButton.h"
 #import "MapViewController.h"
 #import "Three20/Three20.h"
+#import "Map.h"
 
 @interface AbstractMapListController : UITableViewController <TTURLRequestDelegate> {
 	MapViewController *mapController;
-	NSMutableArray *listOfItems;
-	NSMutableArray *listOfNames;
-	NSMutableArray *listOfImages;
 	UIActivityIndicatorView *loadingSpinner;  
+	
+	NSMutableArray *maps;
 	
 	NSMutableData *receivedData;
 	

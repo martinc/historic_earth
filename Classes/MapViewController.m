@@ -28,6 +28,9 @@
 	
 	
 	mapView = [[RMMapView alloc] initWithFrame:self.view.frame];
+	
+	
+	
 	mapView.contents = [[RMMapContents alloc] initForView:mapView];
 	mapView.contents.tileSource = [[RMCloudMadeMapSource alloc]
 								   initWithAccessKey:@"0155d705a5a05e6988534761f6fd2ca5"

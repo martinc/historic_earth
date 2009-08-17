@@ -10,8 +10,10 @@
 #import "AbstractMapListController.h"
 
 
+
 @interface SearchController : AbstractMapListController <UISearchBarDelegate> {
 	
+	NSString *REQUEST_URL;
 	
 	//UISearchDisplayController *theSearchController;
 	

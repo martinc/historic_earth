@@ -9,11 +9,19 @@
 #import "SearchController.h"
 
 
+
+
 @implementation SearchController
+
+
 
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+	
+	
+	REQUEST_URL = @"http://www.historicmapworks.com/iPhone/?lat=39.95249714905981&long=-75.16377925872803";
+
 	
 	
 	searching = NO;
@@ -42,6 +50,9 @@
 	
 	self.tableView.tableHeaderView = searchBar;
 	
+	//self.tableView.bounds = CGRectMake(0, 100, 320, 380);
+	
+	self.tableView.scrollEnabled = NO;
 	
 	
 	/* toolbar - wrong approach
@@ -73,7 +84,7 @@
 
 	
 	
-	[self loadDataWithRequest: [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://oldmapapp.com/test/sample.json"]
+	[self loadDataWithRequest: [NSURLRequest requestWithURL:[NSURL URLWithString:REQUEST_URL]
 												cachePolicy:NSURLRequestUseProtocolCachePolicy
 											timeoutInterval:15.0]];	
 	
@@ -97,8 +108,8 @@
 	letUserSelectRow = YES;
 	searching = NO;
 	self.navigationItem.rightBarButtonItem = nil;
-	self.tableView.scrollEnabled = YES;
 	
+	self.tableView.scrollEnabled = [maps count] > 0;
 	
 }
 
