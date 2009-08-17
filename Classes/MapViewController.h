@@ -9,15 +9,25 @@
 #import <UIKit/UIKit.h>
 #import "RMMapView.h"
 #import "RMCloudMadeMapSource.h"
-
+#import "RMGenericMercatorWMSSource.h"
+#import "Map.h"
+#import "HMWSource.h"
 
 
 @interface MapViewController : UIViewController {
 	
-	RMMapView *mapView;
+	RMMapView *oldMapView, *modernMapView;
 	
 	float currentRoation;
+	
+	NSMutableArray *maps;
+	
+	int currentMapIndex;
 
 }
+
+- (id) initWithMaps: (NSMutableArray *) theMaps;
+
+- (void) loadMapAtIndex: (int) theIndex;
 
 @end

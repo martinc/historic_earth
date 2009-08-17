@@ -11,7 +11,17 @@
 
 @implementation Map
 
-@synthesize layerID, atlasName, name, year, minZoom, mapBounds;
+@synthesize layerID, atlasName, name, year, minZoom, mapBounds, mapCenter;
+
+- (void) setMapBounds:(RMSphericalTrapezium) newMapBounds
+{
+	
+	mapBounds = newMapBounds;
+	
+	mapCenter.longitude = (mapBounds.northeast.longitude + mapBounds.southwest.longitude) / 2.0;
+	mapCenter.latitude = (mapBounds.northeast.latitude + mapBounds.southwest.latitude) / 2.0;
+	
+}
 
 
 @end

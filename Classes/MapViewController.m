@@ -11,39 +11,25 @@
 
 @implementation MapViewController
 
-/*
+
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        // Custom initialization
+- (id) initWithMaps: (NSMutableArray *) theMaps{
+    if (self = [super initWithNibName:nil bundle:nil]) {
+        
+		maps = [theMaps retain];
+		
+		currentMapIndex = 0;
+		
     }
     return self;
 }
-*/
 
 
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView {
 	[super loadView];
 	
-	
-	mapView = [[RMMapView alloc] initWithFrame:self.view.frame];
-	
-	
-	
-	mapView.contents = [[RMMapContents alloc] initForView:mapView];
-	mapView.contents.tileSource = [[RMCloudMadeMapSource alloc]
-								   initWithAccessKey:@"0155d705a5a05e6988534761f6fd2ca5"
-								   styleNumber:5260];
-
-	
-	mapView.backgroundColor = [UIColor clearColor];
-	mapView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-	
-	
-	[self.view addSubview: mapView];
-	
-	
+		
 	self.navigationController.toolbar.barStyle = self.navigationController.navigationBar.barStyle;
 	self.navigationController.toolbar.tintColor = self.navigationController.navigationBar.tintColor;
 	self.navigationController.toolbar.translucent = self.navigationController.navigationBar.translucent;
@@ -109,6 +95,12 @@
 	
 	[self setToolbarItems:items animated: NO ];
 	
+	self.navigationController.toolbar.barStyle = self.navigationController.navigationBar.barStyle;
+	self.navigationController.toolbar.translucent = self.navigationController.navigationBar.translucent;
+	self.navigationController.toolbar.tintColor = self.navigationController.navigationBar.tintColor;
+
+	self.navigationController.toolbar.tintColor = [UIColor brownColor];
+	
 	[items release];
 	self.hidesBottomBarWhenPushed = NO;
 	
@@ -121,6 +113,75 @@
 //	[self.navigationController setToolbarHidden:NO animated: YES];
 	
 }
+
+- (void) loadMapAtIndex: (int) theIndex
+{
+	
+	currentMapIndex = theIndex;
+	
+	Map *theMap = [maps objectAtIndex:currentMapIndex];
+	if(!theMap) return;
+	
+	self.title = [NSString stringWithFormat:@"%d",theMap.year];
+	
+	
+	
+	if(!oldMapView){
+	
+	
+		oldMapView = [[RMMapView alloc] initWithFrame:self.view.frame];
+		modernMapView = [[RMMapView alloc] initWithFrame:self.view.frame];
+		
+		
+		//WMS Settings
+		
+		NSDictionary *wmsParameters = [
+									   [NSDictionary alloc]
+									   initWithObjects:[NSArray arrayWithObjects:theMap.layerID,@"TRUE",nil]
+									   forKeys:[NSArray arrayWithObjects:@"layers",@"transparent",nil]
+									   ];
+		id myTilesource = [[[RMGenericMercatorWMSSource alloc]  
+							initWithBaseUrl:@"http://www.historicmapworks.com/iPhone/request.php?"  
+							parameters:wmsParameters] autorelease];
+		
+		
+		//id myTilesource = [[[HMWSource alloc] init] autorelease];
+		
+		oldMapView.contents = [[[RMMapContents alloc] initWithView:oldMapView
+													 tilesource:myTilesource
+												   centerLatLon:theMap.mapCenter
+													  zoomLevel:10.0
+												   maxZoomLevel:30.0
+												   minZoomLevel:1.0
+												backgroundImage:nil] autorelease];
+		
+		
+		 modernMapView.contents = [[RMMapContents alloc] initForView:modernMapView];
+		 modernMapView.contents.tileSource = [[RMCloudMadeMapSource alloc]
+		 initWithAccessKey:@"0155d705a5a05e6988534761f6fd2ca5"
+		 styleNumber:5260];
+		 
+		 
+		oldMapView.backgroundColor = [UIColor clearColor];
+		modernMapView.backgroundColor = [UIColor clearColor];
+
+		oldMapView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+		modernMapView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+
+		
+		[self.view addSubview: oldMapView];
+		
+	}
+	
+	
+
+	
+	
+	
+}
+
+
+
 
 
 /*
@@ -176,7 +237,7 @@
 - (void)rotate
 {
 	currentRoation += .01;
-	mapView.transform = CGAffineTransformMakeRotation(currentRoation);	
+	//mapView.transform = CGAffineTransformMakeRotation(currentRoation);	
 }
 
 

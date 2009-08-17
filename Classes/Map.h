@@ -20,7 +20,12 @@
 	
 	RMSphericalTrapezium mapBounds;
 	
+	CLLocationCoordinate2D mapCenter;
+	
 }
+
+
+
 
 @property (nonatomic, retain) NSString *layerID;
 @property (nonatomic, retain) NSString *atlasName;
@@ -29,6 +34,7 @@
 @property (nonatomic, assign) int year;
 @property (nonatomic, assign) int minZoom;
 @property (nonatomic, assign) RMSphericalTrapezium mapBounds;
+@property (nonatomic, readonly) CLLocationCoordinate2D mapCenter;
 
 
 @end

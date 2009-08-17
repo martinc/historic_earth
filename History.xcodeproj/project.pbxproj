@@ -18,6 +18,7 @@
 		5B03BCD310390DBD00D6E9DD /* LocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B03BCD210390DBD00D6E9DD /* LocationController.m */; };
 		5B03BCD810390E2B00D6E9DD /* SearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B03BCD710390E2B00D6E9DD /* SearchController.m */; };
 		5B0405DA1039A82400F7C25B /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B0405D91039A82400F7C25B /* Map.m */; };
+		5B0406E31039F8A000F7C25B /* HMWSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B0406E21039F8A000F7C25B /* HMWSource.m */; };
 		5B20C8D81022BBC90003FE62 /* paperbackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B20C8D71022BBC90003FE62 /* paperbackground.png */; };
 		5B20C8EC1022BCE60003FE62 /* CustomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B20C8EB1022BCE60003FE62 /* CustomButton.m */; };
 		5B20C8F31022BD600003FE62 /* custombuttonpressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B20C8F11022BD600003FE62 /* custombuttonpressed.png */; };
@@ -104,6 +105,8 @@
 		5B03BCD710390E2B00D6E9DD /* SearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchController.m; sourceTree = "<group>"; };
 		5B0405D81039A82400F7C25B /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
 		5B0405D91039A82400F7C25B /* Map.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Map.m; sourceTree = "<group>"; };
+		5B0406E11039F8A000F7C25B /* HMWSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMWSource.h; sourceTree = "<group>"; };
+		5B0406E21039F8A000F7C25B /* HMWSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMWSource.m; sourceTree = "<group>"; };
 		5B20C8D71022BBC90003FE62 /* paperbackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = paperbackground.png; sourceTree = "<group>"; };
 		5B20C8EA1022BCE60003FE62 /* CustomButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomButton.h; sourceTree = "<group>"; };
 		5B20C8EB1022BCE60003FE62 /* CustomButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomButton.m; sourceTree = "<group>"; };
@@ -313,6 +316,8 @@
 				5BCD5049102555D00066772E /* MapViewController.m */,
 				5B0405D81039A82400F7C25B /* Map.h */,
 				5B0405D91039A82400F7C25B /* Map.m */,
+				5B0406E11039F8A000F7C25B /* HMWSource.h */,
+				5B0406E21039F8A000F7C25B /* HMWSource.m */,
 			);
 			name = Maps;
 			sourceTree = "<group>";
@@ -455,6 +460,7 @@
 				5B03BCD310390DBD00D6E9DD /* LocationController.m in Sources */,
 				5B03BCD810390E2B00D6E9DD /* SearchController.m in Sources */,
 				5B0405DA1039A82400F7C25B /* Map.m in Sources */,
+				5B0406E31039F8A000F7C25B /* HMWSource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

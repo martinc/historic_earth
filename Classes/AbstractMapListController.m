@@ -76,14 +76,13 @@ NSString * const kMAP_MIN_ZOOM = @"MinZoom";
 	
 	[self.view addSubview:loadingSpinner];
 	
-	
-	mapController = [[MapViewController alloc] initWithNibName:nil bundle:nil];
+	maps = [[NSMutableArray alloc] init];
+	mapController = [[MapViewController alloc] initWithMaps: maps];
 
 
 	self.hidesBottomBarWhenPushed = YES;
 	
 	//Initialize the array.
-	maps = [[NSMutableArray alloc] init];
 	
 	//Add items
 	/*
@@ -456,7 +455,9 @@ NSString * const kMAP_MIN_ZOOM = @"MinZoom";
 	NSUInteger row = indexPath.row;
     if (row != NSNotFound) {
 		
-        mapController.title = [NSString stringWithFormat:@"%d",((Map *)[maps objectAtIndex:indexPath.row]).year];
+		
+		[mapController loadMapAtIndex: indexPath.row];
+		
         [[self navigationController] pushViewController:mapController animated:YES];
 		
     }
