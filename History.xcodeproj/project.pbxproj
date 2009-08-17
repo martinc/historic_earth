@@ -166,19 +166,10 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				5B98EB98103929A400079D2F /* Core Application */,
+				5B98EB971039298E00079D2F /* Maps */,
+				5B98EB961039296B00079D2F /* In-App-Purchase */,
 				5B98EB0E10390FF700079D2F /* Search Results */,
-				5BF87E891036783300787B2A /* StoreObserver.h */,
-				5BF87E8A1036783300787B2A /* StoreObserver.m */,
-				5BF87E5910366A3800787B2A /* PurchaseController.h */,
-				5BF87E5A10366A3800787B2A /* PurchaseController.m */,
-				5BCD51B9102570360066772E /* MainMenuController.h */,
-				5BCD51BA102570360066772E /* MainMenuController.m */,
-				1D3623240D0F684500981E51 /* HistoryAppDelegate.h */,
-				1D3623250D0F684500981E51 /* HistoryAppDelegate.m */,
-				5BCD5048102555D00066772E /* MapViewController.h */,
-				5BCD5049102555D00066772E /* MapViewController.m */,
-				5B7F3E2110360D2600114D2D /* UnlockController.h */,
-				5B7F3E2210360D2600114D2D /* UnlockController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -297,6 +288,39 @@
 				28D7ACF70DDB3853001CB0EB /* AbstractMapListController.m */,
 			);
 			name = "Search Results";
+			sourceTree = "<group>";
+		};
+		5B98EB961039296B00079D2F /* In-App-Purchase */ = {
+			isa = PBXGroup;
+			children = (
+				5B7F3E2110360D2600114D2D /* UnlockController.h */,
+				5B7F3E2210360D2600114D2D /* UnlockController.m */,
+				5BF87E5910366A3800787B2A /* PurchaseController.h */,
+				5BF87E5A10366A3800787B2A /* PurchaseController.m */,
+				5BF87E891036783300787B2A /* StoreObserver.h */,
+				5BF87E8A1036783300787B2A /* StoreObserver.m */,
+			);
+			name = "In-App-Purchase";
+			sourceTree = "<group>";
+		};
+		5B98EB971039298E00079D2F /* Maps */ = {
+			isa = PBXGroup;
+			children = (
+				5BCD5048102555D00066772E /* MapViewController.h */,
+				5BCD5049102555D00066772E /* MapViewController.m */,
+			);
+			name = Maps;
+			sourceTree = "<group>";
+		};
+		5B98EB98103929A400079D2F /* Core Application */ = {
+			isa = PBXGroup;
+			children = (
+				5BCD51B9102570360066772E /* MainMenuController.h */,
+				5BCD51BA102570360066772E /* MainMenuController.m */,
+				1D3623240D0F684500981E51 /* HistoryAppDelegate.h */,
+				1D3623250D0F684500981E51 /* HistoryAppDelegate.m */,
+			);
+			name = "Core Application";
 			sourceTree = "<group>";
 		};
 		5BCD502B102554840066772E /* Products */ = {

@@ -57,8 +57,13 @@
 
 	UIBarButtonItem* backForward = [[UIBarButtonItem alloc] initWithCustomView:segmented];
 	
-	 self.navigationItem.rightBarButtonItem = backForward;
+	 //self.navigationItem.rightBarButtonItem = backForward;
 
+	UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleWhite];
+	
+	spinner.hidesWhenStopped = NO;
+	
+	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView: spinner];
 	
 	
 	//UISlider* slider = [[UISlider alloc] init];

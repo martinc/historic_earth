@@ -26,6 +26,14 @@
 	searchBar.translucent = self.navigationController.navigationBar.translucent;
 	
 	searchBar.placeholder = @"Enter Address Here";
+	
+
+	NSString *lastSearchText = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastSearchText"];
+	if(lastSearchText != nil)
+	{
+		searchBar.text = lastSearchText;
+	}
+	
 	//searchBar.prompt = @"Address";
 	
 	//[searchBar setShowsCancelButton:YES animated:NO];
@@ -60,6 +68,9 @@
 	
 	NSString *searchText = searchBar.text;
 	NSLog(@"performing search for \"%@\"", searchText);
+	
+	[[NSUserDefaults standardUserDefaults] setObject:searchText forKey:@"lastSearchText"];
+
 	
 	
 	[self loadDataWithRequest: [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://oldmapapp.com/test/sample.json"]
@@ -118,6 +129,7 @@
 		searching = NO;
 		letUserSelectRow = NO;
 		self.tableView.scrollEnabled = NO;
+		[self cancelSearching];
 	}
 	
 }
