@@ -133,13 +133,15 @@
 
 - (void) tilesBeganLoading: (NSNotification *) note
 {
-	[spinner startAnimating];
+	if(spinner)
+		[spinner startAnimating];
 	
 }
 
 - (void) tilesLoaded: (NSNotification *) note
 {
-	[spinner stopAnimating];
+	if(spinner)
+		[spinner stopAnimating];
 }
 
 
@@ -192,17 +194,17 @@
 		oldMapView.contents = [[[RMMapContents alloc] initWithView:oldMapView
 													 tilesource:myTilesource
 												   centerLatLon:theMap.mapCenter
-													  zoomLevel:13.0
+													  zoomLevel:theMap.minZoom
 												   maxZoomLevel:30.0
-												   minZoomLevel:1.0
+												   minZoomLevel:theMap.minZoom
 												backgroundImage:nil] autorelease];
 		
 		modernMapView.contents = [[[RMMapContents alloc] initWithView:modernMapView
 														tilesource:[[RMOpenStreetMapSource alloc] init]
 													  centerLatLon:theMap.mapCenter
-														 zoomLevel:13.0
+														 zoomLevel:theMap.minZoom
 													  maxZoomLevel:30.0
-													  minZoomLevel:1.0
+													  minZoomLevel:theMap.minZoom
 												   backgroundImage:nil] autorelease];
 		
 		
@@ -324,6 +326,9 @@
 - (void)viewDidUnload {
 	// Release any retained subviews of the main view.
 	// e.g. self.myOutlet = nil;
+	
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
