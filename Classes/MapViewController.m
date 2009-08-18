@@ -38,16 +38,22 @@
 	
 	NSString *backarrow = @"◀";
 	NSString *forwardarrow = @"▶";
+	//UIImage *backarrow = [UIImage imageNamed:@"backarrow.png"];
+	//UIImage *forwardarrow = [UIImage imageNamed:@"forwardarrow.png"];
+	
 	NSArray *itemArray = [NSArray arrayWithObjects: backarrow, forwardarrow, nil];
 	
-	UISegmentedControl* segmented = [[UISegmentedControl alloc] initWithItems:itemArray];
+	segmented = [[UISegmentedControl alloc] initWithItems:itemArray];
 	//segmented.segmentedControlStyle = UISegmentedControlStylePlain;
 	//segmented.segmentedControlStyle = UISegmentedControlStyleBordered;
 	segmented.segmentedControlStyle = UISegmentedControlStyleBar;
 
-	UIBarButtonItem* backForward = [[UIBarButtonItem alloc] initWithCustomView:segmented];
+	[segmented addTarget:self
+						 action:@selector(arrowPressed)
+			   forControlEvents:UIControlEventValueChanged];
 	
-	 //self.navigationItem.rightBarButtonItem = backForward;
+	
+
 
 	spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleWhite];
 	spinner.hidesWhenStopped = YES;
@@ -57,7 +63,11 @@
 	//spinner.center = CGPointMake(280, 50);
 	//spinner.center = CGPointMake(0, 0);
 	
-	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView: spinner];
+	backForward = [[UIBarButtonItem alloc] initWithCustomView:segmented];
+	barSpinner = [[UIBarButtonItem alloc] initWithCustomView: spinner];
+	self.navigationItem.rightBarButtonItem = backForward;
+
+	
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(tilesBeganLoading:)
@@ -131,17 +141,39 @@
 	
 }
 
+- (void) arrowPressed
+{
+
+	//NSLog(@"arrow pressed is %d", segmented.selectedSegmentIndex);
+	
+	switch (segmented.selectedSegmentIndex) {
+		case 0:
+			[self loadMapAtIndex: (currentMapIndex-1)%[maps count]];
+			break;
+		case 1:
+			[self loadMapAtIndex: (currentMapIndex+1)%[maps count]];
+			break;
+	}
+	segmented.selectedSegmentIndex = -1;
+	
+}
+
 - (void) tilesBeganLoading: (NSNotification *) note
 {
-	if(spinner)
+	if(spinner){
+		self.navigationItem.rightBarButtonItem = barSpinner;
 		[spinner startAnimating];
+	}
 	
 }
 
 - (void) tilesLoaded: (NSNotification *) note
 {
-	if(spinner)
+	if(spinner){
 		[spinner stopAnimating];
+		self.navigationItem.rightBarButtonItem = backForward;
+	}
+	
 }
 
 

@@ -30,6 +30,12 @@
 	UISlider* slider;
 	
 	UIActivityIndicatorView *spinner;
+	
+	UIBarButtonItem* backForward;
+	
+	UIBarButtonItem* barSpinner;
+	
+	UISegmentedControl* segmented;
 
 }
 
