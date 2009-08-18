@@ -110,7 +110,7 @@
 	[gregorian components: NSYearCalendarUnit fromDate:today];
 	NSInteger year = [weekdayComponents year];
 	
-	
+	[gregorian release];
 	
 	
 	UIBarButtonItem* present = [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:@"%d",year] style:UIBarButtonItemStylePlain target:nil action:NULL];
@@ -201,7 +201,7 @@
 	
 	[self loadMapAtIndex: theIndex];
 
-	RMMarker* theMarker = [[RMMarker alloc] initWithUIImage: [UIImage imageNamed:@"marker-blue.png"]];
+	theMarker = [[RMMarker alloc] initWithUIImage: [UIImage imageNamed:@"marker-blue.png"]];
 
 	[oldMapView.markerManager addMarker: theMarker AtLatLong: markerLocation];
 
@@ -246,9 +246,8 @@
 		
 		//WMS Settings
 		
-		NSDictionary *wmsParameters = [
-									   [NSDictionary alloc]
-									   initWithObjects:[NSArray arrayWithObjects:theMap.layerID,@"TRUE",nil]
+		NSDictionary *wmsParameters = [NSDictionary
+									   dictionaryWithObjects:[NSArray arrayWithObjects:theMap.layerID,@"TRUE",nil]
 									   forKeys:[NSArray arrayWithObjects:@"layers",@"transparent",nil]
 									   ];
 		id myTilesource = [[[RMGenericMercatorWMSSource alloc]  
@@ -267,7 +266,7 @@
 												backgroundImage:nil] autorelease];
 		
 		modernMapView.contents = [[[RMMapContents alloc] initWithView:modernMapView
-														tilesource:[[RMOpenStreetMapSource alloc] init]
+														tilesource:[[[RMOpenStreetMapSource alloc] init] autorelease]
 													  centerLatLon:theMap.mapCenter
 														 zoomLevel:theMap.minZoom
 													  maxZoomLevel:30.0
@@ -444,6 +443,9 @@
 	
 	
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	
+	
+	if(theMarker) [theMarker release];
 }
 
 

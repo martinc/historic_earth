@@ -42,9 +42,9 @@
     view.backgroundColor = [UIColor clearColor];
 	
 	
-	UILabel* nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 100)];
-	UILabel* priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 100, 320, 100)];
-	UILabel* descriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 200, 320, 100)];
+	nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 100)];
+	priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 100, 320, 100)];
+	descriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 200, 320, 100)];
 	
     nameLabel.backgroundColor = [UIColor clearColor];
 	priceLabel.backgroundColor = [UIColor clearColor];
@@ -90,6 +90,7 @@
     [view release];
 	
 	
+	
 
 	
 }
@@ -129,6 +130,11 @@
 - (void)viewDidUnload {
 	// Release any retained subviews of the main view.
 	// e.g. self.myOutlet = nil;
+	
+	[nameLabel release];
+	[descriptionLabel release];
+	[priceLabel release];
+	
 }
 
 

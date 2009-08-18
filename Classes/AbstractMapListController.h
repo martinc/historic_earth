@@ -25,6 +25,8 @@
 	BOOL haveLocation;
 	
 	CLLocationCoordinate2D searchLocation;
+	
+	NSURLConnection *theConnection;
 }
 
 - (void) loadDataWithRequest: (NSURLRequest *) theRequest;

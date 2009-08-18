@@ -28,10 +28,10 @@
 	
 	BOOL haveBeenConnected;
 	BOOL shownNetworkError;
-
-
 	
 	
+	UIAlertView *alert;
+
 
 }
 

@@ -33,9 +33,9 @@
 
 - (void) requestProductData
 {
-	SKProductsRequest *request= [[SKProductsRequest alloc] initWithProductIdentifiers: [NSSet setWithObject: @"com.oldmapapp.search"]];
-	request.delegate = self;
-	[request start];
+	productsRequest= [[SKProductsRequest alloc] initWithProductIdentifiers: [NSSet setWithObject: @"com.oldmapapp.search"]];
+	productsRequest.delegate = self;
+	[productsRequest start];
 }
 
 //***************************************
@@ -60,6 +60,8 @@
 	
 	
 	[self.tableView reloadData];
+	
+	[productsRequest release];
 	// populate UI
 	/*
 	for(int i=0;i<[myProduct count];i++)
@@ -162,6 +164,8 @@
 	[numberFormatter setLocale:product.priceLocale];
 	NSString *formattedString = [numberFormatter stringFromNumber:product.price];
 	
+	
+	[numberFormatter release];
 	
 	cell.textLabel.text = [NSString stringWithFormat:@"%@ - %@", product.localizedTitle, formattedString];
 	cell.detailTextLabel.text = product.localizedDescription;

@@ -107,7 +107,7 @@
 	// If the accuracy is valid, go ahead and process the event.
 	if (newHeading.headingAccuracy > 0)
 	{
-		CLLocationDirection theHeading = newHeading.magneticHeading;
+		//CLLocationDirection theHeading = newHeading.magneticHeading;
 		
 		// Do something with the event data.
 	}

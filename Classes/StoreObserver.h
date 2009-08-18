@@ -13,6 +13,8 @@
 	
 	NSMutableData *receivedData;
 	
+	NSURLConnection *theConnection;
+	
 }
 
 - (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions;

@@ -86,7 +86,7 @@
 
 	//NSURL *realStoreURL = [[NSURL alloc] initWithString: @"https://buy.itunes.apple.com/verifyReceipt"];
 	
-	NSURL *sandboxStoreURL = [[NSURL alloc] initWithString: @"https://sandbox.itunes.apple.com/verifyReceipt"];
+	NSURL *sandboxStoreURL = [NSURL URLWithString: @"https://sandbox.itunes.apple.com/verifyReceipt"];
 	NSString *jsonOut = [NSString stringWithFormat:@"{ \"receipt-data\" : \"%@\" }",
 							[[[NSString alloc] initWithData:theReceipt encoding:NSUTF8StringEncoding] autorelease]
 						 ];
@@ -101,7 +101,7 @@
 	
 	// create the connection with the request
 	// and start loading the data
-	NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
+	theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
 	if (theConnection) {
 		// Create the NSMutableData that will hold
 		// the received data
@@ -135,7 +135,7 @@
 - (void)connection:(NSURLConnection *)connection
   didFailWithError:(NSError *)error
 {
-    [connection release];
+    [theConnection release];
     [receivedData release];
 	
     NSLog(@"Connection failed! Error - %@ %@",
@@ -171,7 +171,7 @@
 	
 		
     // release the connection, and the data object
-    [connection release];
+    [theConnection release];
     [receivedData release];
 }
 

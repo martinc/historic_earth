@@ -106,7 +106,7 @@ NSString * const kMAP_MIN_ZOOM = @"MinZoom";
 	
 	// create the connection with the request
 	// and start loading the data
-	NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
+	theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
 	if (theConnection) {
 		// Create the NSMutableData that will hold
 		// the received data
@@ -147,7 +147,7 @@ NSString * const kMAP_MIN_ZOOM = @"MinZoom";
   didFailWithError:(NSError *)error
 {
     // release the connection, and the data object
-    [connection release];
+    [theConnection release];
     // receivedData is declared as a method instance elsewhere
     [receivedData release];
 	
@@ -223,6 +223,7 @@ NSString * const kMAP_MIN_ZOOM = @"MinZoom";
 					}
 
 					[maps addObject:theMap];
+					[theMap release];
 					NSLog(@"added map");
 				}
 				else{
@@ -265,7 +266,7 @@ NSString * const kMAP_MIN_ZOOM = @"MinZoom";
 	[self.tableView reloadData];	
 	
     // release the connection, and the data object
-    [connection release];
+    [theConnection release];
     [receivedData release];
 }
 

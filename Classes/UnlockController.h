@@ -17,6 +17,8 @@
 	NSArray *products;
 	
 	PurchaseController* purchaseController;
+	
+	SKProductsRequest *productsRequest;
 
 }
 

@@ -37,11 +37,15 @@
 	BOOL showingMarker;
 	CLLocationCoordinate2D markerLocation;
 	
+	RMMarker* theMarker;
+	
 }
 
 - (id) initWithMaps: (NSMutableArray *) theMaps;
 
 - (void) loadMapAtIndex: (int) theIndex;
 - (void) loadMapAtIndex: (int) theIndex withMarkerLocation: (CLLocationCoordinate2D) loc;
+
+- (void) updateArrows;
 
 @end

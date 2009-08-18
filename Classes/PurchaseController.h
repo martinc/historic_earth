@@ -14,6 +14,10 @@
 	SKProduct* product;
 	
 	UIButton* buyButton;
+	
+	UILabel* nameLabel;
+	UILabel* priceLabel;
+	UILabel* descriptionLabel;
 
 }
 

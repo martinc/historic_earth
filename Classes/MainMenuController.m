@@ -23,19 +23,19 @@
 		unlockController = [[UnlockController alloc] initWithStyle:UITableViewStyleGrouped];
 		
 		NSString* locationIconPath = [[NSBundle mainBundle] pathForResource:@"74-location" ofType:@"png" inDirectory:@"Images"];
-		UIImage* locationIcon = [[UIImage alloc] initWithContentsOfFile:locationIconPath];
+		UIImage* locationIcon = [UIImage imageWithContentsOfFile:locationIconPath];
 		
 		NSString* featuredIconPath = [[NSBundle mainBundle] pathForResource:@"28-star" ofType:@"png" inDirectory:@"Images"];
-		UIImage* featuredIcon = [[UIImage alloc] initWithContentsOfFile:featuredIconPath];
+		UIImage* featuredIcon = [UIImage imageWithContentsOfFile:featuredIconPath];
 		
 		NSString* settingsIconPath = [[NSBundle mainBundle] pathForResource:@"20-gear2" ofType:@"png" inDirectory:@"Images"];
-		UIImage* settingsIcon = [[UIImage alloc] initWithContentsOfFile:settingsIconPath];
+		UIImage* settingsIcon = [UIImage imageWithContentsOfFile:settingsIconPath];
 
 		NSString* unlockIconPath = [[NSBundle mainBundle] pathForResource:@"24-gift" ofType:@"png" inDirectory:@"Images"];
-		UIImage* unlockIcon = [[UIImage alloc] initWithContentsOfFile: unlockIconPath];
+		UIImage* unlockIcon = [UIImage imageWithContentsOfFile: unlockIconPath];
 
 		NSString* searchIconPath = [[NSBundle mainBundle] pathForResource:@"06-magnifying-glass" ofType:@"png" inDirectory:@"Images"];
-		UIImage* searchIcon = [[UIImage alloc] initWithContentsOfFile: searchIconPath];
+		UIImage* searchIcon = [UIImage imageWithContentsOfFile: searchIconPath];
 
 		
 
