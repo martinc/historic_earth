@@ -19,6 +19,8 @@
 		5B03BCD810390E2B00D6E9DD /* SearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B03BCD710390E2B00D6E9DD /* SearchController.m */; };
 		5B0405DA1039A82400F7C25B /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B0405D91039A82400F7C25B /* Map.m */; };
 		5B0406E31039F8A000F7C25B /* HMWSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B0406E21039F8A000F7C25B /* HMWSource.m */; };
+		5B040854103A4D2900F7C25B /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B040853103A4D2900F7C25B /* Reachability.m */; };
+		5B040873103A5AD700F7C25B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B040872103A5AD700F7C25B /* SystemConfiguration.framework */; };
 		5B20C8D81022BBC90003FE62 /* paperbackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B20C8D71022BBC90003FE62 /* paperbackground.png */; };
 		5B20C8EC1022BCE60003FE62 /* CustomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B20C8EB1022BCE60003FE62 /* CustomButton.m */; };
 		5B20C8F31022BD600003FE62 /* custombuttonpressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B20C8F11022BD600003FE62 /* custombuttonpressed.png */; };
@@ -107,6 +109,9 @@
 		5B0405D91039A82400F7C25B /* Map.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Map.m; sourceTree = "<group>"; };
 		5B0406E11039F8A000F7C25B /* HMWSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMWSource.h; sourceTree = "<group>"; };
 		5B0406E21039F8A000F7C25B /* HMWSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMWSource.m; sourceTree = "<group>"; };
+		5B040852103A4D2900F7C25B /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		5B040853103A4D2900F7C25B /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		5B040872103A5AD700F7C25B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		5B20C8D71022BBC90003FE62 /* paperbackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = paperbackground.png; sourceTree = "<group>"; };
 		5B20C8EA1022BCE60003FE62 /* CustomButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomButton.h; sourceTree = "<group>"; };
 		5B20C8EB1022BCE60003FE62 /* CustomButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomButton.m; sourceTree = "<group>"; };
@@ -163,6 +168,7 @@
 				5BCD507110255B880066772E /* libMapView.a in Frameworks */,
 				5B2F727F1026C5A500676DBD /* libThree20.a in Frameworks */,
 				5B7F3E1A10360CE500114D2D /* StoreKit.framework in Frameworks */,
+				5B040873103A5AD700F7C25B /* SystemConfiguration.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,6 +214,7 @@
 				5BCD483C1025538D0066772E /* QuartzCore.framework */,
 				5BCD503E102554980066772E /* CoreLocation.framework */,
 				5B7F3E1910360CE500114D2D /* StoreKit.framework */,
+				5B040872103A5AD700F7C25B /* SystemConfiguration.framework */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -325,6 +332,8 @@
 		5B98EB98103929A400079D2F /* Core Application */ = {
 			isa = PBXGroup;
 			children = (
+				5B040852103A4D2900F7C25B /* Reachability.h */,
+				5B040853103A4D2900F7C25B /* Reachability.m */,
 				5BCD51B9102570360066772E /* MainMenuController.h */,
 				5BCD51BA102570360066772E /* MainMenuController.m */,
 				1D3623240D0F684500981E51 /* HistoryAppDelegate.h */,
@@ -461,6 +470,7 @@
 				5B03BCD810390E2B00D6E9DD /* SearchController.m in Sources */,
 				5B0405DA1039A82400F7C25B /* Map.m in Sources */,
 				5B0406E31039F8A000F7C25B /* HMWSource.m in Sources */,
+				5B040854103A4D2900F7C25B /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

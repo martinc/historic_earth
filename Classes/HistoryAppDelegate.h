@@ -10,7 +10,7 @@
 #import <StoreKit/StoreKit.h>
 #import "MainMenuController.h"
 #import "StoreObserver.h"
-
+#import "Reachability.h"
 
 @interface HistoryAppDelegate : NSObject <UIApplicationDelegate> {
     UIWindow *window;
@@ -18,10 +18,34 @@
 	MainMenuController* main;
 	StoreObserver *observer;
 	
+	
+	Reachability* hostReach;
+ //   Reachability* internetReach;
+	
+	
+//	NetworkStatus internetConnectionStatus;
+	NetworkStatus remoteHostStatus;
+	
+	BOOL haveBeenConnected;
+	BOOL shownNetworkError;
+
+
+	
+	
 
 }
 
+@property NetworkStatus internetConnectionStatus;
+@property NetworkStatus remoteHostStatus;
+
 @property (nonatomic, retain) IBOutlet UIWindow *window;
+
+
+- (void)initStatus;
+- (void) updateStatus;
+- (void) reachabilityChanged: (NSNotification* )note;
+
+
 
 @end
 
