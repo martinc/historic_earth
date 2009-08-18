@@ -304,10 +304,10 @@
 		5B98EB971039298E00079D2F /* Maps */ = {
 			isa = PBXGroup;
 			children = (
-				5BCD5048102555D00066772E /* MapViewController.h */,
-				5BCD5049102555D00066772E /* MapViewController.m */,
 				5B0405D81039A82400F7C25B /* Map.h */,
 				5B0405D91039A82400F7C25B /* Map.m */,
+				5BCD5048102555D00066772E /* MapViewController.h */,
+				5BCD5049102555D00066772E /* MapViewController.m */,
 				5B0406E11039F8A000F7C25B /* HMWSource.h */,
 				5B0406E21039F8A000F7C25B /* HMWSource.m */,
 			);

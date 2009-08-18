@@ -278,6 +278,13 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+	if(!self.navigationController.toolbar.hidden){
+		[self.navigationController setNavigationBarHidden:YES animated:YES]; 
+		[self.navigationController setToolbarHidden:YES animated:YES];
+	}
+	
+	hasTouchMoved = NO;
+	   
 	//NSLog(@"touchesBegan");
 	for (RMMapView* mv in mapViews){
 		[mv touchesBegan:touches withEvent:event];
@@ -285,13 +292,20 @@
 }
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	//NSLog(@"touchesMoved");
+	hasTouchMoved = YES;
+
 	for (RMMapView* mv in mapViews){
 		[mv touchesMoved:touches withEvent:event];
 	}
 }
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+	if(!hasTouchMoved && self.navigationController.toolbar.hidden)
+	{
+		[self.navigationController setNavigationBarHidden:NO animated:YES]; 
+		[self.navigationController setToolbarHidden:NO animated:YES];
+	}
+	
 	//NSLog(@"touchesEnded");
 	for (RMMapView* mv in mapViews){
 		[mv touchesEnded:touches withEvent:event];

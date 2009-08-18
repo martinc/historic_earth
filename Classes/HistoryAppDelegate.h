@@ -35,7 +35,6 @@
 
 }
 
-@property NetworkStatus internetConnectionStatus;
 @property NetworkStatus remoteHostStatus;
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;

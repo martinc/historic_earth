@@ -36,6 +36,8 @@
 	UIBarButtonItem* barSpinner;
 	
 	UISegmentedControl* segmented;
+	
+	BOOL hasTouchMoved;
 
 }
 
