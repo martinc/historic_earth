@@ -30,6 +30,7 @@
 	searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
 	searchBar.delegate = self;
 	
+	searchBar.barStyle = self.navigationController.navigationBar.barStyle;
 	searchBar.tintColor = self.navigationController.navigationBar.tintColor;
 	searchBar.translucent = self.navigationController.navigationBar.translucent;
 	

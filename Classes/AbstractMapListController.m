@@ -83,45 +83,11 @@ NSString * const kMAP_MIN_ZOOM = @"MinZoom";
 
 	self.hidesBottomBarWhenPushed = YES;
 	
-	//Initialize the array.
-	
-	//Add items
-	/*
-	[listOfItems addObject:@"1864"];
-	[listOfItems addObject:@"1926"];
-	[listOfItems addObject:@"1766"];
-	[listOfItems addObject:@"1655"];
-	[listOfItems addObject:@"1542"];
-	*/
-	
-	/*
-	float tableWidth = 310.0;
-	float distanceFromTop = 44.0;
-	
-	CGRect tableFrame = CGRectMake((320-tableWidth)/2, distanceFromTop, tableWidth, 480.0-distanceFromTop);
-	*/
-	
-	
-	
-//	UITableView* tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStyleGrouped];
-//UITableView* tableView = [[UITableView alloc] initWithFrame:tableFrame style:UITableViewStyleGrouped];
+
 
 	
 	self.tableView.separatorColor = [UIColor brownColor];
-//	self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-	
-	
-	/*
-	CustomButton* thebutton = [[CustomButton alloc]
-							   initWithFrame:CGRectMake(0.0, 0.0, 150.0, 80.0)];
-	thebutton.titleLabel.textColor = [UIColor blackColor];
 
-	[thebutton setTitle:@"load maps" forState:UIControlStateNormal];
-	[thebutton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-
-	self.tableView.tableFooterView = thebutton;
-	
-	*/	
 	
 }
 
