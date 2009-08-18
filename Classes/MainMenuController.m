@@ -31,14 +31,13 @@
 		NSString* settingsIconPath = [[NSBundle mainBundle] pathForResource:@"20-gear2" ofType:@"png" inDirectory:@"Images"];
 		UIImage* settingsIcon = [[UIImage alloc] initWithContentsOfFile:settingsIconPath];
 
-		NSString* unlockIconPath = [[NSBundle mainBundle] pathForResource:@"54-lock" ofType:@"png" inDirectory:@"Images"];
+		NSString* unlockIconPath = [[NSBundle mainBundle] pathForResource:@"24-gift" ofType:@"png" inDirectory:@"Images"];
 		UIImage* unlockIcon = [[UIImage alloc] initWithContentsOfFile: unlockIconPath];
 
 		NSString* searchIconPath = [[NSBundle mainBundle] pathForResource:@"06-magnifying-glass" ofType:@"png" inDirectory:@"Images"];
 		UIImage* searchIcon = [[UIImage alloc] initWithContentsOfFile: searchIconPath];
 
 		
-		if(locationIcon!=nil) NSLog(@"no error loading image");
 
 		
 		mainMenuData = [[NSMutableArray alloc] initWithObjects:
@@ -206,8 +205,12 @@
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 	cell.textLabel.backgroundColor = [UIColor clearColor];
 	
-	cell.textLabel.font = [UIFont fontWithName:@"Georgia" size:16.0];
+	cell.textLabel.font = [UIFont fontWithName:@"Georgia" size:14.0];
+	cell.textLabel.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
+	//cell.indentationWidth = 20.0;
+	//cell.indentationLevel = 1;
 	
+	cell.textLabel.textAlignment = UITextAlignmentLeft;
 	
 	UIImage* theIcon = [[[mainMenuData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"image"];
 
