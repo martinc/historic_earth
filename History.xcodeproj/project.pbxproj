@@ -25,11 +25,6 @@
 		5B20C8EC1022BCE60003FE62 /* CustomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B20C8EB1022BCE60003FE62 /* CustomButton.m */; };
 		5B20C8F31022BD600003FE62 /* custombuttonpressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B20C8F11022BD600003FE62 /* custombuttonpressed.png */; };
 		5B20C8F41022BD600003FE62 /* custombuttonnormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B20C8F21022BD600003FE62 /* custombuttonnormal.png */; };
-		5B20C93D1022C9740003FE62 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B20C9381022C9740003FE62 /* 1.png */; };
-		5B20C93E1022C9740003FE62 /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B20C9391022C9740003FE62 /* 2.png */; };
-		5B20C93F1022C9740003FE62 /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B20C93A1022C9740003FE62 /* 3.png */; };
-		5B20C9401022C9740003FE62 /* 4.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B20C93B1022C9740003FE62 /* 4.png */; };
-		5B20C9411022C9740003FE62 /* 5.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B20C93C1022C9740003FE62 /* 5.png */; };
 		5B2F723910268EE100676DBD /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B2F722E10268EE100676DBD /* NSObject+SBJSON.m */; };
 		5B2F723A10268EE100676DBD /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B2F723010268EE100676DBD /* NSString+SBJSON.m */; };
 		5B2F723B10268EE100676DBD /* SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B2F723210268EE100676DBD /* SBJSON.m */; };
@@ -117,11 +112,6 @@
 		5B20C8EB1022BCE60003FE62 /* CustomButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomButton.m; sourceTree = "<group>"; };
 		5B20C8F11022BD600003FE62 /* custombuttonpressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = custombuttonpressed.png; sourceTree = "<group>"; };
 		5B20C8F21022BD600003FE62 /* custombuttonnormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = custombuttonnormal.png; sourceTree = "<group>"; };
-		5B20C9381022C9740003FE62 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
-		5B20C9391022C9740003FE62 /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
-		5B20C93A1022C9740003FE62 /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
-		5B20C93B1022C9740003FE62 /* 4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4.png; sourceTree = "<group>"; };
-		5B20C93C1022C9740003FE62 /* 5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 5.png; sourceTree = "<group>"; };
 		5B2F722C10268EE100676DBD /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
 		5B2F722D10268EE100676DBD /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
 		5B2F722E10268EE100676DBD /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJSON.m"; sourceTree = "<group>"; };
@@ -251,11 +241,6 @@
 		5B20C8CF1022BA500003FE62 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				5B20C9381022C9740003FE62 /* 1.png */,
-				5B20C9391022C9740003FE62 /* 2.png */,
-				5B20C93A1022C9740003FE62 /* 3.png */,
-				5B20C93B1022C9740003FE62 /* 4.png */,
-				5B20C93C1022C9740003FE62 /* 5.png */,
 				5B20C8F11022BD600003FE62 /* custombuttonpressed.png */,
 				5B20C8F21022BD600003FE62 /* custombuttonnormal.png */,
 			);
@@ -434,11 +419,6 @@
 				5B20C8D81022BBC90003FE62 /* paperbackground.png in Resources */,
 				5B20C8F31022BD600003FE62 /* custombuttonpressed.png in Resources */,
 				5B20C8F41022BD600003FE62 /* custombuttonnormal.png in Resources */,
-				5B20C93D1022C9740003FE62 /* 1.png in Resources */,
-				5B20C93E1022C9740003FE62 /* 2.png in Resources */,
-				5B20C93F1022C9740003FE62 /* 3.png in Resources */,
-				5B20C9401022C9740003FE62 /* 4.png in Resources */,
-				5B20C9411022C9740003FE62 /* 5.png in Resources */,
 				5B2F728F1026C98000676DBD /* Three20.bundle in Resources */,
 				5B63EF0B103480CD005E4CA7 /* Images in Resources */,
 			);
