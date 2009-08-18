@@ -132,9 +132,7 @@
 	
 	[items release];
 	self.hidesBottomBarWhenPushed = NO;
-	
-	navigationHidden = NO;
-	
+		
 	
 	/*
 	currentRoation = 0;	
@@ -179,6 +177,20 @@
 	}
 	
 }
+
+- (void) loadMapAtIndex: (int) theIndex withMarkerLocation: (CLLocationCoordinate2D) loc
+{
+	markerLocation = loc;
+	
+	[self loadMapAtIndex: theIndex];
+
+	RMMarker* theMarker = [[RMMarker alloc] initWithUIImage: [UIImage imageNamed:@"marker-blue.png"]];
+
+	[oldMapView.markerManager addMarker: theMarker AtLatLong: markerLocation];
+
+	
+}
+
 
 
 - (void) loadMapAtIndex: (int) theIndex

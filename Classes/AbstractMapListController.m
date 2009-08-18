@@ -57,6 +57,7 @@ NSString * const kMAP_MIN_ZOOM = @"MinZoom";
 	
 	dataLoaded = NO;
 	loadingResults = NO;
+	haveLocation = NO;
 
 	
 	
@@ -122,6 +123,15 @@ NSString * const kMAP_MIN_ZOOM = @"MinZoom";
 	
 	*/	
 	
+}
+
+- (void) loadDataWithRequest: (NSURLRequest *) theRequest searchLocation: (CLLocationCoordinate2D) loc
+{
+	searchLocation = loc;
+	haveLocation = YES;
+	
+	[self loadDataWithRequest: theRequest];
+
 }
 
 - (void) loadDataWithRequest: (NSURLRequest *) theRequest
@@ -455,8 +465,14 @@ NSString * const kMAP_MIN_ZOOM = @"MinZoom";
 	NSUInteger row = indexPath.row;
     if (row != NSNotFound) {
 		
-		
-		[mapController loadMapAtIndex: indexPath.row];
+		if(haveLocation)
+		{
+			[mapController loadMapAtIndex: indexPath.row withMarkerLocation: searchLocation];
+		}
+		else
+		{
+			[mapController loadMapAtIndex: indexPath.row];
+		}
 		
         [[self navigationController] pushViewController:mapController animated:YES];
 		

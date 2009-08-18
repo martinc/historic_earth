@@ -22,10 +22,13 @@
 	
 	BOOL loadingResults;
 	BOOL dataLoaded;
+	BOOL haveLocation;
+	
+	CLLocationCoordinate2D searchLocation;
 }
 
-
 - (void) loadDataWithRequest: (NSURLRequest *) theRequest;
+- (void) loadDataWithRequest: (NSURLRequest *) theRequest searchLocation: (CLLocationCoordinate2D) loc;
 
 - (UIImage *)scaleImage:(UIImage *) image maxWidth:(float) maxWidth maxHeight:(float) maxHeight;
 

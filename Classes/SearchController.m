@@ -86,7 +86,7 @@
 	
 	[self loadDataWithRequest: [NSURLRequest requestWithURL:[NSURL URLWithString:REQUEST_URL]
 												cachePolicy:NSURLRequestUseProtocolCachePolicy
-											timeoutInterval:15.0]];	
+											timeoutInterval:15.0]];
 	
 	[self doneSearching];
 	

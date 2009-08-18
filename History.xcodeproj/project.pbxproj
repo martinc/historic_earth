@@ -33,6 +33,8 @@
 		5B2F723E10268EE100676DBD /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B2F723810268EE100676DBD /* SBJsonWriter.m */; };
 		5B2F727F1026C5A500676DBD /* libThree20.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B2F727E1026C59C00676DBD /* libThree20.a */; };
 		5B2F728F1026C98000676DBD /* Three20.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5B2F728E1026C98000676DBD /* Three20.bundle */; };
+		5B37B549103B1B12008CF2FC /* marker-crosshair.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B37B548103B1B12008CF2FC /* marker-crosshair.png */; };
+		5B37B578103B1D1F008CF2FC /* marker-blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B37B577103B1D1F008CF2FC /* marker-blue.png */; };
 		5B63EF0B103480CD005E4CA7 /* Images in Resources */ = {isa = PBXBuildFile; fileRef = 5B63EF07103480CD005E4CA7 /* Images */; };
 		5B7F3E1A10360CE500114D2D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B7F3E1910360CE500114D2D /* StoreKit.framework */; };
 		5B7F3E2310360D2600114D2D /* UnlockController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7F3E2210360D2600114D2D /* UnlockController.m */; };
@@ -127,6 +129,8 @@
 		5B2F723810268EE100676DBD /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
 		5B2F72791026C59C00676DBD /* Three20.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Three20.xcodeproj; path = ../three20/src/Three20.xcodeproj; sourceTree = SOURCE_ROOT; };
 		5B2F728E1026C98000676DBD /* Three20.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Three20.bundle; path = ../three20/src/Three20.bundle; sourceTree = SOURCE_ROOT; };
+		5B37B548103B1B12008CF2FC /* marker-crosshair.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "marker-crosshair.png"; sourceTree = "<group>"; };
+		5B37B577103B1D1F008CF2FC /* marker-blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "marker-blue.png"; sourceTree = "<group>"; };
 		5B63EF07103480CD005E4CA7 /* Images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Images; sourceTree = "<group>"; };
 		5B7F3E1910360CE500114D2D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		5B7F3E2110360D2600114D2D /* UnlockController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnlockController.h; sourceTree = "<group>"; };
@@ -241,6 +245,8 @@
 		5B20C8CF1022BA500003FE62 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				5B37B577103B1D1F008CF2FC /* marker-blue.png */,
+				5B37B548103B1B12008CF2FC /* marker-crosshair.png */,
 				5B20C8F11022BD600003FE62 /* custombuttonpressed.png */,
 				5B20C8F21022BD600003FE62 /* custombuttonnormal.png */,
 			);
@@ -421,6 +427,8 @@
 				5B20C8F41022BD600003FE62 /* custombuttonnormal.png in Resources */,
 				5B2F728F1026C98000676DBD /* Three20.bundle in Resources */,
 				5B63EF0B103480CD005E4CA7 /* Images in Resources */,
+				5B37B549103B1B12008CF2FC /* marker-crosshair.png in Resources */,
+				5B37B578103B1D1F008CF2FC /* marker-blue.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
