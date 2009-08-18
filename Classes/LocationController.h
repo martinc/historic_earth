@@ -8,13 +8,23 @@
 
 #import <Foundation/Foundation.h>
 #import "AbstractMapListController.h"
+#import <CoreLocation/CoreLocation.h>
 
 
 
-@interface LocationController : AbstractMapListController {
+@interface LocationController : AbstractMapListController <CLLocationManagerDelegate> {
 
 	NSString *REQUEST_URL;
+	
+	CLLocationManager *locationManager;
+	
+	CLLocationCoordinate2D currentLocation;
+	
+	BOOL haveLoadedLocation;
 
 }
+
+- (void)startUpdates;
+
 
 @end
