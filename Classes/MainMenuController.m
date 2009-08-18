@@ -20,9 +20,25 @@
 		
 		locationController = [[LocationController alloc] initWithStyle:UITableViewStyleGrouped];
 		searchController = [[SearchController alloc] initWithStyle:UITableViewStyleGrouped];
+		unlockController = [[UnlockController alloc] initWithStyle:UITableViewStyleGrouped];
+		
+		NSString* locationIconPath = [[NSBundle mainBundle] pathForResource:@"74-location" ofType:@"png" inDirectory:@"Images"];
+		UIImage* locationIcon = [[UIImage alloc] initWithContentsOfFile:locationIconPath];
+		
+		NSString* featuredIconPath = [[NSBundle mainBundle] pathForResource:@"28-star" ofType:@"png" inDirectory:@"Images"];
+		UIImage* featuredIcon = [[UIImage alloc] initWithContentsOfFile:featuredIconPath];
+		
+		NSString* settingsIconPath = [[NSBundle mainBundle] pathForResource:@"20-gear2" ofType:@"png" inDirectory:@"Images"];
+		UIImage* settingsIcon = [[UIImage alloc] initWithContentsOfFile:settingsIconPath];
+
+		NSString* unlockIconPath = [[NSBundle mainBundle] pathForResource:@"54-lock" ofType:@"png" inDirectory:@"Images"];
+		UIImage* unlockIcon = [[UIImage alloc] initWithContentsOfFile: unlockIconPath];
+
+		NSString* searchIconPath = [[NSBundle mainBundle] pathForResource:@"06-magnifying-glass" ofType:@"png" inDirectory:@"Images"];
+		UIImage* searchIcon = [[UIImage alloc] initWithContentsOfFile: searchIconPath];
 
 		
-		unlockController = [[UnlockController alloc] initWithStyle:UITableViewStyleGrouped];
+		if(locationIcon!=nil) NSLog(@"no error loading image");
 
 		
 		mainMenuData = [[NSMutableArray alloc] initWithObjects:
@@ -30,20 +46,24 @@
 						 [NSMutableDictionary dictionaryWithObjectsAndKeys:
 						  @"Map Your Location", @"name",
 						  locationController, @"controller",
+						  locationIcon, @"image",
 						  nil],
 						 [NSMutableDictionary dictionaryWithObjectsAndKeys:
 						  @"Featured Collections", @"name",
 						  [NSNull null], @"controller",
+						  featuredIcon, @"image",
 						  nil],
 						 nil],
 						[NSMutableArray arrayWithObjects:
 						 [NSMutableDictionary dictionaryWithObjectsAndKeys:
 						  @"Settings", @"name",
 						  [NSNull null], @"controller",
+						  settingsIcon, @"image",
 						  nil],
 						 [NSMutableDictionary dictionaryWithObjectsAndKeys:
-						  @"Unlock Content", @"name",
+						  @"Additional Content", @"name",
 						  unlockController, @"controller",
+						  unlockIcon, @"image",
 						  nil],
 						 nil],
 						nil];
@@ -56,6 +76,7 @@
 												 [NSMutableDictionary dictionaryWithObjectsAndKeys:
 												  @"Search by Address", @"name",
 												  searchController, @"controller",
+												  searchIcon, @"image",
 												  nil]
 												 atIndex:2];
 		}
@@ -187,6 +208,12 @@
 	
 	cell.textLabel.font = [UIFont fontWithName:@"Georgia" size:16.0];
 	
+	
+	UIImage* theIcon = [[[mainMenuData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"image"];
+
+	NSLog(@"the icon size is %f,%f", theIcon.size.width, theIcon.size.height);
+	
+	cell.imageView.image = 	theIcon;
 
     return cell;
 }
