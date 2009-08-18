@@ -367,12 +367,17 @@
 
 - (void) sliderChanged 
 {
-
-	//NSLog(@"slider value is %f", slider.value);
-	oldMapView.alpha = 1.0 - slider.value;
 	
-}
+	NSArray* subs = [oldMapView.layer sublayers];
+	for(CALayer *sub in subs)
+	{
+		if([subs indexOfObject:sub] != [subs count] - 1){
+			[sub setOpacity:1.0 - slider.value];
+		}
+		
+	}
 
+}
 
 
 /*
