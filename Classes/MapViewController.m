@@ -12,6 +12,8 @@
 #define kTILES_BEGAN_LOADING_NOTIFICATION @"kTILES_BEGAN_LOADING_NOTIFICATION"
 #define kTILES_LOADED_NOTIFICATION @"kTILES_LOADED_NOTIFICATION"
 
+#define kSINGLE_TOUCH_DELAY 0.25
+
 
 @implementation MapViewController
 
@@ -130,6 +132,8 @@
 	
 	[items release];
 	self.hidesBottomBarWhenPushed = NO;
+	
+	navigationHidden = NO;
 	
 	
 	/*
@@ -278,10 +282,13 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	if(!self.navigationController.toolbar.hidden){
-		[self.navigationController setNavigationBarHidden:YES animated:YES]; 
-		[self.navigationController setToolbarHidden:YES animated:YES];
+	
+	UITouch *touch = [touches anyObject];
+
+	if([touch tapCount] == 2){
+		[NSObject cancelPreviousPerformRequestsWithTarget:self];
 	}
+
 	
 	hasTouchMoved = NO;
 	   
@@ -293,24 +300,50 @@
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	hasTouchMoved = YES;
-
+	
+	if(!self.navigationController.toolbar.hidden){
+		[self.navigationController setNavigationBarHidden:YES animated:YES]; 
+		[self.navigationController setToolbarHidden:YES animated:YES];
+	}
+	
 	for (RMMapView* mv in mapViews){
 		[mv touchesMoved:touches withEvent:event];
 	}
 }
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	if(!hasTouchMoved && self.navigationController.toolbar.hidden)
-	{
-		[self.navigationController setNavigationBarHidden:NO animated:YES]; 
-		[self.navigationController setToolbarHidden:NO animated:YES];
-	}
 	
+	
+	UITouch *touch = [touches anyObject];
+	
+    if ([touch tapCount] == 1) {
+		[self performSelector:@selector(singleTouch:) withObject:[NSValue valueWithNonretainedObject:touch]  afterDelay:kSINGLE_TOUCH_DELAY];
+        //CGPoint tapPoint = [theTouch locationInView:self];
+    }
+
+	
+
 	//NSLog(@"touchesEnded");
 	for (RMMapView* mv in mapViews){
 		[mv touchesEnded:touches withEvent:event];
 	}
 }
+- (void) singleTouch: (NSValue *) val
+{
+	NSLog(@"single touch called");
+	if(!hasTouchMoved){
+
+		NSLog(@"toolbar is hidden?: %@", self.navigationController.navigationBarHidden ? @"yes" : @"no" );
+
+		BOOL newHiddenStatus = ! (self.navigationController.navigationBarHidden);
+		NSLog(@"setting toolbar to hidden: %@", newHiddenStatus ? @"yes" : @"no" );
+
+		[self.navigationController setNavigationBarHidden:newHiddenStatus animated:YES]; 
+		[self.navigationController setToolbarHidden:newHiddenStatus animated:YES];
+	}
+	
+}
+
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	//NSLog(@"touchesCancelled");

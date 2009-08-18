@@ -38,6 +38,8 @@
 	UISegmentedControl* segmented;
 	
 	BOOL hasTouchMoved;
+	
+	BOOL navigationHidden;
 
 }
 
