@@ -28,6 +28,8 @@
 	NSMutableArray *mapViews;
 	
 	UISlider* slider;
+	
+	UIActivityIndicatorView *spinner;
 
 }
 

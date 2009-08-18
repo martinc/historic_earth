@@ -9,6 +9,10 @@
 #import "MapViewController.h"
 
 
+#define kTILES_BEGAN_LOADING_NOTIFICATION @"kTILES_BEGAN_LOADING_NOTIFICATION"
+#define kTILES_LOADED_NOTIFICATION @"kTILES_LOADED_NOTIFICATION"
+
+
 @implementation MapViewController
 
 
@@ -45,11 +49,26 @@
 	
 	 //self.navigationItem.rightBarButtonItem = backForward;
 
-	UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleWhite];
+	spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleWhite];
+	spinner.hidesWhenStopped = YES;
+	//	spinner.frame = CGRectMake(0, 0, 320, 100);
 	
-	spinner.hidesWhenStopped = NO;
+	//[self.view addSubview:spinner];
+	//spinner.center = CGPointMake(280, 50);
+	//spinner.center = CGPointMake(0, 0);
 	
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView: spinner];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(tilesBeganLoading:)
+												 name:kTILES_BEGAN_LOADING_NOTIFICATION
+											   object:nil];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(tilesLoaded:)
+												 name:kTILES_LOADED_NOTIFICATION
+											   object:nil];
+	
 	
 	
 	//UISlider* slider = [[UISlider alloc] init];
@@ -111,6 +130,18 @@
 //	[self.navigationController setToolbarHidden:NO animated: YES];
 	
 }
+
+- (void) tilesBeganLoading: (NSNotification *) note
+{
+	[spinner startAnimating];
+	
+}
+
+- (void) tilesLoaded: (NSNotification *) note
+{
+	[spinner stopAnimating];
+}
+
 
 - (void) loadMapAtIndex: (int) theIndex
 {
