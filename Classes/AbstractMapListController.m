@@ -87,6 +87,10 @@ NSString * const kMAP_MIN_ZOOM = @"MinZoom";
 
 	
 	self.tableView.separatorColor = [UIColor brownColor];
+	
+	
+	[loadingSpinner startAnimating];
+
 
 	
 }
@@ -111,9 +115,9 @@ NSString * const kMAP_MIN_ZOOM = @"MinZoom";
 		// Create the NSMutableData that will hold
 		// the received data
 		// receivedData is declared as a method instance elsewhere
+		[loadingSpinner startAnimating];
 		receivedData=[[NSMutableData data] retain];
 		loadingResults = YES;
-		[loadingSpinner startAnimating];
 
 		
 	} else {

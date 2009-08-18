@@ -31,7 +31,7 @@
 	searchBar.delegate = self;
 	
 	searchBar.barStyle = self.navigationController.navigationBar.barStyle;
-	searchBar.tintColor = self.navigationController.navigationBar.tintColor;
+	//searchBar.tintColor = self.navigationController.navigationBar.tintColor;
 	searchBar.translucent = self.navigationController.navigationBar.translucent;
 	
 	searchBar.placeholder = @"Enter Address Here";
@@ -54,6 +54,9 @@
 	//self.tableView.bounds = CGRectMake(0, 100, 320, 380);
 	
 	self.tableView.scrollEnabled = NO;
+	
+	
+	[loadingSpinner stopAnimating];
 	
 	
 	/* toolbar - wrong approach
