@@ -37,12 +37,12 @@
 	
 	navController = [[UINavigationController alloc] initWithRootViewController: main];
 	
-	navController.navigationBar.barStyle = UIBarStyleBlack;
-	navController.navigationBar.translucent = YES;
+	navController.toolbar.barStyle = navController.navigationBar.barStyle = UIBarStyleBlack;
+	navController.toolbar.translucent = navController.navigationBar.translucent = YES;
 //	navController.navigationBar.alpha = 1.0;
 //	navController.navigationBar.tintColor = [UIColor brownColor];
 	//0.6, 0.4, 0.2 brown
-	navController.navigationBar.tintColor = [UIColor colorWithRed:0.5 green:0.3 blue:0.1 alpha:1];
+	navController.toolbar.tintColor = navController.navigationBar.tintColor = [UIColor colorWithRed:0.5 green:0.3 blue:0.1 alpha:1];
 	//viewController.title = @"Historic Earth";
 	
 	

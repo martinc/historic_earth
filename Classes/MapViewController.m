@@ -128,7 +128,14 @@
 	
 	
 	
-	if(!oldMapView){
+	if(oldMapView){
+		[oldMapView removeFromSuperview];
+		[oldMapView release];
+	}
+	if(modernMapView){
+		[modernMapView removeFromSuperview];
+		[modernMapView release];
+	}
 	
 	
 		oldMapView = [[RMMapView alloc] initWithFrame:self.view.frame];
@@ -195,8 +202,6 @@
 		[self.view addSubview: oldMapView];
 		//[self.view addSubview: interactionView];
 		
-	}
-	
 	
 
 	
