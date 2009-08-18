@@ -38,10 +38,10 @@
 		
 	
 	
-	NSString *backarrow = @"◀";
-	NSString *forwardarrow = @"▶";
-	//UIImage *backarrow = [UIImage imageNamed:@"backarrow.png"];
-	//UIImage *forwardarrow = [UIImage imageNamed:@"forwardarrow.png"];
+	//NSString *backarrow = @"◀";
+	//NSString *forwardarrow = @"▶";
+	UIImage *backarrow = [UIImage imageNamed:@"Images/backarrow.png"];
+	UIImage *forwardarrow = [UIImage imageNamed:@"Images/forwardarrow.png"];
 	
 	NSArray *itemArray = [NSArray arrayWithObjects: backarrow, forwardarrow, nil];
 	
@@ -54,11 +54,14 @@
 						 action:@selector(arrowPressed)
 			   forControlEvents:UIControlEventValueChanged];
 	
-	
 
+	[self updateArrows];
+	
 
 	spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleWhite];
 	spinner.hidesWhenStopped = YES;
+	
+
 	//	spinner.frame = CGRectMake(0, 0, 320, 100);
 	
 	//[self.view addSubview:spinner];
@@ -94,7 +97,10 @@
 	//[sliderView addSubview:slider];
 	//UISlider* slider = [[UISlider alloc] init];
 	
-	UIBarButtonItem* past = [[UIBarButtonItem alloc] initWithTitle:@"1776" style:UIBarButtonItemStylePlain target:nil action:NULL];
+	NSString *oldYear = [NSString stringWithFormat:@"%d",((Map *)[maps objectAtIndex:currentMapIndex]).year];
+	
+	UIBarButtonItem* past = [[UIBarButtonItem alloc] initWithTitle:oldYear style:UIBarButtonItemStylePlain target:nil action:NULL];
+
 
 	//get current year for toolbar
 	NSDate *today = [NSDate date];
@@ -103,6 +109,8 @@
 	NSDateComponents *weekdayComponents =
 	[gregorian components: NSYearCalendarUnit fromDate:today];
 	NSInteger year = [weekdayComponents year];
+	
+	
 	
 	
 	UIBarButtonItem* present = [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:@"%d",year] style:UIBarButtonItemStylePlain target:nil action:NULL];
@@ -143,6 +151,14 @@
 	
 }
 
+- (void) updateArrows
+{
+	[segmented setEnabled:(currentMapIndex != 0) forSegmentAtIndex:0];
+	[segmented setEnabled:(currentMapIndex != [maps count]-1) forSegmentAtIndex:1];
+
+	
+}
+
 - (void) arrowPressed
 {
 
@@ -157,6 +173,7 @@
 			break;
 	}
 	segmented.selectedSegmentIndex = -1;
+	[self updateArrows];
 	
 }
 
@@ -208,6 +225,8 @@
 	self.title = [NSString stringWithFormat:@"%d",theMap.year];
 	
 	
+	[self updateArrows];
+
 	
 	if(oldMapView){
 		[oldMapView removeFromSuperview];
