@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "RMMapView.h"
 #import "RMCloudMadeMapSource.h"
+#import "RMOpenStreetMapSource.h"
 #import "RMGenericMercatorWMSSource.h"
 #import "Map.h"
 #import "HMWSource.h"
@@ -25,6 +26,8 @@
 	int currentMapIndex;
 	
 	NSMutableArray *mapViews;
+	
+	UISlider* slider;
 
 }
 

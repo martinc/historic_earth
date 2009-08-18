@@ -30,9 +30,6 @@
 	[super loadView];
 	
 		
-	self.navigationController.toolbar.barStyle = self.navigationController.navigationBar.barStyle;
-	self.navigationController.toolbar.tintColor = self.navigationController.navigationBar.tintColor;
-	self.navigationController.toolbar.translucent = self.navigationController.navigationBar.translucent;
 	
 	
 	NSString *backarrow = @"◀";
@@ -56,7 +53,9 @@
 	
 	
 	//UISlider* slider = [[UISlider alloc] init];
-	UISlider* slider = [[UISlider alloc] initWithFrame:CGRectMake(0,0,170,20)];
+	slider = [[UISlider alloc] initWithFrame:CGRectMake(0,0,170,20)];
+	slider.value = 0.0;
+	[slider addTarget:self action:@selector(sliderChanged) forControlEvents:UIControlEventValueChanged];
 	
 	slider.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 
@@ -93,13 +92,12 @@
 	[present release];
 	[slider release];
 	
-	[self setToolbarItems:items animated: NO ];
-	
 	self.navigationController.toolbar.barStyle = self.navigationController.navigationBar.barStyle;
-	self.navigationController.toolbar.translucent = self.navigationController.navigationBar.translucent;
 	self.navigationController.toolbar.tintColor = self.navigationController.navigationBar.tintColor;
+	self.navigationController.toolbar.translucent = self.navigationController.navigationBar.translucent;
+	
+	[self setToolbarItems:items animated: NO ];
 
-	self.navigationController.toolbar.tintColor = [UIColor brownColor];
 	
 	[items release];
 	self.hidesBottomBarWhenPushed = NO;
@@ -116,6 +114,10 @@
 
 - (void) loadMapAtIndex: (int) theIndex
 {
+	
+	self.navigationController.toolbar.barStyle = self.navigationController.navigationBar.barStyle;
+	self.navigationController.toolbar.tintColor = self.navigationController.navigationBar.tintColor;
+	self.navigationController.toolbar.translucent = self.navigationController.navigationBar.translucent;
 	
 	currentMapIndex = theIndex;
 	
@@ -152,16 +154,24 @@
 		oldMapView.contents = [[[RMMapContents alloc] initWithView:oldMapView
 													 tilesource:myTilesource
 												   centerLatLon:theMap.mapCenter
-													  zoomLevel:10.0
+													  zoomLevel:13.0
 												   maxZoomLevel:30.0
 												   minZoomLevel:1.0
 												backgroundImage:nil] autorelease];
 		
+		modernMapView.contents = [[[RMMapContents alloc] initWithView:modernMapView
+														tilesource:[[RMOpenStreetMapSource alloc] init]
+													  centerLatLon:theMap.mapCenter
+														 zoomLevel:13.0
+													  maxZoomLevel:30.0
+													  minZoomLevel:1.0
+												   backgroundImage:nil] autorelease];
 		
-		 modernMapView.contents = [[RMMapContents alloc] initForView:modernMapView];
-		 modernMapView.contents.tileSource = [[RMCloudMadeMapSource alloc]
-		 initWithAccessKey:@"0155d705a5a05e6988534761f6fd2ca5"
-		 styleNumber:5260];
+		
+		 //modernMapView.contents = [[RMMapContents alloc] initForView:modernMapView];
+		 //modernMapView.contents.tileSource = [[RMCloudMadeMapSource alloc]
+		 //initWithAccessKey:@"0155d705a5a05e6988534761f6fd2ca5"
+		 //styleNumber:5260];
 		 
 		
 //UIView* interactionView = [[UIView alloc] initWithFrame:self.view.frame];
@@ -226,6 +236,13 @@
 }
 
 
+- (void) sliderChanged 
+{
+
+	//NSLog(@"slider value is %f", slider.value);
+	oldMapView.alpha = 1.0 - slider.value;
+	
+}
 
 
 
