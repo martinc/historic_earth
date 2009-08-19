@@ -26,6 +26,8 @@
 		
 		currentMapIndex = 0;
 		
+		infoController = [[InfoController alloc] initWithNibName:@"InfoView" bundle:nil];
+		
     }
     return self;
 }
@@ -40,8 +42,8 @@
 	
 	//NSString *backarrow = @"◀";
 	//NSString *forwardarrow = @"▶";
-	UIImage *backarrow = [UIImage imageNamed:@"Images/backarrow.png"];
-	UIImage *forwardarrow = [UIImage imageNamed:@"Images/forwardarrow.png"];
+	UIImage *backarrow = [UIImage imageNamed:@"up.png"];
+	UIImage *forwardarrow = [UIImage imageNamed:@"down.png"];
 	
 	NSArray *itemArray = [NSArray arrayWithObjects: backarrow, forwardarrow, nil];
 	
@@ -49,6 +51,10 @@
 	//segmented.segmentedControlStyle = UISegmentedControlStylePlain;
 	//segmented.segmentedControlStyle = UISegmentedControlStyleBordered;
 	segmented.segmentedControlStyle = UISegmentedControlStyleBar;
+	
+	segmented.frame = CGRectMake(0, 0, 90, 30);
+
+	segmented.tintColor = [UIColor darkGrayColor];
 
 	[segmented addTarget:self
 						 action:@selector(arrowPressed)
@@ -87,8 +93,8 @@
 	
 	
 	//UISlider* slider = [[UISlider alloc] init];
-	slider = [[UISlider alloc] initWithFrame:CGRectMake(0,0,170,20)];
-	slider.value = 0.0;
+	slider = [[UISlider alloc] initWithFrame:CGRectMake(0,0,140,20)];
+	slider.value = 1.0;
 	[slider addTarget:self action:@selector(sliderChanged) forControlEvents:UIControlEventValueChanged];
 	
 	slider.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -121,9 +127,30 @@
 	
 
 	UIBarButtonItem* space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:NULL];
-							  
+							
+	/*
+	NSString* lockIconPath = [[NSBundle mainBundle] pathForResource:@"54-lock" ofType:@"png" inDirectory:@"Images"];
+	UIImage* lockIcon = [UIImage imageWithContentsOfFile: lockIconPath];
+	UIBarButtonItem* theLock = [[UIBarButtonItem alloc] initWithImage:lockIcon style:UIBarButtonItemStyleBordered target:self action:@selector(lockMap)];
 	
-	NSArray* items = [[NSArray alloc] initWithObjects: past, space, item, space, present, nil ];
+	NSString* compassIconPath = [[NSBundle mainBundle] pathForResource:@"71-compass" ofType:@"png" inDirectory:@"Images"];
+	UIImage* compassIcon = [UIImage imageWithContentsOfFile: compassIconPath];
+	UIBarButtonItem* theCompass = [[UIBarButtonItem alloc] initWithImage:compassIcon style:UIBarButtonItemStyleBordered target:self action:@selector(hitCompass)];
+	*/
+	
+	
+	infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
+	[infoButton addTarget:self action:@selector(showInfo) forControlEvents:UIControlEventTouchUpInside];
+	
+	UIBarButtonItem* infoBarButton = [[UIBarButtonItem alloc] initWithCustomView:infoButton];
+	infoBarButton.style = UIBarButtonItemStyleBordered;
+	//infoBarButton.target = self;
+	//infoBarButton.action = @selector(showInfo);
+
+//	[self.navigationController.toolbar addSubview:infoButton];
+	
+	
+	NSArray* items = [[NSArray alloc] initWithObjects: present, space, item, space, past, space , infoBarButton, nil ];
 	
 	[space release];
 	[item release];
@@ -140,6 +167,15 @@
 	
 	[items release];
 	self.hidesBottomBarWhenPushed = NO;
+	
+	
+	
+	//Info button
+	
+	
+	//infoButton.center = CGPointMake(300, 440);
+	
+	
 		
 	
 	/*
@@ -148,6 +184,17 @@
 	 */
 	
 //	[self.navigationController setToolbarHidden:NO animated: YES];
+	
+}
+
+- (void) showInfo
+{
+
+	NSLog(@"showInfo");
+	self.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+	infoController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+	[self presentModalViewController:infoController animated:YES];
+	
 	
 }
 
@@ -302,6 +349,7 @@
 		//[self.view addSubview: interactionView];
 		
 	
+	[self.view bringSubviewToFront:infoButton];
 
 	
 	
@@ -390,7 +438,7 @@
 	for(CALayer *sub in subs)
 	{
 		if([subs indexOfObject:sub] != [subs count] - 1){
-			[sub setOpacity:1.0 - slider.value];
+			[sub setOpacity:slider.value];
 		}
 		
 	}
@@ -431,7 +479,8 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
 	
-	[self.navigationController setToolbarHidden:YES animated: animated];
+	if(!self.modalViewController)
+		[self.navigationController setToolbarHidden:YES animated: animated];
 
 	
 }

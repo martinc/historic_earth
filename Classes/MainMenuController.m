@@ -48,7 +48,7 @@
 						  locationIcon, @"image",
 						  nil],
 						 [NSMutableDictionary dictionaryWithObjectsAndKeys:
-						  @"Featured Collections", @"name",
+						  @"Featured Locations", @"name",
 						  [NSNull null], @"controller",
 						  featuredIcon, @"image",
 						  nil],

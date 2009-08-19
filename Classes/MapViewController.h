@@ -14,6 +14,7 @@
 #import "Map.h"
 #import "HMWSource.h"
 #import "RMMarkerManager.h"
+#import "InfoController.h"
 
 
 
@@ -38,6 +39,10 @@
 	CLLocationCoordinate2D markerLocation;
 	
 	RMMarker* theMarker;
+	
+	UIButton* infoButton;
+	
+	InfoController* infoController;
 	
 }
 
