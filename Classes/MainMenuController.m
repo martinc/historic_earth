@@ -21,6 +21,7 @@
 		locationController = [[LocationController alloc] initWithStyle:UITableViewStyleGrouped];
 		searchController = [[SearchController alloc] initWithStyle:UITableViewStyleGrouped];
 		unlockController = [[UnlockController alloc] initWithStyle:UITableViewStyleGrouped];
+		featuredController = [[FeaturedController alloc] initWithStyle:UITableViewStyleGrouped];
 		
 		NSString* locationIconPath = [[NSBundle mainBundle] pathForResource:@"74-location" ofType:@"png" inDirectory:@"Images"];
 		UIImage* locationIcon = [UIImage imageWithContentsOfFile:locationIconPath];
@@ -49,7 +50,7 @@
 						  nil],
 						 [NSMutableDictionary dictionaryWithObjectsAndKeys:
 						  @"Featured Locations", @"name",
-						  [NSNull null], @"controller",
+						  featuredController, @"controller",
 						  featuredIcon, @"image",
 						  nil],
 						 nil],

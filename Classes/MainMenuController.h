@@ -10,14 +10,16 @@
 #import "LocationController.h"
 #import "SearchController.h"
 #import "UnlockController.h"
+#import "FeaturedController.h"
 
 
 @interface MainMenuController : UITableViewController {
 	
 	LocationController *locationController;
 	SearchController *searchController;
-	
 	UnlockController *unlockController;
+	FeaturedController *featuredController;
+	
 	NSMutableArray* mainMenuData;
 }
 

@@ -62,8 +62,10 @@ NSString * const kMAP_MIN_ZOOM = @"MinZoom";
 	
 	
 	self.title = @"Results";
-	
+	self.hidesBottomBarWhenPushed = YES;
 	self.tableView.backgroundColor = [UIColor clearColor];
+	self.tableView.separatorColor = [UIColor brownColor];
+
 	
 	//self.tableView.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.4];
 	
@@ -72,23 +74,12 @@ NSString * const kMAP_MIN_ZOOM = @"MinZoom";
 
 	loadingSpinner.hidesWhenStopped = YES;
 	loadingSpinner.center = CGPointMake(320/2, 480/2);
-	//loadingSpinner.transform = CGAffineTransformMakeScale(4.0, 4.0);
-
 	
 	[self.view addSubview:loadingSpinner];
 	
 	maps = [[NSMutableArray alloc] init];
 	mapController = [[MapViewController alloc] initWithMaps: maps];
 
-
-	self.hidesBottomBarWhenPushed = YES;
-	
-
-
-	
-	self.tableView.separatorColor = [UIColor brownColor];
-	
-	
 	[loadingSpinner startAnimating];
 
 

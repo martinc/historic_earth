@@ -79,6 +79,17 @@
 	self.navigationItem.rightBarButtonItem = backForward;
 
 	
+	//UIBarButtonItem* backButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:nil action:nil];
+	//UIBarButtonItem* refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:nil action:nil];
+
+	
+	UISegmentedControl* backSegmented = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Back", @"Back with this location", nil]];
+	backSegmented.segmentedControlStyle = UISegmentedControlStyleBar;
+
+
+	UIBarButtonItem* backControls = [[UIBarButtonItem alloc] initWithCustomView:backSegmented];
+	//self.navigationItem.leftBarButtonItem = backControls;
+	
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(tilesBeganLoading:)
@@ -191,7 +202,7 @@
 {
 
 	NSLog(@"showInfo");
-	self.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+	//self.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
 	infoController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
 	[self presentModalViewController:infoController animated:YES];
 	
