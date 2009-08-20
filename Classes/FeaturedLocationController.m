@@ -11,4 +11,33 @@
 
 @implementation FeaturedLocationController
 
+
+
+- (id)initWithLocations: (NSMutableArray *) locs atIndex: (int) theIndex
+{
+
+	self = [super initWithStyle:UITableViewStyleGrouped];
+	
+	locations = [locs retain];
+	currentLocationIndex = theIndex;
+	
+	[self loadData];
+	
+	return self;
+}
+
+
+- (void)loadData
+{
+	
+	NSString* REQUEST_URL = [[NSString alloc] initWithFormat: @"http://www.historicmapworks.com/iPhone/featured.php?p=%d",
+					((Location *)[locations objectAtIndex:currentLocationIndex]).locationID];
+	
+	
+	[self loadDataWithRequest: [NSURLRequest requestWithURL:[NSURL URLWithString:REQUEST_URL]
+												cachePolicy:NSURLRequestUseProtocolCachePolicy
+											timeoutInterval:15.0]];
+	
+}
+
 @end

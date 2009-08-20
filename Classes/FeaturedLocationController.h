@@ -9,10 +9,17 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "AbstractMapListController.h"
+#import "Location.h"
 
 
 @interface FeaturedLocationController : AbstractMapListController {
 
+	NSMutableArray* locations;
+	int currentLocationIndex;
+	
 }
+
+- (void) loadData;
+
 
 @end

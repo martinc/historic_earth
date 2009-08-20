@@ -47,7 +47,6 @@
 	
 	
 	locations = [[NSMutableArray alloc] init];
-	featuredLocationController = [[FeaturedLocationController alloc] init];
 	
 	
 	
@@ -148,7 +147,7 @@
 				NSLog(@"added location");
 			}
 			else{
-				NSLog(@"didn't get all required values for map");
+				NSLog(@"didn't get all required values for location");
 			}
 		
 		}//end for loop
@@ -268,6 +267,11 @@
 	// AnotherViewController *anotherViewController = [[AnotherViewController alloc] initWithNibName:@"AnotherView" bundle:nil];
 	// [self.navigationController pushViewController:anotherViewController];
 	// [anotherViewController release];
+	
+	
+	FeaturedLocationController* featuredLocationController = [[FeaturedLocationController alloc] initWithLocations: locations atIndex: indexPath.row];
+	[self.navigationController pushViewController:featuredLocationController animated:YES];
+	[featuredLocationController release];
 }
 
 

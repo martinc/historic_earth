@@ -18,7 +18,6 @@
 	UIActivityIndicatorView *loadingSpinner;  
 	NSMutableArray *locations;
 	
-	FeaturedLocationController *featuredLocationController;
 	
 	BOOL loadingResults;
 	

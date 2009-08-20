@@ -195,6 +195,8 @@ NSString * const kMAP_MIN_ZOOM = @"MinZoom";
 					theMap.name = theName;
 					theMap.year = [theYear intValue];
 					theMap.minZoom = [theMinZoom intValue];
+					if(theMap.minZoom == 0)
+						theMap.minZoom = 12;
 					
 					
 					NSArray* southWestStrings = [theBL componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
