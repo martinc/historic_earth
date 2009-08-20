@@ -87,9 +87,12 @@
 	//NSURL *realStoreURL = [[NSURL alloc] initWithString: @"https://buy.itunes.apple.com/verifyReceipt"];
 	
 	NSURL *sandboxStoreURL = [NSURL URLWithString: @"https://sandbox.itunes.apple.com/verifyReceipt"];
-	NSString *jsonOut = [NSString stringWithFormat:@"{ \"receipt-data\" : \"%@\" }",
-							[[[NSString alloc] initWithData:theReceipt encoding:NSUTF8StringEncoding] autorelease]
+	NSString *jsonOut = [NSString stringWithFormat:@"{\"receipt-data\":\"%@\" }",
+						//	[[[NSString alloc] initWithData:theReceipt encoding:NSUTF8StringEncoding] autorelease]
+						 [theReceipt base64Encoding]
 						 ];
+	
+	NSLog(@"jsonOut is %@", jsonOut);
 	
 	// create the request
 	NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:sandboxStoreURL

@@ -50,6 +50,7 @@
 		5B22B5FB103CB5BF0026281D /* FeaturedController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B22B5FA103CB5BF0026281D /* FeaturedController.m */; };
 		5B22B605103CB6EE0026281D /* FeaturedLocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B22B604103CB6EE0026281D /* FeaturedLocationController.m */; };
 		5B22B60A103CB91D0026281D /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B22B609103CB91D0026281D /* Location.m */; };
+		5B22B8CD103E0DA20026281D /* NSDataBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B22B8CC103E0DA20026281D /* NSDataBase64.m */; };
 		5B2F723910268EE100676DBD /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B2F722E10268EE100676DBD /* NSObject+SBJSON.m */; };
 		5B2F723A10268EE100676DBD /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B2F723010268EE100676DBD /* NSString+SBJSON.m */; };
 		5B2F723B10268EE100676DBD /* SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B2F723210268EE100676DBD /* SBJSON.m */; };
@@ -167,6 +168,8 @@
 		5B22B604103CB6EE0026281D /* FeaturedLocationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeaturedLocationController.m; sourceTree = "<group>"; };
 		5B22B608103CB91D0026281D /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
 		5B22B609103CB91D0026281D /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
+		5B22B8CB103E0DA20026281D /* NSDataBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDataBase64.h; sourceTree = "<group>"; };
+		5B22B8CC103E0DA20026281D /* NSDataBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDataBase64.m; sourceTree = "<group>"; };
 		5B2F722C10268EE100676DBD /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
 		5B2F722D10268EE100676DBD /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
 		5B2F722E10268EE100676DBD /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJSON.m"; sourceTree = "<group>"; };
@@ -408,6 +411,8 @@
 				5BF87E5A10366A3800787B2A /* PurchaseController.m */,
 				5BF87E891036783300787B2A /* StoreObserver.h */,
 				5BF87E8A1036783300787B2A /* StoreObserver.m */,
+				5B22B8CB103E0DA20026281D /* NSDataBase64.h */,
+				5B22B8CC103E0DA20026281D /* NSDataBase64.m */,
 			);
 			name = "In-App-Purchase";
 			sourceTree = "<group>";
@@ -589,6 +594,7 @@
 				5B22B5FB103CB5BF0026281D /* FeaturedController.m in Sources */,
 				5B22B605103CB6EE0026281D /* FeaturedLocationController.m in Sources */,
 				5B22B60A103CB91D0026281D /* Location.m in Sources */,
+				5B22B8CD103E0DA20026281D /* NSDataBase64.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

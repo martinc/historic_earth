@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <StoreKit/StoreKit.h>
+#import "NSDataBase64.h"
 
 @interface StoreObserver : NSObject<SKPaymentTransactionObserver> {
 	
