@@ -6,3 +6,20 @@
     #import <Foundation/Foundation.h>
     #import <UIKit/UIKit.h>
 #endif
+
+
+#define kSINGLE_TOUCH_DELAY 0.25
+
+
+#define kLOCK_ENABLED @"kLOCK_ENABLED"
+#define kCOMPASS_ENABLED @"kCOMPASS_ENABLED"
+
+#define kTILES_BEGAN_LOADING_NOTIFICATION @"kTILES_BEGAN_LOADING_NOTIFICATION"
+#define kTILES_LOADED_NOTIFICATION @"kTILES_LOADED_NOTIFICATION"
+
+
+#define kHOST_DOMAIN_NAME @"www.historicmapworks.com"
+#define kFEATURED_LOCATION_SERVICE @"http://www.historicmapworks.com/iPhone/featured_list.php"
+#define kFEATURED_DETAILS @"http://www.historicmapworks.com/iPhone/featured.php?"
+#define kWMS_SERVER_URL @"http://www.historicmapworks.com/iPhone/request.php?"
+#define kLAT_LONG_SEARCH @"http://www.historicmapworks.com/iPhone/?"

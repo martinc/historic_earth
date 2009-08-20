@@ -30,7 +30,7 @@
 - (void)loadData
 {
 	
-	NSString* REQUEST_URL = [[NSString alloc] initWithFormat: @"http://www.historicmapworks.com/iPhone/featured.php?p=%d",
+	NSString* REQUEST_URL = [[NSString alloc] initWithFormat: @"%@p=%d", kFEATURED_DETAILS,
 					((Location *)[locations objectAtIndex:currentLocationIndex]).locationID];
 	
 	

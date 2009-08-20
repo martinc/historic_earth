@@ -331,6 +331,37 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
+		5B22B676103D06780026281D /* Featured Locations */ = {
+			isa = PBXGroup;
+			children = (
+				5B22B5F9103CB5BF0026281D /* FeaturedController.h */,
+				5B22B5FA103CB5BF0026281D /* FeaturedController.m */,
+				5B22B603103CB6EE0026281D /* FeaturedLocationController.h */,
+				5B22B604103CB6EE0026281D /* FeaturedLocationController.m */,
+				5B22B608103CB91D0026281D /* Location.h */,
+				5B22B609103CB91D0026281D /* Location.m */,
+			);
+			name = "Featured Locations";
+			sourceTree = "<group>";
+		};
+		5B22B677103D068E0026281D /* Search by address */ = {
+			isa = PBXGroup;
+			children = (
+				5B03BCD610390E2B00D6E9DD /* SearchController.h */,
+				5B03BCD710390E2B00D6E9DD /* SearchController.m */,
+			);
+			name = "Search by address";
+			sourceTree = "<group>";
+		};
+		5B22B678103D06AE0026281D /* Search by latlong */ = {
+			isa = PBXGroup;
+			children = (
+				5B03BCD110390DBD00D6E9DD /* LocationController.h */,
+				5B03BCD210390DBD00D6E9DD /* LocationController.m */,
+			);
+			name = "Search by latlong";
+			sourceTree = "<group>";
+		};
 		5B2F723F10268EE500676DBD /* JSON */ = {
 			isa = PBXGroup;
 			children = (
@@ -362,18 +393,11 @@
 		5B98EB0E10390FF700079D2F /* Search Results */ = {
 			isa = PBXGroup;
 			children = (
-				5B03BCD110390DBD00D6E9DD /* LocationController.h */,
-				5B03BCD210390DBD00D6E9DD /* LocationController.m */,
-				5B03BCD610390E2B00D6E9DD /* SearchController.h */,
-				5B03BCD710390E2B00D6E9DD /* SearchController.m */,
 				28D7ACF60DDB3853001CB0EB /* AbstractMapListController.h */,
 				28D7ACF70DDB3853001CB0EB /* AbstractMapListController.m */,
-				5B22B5F9103CB5BF0026281D /* FeaturedController.h */,
-				5B22B5FA103CB5BF0026281D /* FeaturedController.m */,
-				5B22B603103CB6EE0026281D /* FeaturedLocationController.h */,
-				5B22B604103CB6EE0026281D /* FeaturedLocationController.m */,
-				5B22B608103CB91D0026281D /* Location.h */,
-				5B22B609103CB91D0026281D /* Location.m */,
+				5B22B678103D06AE0026281D /* Search by latlong */,
+				5B22B677103D068E0026281D /* Search by address */,
+				5B22B676103D06780026281D /* Featured Locations */,
 			);
 			name = "Search Results";
 			sourceTree = "<group>";

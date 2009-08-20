@@ -10,7 +10,6 @@
 #import "AbstractMapListController.h"
 
 
-#define kHostName @"www.historicmapworks.com"
 
 
 @implementation HistoryAppDelegate
@@ -47,7 +46,7 @@
 
 	
 	//internetReach = [[Reachability reachabilityForInternetConnection] retain];
-	hostReach = [[Reachability reachabilityWithHostName: kHostName] retain];
+	hostReach = [[Reachability reachabilityWithHostName: kHOST_DOMAIN_NAME] retain];
 	
 	//[internetReach startNotifer];
 	[hostReach startNotifer];

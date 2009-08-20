@@ -11,6 +11,7 @@
 
 @implementation InfoController
 
+@synthesize lockSwitch, compassSwitch;
 
 - (IBAction) closeWindow
 {
@@ -23,12 +24,30 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
         // Custom initialization
-		
-		
 		self.hidesBottomBarWhenPushed = NO;
+
+
 		
     }
     return self;
+}
+
+- (IBAction) switchesChanged
+{
+	NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+	
+	[defaults setBool:lockSwitch.on forKey:kLOCK_ENABLED];
+	[defaults setBool:compassSwitch.on forKey:kCOMPASS_ENABLED];
+
+	
+	NSLog(@"lockSwitchIs %d", lockSwitch.on);
+	NSLog(@"compassSwitch %d", compassSwitch.on);
+
+	
+	[defaults synchronize];
+	
+	NSLog(@"set switches");
+	
 }
 
 
@@ -40,16 +59,18 @@
 
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-/*
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-	
-	//NSLog(@"info viewDidLoad called");
-	
-	UILabel* sett
 
+	
+	
+	lockSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey: kLOCK_ENABLED];
+	compassSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey: kCOMPASS_ENABLED];
+
+	
 }
- */
+ 
 
 
 /*

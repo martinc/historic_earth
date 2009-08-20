@@ -9,12 +9,6 @@
 #import "MapViewController.h"
 
 
-#define kTILES_BEGAN_LOADING_NOTIFICATION @"kTILES_BEGAN_LOADING_NOTIFICATION"
-#define kTILES_LOADED_NOTIFICATION @"kTILES_LOADED_NOTIFICATION"
-
-#define kSINGLE_TOUCH_DELAY 0.25
-
-
 @implementation MapViewController
 
 
@@ -28,8 +22,21 @@
 		
 		infoController = [[InfoController alloc] initWithNibName:@"InfoView" bundle:nil];
 		
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(updateSettings:)
+													 name:NSUserDefaultsDidChangeNotification object:nil];
+		
+		[self updateSettings:nil];
+		
+		
     }
     return self;
+}
+-(void) updateSettings: (NSNotification *)notification
+{
+
+	NSLog(@"updateSettings called with notification %@", notification);
+	
 }
 
 
@@ -38,7 +45,7 @@
 	[super loadView];
 	
 		
-	
+	locked = YES;
 	
 	//NSString *backarrow = @"◀";
 	//NSString *forwardarrow = @"▶";
@@ -286,18 +293,50 @@
 	[self updateArrows];
 
 	
+	
+	float targetZoom;
+	CLLocationCoordinate2D targetCenter;
+	
+	targetCenter = theMap.mapCenter;
+	targetZoom = theMap.minZoom + 1.0;
+
 	if(oldMapView){
+		if(locked) {
+			targetCenter = oldMapView.contents.mapCenter;
+			targetZoom = oldMapView.contents.zoom;
+		}
+		
 		[oldMapView removeFromSuperview];
 		[oldMapView release];
 	}
 	if(modernMapView){
-		[modernMapView removeFromSuperview];
-		[modernMapView release];
+	//	[modernMapView removeFromSuperview];
+	//	[modernMapView release];
+//		modernMapView.contents.zoom = theMap.minZoom;
+		
+		if(!locked){
+			
+			modernMapView.contents.zoom = targetZoom;
+			modernMapView.contents.mapCenter = targetCenter;
+			
+			
+			
+		}
+	}
+	else{
+		modernMapView = [[RMMapView alloc] initWithFrame:self.view.frame];
+		modernMapView.contents = [[[RMMapContents alloc] initWithView:modernMapView
+														   tilesource:[[[RMOpenStreetMapSource alloc] init] autorelease]
+														 centerLatLon:targetCenter
+															zoomLevel:targetZoom
+														 maxZoomLevel:30.0
+														 minZoomLevel:theMap.minZoom
+													  backgroundImage:nil] autorelease];
+		
 	}
 	
 	
 		oldMapView = [[RMMapView alloc] initWithFrame:self.view.frame];
-		modernMapView = [[RMMapView alloc] initWithFrame:self.view.frame];
 		
 		mapViews = [[NSMutableArray alloc] initWithObjects:oldMapView,modernMapView, nil];
 		
@@ -308,8 +347,8 @@
 									   dictionaryWithObjects:[NSArray arrayWithObjects:theMap.layerID,@"TRUE",nil]
 									   forKeys:[NSArray arrayWithObjects:@"layers",@"transparent",nil]
 									   ];
-		id myTilesource = [[[RMGenericMercatorWMSSource alloc]  
-							initWithBaseUrl:@"http://www.historicmapworks.com/iPhone/request.php?"  
+		id myTilesource = [[[RMGenericMercatorWMSSource alloc]   
+							initWithBaseUrl: kWMS_SERVER_URL
 							parameters:wmsParameters] autorelease];
 		
 		
@@ -317,19 +356,12 @@
 		
 		oldMapView.contents = [[[RMMapContents alloc] initWithView:oldMapView
 													 tilesource:myTilesource
-												   centerLatLon:theMap.mapCenter
-													  zoomLevel:theMap.minZoom
+												   centerLatLon:targetCenter
+													  zoomLevel:targetZoom
 												   maxZoomLevel:30.0
 												   minZoomLevel:theMap.minZoom
 												backgroundImage:nil] autorelease];
 		
-		modernMapView.contents = [[[RMMapContents alloc] initWithView:modernMapView
-														tilesource:[[[RMOpenStreetMapSource alloc] init] autorelease]
-													  centerLatLon:theMap.mapCenter
-														 zoomLevel:theMap.minZoom
-													  maxZoomLevel:30.0
-													  minZoomLevel:theMap.minZoom
-												   backgroundImage:nil] autorelease];
 		
 		
 		 //modernMapView.contents = [[RMMapContents alloc] initForView:modernMapView];

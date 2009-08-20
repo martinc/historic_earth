@@ -44,6 +44,7 @@
 	
 	InfoController* infoController;
 	
+	BOOL locked;
 }
 
 - (id) initWithMaps: (NSMutableArray *) theMaps;

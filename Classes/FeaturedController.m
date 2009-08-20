@@ -8,7 +8,6 @@
 
 #import "FeaturedController.h"
 
-#define kFeaturedLocationService @"http://www.historicmapworks.com/iPhone/featured_list.php"
 
 @implementation FeaturedController
 
@@ -52,7 +51,7 @@
 	
 	theConnection=[[NSURLConnection alloc] initWithRequest:
 				   [NSURLRequest requestWithURL:
-					[NSURL URLWithString:kFeaturedLocationService]]
+					[NSURL URLWithString:kFEATURED_LOCATION_SERVICE]]
 												  delegate:self];
 	if (theConnection) {
 		// Create the NSMutableData that will hold

@@ -10,9 +10,16 @@
 
 
 @interface InfoController : UIViewController {
+	
+	IBOutlet UISwitch* lockSwitch;
+	IBOutlet UISwitch* compassSwitch;
 
 }
 
+@property (nonatomic, retain) IBOutlet UISwitch* lockSwitch;
+@property (nonatomic, retain) IBOutlet UISwitch* compassSwitch;
+
 - (IBAction) closeWindow;
+- (IBAction) switchesChanged;
 
 @end
