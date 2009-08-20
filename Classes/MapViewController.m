@@ -35,8 +35,11 @@
 -(void) updateSettings: (NSNotification *)notification
 {
 
-	NSLog(@"updateSettings called with notification %@", notification);
+	//NSLog(@"updateSettings called with notification %@", notification);
 	
+	locked = [[NSUserDefaults standardUserDefaults] boolForKey:kLOCK_ENABLED];
+	compassEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:kCOMPASS_ENABLED];
+
 }
 
 

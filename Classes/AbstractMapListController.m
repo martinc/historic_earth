@@ -373,8 +373,9 @@ NSString * const kMAP_MIN_ZOOM = @"MinZoom";
 	Map* theMap = [maps objectAtIndex:indexPath.row];
 	
 	cell.textLabel.text = [NSString stringWithFormat:@"%d",theMap.year];
-	cell.detailTextLabel.text = [NSString stringWithFormat:@"%@: %@",theMap.name,theMap.layerID];
-	
+	//cell.detailTextLabel.text = [NSString stringWithFormat:@"%@: %@",theMap.name,theMap.layerID];
+	cell.detailTextLabel.text = theMap.atlasName;
+
 	cell.textLabel.textColor = [UIColor brownColor];
 
 	cell.textLabel.font = [UIFont fontWithName:@"Georgia" size:26.0];

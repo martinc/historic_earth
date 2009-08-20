@@ -45,6 +45,7 @@
 	InfoController* infoController;
 	
 	BOOL locked;
+	BOOL compassEnabled;
 }
 
 - (id) initWithMaps: (NSMutableArray *) theMaps;
