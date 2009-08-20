@@ -14,15 +14,6 @@
 @implementation AbstractMapListController
 
 
-NSString * const kMAP_ATLAS_NAME = @"Atlas Name";
-NSString * const kMAP_BL = @"BL";
-NSString * const kMAP_TR = @"TR";
-NSString * const kMAP_LAYER = @"Layer";
-NSString * const kMAP_NAME = @"Name";
-NSString * const kMAP_YEAR = @"Year";
-NSString * const kMAP_MIN_ZOOM = @"MinZoom";
-
-
 
 /*
 
@@ -196,7 +187,7 @@ NSString * const kMAP_MIN_ZOOM = @"MinZoom";
 					theMap.year = [theYear intValue];
 					theMap.minZoom = [theMinZoom intValue];
 					if(theMap.minZoom == 0)
-						theMap.minZoom = 12;
+						theMap.minZoom = 10;
 					
 					
 					NSArray* southWestStrings = [theBL componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
@@ -211,7 +202,7 @@ NSString * const kMAP_MIN_ZOOM = @"MinZoom";
 						mapBounds.southwest.latitude = [[southWestStrings objectAtIndex:1] doubleValue];
 						mapBounds.northeast.longitude = [[northEastStrings objectAtIndex:0] doubleValue];
 						mapBounds.northeast.latitude = [[northEastStrings objectAtIndex:1] doubleValue];
-						NSLog(@"set corners to %f,%f %f,%f", mapBounds.southwest.latitude, mapBounds.southwest.longitude, mapBounds.northeast.latitude, mapBounds.northeast.longitude);
+						//NSLog(@"set corners to %f,%f %f,%f", mapBounds.southwest.latitude, mapBounds.southwest.longitude, mapBounds.northeast.latitude, mapBounds.northeast.longitude);
 						theMap.mapBounds = mapBounds;
 						
 					}
@@ -221,7 +212,7 @@ NSString * const kMAP_MIN_ZOOM = @"MinZoom";
 
 					[maps addObject:theMap];
 					[theMap release];
-					NSLog(@"added map");
+					//NSLog(@"added map");
 				}
 				else{
 					NSLog(@"didn't get all required values for map");

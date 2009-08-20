@@ -12,7 +12,6 @@
 #import "RMOpenStreetMapSource.h"
 #import "RMGenericMercatorWMSSource.h"
 #import "Map.h"
-#import "HMWSource.h"
 #import "RMMarkerManager.h"
 #import "InfoController.h"
 
@@ -54,5 +53,8 @@
 - (void) loadMapAtIndex: (int) theIndex withMarkerLocation: (CLLocationCoordinate2D) loc;
 
 - (void) updateArrows;
+
+-(void) updateSettings: (NSNotification *)notification;
+
 
 @end

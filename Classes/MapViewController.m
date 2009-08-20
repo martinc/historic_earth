@@ -298,15 +298,19 @@
 	
 	
 	float targetZoom;
+	float targetMinZoom;
 	CLLocationCoordinate2D targetCenter;
 	
 	targetCenter = theMap.mapCenter;
-	targetZoom = theMap.minZoom + 1.0;
+	targetMinZoom = theMap.minZoom - 4.0;
+	targetZoom = theMap.minZoom - 2.0;
 
 	if(oldMapView){
 		if(locked) {
 			targetCenter = oldMapView.contents.mapCenter;
 			targetZoom = oldMapView.contents.zoom;
+			targetMinZoom = oldMapView.contents.minZoom;
+
 		}
 		
 		[oldMapView removeFromSuperview];
@@ -321,6 +325,7 @@
 			
 			modernMapView.contents.zoom = targetZoom;
 			modernMapView.contents.mapCenter = targetCenter;
+			modernMapView.contents.minZoom = targetMinZoom;
 			
 			
 			
@@ -333,7 +338,7 @@
 														 centerLatLon:targetCenter
 															zoomLevel:targetZoom
 														 maxZoomLevel:30.0
-														 minZoomLevel:theMap.minZoom
+														 minZoomLevel:targetMinZoom
 													  backgroundImage:nil] autorelease];
 		
 	}
@@ -362,7 +367,7 @@
 												   centerLatLon:targetCenter
 													  zoomLevel:targetZoom
 												   maxZoomLevel:30.0
-												   minZoomLevel:theMap.minZoom
+												   minZoomLevel:targetMinZoom
 												backgroundImage:nil] autorelease];
 		
 		

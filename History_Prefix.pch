@@ -23,3 +23,13 @@
 #define kFEATURED_DETAILS @"http://www.historicmapworks.com/iPhone/featured.php?"
 #define kWMS_SERVER_URL @"http://www.historicmapworks.com/iPhone/request.php?"
 #define kLAT_LONG_SEARCH @"http://www.historicmapworks.com/iPhone/?"
+
+
+#define kMAP_ATLAS_NAME @"Atlas Name"
+#define kMAP_BL @"BL"
+#define kMAP_TR @"TR"
+#define kMAP_LAYER @"Layer"
+#define kMAP_NAME @"Name"
+#define kMAP_YEAR @"Year"
+#define kMAP_MIN_ZOOM @"MinZoom"
+
