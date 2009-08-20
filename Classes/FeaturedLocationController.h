@@ -21,5 +21,6 @@
 
 - (void) loadData;
 
+- (id)initWithLocations: (NSMutableArray *) locs atIndex: (int) theIndex;
 
 @end

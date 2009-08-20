@@ -93,11 +93,9 @@
 	//UIBarButtonItem* refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:nil action:nil];
 
 	
-	UISegmentedControl* backSegmented = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Back", @"Back with this location", nil]];
-	backSegmented.segmentedControlStyle = UISegmentedControlStyleBar;
-
-
-	UIBarButtonItem* backControls = [[UIBarButtonItem alloc] initWithCustomView:backSegmented];
+	//UISegmentedControl* backSegmented = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Back", @"Back with this location", nil]];
+	//backSegmented.segmentedControlStyle = UISegmentedControlStyleBar;
+	//UIBarButtonItem* backControls = [[UIBarButtonItem alloc] initWithCustomView:backSegmented];
 	//self.navigationItem.leftBarButtonItem = backControls;
 	
 	
@@ -178,6 +176,7 @@
 	[past release];
 	[present release];
 	[slider release];
+	[infoBarButton release];
 	
 	self.navigationController.toolbar.barStyle = self.navigationController.navigationBar.barStyle;
 	self.navigationController.toolbar.tintColor = self.navigationController.navigationBar.tintColor;
