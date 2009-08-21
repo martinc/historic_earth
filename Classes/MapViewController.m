@@ -312,8 +312,28 @@
 
 		}
 		
-		[oldMapView removeFromSuperview];
-		[oldMapView release];
+		NSLog(@"are animations enabled? %d ", [UIView areAnimationsEnabled]);
+		
+		
+		if(fadingOutView) [fadingOutView release];
+		fadingOutView = oldMapView;
+		oldMapView = nil;
+		
+		
+		[UIView beginAnimations:nil context:NULL];
+		[UIView setAnimationCurve:UIViewAnimationCurveLinear];
+		[UIView setAnimationDuration: kMAP_EXIT_DURATION ];
+		[UIView setAnimationDelegate:self];
+		[UIView setAnimationDidStopSelector:@selector(oldMapFadedOut)/*@selector(oldMapFadedOut: finished: context:)*/];
+		
+
+		//[oldMapView removeFromSuperview];
+		fadingOutView.alpha = 0.0;
+		
+		[UIView commitAnimations];
+
+		
+//		[oldMapView release];
 	}
 	if(modernMapView){
 	//	[modernMapView removeFromSuperview];
@@ -339,6 +359,16 @@
 														 maxZoomLevel:30.0
 														 minZoomLevel:targetMinZoom
 													  backgroundImage:nil] autorelease];
+		
+		modernMapView.backgroundColor = [UIColor clearColor];
+		modernMapView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+		modernMapView.userInteractionEnabled = NO;
+
+		
+		[self.view addSubview: modernMapView];
+
+
+
 		
 	}
 	
@@ -381,22 +411,28 @@
 
 		 
 		oldMapView.backgroundColor = [UIColor clearColor];
-		modernMapView.backgroundColor = [UIColor clearColor];
 		//interactionView.backgroundColor = [UIColor clearColor];
 
 		
 		oldMapView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-		modernMapView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 		//interactionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 
 		
-		modernMapView.userInteractionEnabled = NO;
 		oldMapView.userInteractionEnabled = NO;
+	
+	oldMapView.alpha = 0.0;
+	
+	[self.view addSubview: oldMapView];
+
+	
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationCurve:UIViewAnimationCurveLinear];
+	[UIView setAnimationDuration:kMAP_ENTRANCE_DURATION];
+	
+	oldMapView.alpha = 1.0;
+	
+	[UIView commitAnimations];
 		
-		
-		[self.view addSubview: modernMapView];
-		[self.view addSubview: oldMapView];
-		//[self.view addSubview: interactionView];
 		
 	
 	[self.view bringSubviewToFront:infoButton];
@@ -406,6 +442,14 @@
 	
 }
 
+//- (void) oldMapFadedOut: (NSString *)animationID finished:(NSNumber *)finished context:(void *)context
+- (void) oldMapFadedOut
+{
+	//NSLog(@"oldMapFadedOut");
+	[fadingOutView removeFromSuperview];
+	[fadingOutView release];
+	fadingOutView = nil;
+}
 
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event

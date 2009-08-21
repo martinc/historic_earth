@@ -19,7 +19,7 @@
 
 @interface MapViewController : UIViewController {
 	
-	RMMapView *oldMapView, *modernMapView;
+	RMMapView *oldMapView, *modernMapView, *fadingOutView;
 	
 	float currentRoation;
 	NSMutableArray *maps;
