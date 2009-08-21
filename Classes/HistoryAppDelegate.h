@@ -12,6 +12,8 @@
 #import "StoreObserver.h"
 #import "Reachability.h"
 
+@class StoreObserver;
+
 @interface HistoryAppDelegate : NSObject <UIApplicationDelegate> {
     UIWindow *window;
 	UINavigationController* navController;
@@ -44,7 +46,7 @@
 - (void) updateStatus;
 - (void) reachabilityChanged: (NSNotification* )note;
 
-
+- (void) purchasedSearch;
 
 @end
 

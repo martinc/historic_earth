@@ -22,7 +22,7 @@
 	self.title = @"Unlock Content";
 	
 	self.tableView.backgroundColor = [UIColor clearColor];
-	self.tableView.rowHeight = 200;
+	//self.tableView.rowHeight = 200;
 	
 	[self requestProductData];
 	
@@ -33,7 +33,7 @@
 
 - (void) requestProductData
 {
-	productsRequest= [[SKProductsRequest alloc] initWithProductIdentifiers: [NSSet setWithObject: @"com.oldmapapp.search"]];
+	productsRequest= [[SKProductsRequest alloc] initWithProductIdentifiers: [NSSet setWithObject: kSEARCH_PRODUCT_ID]];
 	productsRequest.delegate = self;
 	[productsRequest start];
 }
@@ -43,7 +43,7 @@
 //***************************************
 - (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response
 {
-	NSLog(@"received storekit response");
+	//NSLog(@"received storekit response");
 	
 	for(NSString* invalidID in response.invalidProductIdentifiers){
 		NSLog(@"Invalid id: %@", invalidID);
@@ -148,7 +148,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
     // Set up the cell...
@@ -158,6 +158,8 @@
 //	NSLog(@”Product identifier: %@”, [product productIdentifier]);
 	
 	
+	/*
+	
 	NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
 	[numberFormatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
 	[numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
@@ -166,14 +168,22 @@
 	
 	
 	[numberFormatter release];
+	 
+	 
+	 */
 	
-	cell.textLabel.text = [NSString stringWithFormat:@"%@ - %@", product.localizedTitle, formattedString];
-	cell.detailTextLabel.text = product.localizedDescription;
+	cell.textLabel.text = product.localizedTitle;
+	//cell.textLabel.text = [NSString stringWithFormat:@"%@ - %@", product.localizedTitle, formattedString];
+	cell.textLabel.font = [UIFont fontWithName:@"Georgia" size:18.0];
+	//cell.detailTextLabel.text = product.localizedDescription;
+	//cell.detailTextLabel.numberOfLines = 4; //No limit on label lines
+	//cell.detailTextLabel.lineBreakMode = UILineBreakModeWordWrap;
 	
-	cell.detailTextLabel.numberOfLines = 0; //No limit on label lines
-	cell.detailTextLabel.lineBreakMode = UILineBreakModeWordWrap;
+	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 	
-	cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+	cell.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.4];
+	
+	cell.textLabel.backgroundColor = [UIColor clearColor];
 	
     return cell;
 }

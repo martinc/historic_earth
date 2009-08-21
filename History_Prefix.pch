@@ -13,10 +13,12 @@
 
 #define kLOCK_ENABLED @"kLOCK_ENABLED"
 #define kCOMPASS_ENABLED @"kCOMPASS_ENABLED"
+#define kSEARCH_ENABLED @"kSEARCH_ENABLED"
 
 #define kTILES_BEGAN_LOADING_NOTIFICATION @"kTILES_BEGAN_LOADING_NOTIFICATION"
 #define kTILES_LOADED_NOTIFICATION @"kTILES_LOADED_NOTIFICATION"
 
+#define kSEARCH_PRODUCT_ID @"com.oldmapapp.search"
 
 #define kHOST_DOMAIN_NAME @"www.historicmapworks.com"
 #define kFEATURED_LOCATION_SERVICE @"http://www.historicmapworks.com/iPhone/featured_list.php"

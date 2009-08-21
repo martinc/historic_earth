@@ -21,6 +21,11 @@
 	FeaturedController *featuredController;
 	
 	NSMutableArray* mainMenuData;
+	NSMutableDictionary* searchData;
+	
+	BOOL searchVisible;
 }
+
+-(void) makeSearchAppear;
 
 @end

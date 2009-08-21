@@ -33,7 +33,7 @@
 	
 	//Store Kit
 	
-	observer = [[StoreObserver alloc] init];
+	observer = [[StoreObserver alloc] initWithAppDelegate:self];
 	[[SKPaymentQueue defaultQueue] addTransactionObserver:observer];
 	
 	
@@ -76,6 +76,23 @@
     [window makeKeyAndVisible];
 }
 
+- (void) purchasedSearch
+{
+	
+	[[NSUserDefaults standardUserDefaults] setBool:YES forKey:kSEARCH_ENABLED];
+	[navController popToRootViewControllerAnimated:YES];
+	
+	
+	[self performSelector:@selector(insertSearch) withObject:nil afterDelay:0.50];
+}
+
+- (void) insertSearch
+{
+
+	[main makeSearchAppear];
+
+	
+}
 
 - (void)reachabilityChanged:(NSNotification *)note {
     [self updateStatus];

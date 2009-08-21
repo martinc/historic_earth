@@ -15,9 +15,7 @@
 @interface UnlockController : UITableViewController <SKProductsRequestDelegate> {
 	
 	NSArray *products;
-	
-	PurchaseController* purchaseController;
-	
+		
 	SKProductsRequest *productsRequest;
 
 }

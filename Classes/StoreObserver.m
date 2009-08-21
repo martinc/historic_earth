@@ -14,6 +14,24 @@
 
 @implementation StoreObserver
 
+
+
+- (id) initWithAppDelegate:(HistoryAppDelegate *)del
+{
+
+	self = [super init];
+	app = [del retain];
+	
+	return self;
+	
+}
+
+- (void)dealloc {
+	[app release];
+    [super dealloc];
+}
+
+
 - (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions
 {
 	for (SKPaymentTransaction *transaction in transactions)
@@ -166,8 +184,8 @@
 	
 	if([result intValue] == 0){
 		NSLog(@"receipt status successful");
-	
-		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"searchEnabled"];
+		
+		[app purchasedSearch];
 
 	}
 	else NSLog(@"receipt status unsucessfull");

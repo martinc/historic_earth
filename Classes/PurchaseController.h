@@ -8,12 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import <StoreKit/StoreKit.h>
+#import "CustomButton.h"
 
 @interface PurchaseController : UIViewController {
 	
 	SKProduct* product;
 	
-	UIButton* buyButton;
+	CustomButton* buyButton;
 	
 	UILabel* nameLabel;
 	UILabel* priceLabel;

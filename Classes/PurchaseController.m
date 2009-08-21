@@ -19,6 +19,7 @@
 	
 	product = [theProduct retain];
 
+
 	return self;
 }
 
@@ -42,9 +43,9 @@
     view.backgroundColor = [UIColor clearColor];
 	
 	
-	nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 100)];
+	nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 50, 320, 150)];
 	priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 100, 320, 100)];
-	descriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 200, 320, 100)];
+	descriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 200, 280, 100)];
 	
     nameLabel.backgroundColor = [UIColor clearColor];
 	priceLabel.backgroundColor = [UIColor clearColor];
@@ -55,13 +56,15 @@
 	descriptionLabel.textAlignment = UITextAlignmentLeft;
 
 	
+	nameLabel.font = [UIFont fontWithName:@"Georgia" size:24.0];
+	priceLabel.font = [UIFont boldSystemFontOfSize:18.0];
+	descriptionLabel.font = [UIFont fontWithName:@"Georgia" size:16.0];
 	
-	buyButton = [UIButton buttonWithType: UIButtonTypeRoundedRect];
+	buyButton = [[CustomButton alloc] initWithFrame:CGRectMake(50, 380, 220, 50)];
 	
 	
 	[buyButton setTitle:@"Buy Content" forState:UIControlStateNormal];
-	
-	buyButton.frame = CGRectMake(50, 380, 220, 50);	
+	buyButton.titleLabel.textColor = [UIColor blackColor];
 	
 	[buyButton addTarget:self action:@selector(buyProduct) forControlEvents:UIControlEventTouchUpInside];
 	
@@ -80,6 +83,28 @@
 	nameLabel.text = product.localizedTitle;
 	descriptionLabel.text = product.localizedDescription;
 	descriptionLabel.numberOfLines = 0;
+	
+	
+	
+	
+	
+	
+	
+	if([[NSUserDefaults standardUserDefaults] boolForKey:kSEARCH_ENABLED] && [product.productIdentifier isEqualToString:kSEARCH_PRODUCT_ID])
+	{
+		
+		buyButton.enabled = NO;
+		[buyButton setTitle:@"Already Purchased" forState:UIControlStateNormal];
+		
+		
+	}
+	else if(![SKPaymentQueue canMakePayments])
+	{
+		buyButton.enabled = NO;
+		[buyButton setTitle:@"Purchases Disabled" forState:UIControlStateNormal];
+	}
+	
+	
 	
 	[view addSubview: nameLabel];
 	[view addSubview: priceLabel];

@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <StoreKit/StoreKit.h>
 #import "NSDataBase64.h"
+#import "HistoryAppDelegate.h"
+
+@class HistoryAppDelegate;
 
 @interface StoreObserver : NSObject<SKPaymentTransactionObserver> {
 	
@@ -16,7 +19,10 @@
 	
 	NSURLConnection *theConnection;
 	
+	HistoryAppDelegate *app;
 }
+
+- (id) initWithAppDelegate: (HistoryAppDelegate *) del;
 
 - (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions;
 - (void) failedTransaction: (SKPaymentTransaction *)transaction;

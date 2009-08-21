@@ -39,6 +39,13 @@
 		UIImage* searchIcon = [UIImage imageWithContentsOfFile: searchIconPath];
 
 		
+		searchData =  [[NSMutableDictionary alloc] initWithObjectsAndKeys:
+						  @"Search by Address", @"name",
+						  searchController, @"controller",
+						  searchIcon, @"image",
+					   nil];
+		
+
 
 		
 		mainMenuData = [[NSMutableArray alloc] initWithObjects:
@@ -69,16 +76,15 @@
 						nil];
 		//Enable search always for development
 		//if([[NSUserDefaults standardUserDefaults] boolForKey:@"searchEnabled"])
-		if(1)
+		if([[NSUserDefaults standardUserDefaults] boolForKey:kSEARCH_ENABLED])
 		{
 		
-			[[mainMenuData objectAtIndex:0] insertObject:
-												 [NSMutableDictionary dictionaryWithObjectsAndKeys:
-												  @"Search by Address", @"name",
-												  searchController, @"controller",
-												  searchIcon, @"image",
-												  nil]
+			searchVisible = YES;
+			[[mainMenuData objectAtIndex:0] insertObject: searchData
 												 atIndex:2];
+		}
+		else{
+			searchVisible = NO;
 		}
 
     }
@@ -115,11 +121,24 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	
-	
-	
 
 }
 
+
+- (void) makeSearchAppear
+{
+
+	
+	if(!searchVisible)
+	{
+		
+		NSIndexPath* newIndexPath = [NSIndexPath indexPathForRow:[[mainMenuData objectAtIndex:0] count] inSection:0];
+		[[mainMenuData objectAtIndex:0] insertObject:searchData atIndex:newIndexPath.row];		
+		[self.tableView insertRowsAtIndexPaths: [NSArray arrayWithObject: newIndexPath]
+							  withRowAnimation:UITableViewRowAnimationTop];
+
+	}
+}
 
 
 - (void)viewWillAppear:(BOOL)animated {
