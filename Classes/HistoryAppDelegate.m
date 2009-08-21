@@ -78,12 +78,13 @@
 
 - (void) purchasedSearch
 {
+	if(![[NSUserDefaults standardUserDefaults] boolForKey:kSEARCH_ENABLED]){
 	
-	[[NSUserDefaults standardUserDefaults] setBool:YES forKey:kSEARCH_ENABLED];
-	[navController popToRootViewControllerAnimated:YES];
-	
-	
-	[self performSelector:@selector(insertSearch) withObject:nil afterDelay:0.50];
+		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:kSEARCH_ENABLED];
+		[navController popToRootViewControllerAnimated:YES];
+		[self performSelector:@selector(insertSearch) withObject:nil afterDelay:0.50];
+		
+	}
 }
 
 - (void) insertSearch

@@ -11,6 +11,7 @@
 #import "SearchController.h"
 #import "UnlockController.h"
 #import "FeaturedController.h"
+#import "SettingsController.h"
 
 
 @interface MainMenuController : UITableViewController {
@@ -19,6 +20,7 @@
 	SearchController *searchController;
 	UnlockController *unlockController;
 	FeaturedController *featuredController;
+	SettingsController *settingsController;
 	
 	NSMutableArray* mainMenuData;
 	NSMutableDictionary* searchData;

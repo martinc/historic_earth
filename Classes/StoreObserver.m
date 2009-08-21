@@ -67,7 +67,12 @@
 	
 	NSLog(@"Restore transaction");
 	
-	[self validateReceipt: transaction.originalTransaction.transactionReceipt];
+	NSLog(@"transaction.transactionReceipt: %@",transaction.transactionReceipt);
+	NSLog(@"transaction.originalTransaction.transactionReceipt: %@",transaction.originalTransaction.transactionReceipt);
+
+	
+	[self validateReceipt: transaction.transactionReceipt];
+	//[self validateReceipt: transaction.originalTransaction.transactionReceipt];
 
 
 	//If you want to save the transaction
@@ -182,10 +187,17 @@
 	
 	NSNumber* result = [jsonData objectForKey:@"status"];
 	
-	if([result intValue] == 0){
+	if(result && [result intValue] == 0){
 		NSLog(@"receipt status successful");
 		
-		[app purchasedSearch];
+		NSString* product_id = [[jsonData objectForKey:@"receipt"] objectForKey:@"product_id"];
+		
+		if([product_id isEqualToString:kSEARCH_PRODUCT_ID])
+		{
+		
+			[app purchasedSearch];
+			
+		}
 
 	}
 	else NSLog(@"receipt status unsucessfull");
