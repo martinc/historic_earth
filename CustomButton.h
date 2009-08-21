@@ -12,6 +12,9 @@
 
 @interface CustomButton : UIButton {
 
+	UIImage *normalImage;
+	UIImage *pressedImage;
+
 }
 
 - (void) initialize;

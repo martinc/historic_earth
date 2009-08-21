@@ -16,11 +16,6 @@
 
 @interface MainMenuController : UITableViewController {
 	
-	LocationController *locationController;
-	SearchController *searchController;
-	UnlockController *unlockController;
-	FeaturedController *featuredController;
-	SettingsController *settingsController;
 	
 	NSMutableArray* mainMenuData;
 	NSMutableDictionary* searchData;

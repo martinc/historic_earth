@@ -11,9 +11,6 @@
 
 @implementation CustomButton
 	
-// global images so we don't load/create them over and over
-UIImage *normalImage;
-UIImage *pressedImage;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -39,7 +36,7 @@ UIImage *pressedImage;
 	if (!normalImage)
 	{
 		UIImage *image =
-		[UIImage imageNamed:@"custombuttonnormal.png"];
+		[[UIImage imageNamed:@"custombuttonnormal.png"] retain];
 		normalImage =
 		[image stretchableImageWithLeftCapWidth:12
 								   topCapHeight:12];
@@ -48,7 +45,7 @@ UIImage *pressedImage;
 	if (!pressedImage)
 	{
 		UIImage *image =
-		[UIImage imageNamed:@"custombuttonpressed.png"];
+		[[UIImage imageNamed:@"custombuttonpressed.png"] retain];
 		pressedImage =
 		[image stretchableImageWithLeftCapWidth:12
 								   topCapHeight:12];
@@ -60,5 +57,13 @@ UIImage *pressedImage;
 					forState:UIControlStateHighlighted];
 	
 }
+
+- (void) dealloc
+{
+	[super dealloc];
+//	[normalImage release];
+//	[pressedImage release];
+}
+	
 
 @end

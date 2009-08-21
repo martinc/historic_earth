@@ -18,12 +18,6 @@
 		
 		//self.tableView.frame = CGRectMake(40, 0, 240, 480);
 		
-		locationController = [[LocationController alloc] initWithStyle:UITableViewStyleGrouped];
-		searchController = [[SearchController alloc] initWithStyle:UITableViewStyleGrouped];
-		unlockController = [[UnlockController alloc] initWithStyle:UITableViewStyleGrouped];
-		featuredController = [[FeaturedController alloc] initWithStyle:UITableViewStyleGrouped];
-		settingsController = [[SettingsController alloc] initWithNibName:@"SettingsController" bundle:nil];
-		
 		NSString* locationIconPath = [[NSBundle mainBundle] pathForResource:@"74-location" ofType:@"png" inDirectory:@"Images"];
 		UIImage* locationIcon = [UIImage imageWithContentsOfFile:locationIconPath];
 		
@@ -42,10 +36,9 @@
 		
 		searchData =  [[NSMutableDictionary alloc] initWithObjectsAndKeys:
 						  @"Search by Address", @"name",
-						  searchController, @"controller",
+						  @"searchController", @"controller",
 						  searchIcon, @"image",
 					   nil];
-		
 
 
 		
@@ -53,24 +46,24 @@
 						[NSMutableArray arrayWithObjects:
 						 [NSMutableDictionary dictionaryWithObjectsAndKeys:
 						  @"Map Your Location", @"name",
-						  locationController, @"controller",
+						  @"locationController", @"controller",
 						  locationIcon, @"image",
 						  nil],
 						 [NSMutableDictionary dictionaryWithObjectsAndKeys:
 						  @"Featured Locations", @"name",
-						  featuredController, @"controller",
+						  @"featuredController", @"controller",
 						  featuredIcon, @"image",
 						  nil],
 						 nil],
 						[NSMutableArray arrayWithObjects:
 						 [NSMutableDictionary dictionaryWithObjectsAndKeys:
 						  @"Settings", @"name",
-						  settingsController, @"controller",
+						  @"settingsController", @"controller",
 						  settingsIcon, @"image",
 						  nil],
 						 [NSMutableDictionary dictionaryWithObjectsAndKeys:
 						  @"Additional Content", @"name",
-						  unlockController, @"controller",
+						  @"unlockController", @"controller",
 						  unlockIcon, @"image",
 						  nil],
 						 nil],
@@ -90,6 +83,33 @@
 
     }
     return self;
+}
+
+
+- (void) locationController
+{
+	[self.navigationController pushViewController: [[[LocationController alloc] initWithStyle:UITableViewStyleGrouped] autorelease]
+										 animated:YES];
+}
+- (void) unlockController
+{
+	[self.navigationController pushViewController: [[[UnlockController alloc] initWithStyle:UITableViewStyleGrouped] autorelease]
+										 animated:YES];
+}
+- (void) featuredController
+{
+	[self.navigationController pushViewController: [[[FeaturedController alloc] initWithStyle:UITableViewStyleGrouped] autorelease]
+										 animated:YES];	
+}
+- (void) settingsController
+{
+	[self.navigationController pushViewController: [[[SettingsController alloc] initWithNibName:@"SettingsController" bundle:nil] autorelease]
+										 animated:YES];
+}
+- (void) searchController
+{
+	[self.navigationController pushViewController: [[[SearchController alloc] initWithStyle:UITableViewStyleGrouped] autorelease]
+										 animated:YES];	
 }
 
 
@@ -252,7 +272,9 @@
 		id theController = [[[mainMenuData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"controller"];
 		
 		if(theController != [NSNull null]){
-			[self.navigationController pushViewController:(UIViewController *)theController animated:YES];
+			//[self.navigationController pushViewController:(UIViewController *)theController animated:YES];
+			
+			[self performSelector:NSSelectorFromString(theController)];
 		}
 
 		
