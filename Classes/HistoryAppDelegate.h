@@ -11,6 +11,7 @@
 #import "MainMenuController.h"
 #import "StoreObserver.h"
 #import "Reachability.h"
+#import "TargetConditionals.h"
 
 @class StoreObserver;
 
