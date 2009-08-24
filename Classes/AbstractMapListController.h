@@ -32,7 +32,7 @@
 - (void) loadDataWithRequest: (NSURLRequest *) theRequest;
 - (void) loadDataWithRequest: (NSURLRequest *) theRequest searchLocation: (CLLocationCoordinate2D) loc;
 
-- (UIImage *)scaleImage:(UIImage *) image maxWidth:(float) maxWidth maxHeight:(float) maxHeight;
+//- (UIImage *)scaleImage:(UIImage *) image maxWidth:(float) maxWidth maxHeight:(float) maxHeight;
 
 
 @end

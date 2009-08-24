@@ -64,7 +64,8 @@
 					  initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
 
 	loadingSpinner.hidesWhenStopped = YES;
-	loadingSpinner.center = CGPointMake(320/2, 480/2);
+	loadingSpinner.center = CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height/2); 
+	loadingSpinner.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
 	
 	[self.view addSubview:loadingSpinner];
 	
@@ -409,7 +410,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	return 100.0;
+	return 85.0;
 }
 
 
@@ -440,7 +441,7 @@
 
 
 
-
+/*
 
 - (UIImage *)scaleImage:(UIImage *) image maxWidth:(float) maxWidth maxHeight:(float) maxHeight
 {
@@ -488,7 +489,7 @@
 	
 	return imageCopy;
 }
-
+*/
 
 
 @end

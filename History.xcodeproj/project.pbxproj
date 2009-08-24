@@ -139,7 +139,7 @@
 		5B11934F103B80E100A71E72 /* down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down.png; sourceTree = "<group>"; };
 		5B1193AC103BB81A00A71E72 /* InfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoController.h; sourceTree = "<group>"; };
 		5B1193AD103BB81A00A71E72 /* InfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoController.m; sourceTree = "<group>"; };
-		5B1193CA103BBA7E00A71E72 /* InfoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoView.xib; sourceTree = "<group>"; };
+		5B1193CA103BBA7E00A71E72 /* InfoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = InfoView.xib; path = ../InfoView.xib; sourceTree = "<group>"; };
 		5B11941E103BC21F00A71E72 /* 01-refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "01-refresh.png"; path = "Images/01-refresh.png"; sourceTree = "<group>"; };
 		5B11941F103BC21F00A71E72 /* 02-redo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "02-redo.png"; path = "Images/02-redo.png"; sourceTree = "<group>"; };
 		5B119420103BC21F00A71E72 /* 06-magnifying-glass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "06-magnifying-glass.png"; path = "Images/06-magnifying-glass.png"; sourceTree = "<group>"; };
@@ -291,7 +291,6 @@
 				2899E5210DE3E06400AC0155 /* HistoryViewController.xib */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* History-Info.plist */,
-				5B1193CA103BBA7E00A71E72 /* InfoView.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -427,6 +426,7 @@
 			children = (
 				5B1193AC103BB81A00A71E72 /* InfoController.h */,
 				5B1193AD103BB81A00A71E72 /* InfoController.m */,
+				5B1193CA103BBA7E00A71E72 /* InfoView.xib */,
 				5B0405D81039A82400F7C25B /* Map.h */,
 				5B0405D91039A82400F7C25B /* Map.m */,
 				5BCD5048102555D00066772E /* MapViewController.h */,

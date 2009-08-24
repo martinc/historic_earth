@@ -30,6 +30,18 @@
 	
 }
 
+- (void) dealloc
+{
+	[REQUEST_URL release];
+	
+	[locationManager stopUpdatingLocation];
+	
+	[locationManager release];
+
+	
+	[super dealloc];
+}
+
 - (void)startUpdates
 {
     // Create the location manager if this object does not

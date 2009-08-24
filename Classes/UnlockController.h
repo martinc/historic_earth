@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <StoreKit/StoreKit.h>
 #import "PurchaseController.h"
-
+#import "TargetConditionals.h"
 
 
 @interface UnlockController : UITableViewController <SKProductsRequestDelegate> {

@@ -11,6 +11,8 @@
 
 @interface SettingsController : UIViewController {
 
+	IBOutlet UILabel* cacheSizeLabel;
+	
 }
 
 - (IBAction) done;
@@ -18,5 +20,9 @@
 - (IBAction) restorePurchases;
 
 - (IBAction) clearCache;
+
+- (void) calculateSize;
+
+@property (nonatomic, retain) IBOutlet UILabel* cacheSizeLabel;
 
 @end

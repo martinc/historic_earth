@@ -12,6 +12,41 @@
 
 @implementation SettingsController
 
+@synthesize cacheSizeLabel;
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+	
+	[self calculateSize];
+
+
+	
+}
+
+- (void) calculateSize
+{
+	
+	NSArray* paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+	
+	NSString* folderPath = [paths objectAtIndex:0];
+	double totalSize = 0.0;
+	
+	
+	NSArray *contents;
+	NSEnumerator *enumerator;
+	NSString *path;
+	contents = [[NSFileManager defaultManager] subpathsAtPath:folderPath];
+	enumerator = [contents objectEnumerator];
+	while (path = [enumerator nextObject]) {
+		NSDictionary *fattrib = [[NSFileManager defaultManager] fileAttributesAtPath:[folderPath stringByAppendingPathComponent:path] traverseLink:YES];
+		totalSize += [fattrib fileSize] / 1048576.0;
+	}
+	
+	
+	cacheSizeLabel.text = [NSString stringWithFormat:@"%.1f MB", totalSize];
+	
+}
+
 - (IBAction) done
 {
 
@@ -29,9 +64,81 @@
 
 - (IBAction) clearCache
 {
-	
-	
+	NSArray* paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+	NSString* base = [paths objectAtIndex:0];	
+	NSString* rmcachePath = [base stringByAppendingPathComponent:@"__RMCache"];
+	[[NSFileManager defaultManager] removeItemAtPath:rmcachePath error:NULL];
+
+	[self calculateSize];
 }
+
+
+
+/*
+
+- (unsigned long long) fastFolderSizeAtFSRef:(FSRef*)theFileRef
+{
+    FSIterator    thisDirEnum = NULL;
+    unsigned long long totalSize = 0;
+	
+    // Iterate the directory contents, recursing as necessary
+    if (FSOpenIterator(theFileRef, kFSIterateFlat, &thisDirEnum) ==  
+		noErr)
+    {
+        const ItemCount kMaxEntriesPerFetch = 256;
+        ItemCount actualFetched;
+        FSRef    fetchedRefs[kMaxEntriesPerFetch];
+        FSCatalogInfo fetchedInfos[kMaxEntriesPerFetch];
+		
+        // DCJ Note right now this is only fetching data fork  
+		//sizes... if we decide to include
+			// resource forks we will have to add kFSCatInfoRsrcSizes
+			
+			OSErr fsErr = FSGetCatalogInfoBulk(thisDirEnum,  
+											   kMaxEntriesPerFetch, &actualFetched,
+											   NULL, kFSCatInfoDataSizes |  
+											   kFSCatInfoNodeFlags, fetchedInfos,
+											   fetchedRefs, NULL, NULL);
+        while ((fsErr == noErr) || (fsErr == errFSNoMoreItems))
+        {
+            ItemCount thisIndex;
+            for (thisIndex = 0; thisIndex < actualFetched; thisIndex++)
+            {
+                // Recurse if it's a folder
+                if (fetchedInfos[thisIndex].nodeFlags &  
+					kFSNodeIsDirectoryMask)
+                {
+                    totalSize += [self  
+								  fastFolderSizeAtFSRef:&fetchedRefs[thisIndex]];
+                }
+                else
+                {
+                    // add the size for this item
+                    totalSize += fetchedInfos 
+					[thisIndex].dataLogicalSize;
+                }
+            }
+			
+            if (fsErr == errFSNoMoreItems)
+            {
+                break;
+            }
+            else
+            {
+                // get more items
+                fsErr = FSGetCatalogInfoBulk(thisDirEnum,  
+											 kMaxEntriesPerFetch, &actualFetched,
+											 NULL, kFSCatInfoDataSizes |  
+											 kFSCatInfoNodeFlags, fetchedInfos,
+											 fetchedRefs, NULL, NULL);
+            }
+        }
+        FSCloseIterator(thisDirEnum);
+    }
+    return totalSize;
+}
+ 
+ */
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -43,12 +150,9 @@
 }
 */
 
-/*
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad {
-    [super viewDidLoad];
-}
-*/
+
 
 /*
 // Override to allow orientations other than the default portrait orientation.

@@ -302,7 +302,7 @@
 	
 	targetCenter = theMap.mapCenter;
 	targetMinZoom = theMap.minZoom - 4.0;
-	targetZoom = theMap.minZoom - 2.0;
+	targetZoom = theMap.minZoom;
 
 	if(oldMapView){
 		if(locked) {
