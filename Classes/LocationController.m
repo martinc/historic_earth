@@ -16,19 +16,18 @@
 
 
 
-
-- (void) viewWillAppear:(BOOL)animated {
+- (id) initWithStyle:(UITableViewStyle)style
+{
+	self = [super initWithStyle:style];
 	
-
-	[super viewWillAppear:animated];
-	
-	
-	
-
 	haveLoadedLocation = NO;
 	[self startUpdates];
 	
+	
+	return self;
+	
 }
+
 
 - (void) dealloc
 {
