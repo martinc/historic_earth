@@ -61,11 +61,13 @@
 		5B2F728F1026C98000676DBD /* Three20.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5B2F728E1026C98000676DBD /* Three20.bundle */; };
 		5B37B549103B1B12008CF2FC /* marker-crosshair.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B37B548103B1B12008CF2FC /* marker-crosshair.png */; };
 		5B37B578103B1D1F008CF2FC /* marker-blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B37B577103B1D1F008CF2FC /* marker-blue.png */; };
-		5B63EF0B103480CD005E4CA7 /* Images in Resources */ = {isa = PBXBuildFile; fileRef = 5B63EF07103480CD005E4CA7 /* Images */; };
 		5B652E24103E63F900E3B3A4 /* SettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B652E22103E63F900E3B3A4 /* SettingsController.m */; };
 		5B652E25103E63F900E3B3A4 /* SettingsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B652E23103E63F900E3B3A4 /* SettingsController.xib */; };
 		5B7F3E1A10360CE500114D2D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B7F3E1910360CE500114D2D /* StoreKit.framework */; };
 		5B7F3E2310360D2600114D2D /* UnlockController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7F3E2210360D2600114D2D /* UnlockController.m */; };
+		5B8F1D2D10448E3E00DF8D8E /* he_large.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B8F1D2A10448E3E00DF8D8E /* he_large.png */; };
+		5B8F1D2E10448E3E00DF8D8E /* he_mainmenu.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B8F1D2B10448E3E00DF8D8E /* he_mainmenu.png */; };
+		5B8F1D2F10448E3E00DF8D8E /* he_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B8F1D2C10448E3E00DF8D8E /* he_small.png */; };
 		5BCD483D1025538D0066772E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BCD483C1025538D0066772E /* QuartzCore.framework */; };
 		5BCD503F102554980066772E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BCD503E102554980066772E /* CoreLocation.framework */; };
 		5BCD504A102555D00066772E /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BCD5049102555D00066772E /* MapViewController.m */; };
@@ -189,13 +191,15 @@
 		5B2F728E1026C98000676DBD /* Three20.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Three20.bundle; path = ../three20/src/Three20.bundle; sourceTree = SOURCE_ROOT; };
 		5B37B548103B1B12008CF2FC /* marker-crosshair.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "marker-crosshair.png"; sourceTree = "<group>"; };
 		5B37B577103B1D1F008CF2FC /* marker-blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "marker-blue.png"; sourceTree = "<group>"; };
-		5B63EF07103480CD005E4CA7 /* Images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Images; sourceTree = "<group>"; };
 		5B652E21103E63F900E3B3A4 /* SettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsController.h; sourceTree = "<group>"; };
 		5B652E22103E63F900E3B3A4 /* SettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsController.m; sourceTree = "<group>"; };
 		5B652E23103E63F900E3B3A4 /* SettingsController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsController.xib; sourceTree = "<group>"; };
 		5B7F3E1910360CE500114D2D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		5B7F3E2110360D2600114D2D /* UnlockController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnlockController.h; sourceTree = "<group>"; };
 		5B7F3E2210360D2600114D2D /* UnlockController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnlockController.m; sourceTree = "<group>"; };
+		5B8F1D2A10448E3E00DF8D8E /* he_large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = he_large.png; path = Images/he_large.png; sourceTree = "<group>"; };
+		5B8F1D2B10448E3E00DF8D8E /* he_mainmenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = he_mainmenu.png; path = Images/he_mainmenu.png; sourceTree = "<group>"; };
+		5B8F1D2C10448E3E00DF8D8E /* he_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = he_small.png; path = Images/he_small.png; sourceTree = "<group>"; };
 		5BCD483C1025538D0066772E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		5BCD502A102554840066772E /* MapView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MapView.xcodeproj; path = ../routemeNT/MapView/MapView.xcodeproj; sourceTree = SOURCE_ROOT; };
 		5BCD503E102554980066772E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -261,7 +265,6 @@
 				5B11934E103B80E100A71E72 /* up.png */,
 				5B11934F103B80E100A71E72 /* down.png */,
 				5B20C8EB1022BCE60003FE62 /* CustomButton.m */,
-				5B63EF07103480CD005E4CA7 /* Images */,
 				5B20C8CF1022BA500003FE62 /* Images */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -308,6 +311,9 @@
 		5B20C8CF1022BA500003FE62 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				5B8F1D2A10448E3E00DF8D8E /* he_large.png */,
+				5B8F1D2B10448E3E00DF8D8E /* he_mainmenu.png */,
+				5B8F1D2C10448E3E00DF8D8E /* he_small.png */,
 				5B11941E103BC21F00A71E72 /* 01-refresh.png */,
 				5B11941F103BC21F00A71E72 /* 02-redo.png */,
 				5B119420103BC21F00A71E72 /* 06-magnifying-glass.png */,
@@ -544,7 +550,6 @@
 				5B20C8F31022BD600003FE62 /* custombuttonpressed.png in Resources */,
 				5B20C8F41022BD600003FE62 /* custombuttonnormal.png in Resources */,
 				5B2F728F1026C98000676DBD /* Three20.bundle in Resources */,
-				5B63EF0B103480CD005E4CA7 /* Images in Resources */,
 				5B37B549103B1B12008CF2FC /* marker-crosshair.png in Resources */,
 				5B37B578103B1D1F008CF2FC /* marker-blue.png in Resources */,
 				5B119350103B80E100A71E72 /* up.png in Resources */,
@@ -570,6 +575,9 @@
 				5B119442103BC21F00A71E72 /* backarrow.png in Resources */,
 				5B119443103BC21F00A71E72 /* forwardarrow.png in Resources */,
 				5B652E25103E63F900E3B3A4 /* SettingsController.xib in Resources */,
+				5B8F1D2D10448E3E00DF8D8E /* he_large.png in Resources */,
+				5B8F1D2E10448E3E00DF8D8E /* he_mainmenu.png in Resources */,
+				5B8F1D2F10448E3E00DF8D8E /* he_small.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -34,6 +34,7 @@
 		UIImage* searchIcon = [UIImage imageWithContentsOfFile: searchIconPath];
 
 		
+		
 		searchData =  [[NSMutableDictionary alloc] initWithObjectsAndKeys:
 						  @"Search by Address", @"name",
 						  @"searchController", @"controller",
@@ -127,7 +128,7 @@
 	self.hidesBottomBarWhenPushed = YES;
 	
 	
-	
+	/*
 	UILabel* headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 200)];
 	headerLabel.text = @"Historic Earth";
 	headerLabel.font = [UIFont fontWithName:@"Georgia" size:28];
@@ -135,6 +136,17 @@
 	headerLabel.textAlignment = UITextAlignmentCenter;
 	self.tableView.tableHeaderView = headerLabel;
 	[headerLabel release];
+	 */
+	
+	UIImage* headerImage = [UIImage imageNamed:@"he_mainmenu.png"];
+	UIImageView* headerImageView = [[UIImageView alloc] initWithImage:headerImage];
+	
+	headerImageView.frame = CGRectMake(0, 0, 320, 200);
+	headerImageView.contentMode = UIViewContentModeBottom;
+		
+	self.tableView.tableHeaderView = headerImageView;
+	
+	[headerImageView release];
 	
 	//self.tableView.backgroundColor = [UIColor blueColor];
 
