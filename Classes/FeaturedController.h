@@ -9,15 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "JSON.h"
 #import "FeaturedLocationController.h"
-#import "Location.h"
+#import "LocationGroup.h"
 
 
 @interface FeaturedController : UITableViewController {
 
 	
 	UIActivityIndicatorView *loadingSpinner;  
-	NSMutableArray *locations;
-	
+	NSMutableArray *groups;
 	
 	BOOL loadingResults;
 	

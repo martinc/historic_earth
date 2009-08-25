@@ -45,7 +45,7 @@
 
 	
 	
-	locations = [[NSMutableArray alloc] init];
+	groups = [[NSMutableArray alloc] init];
 	
 	
 	
@@ -117,14 +117,24 @@
 							 initWithData: receivedData
 							 encoding: NSUTF8StringEncoding];
 	
-	NSDictionary* jsonData = [dataString JSONValue];
+	NSArray* jsonData = [dataString JSONValue];
 	[dataString release];
 	
 	if(jsonData){
 		
+		
+		for(NSDictionary* aGroup in jsonData)
+		{
+			LocationGroup* theGroup = [[LocationGroup alloc] initWithDictionary:aGroup];
+			[groups addObject: theGroup];
+			[theGroup release];
+		}
+		
+		
 		//NSLog(@"json object is : %@",jsonData);
 		
 
+		/*
 		NSArray* theKeys = [jsonData allKeys];
 		NSArray* sortedKeys = [theKeys sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
 		
@@ -151,6 +161,7 @@
 		
 		}//end for loop
 		
+		*/
 	}
 	else{
 		NSLog(@"error parsing json file");
@@ -162,7 +173,7 @@
 	
 	[loadingSpinner stopAnimating];
 	
-	self.tableView.scrollEnabled = [locations count] > 0;
+	self.tableView.scrollEnabled = [groups count] > 0;
 	[self.tableView reloadData];	
 	
     // release the connection, and the data object
@@ -220,14 +231,36 @@
 #pragma mark Table view methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+	int sectionCount = [groups count];
+    return sectionCount;
 }
 
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	return [locations count];
+	LocationGroup* theGroup = [groups objectAtIndex:section];
+	int locationCount = [theGroup.locations count];
+	return locationCount;
 }
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+	
+	UILabel* theSectionHeader = [[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 100)] autorelease];
+	
+	theSectionHeader.backgroundColor = [UIColor clearColor];
+	
+	theSectionHeader.textAlignment = UITextAlignmentRight;
+	
+	LocationGroup* theGroup = [groups objectAtIndex:section];
+
+	theSectionHeader.text = theGroup.name;
+	
+	
+	return theSectionHeader;
+	
+}
+
 
 
 // Customize the appearance of table view cells.
@@ -242,7 +275,7 @@
     
     // Set up the cell...
 	
-	Location* theLoc = [locations objectAtIndex:indexPath.row];
+	Location* theLoc = [((LocationGroup *)[groups objectAtIndex:indexPath.section]).locations objectAtIndex:indexPath.row];
 	
 	cell.textLabel.text = theLoc.name;
 	cell.textLabel.font = [UIFont fontWithName:@"Georgia" size:14.0];
@@ -268,7 +301,9 @@
 	// [anotherViewController release];
 	
 	
-	FeaturedLocationController* featuredLocationController = [[FeaturedLocationController alloc] initWithLocations: locations atIndex: indexPath.row];
+	FeaturedLocationController* featuredLocationController = [[FeaturedLocationController alloc] initWithLocations: 
+																										   ((LocationGroup *)[groups objectAtIndex:indexPath.section]).locations 
+																										   atIndex: indexPath.row];
 	[self.navigationController pushViewController:featuredLocationController animated:YES];
 	[featuredLocationController release];
 }
