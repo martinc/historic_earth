@@ -243,24 +243,56 @@
 	return locationCount;
 }
 
+/*
+
+- (NSString *)tableView:(UITableView *)aTableView titleForHeaderInSection:(NSInteger)section
+{
+	LocationGroup* theGroup = [groups objectAtIndex:section];
+	
+	return theGroup.name;
+	
+}
+
+ */
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
 	
-	UILabel* theSectionHeader = [[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 100)] autorelease];
+	//UILabel* theSectionHeader = [[[UILabel alloc] initWithFrame:CGRectMake(50, 0, 200, 100)] autorelease];
+	UILabel* theSectionHeader = [[[UILabel alloc] init] autorelease];
+
 	
 	theSectionHeader.backgroundColor = [UIColor clearColor];
 	
-	theSectionHeader.textAlignment = UITextAlignmentRight;
+	theSectionHeader.textAlignment = UITextAlignmentCenter;
+	theSectionHeader.contentMode = UIViewContentModeBottom;
+//	theSectionHeader.baselineAdjustment = UIBaselineAdjustment
 	
 	LocationGroup* theGroup = [groups objectAtIndex:section];
 
 	theSectionHeader.text = theGroup.name;
+	
+	//theSectionHeader.bounds = CGRectMake(0, 0, 200, 100);
+	
+	//theSectionHeader.font = [UIFont fontWithName:@"Georgia" size:16.0];
+	theSectionHeader.font = [UIFont boldSystemFontOfSize:12.0];
+	theSectionHeader.textColor = [UIColor blackColor];
+	
+	//UIView *theView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 100)] autorelease];
+	
+	//[theView addSubview:theSectionHeader];
 	
 	
 	return theSectionHeader;
 	
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+	
+	return 60.0;
+	
+}
 
 
 // Customize the appearance of table view cells.
