@@ -12,6 +12,7 @@
 #import "UnlockController.h"
 #import "FeaturedController.h"
 #import "SettingsController.h"
+#import "AboutController.h"
 
 
 @interface MainMenuController : UITableViewController {

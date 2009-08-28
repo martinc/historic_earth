@@ -13,27 +13,17 @@
 
 
 - (id)initWithStyle:(UITableViewStyle)style {
-    // Override initWithStyle: if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
     if (self = [super initWithStyle:style]) {
 		
-		//self.tableView.frame = CGRectMake(40, 0, 240, 480);
-		
-		NSString* locationIconPath = [[NSBundle mainBundle] pathForResource:@"74-location" ofType:@"png" inDirectory:@"Images"];
-		UIImage* locationIcon = [UIImage imageWithContentsOfFile:locationIconPath];
-		
-		NSString* featuredIconPath = [[NSBundle mainBundle] pathForResource:@"28-star" ofType:@"png" inDirectory:@"Images"];
-		UIImage* featuredIcon = [UIImage imageWithContentsOfFile:featuredIconPath];
-		
-		NSString* settingsIconPath = [[NSBundle mainBundle] pathForResource:@"20-gear2" ofType:@"png" inDirectory:@"Images"];
-		UIImage* settingsIcon = [UIImage imageWithContentsOfFile:settingsIconPath];
 
-		NSString* unlockIconPath = [[NSBundle mainBundle] pathForResource:@"24-gift" ofType:@"png" inDirectory:@"Images"];
-		UIImage* unlockIcon = [UIImage imageWithContentsOfFile: unlockIconPath];
+		UIImage* searchIcon = [UIImage imageNamed:@"06-magnifying-glass.png"];
+		UIImage* unlockIcon = [UIImage imageNamed:@"24-gift.png"];
+		UIImage* settingsIcon = [UIImage imageNamed:@"20-gear2.png"];
+		UIImage* featuredIcon = [UIImage imageNamed:@"28-star.png"];
+		UIImage* locationIcon = [UIImage imageNamed:@"74-location.png"];
+		UIImage* aboutIcon = [UIImage imageNamed:@"14-tag.png"];
 
-		NSString* searchIconPath = [[NSBundle mainBundle] pathForResource:@"06-magnifying-glass" ofType:@"png" inDirectory:@"Images"];
-		UIImage* searchIcon = [UIImage imageWithContentsOfFile: searchIconPath];
 
-		
 		
 		searchData =  [[NSMutableDictionary alloc] initWithObjectsAndKeys:
 						  @"Search by Address", @"name",
@@ -66,6 +56,11 @@
 						  @"Additional Content", @"name",
 						  @"unlockController", @"controller",
 						  unlockIcon, @"image",
+						  nil],
+						 [NSMutableDictionary dictionaryWithObjectsAndKeys:
+						  @"About", @"name",
+						  @"aboutController", @"controller",
+						  aboutIcon, @"image",
 						  nil],
 						 nil],
 						nil];
@@ -112,6 +107,12 @@
 	[self.navigationController pushViewController: [[[SearchController alloc] initWithStyle:UITableViewStyleGrouped] autorelease]
 										 animated:YES];	
 }
+- (void) aboutController
+{
+	[self.navigationController pushViewController: [[[AboutController alloc] initWithNibName:@"AboutController" bundle:nil] autorelease]
+										 animated:YES];	
+}
+
 
 
 
@@ -143,6 +144,7 @@
 	
 	headerImageView.frame = CGRectMake(0, 0, 320, 200);
 	headerImageView.contentMode = UIViewContentModeBottom;
+	headerImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 		
 	self.tableView.tableHeaderView = headerImageView;
 	

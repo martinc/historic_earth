@@ -23,6 +23,14 @@
 	
 }
 
+- (void) viewWillAppear:(BOOL)animated
+{
+	
+	self.title = @"Settings";
+	[self.navigationController setNavigationBarHidden:NO animated:animated];
+	
+}
+
 - (void) calculateSize
 {
 	

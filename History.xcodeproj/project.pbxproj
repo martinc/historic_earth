@@ -65,6 +65,10 @@
 		5B652E25103E63F900E3B3A4 /* SettingsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B652E23103E63F900E3B3A4 /* SettingsController.xib */; };
 		5B7F3E1A10360CE500114D2D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B7F3E1910360CE500114D2D /* StoreKit.framework */; };
 		5B7F3E2310360D2600114D2D /* UnlockController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7F3E2210360D2600114D2D /* UnlockController.m */; };
+		5B8D614D10477D2F00208F64 /* 14-tag.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B8D614C10477D2F00208F64 /* 14-tag.png */; };
+		5B8D615F10477E5D00208F64 /* AboutController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B8D615D10477E5D00208F64 /* AboutController.m */; };
+		5B8D616010477E5D00208F64 /* AboutController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B8D615E10477E5D00208F64 /* AboutController.xib */; };
+		5B8D618A1047806C00208F64 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B8D61891047806C00208F64 /* Default.png */; };
 		5B8F1D2D10448E3E00DF8D8E /* he_large.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B8F1D2A10448E3E00DF8D8E /* he_large.png */; };
 		5B8F1D2E10448E3E00DF8D8E /* he_mainmenu.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B8F1D2B10448E3E00DF8D8E /* he_mainmenu.png */; };
 		5B8F1D2F10448E3E00DF8D8E /* he_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B8F1D2C10448E3E00DF8D8E /* he_small.png */; };
@@ -198,6 +202,11 @@
 		5B7F3E1910360CE500114D2D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		5B7F3E2110360D2600114D2D /* UnlockController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnlockController.h; sourceTree = "<group>"; };
 		5B7F3E2210360D2600114D2D /* UnlockController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnlockController.m; sourceTree = "<group>"; };
+		5B8D614C10477D2F00208F64 /* 14-tag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "14-tag.png"; path = "Images/14-tag.png"; sourceTree = "<group>"; };
+		5B8D615C10477E5D00208F64 /* AboutController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutController.h; sourceTree = "<group>"; };
+		5B8D615D10477E5D00208F64 /* AboutController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutController.m; sourceTree = "<group>"; };
+		5B8D615E10477E5D00208F64 /* AboutController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutController.xib; sourceTree = "<group>"; };
+		5B8D61891047806C00208F64 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		5B8F1D2A10448E3E00DF8D8E /* he_large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = he_large.png; path = Images/he_large.png; sourceTree = "<group>"; };
 		5B8F1D2B10448E3E00DF8D8E /* he_mainmenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = he_mainmenu.png; path = Images/he_mainmenu.png; sourceTree = "<group>"; };
 		5B8F1D2C10448E3E00DF8D8E /* he_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = he_small.png; path = Images/he_small.png; sourceTree = "<group>"; };
@@ -259,6 +268,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				5B8D61891047806C00208F64 /* Default.png */,
 				5B2F728E1026C98000676DBD /* Three20.bundle */,
 				5B2F72791026C59C00676DBD /* Three20.xcodeproj */,
 				5B2F723F10268EE500676DBD /* JSON */,
@@ -314,6 +324,7 @@
 		5B20C8CF1022BA500003FE62 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				5B8D614C10477D2F00208F64 /* 14-tag.png */,
 				5B8F1D2A10448E3E00DF8D8E /* he_large.png */,
 				5B8F1D2B10448E3E00DF8D8E /* he_mainmenu.png */,
 				5B8F1D2C10448E3E00DF8D8E /* he_small.png */,
@@ -458,6 +469,9 @@
 				5B652E21103E63F900E3B3A4 /* SettingsController.h */,
 				5B652E22103E63F900E3B3A4 /* SettingsController.m */,
 				5B652E23103E63F900E3B3A4 /* SettingsController.xib */,
+				5B8D615C10477E5D00208F64 /* AboutController.h */,
+				5B8D615D10477E5D00208F64 /* AboutController.m */,
+				5B8D615E10477E5D00208F64 /* AboutController.xib */,
 			);
 			name = "Core Application";
 			sourceTree = "<group>";
@@ -583,6 +597,9 @@
 				5B8F1D2D10448E3E00DF8D8E /* he_large.png in Resources */,
 				5B8F1D2E10448E3E00DF8D8E /* he_mainmenu.png in Resources */,
 				5B8F1D2F10448E3E00DF8D8E /* he_small.png in Resources */,
+				5B8D614D10477D2F00208F64 /* 14-tag.png in Resources */,
+				5B8D616010477E5D00208F64 /* AboutController.xib in Resources */,
+				5B8D618A1047806C00208F64 /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -619,6 +636,7 @@
 				5B22B8CD103E0DA20026281D /* NSDataBase64.m in Sources */,
 				5B652E24103E63F900E3B3A4 /* SettingsController.m in Sources */,
 				5B8F1D551044A29B00DF8D8E /* LocationGroup.m in Sources */,
+				5B8D615F10477E5D00208F64 /* AboutController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -704,8 +722,8 @@
 					"-all_load",
 				);
 				PREBINDING = NO;
-				PROVISIONING_PROFILE = "F4F698AD-94FE-40F8-B442-2F40C79D8AF3";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F4F698AD-94FE-40F8-B442-2F40C79D8AF3";
+				PROVISIONING_PROFILE = "3209CD61-D172-4EEE-9160-55C486291BCE";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3209CD61-D172-4EEE-9160-55C486291BCE";
 				SDKROOT = iphoneos3.0;
 			};
 			name = Debug;
@@ -728,8 +746,8 @@
 					"-all_load",
 				);
 				PREBINDING = NO;
-				PROVISIONING_PROFILE = "F4F698AD-94FE-40F8-B442-2F40C79D8AF3";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F4F698AD-94FE-40F8-B442-2F40C79D8AF3";
+				PROVISIONING_PROFILE = "3209CD61-D172-4EEE-9160-55C486291BCE";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3209CD61-D172-4EEE-9160-55C486291BCE";
 				SDKROOT = iphoneos3.0;
 			};
 			name = Release;
