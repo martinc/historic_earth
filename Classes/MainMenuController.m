@@ -48,6 +48,11 @@
 						 nil],
 						[NSMutableArray arrayWithObjects:
 						 [NSMutableDictionary dictionaryWithObjectsAndKeys:
+						  @"Coverage Area", @"name",
+						  @"coverageController", @"controller",
+						  nil, @"image",
+						  nil],
+						 [NSMutableDictionary dictionaryWithObjectsAndKeys:
 						  @"Settings", @"name",
 						  @"settingsController", @"controller",
 						  settingsIcon, @"image",
@@ -112,7 +117,35 @@
 	[self.navigationController pushViewController: [[[AboutController alloc] initWithNibName:@"AboutController" bundle:nil] autorelease]
 										 animated:YES];	
 }
+- (void) coverageController
+{
+	[self.navigationController pushViewController: [[[CoverageController alloc] init] autorelease]
+										 animated:YES];	
 
+	/*
+	Map* coverageMap = [[Map alloc] init];
+	coverageMap.layerID = @"topp:AGIS_Coverage";
+	coverageMap.atlasName = @"Coverage Area";
+	coverageMap.name = @"Coverage";
+	coverageMap.year = 2009;
+	CLLocationCoordinate2D center;
+	center.latitude = 39.943436;
+	center.longitude = -75.344238;
+	coverageMap.mapCenter = center;
+	coverageMap.minZoom = 4;
+	
+	NSMutableArray* coverageMaps = [NSMutableArray arrayWithObject:coverageMap];
+	[coverageMap release];
+	
+	MapViewController* mapview = [[MapViewController alloc] initWithMaps:coverageMaps];
+	[mapview loadMapAtIndex:0];
+
+	
+	[self.navigationController pushViewController: mapview animated:YES];
+	
+	[mapview release];
+	 */
+}
 
 
 

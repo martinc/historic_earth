@@ -35,7 +35,7 @@
 @property (nonatomic, assign) int year;
 @property (nonatomic, assign) int minZoom;
 @property (nonatomic, assign) RMSphericalTrapezium mapBounds;
-@property (nonatomic, readonly) CLLocationCoordinate2D mapCenter;
+@property (nonatomic, readwrite) CLLocationCoordinate2D mapCenter;
 
 
 @end

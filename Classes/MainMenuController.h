@@ -13,6 +13,7 @@
 #import "FeaturedController.h"
 #import "SettingsController.h"
 #import "AboutController.h"
+#import "CoverageController.h"
 
 
 @interface MainMenuController : UITableViewController {
