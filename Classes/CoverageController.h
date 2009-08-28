@@ -13,6 +13,12 @@
 
 @interface CoverageController : UIViewController {
 
+	
+	UIActivityIndicatorView *loadingSpinner;  
+	BOOL loadingResults;
+	NSMutableData *receivedData;
+	NSURLConnection *theConnection;
+	
 }
 
 @end

@@ -15,13 +15,12 @@
 @interface FeaturedController : UITableViewController {
 
 	
-	UIActivityIndicatorView *loadingSpinner;  
 	NSMutableArray *groups;
+
 	
+	UIActivityIndicatorView *loadingSpinner;  
 	BOOL loadingResults;
-	
 	NSMutableData *receivedData;
-	
 	NSURLConnection *theConnection;
 	
 	
