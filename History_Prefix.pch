@@ -21,13 +21,14 @@
 #define kTILES_BEGAN_LOADING_NOTIFICATION @"kTILES_BEGAN_LOADING_NOTIFICATION"
 #define kTILES_LOADED_NOTIFICATION @"kTILES_LOADED_NOTIFICATION"
 
-#define kSEARCH_PRODUCT_ID @"com.oldmapapp.search"
+#define kSEARCH_PRODUCT_ID @"com.hmw.historicearth.searchbyaddress"
 
 #define kHOST_DOMAIN_NAME @"www.historicmapworks.com"
 #define kFEATURED_LOCATION_SERVICE @"http://www.historicmapworks.com/iPhone/featured_list.php"
 #define kFEATURED_DETAILS @"http://www.historicmapworks.com/iPhone/featured.php?"
 #define kWMS_SERVER_URL @"http://www.historicmapworks.com/iPhone/request.php?"
 #define kLAT_LONG_SEARCH @"http://www.historicmapworks.com/iPhone/?"
+#define kSEARCH_BY_ADDRESS_URL @"http://www.historicmapworks.com/iPhone/address.php?"
 
 
 #define kMAP_ATLAS_NAME @"Atlas Name"

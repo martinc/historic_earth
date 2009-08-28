@@ -20,7 +20,7 @@
 	[super viewDidLoad];
 	
 	
-	REQUEST_URL = @"http://www.historicmapworks.com/iPhone/?lat=39.95249714905981&long=-75.16377925872803";
+	REQUEST_URL = kSEARCH_BY_ADDRESS_URL;
 
 	
 	
@@ -82,13 +82,16 @@
 {
 	
 	NSString *searchText = searchBar.text;
-	NSLog(@"performing search for \"%@\"", searchText);
 	
 	[[NSUserDefaults standardUserDefaults] setObject:searchText forKey:@"lastSearchText"];
 
 	
+	NSString *requestURL = [NSString stringWithFormat:@"%@a=%@", kSEARCH_BY_ADDRESS_URL, [searchText stringByAddingPercentEscapesUsingEncoding: NSASCIIStringEncoding]];
 	
-	[self loadDataWithRequest: [NSURLRequest requestWithURL:[NSURL URLWithString:REQUEST_URL]
+	NSLog(@"search request url is \"%@\"", requestURL);
+
+	
+	[self loadDataWithRequest: [NSURLRequest requestWithURL:[NSURL URLWithString:requestURL]
 												cachePolicy:NSURLRequestUseProtocolCachePolicy
 											timeoutInterval:15.0]];
 	

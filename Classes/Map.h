@@ -25,6 +25,7 @@
 }
 
 
+- (NSComparisonResult) mapOrder: (Map *) anotherMap;
 
 
 @property (nonatomic, retain) NSString *layerID;

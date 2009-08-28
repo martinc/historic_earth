@@ -11,7 +11,7 @@
 	<key>CFBundleIconFile</key>
 	<string>he_small.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.historicmapworks.historicearth</string>
+	<string>com.hmw.historicearth</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>

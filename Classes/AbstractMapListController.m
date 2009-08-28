@@ -154,82 +154,114 @@
 						  initWithData: receivedData
 						  encoding: NSUTF8StringEncoding];
 	
-	NSArray* jsonData = [dataString JSONValue];
+	NSLog(@"response is : %@",dataString);
+
+	
+	NSDictionary* jsonData = [dataString JSONValue];
 	[dataString release];
 	
 	if(jsonData){
-	
-	//NSLog(@"json object is : %@",jsonData);
-	
-		for(NSDictionary* mapDataShell in jsonData){
-			NSDictionary* mapData = [mapDataShell objectForKey:@"Map"];
-			if(mapData){
-				
+		
+		//Test status
+		
+		NSNumber *status = [jsonData objectForKey:@"status"];
 
+		if([status intValue] == -1)
+		{
+			// Error case for invalid search
+		}
+		else if([status intValue] == 0)
+		{
+			//Error case for no matches found
+		}
+		else{
+		
+			//Success
+			
+			NSArray* theMaps = [jsonData objectForKey:@"Maps"];
+			
+			if(theMaps){
+			
+				for(NSDictionary* mapData in theMaps){
 				
-				NSString* theAtlasName = [mapData objectForKey:kMAP_ATLAS_NAME]; 
-				NSString* theBL = [mapData objectForKey:kMAP_BL];
-				NSString* theTR = [mapData objectForKey:kMAP_TR];
-				NSString* theLayer = [mapData objectForKey:kMAP_LAYER];
-				NSString* theName = [mapData objectForKey:kMAP_NAME];
-				
-				NSNumber* theYear = [mapData objectForKey:kMAP_YEAR];
-				NSNumber* theMinZoom = [mapData objectForKey:kMAP_MIN_ZOOM];
-										
+					if(mapData){
 						
-				if(theAtlasName && theBL && theTR && theLayer && theName && theYear && theMinZoom){
-				
-					
-					Map* theMap = [[Map alloc] init];
-					
-					theMap.layerID = theLayer;
-					theMap.atlasName = theAtlasName;
-					theMap.name = theName;
-					theMap.year = [theYear intValue];
-					theMap.minZoom = [theMinZoom intValue];
-					if(theMap.minZoom == 0)
-						theMap.minZoom = 10;
-					
-					
-					NSArray* southWestStrings = [theBL componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-					NSArray* northEastStrings = [theTR componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-					
-
-					if([southWestStrings count] == 2 && [northEastStrings count] == 2)
-					{
 						
-						RMSphericalTrapezium mapBounds;
-						mapBounds.southwest.longitude = [[southWestStrings objectAtIndex:0] doubleValue];
-						mapBounds.southwest.latitude = [[southWestStrings objectAtIndex:1] doubleValue];
-						mapBounds.northeast.longitude = [[northEastStrings objectAtIndex:0] doubleValue];
-						mapBounds.northeast.latitude = [[northEastStrings objectAtIndex:1] doubleValue];
-						//NSLog(@"set corners to %f,%f %f,%f", mapBounds.southwest.latitude, mapBounds.southwest.longitude, mapBounds.northeast.latitude, mapBounds.northeast.longitude);
-						theMap.mapBounds = mapBounds;
 						
+						NSString* theAtlasName = [mapData objectForKey:kMAP_ATLAS_NAME]; 
+						NSString* theBL = [mapData objectForKey:kMAP_BL];
+						NSString* theTR = [mapData objectForKey:kMAP_TR];
+						NSString* theLayer = [mapData objectForKey:kMAP_LAYER];
+						NSString* theName = [mapData objectForKey:kMAP_NAME];
+						
+						NSNumber* theYear = [mapData objectForKey:kMAP_YEAR];
+						NSNumber* theMinZoom = [mapData objectForKey:kMAP_MIN_ZOOM];
+						
+						
+						if(theAtlasName && theBL && theTR && theLayer && theName && theYear && theMinZoom){
+							
+							
+							Map* theMap = [[Map alloc] init];
+							
+							theMap.layerID = theLayer;
+							theMap.atlasName = theAtlasName;
+							theMap.name = theName;
+							theMap.year = [theYear intValue];
+							theMap.minZoom = [theMinZoom intValue];
+							if(theMap.minZoom == 0)
+								theMap.minZoom = 10;
+							
+							
+							NSArray* southWestStrings = [theBL componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+							NSArray* northEastStrings = [theTR componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+							
+							
+							if([southWestStrings count] == 2 && [northEastStrings count] == 2)
+							{
+								
+								RMSphericalTrapezium mapBounds;
+								mapBounds.southwest.longitude = [[southWestStrings objectAtIndex:0] doubleValue];
+								mapBounds.southwest.latitude = [[southWestStrings objectAtIndex:1] doubleValue];
+								mapBounds.northeast.longitude = [[northEastStrings objectAtIndex:0] doubleValue];
+								mapBounds.northeast.latitude = [[northEastStrings objectAtIndex:1] doubleValue];
+								//NSLog(@"set corners to %f,%f %f,%f", mapBounds.southwest.latitude, mapBounds.southwest.longitude, mapBounds.northeast.latitude, mapBounds.northeast.longitude);
+								theMap.mapBounds = mapBounds;
+								
+							}
+							else{
+								NSLog(@"error parsing latlong bounds");
+							}
+							
+							[maps addObject:theMap];
+							[theMap release];
+							//NSLog(@"added map");
+						}
+						else{
+							NSLog(@"didn't get all required values for map");
+						}
+						
+						
+						
+						
+						
+					} // end if(mapData)
+					else {
+						NSLog(@"error reading map object");
 					}
-					else{
-						NSLog(@"error parsing latlong bounds");
-					}
-
-					[maps addObject:theMap];
-					[theMap release];
-					//NSLog(@"added map");
-				}
-				else{
-					NSLog(@"didn't get all required values for map");
-				}
-			}
-			else {
-				NSLog(@"error reading map object");
+						
+				} // end for
+				
+			} // end if (theMaps)
+			else{
+				NSLog(@"error parsing json file");
+				
 			}
 			
-		}//end for loop
+		} // end else
+		
 		
 	}
-	else{
-		NSLog(@"error parsing json file");
-		
-	}
+	
 	
 	
 	
@@ -244,6 +276,11 @@
 		request.response = [[[TTURLImageResponse alloc] init] autorelease];
 		[[TTURLRequestQueue mainQueue]  sendRequest: request];
 		 */
+	
+	
+	// Now, let's sort the maps by date
+	
+	[maps sortUsingSelector:@selector(mapOrder:)];
 		
 	
 	loadingResults = NO;
@@ -365,15 +402,15 @@
 	Map* theMap = [maps objectAtIndex:indexPath.row];
 	
 	cell.textLabel.text = [NSString stringWithFormat:@"%d",theMap.year];
-	//cell.detailTextLabel.text = [NSString stringWithFormat:@"%@: %@",theMap.name,theMap.layerID];
-	cell.detailTextLabel.text = theMap.atlasName;
+	cell.detailTextLabel.text = [NSString stringWithFormat:@"%@, %@",theMap.atlasName,theMap.name];
+	//cell.detailTextLabel.text = theMap.atlasName;
 
 	cell.textLabel.textColor = [UIColor brownColor];
 
 	cell.textLabel.font = [UIFont fontWithName:@"Georgia" size:26.0];
 	cell.detailTextLabel.textColor = [UIColor grayColor];
 
-	cell.detailTextLabel.font = [UIFont fontWithName:@"Georgia" size:14.0];
+	cell.detailTextLabel.font = [UIFont fontWithName:@"Georgia" size:12.0];
 
 	
 	

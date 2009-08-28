@@ -690,8 +690,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Martin Ceperley (64RP86GBX7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Martin Ceperley (64RP86GBX7)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Charles Carpenter (5A8YNUQFJA)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Charles Carpenter (5A8YNUQFJA)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -704,8 +704,8 @@
 					"-all_load",
 				);
 				PREBINDING = NO;
-				PROVISIONING_PROFILE = "1CA9826C-2579-421A-B781-7DF01693F331";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1CA9826C-2579-421A-B781-7DF01693F331";
+				PROVISIONING_PROFILE = "F4F698AD-94FE-40F8-B442-2F40C79D8AF3";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F4F698AD-94FE-40F8-B442-2F40C79D8AF3";
 				SDKROOT = iphoneos3.0;
 			};
 			name = Debug;
@@ -714,8 +714,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Martin Ceperley (64RP86GBX7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Martin Ceperley (64RP86GBX7)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Charles Carpenter (5A8YNUQFJA)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Charles Carpenter (5A8YNUQFJA)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -728,8 +728,8 @@
 					"-all_load",
 				);
 				PREBINDING = NO;
-				PROVISIONING_PROFILE = "1CA9826C-2579-421A-B781-7DF01693F331";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1CA9826C-2579-421A-B781-7DF01693F331";
+				PROVISIONING_PROFILE = "F4F698AD-94FE-40F8-B442-2F40C79D8AF3";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F4F698AD-94FE-40F8-B442-2F40C79D8AF3";
 				SDKROOT = iphoneos3.0;
 			};
 			name = Release;

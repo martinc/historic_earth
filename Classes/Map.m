@@ -23,5 +23,20 @@
 	
 }
 
+- (NSComparisonResult) mapOrder: (Map *) anotherMap
+{
+	if(year < anotherMap.year)
+	{
+		return NSOrderedAscending;
+	}
+	else if(year > anotherMap.year)
+	{
+		return NSOrderedDescending;
+	}
+	
+	return [name caseInsensitiveCompare:anotherMap.name];
+	
+}
+
 
 @end
