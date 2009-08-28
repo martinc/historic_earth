@@ -27,7 +27,7 @@
 
 - (void) cancelSearching;
 - (void) doneSearching;
-
+- (void) searchTableView;
 
 
 @end

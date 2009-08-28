@@ -178,9 +178,13 @@
 		
 			//Success
 			
+			
 			NSArray* theMaps = [jsonData objectForKey:@"Maps"];
 			
 			if(theMaps){
+				
+				[maps removeAllObjects];
+
 			
 				for(NSDictionary* mapData in theMaps){
 				

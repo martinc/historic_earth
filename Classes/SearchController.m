@@ -37,11 +37,7 @@
 	searchBar.placeholder = @"Enter Address Here";
 	
 
-	NSString *lastSearchText = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastSearchText"];
-	if(lastSearchText != nil)
-	{
-		searchBar.text = lastSearchText;
-	}
+
 	
 	//searchBar.prompt = @"Address";
 	
@@ -57,6 +53,15 @@
 	
 	
 	[loadingSpinner stopAnimating];
+	
+	
+	NSString *lastSearchText = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastSearchText"];
+	if(lastSearchText != nil)
+	{
+		searchBar.text = lastSearchText;
+		[self searchTableView];
+	}
+	
 	
 	
 	/* toolbar - wrong approach
