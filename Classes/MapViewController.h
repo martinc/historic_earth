@@ -14,6 +14,7 @@
 #import "Map.h"
 #import "RMMarkerManager.h"
 #import "InfoController.h"
+#import "LenientUISlider.h"
 
 
 
@@ -26,7 +27,7 @@
 	int currentMapIndex;
 	NSMutableArray *mapViews;
 	
-	UISlider* slider;
+	LenientUISlider* slider;
 	UIActivityIndicatorView *spinner;
 	UIBarButtonItem* backForward;
 	UIBarButtonItem* barSpinner;

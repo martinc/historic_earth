@@ -70,6 +70,7 @@
 		5B8D616010477E5D00208F64 /* AboutController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B8D615E10477E5D00208F64 /* AboutController.xib */; };
 		5B8D618A1047806C00208F64 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B8D61891047806C00208F64 /* Default.png */; };
 		5B8D620610479B4500208F64 /* about.html in Resources */ = {isa = PBXBuildFile; fileRef = 5B8D620510479B4500208F64 /* about.html */; };
+		5B8D626B1047A67D00208F64 /* LenientUISlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B8D626A1047A67D00208F64 /* LenientUISlider.m */; };
 		5B8F1D2D10448E3E00DF8D8E /* he_large.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B8F1D2A10448E3E00DF8D8E /* he_large.png */; };
 		5B8F1D2E10448E3E00DF8D8E /* he_mainmenu.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B8F1D2B10448E3E00DF8D8E /* he_mainmenu.png */; };
 		5B8F1D2F10448E3E00DF8D8E /* he_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B8F1D2C10448E3E00DF8D8E /* he_small.png */; };
@@ -209,6 +210,8 @@
 		5B8D615E10477E5D00208F64 /* AboutController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutController.xib; sourceTree = "<group>"; };
 		5B8D61891047806C00208F64 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		5B8D620510479B4500208F64 /* about.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = about.html; path = ../about.html; sourceTree = "<group>"; };
+		5B8D62691047A67D00208F64 /* LenientUISlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LenientUISlider.h; sourceTree = "<group>"; };
+		5B8D626A1047A67D00208F64 /* LenientUISlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LenientUISlider.m; sourceTree = "<group>"; };
 		5B8F1D2A10448E3E00DF8D8E /* he_large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = he_large.png; path = Images/he_large.png; sourceTree = "<group>"; };
 		5B8F1D2B10448E3E00DF8D8E /* he_mainmenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = he_mainmenu.png; path = Images/he_mainmenu.png; sourceTree = "<group>"; };
 		5B8F1D2C10448E3E00DF8D8E /* he_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = he_small.png; path = Images/he_small.png; sourceTree = "<group>"; };
@@ -448,6 +451,8 @@
 		5B98EB971039298E00079D2F /* Maps */ = {
 			isa = PBXGroup;
 			children = (
+				5B8D62691047A67D00208F64 /* LenientUISlider.h */,
+				5B8D626A1047A67D00208F64 /* LenientUISlider.m */,
 				5B1193AC103BB81A00A71E72 /* InfoController.h */,
 				5B1193AD103BB81A00A71E72 /* InfoController.m */,
 				5B1193CA103BBA7E00A71E72 /* InfoView.xib */,
@@ -641,6 +646,7 @@
 				5B652E24103E63F900E3B3A4 /* SettingsController.m in Sources */,
 				5B8F1D551044A29B00DF8D8E /* LocationGroup.m in Sources */,
 				5B8D615F10477E5D00208F64 /* AboutController.m in Sources */,
+				5B8D626B1047A67D00208F64 /* LenientUISlider.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

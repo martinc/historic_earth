@@ -112,7 +112,9 @@
 	
 	
 	//UISlider* slider = [[UISlider alloc] init];
-	slider = [[UISlider alloc] initWithFrame:CGRectMake(0,0,140,20)];
+	slider = [[LenientUISlider alloc] initWithFrame:CGRectMake(0,0,260,20)];
+//	slider = [[LenientUISlider alloc] init];
+
 	slider.value = 1.0;
 	[slider addTarget:self action:@selector(sliderChanged) forControlEvents:UIControlEventValueChanged];
 	
@@ -122,8 +124,10 @@
 	//[sliderView addSubview:slider];
 	//UISlider* slider = [[UISlider alloc] init];
 	
-	NSString *oldYear = [NSString stringWithFormat:@"%d",((Map *)[maps objectAtIndex:currentMapIndex]).year];
 	
+	/* Getting rid of year labels
+	
+	NSString *oldYear = [NSString stringWithFormat:@"%d",((Map *)[maps objectAtIndex:currentMapIndex]).year];
 	UIBarButtonItem* past = [[UIBarButtonItem alloc] initWithTitle:oldYear style:UIBarButtonItemStylePlain target:nil action:NULL];
 
 
@@ -136,10 +140,11 @@
 	NSInteger year = [weekdayComponents year];
 	
 	[gregorian release];
-	
-	
 	UIBarButtonItem* present = [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:@"%d",year] style:UIBarButtonItemStylePlain target:nil action:NULL];
-	UIBarButtonItem* item = [[UIBarButtonItem alloc] initWithCustomView: slider];
+
+	 */
+	 
+	 UIBarButtonItem* item = [[UIBarButtonItem alloc] initWithCustomView: slider];
 	
 	//item.customView.bounds = CGRectMake(0, 0, 100, 100);
 	//item.width = 170;
@@ -169,12 +174,12 @@
 //	[self.navigationController.toolbar addSubview:infoButton];
 	
 	
-	NSArray* items = [[NSArray alloc] initWithObjects: present, space, item, space, past, space , infoBarButton, nil ];
+	NSArray* items = [[NSArray alloc] initWithObjects: item,  infoBarButton, nil ];
 	
 	[space release];
 	[item release];
-	[past release];
-	[present release];
+	/*[past release];
+	[present release];*/
 	[slider release];
 	[infoBarButton release];
 	
