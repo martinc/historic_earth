@@ -9,7 +9,11 @@
 #import "AboutController.h"
 
 
+
 @implementation AboutController
+
+@synthesize webView;
+
 
 - (void) viewWillAppear:(BOOL)animated
 {
@@ -28,12 +32,57 @@
 }
 */
 
-/*
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-}
+	
+	/*
+	NSMutableString* htmlBody = [[NSMutableString alloc] initWithCapacity:256];
+	
+	[htmlBody appendString:@"<head></head><body>"];
+	[htmlBody appendString:@"Developed by <a href=\"http://emergencestudios.com\">emergence studios</a>"];
+	[htmlBody appendString:@"</body>"];
 */
+	
+	
+	 
+
+	NSString* htmlBody = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"about" ofType:@"html"]
+							  encoding:NSUTF8StringEncoding
+								 error:NULL];
+	 
+
+	
+	
+	
+	[webView loadHTMLString:htmlBody baseURL:nil];
+	
+	webView.backgroundColor = [UIColor clearColor];
+	
+	id scrollView = [webView.subviews objectAtIndex:0];
+	if( [scrollView respondsToSelector:@selector(setAllowsRubberBanding:)] )
+	{
+		[scrollView performSelector:@selector(setAllowsRubberBanding:) withObject:NO];
+	}
+	
+//	webView.scrollEnabled = NO;
+	
+	
+
+}
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+	if(navigationType == UIWebViewNavigationTypeLinkClicked)
+	{
+		[[UIApplication sharedApplication] openURL:request.URL];
+		return NO;
+	}
+	return YES;
+}
+
+
 
 /*
 // Override to allow orientations other than the default portrait orientation.
