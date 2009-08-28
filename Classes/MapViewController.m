@@ -356,7 +356,7 @@
 														   tilesource:[[[RMOpenStreetMapSource alloc] init] autorelease]
 														 centerLatLon:targetCenter
 															zoomLevel:targetZoom
-														 maxZoomLevel:30.0
+														 maxZoomLevel:18.0
 														 minZoomLevel:targetMinZoom
 													  backgroundImage:nil] autorelease];
 		
@@ -395,7 +395,7 @@
 													 tilesource:myTilesource
 												   centerLatLon:targetCenter
 													  zoomLevel:targetZoom
-												   maxZoomLevel:30.0
+												   maxZoomLevel:18.0
 												   minZoomLevel:targetMinZoom
 												backgroundImage:nil] autorelease];
 		
@@ -481,6 +481,13 @@
 	for (RMMapView* mv in mapViews){
 		[mv touchesMoved:touches withEvent:event];
 	}
+	/*
+	NSLog(@"touched moved, layer position delta: %f zoom delta: %f", 
+		  fabs(oldMapView.contents.mapCenter.longitude -modernMapView.contents.mapCenter.longitude) +  fabs(oldMapView.contents.mapCenter.latitude -modernMapView.contents.mapCenter.latitude)
+		  ,  fabs(oldMapView.contents.zoom - modernMapView.contents.zoom));
+
+	NSLog(@"zooms: modern: %f Old: %f", modernMapView.contents.zoom, oldMapView.contents.zoom);
+*/
 }
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -502,13 +509,13 @@
 }
 - (void) singleTouch: (NSValue *) val
 {
-	NSLog(@"single touch called");
+	//NSLog(@"single touch called");
 	if(!hasTouchMoved){
 
-		NSLog(@"toolbar is hidden?: %@", self.navigationController.navigationBarHidden ? @"yes" : @"no" );
+		//NSLog(@"toolbar is hidden?: %@", self.navigationController.navigationBarHidden ? @"yes" : @"no" );
 
 		BOOL newHiddenStatus = ! (self.navigationController.navigationBarHidden);
-		NSLog(@"setting toolbar to hidden: %@", newHiddenStatus ? @"yes" : @"no" );
+		//NSLog(@"setting toolbar to hidden: %@", newHiddenStatus ? @"yes" : @"no" );
 
 		[self.navigationController setNavigationBarHidden:newHiddenStatus animated:YES]; 
 		[self.navigationController setToolbarHidden:newHiddenStatus animated:YES];
