@@ -173,11 +173,77 @@
     // receivedData is declared as a method instance elsewhere
     NSLog(@"Succeeded! Received featured collections list",[receivedData length]);
 	
-	NSString* dataString =  [[NSString alloc]
+	NSMutableString* dataString =  [[NSMutableString alloc]
 							 initWithData: receivedData
 							 encoding: NSUTF8StringEncoding];
 	
+	//remove Namespace
+	
+	//	<gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+
+	NSRange theRange = [dataString rangeOfString:@"<gml:coordinates xmlns:gml=\"http://www.opengis.net/gml\" decimal=\".\" cs=\",\" ts=\" \">"];
+	
+	NSLog(@"first occurrence at %d %d", theRange.location, theRange.length);
+	
+	
+	NSRange searchForEndRange = NSMakeRange( theRange.location+theRange.length, [dataString length] - (theRange.location+theRange.length) );
+	
+	
+	NSRange endingRange = [dataString rangeOfString: @"</gml:coordinates>"
+					options: NSCaseInsensitiveSearch 
+					  range: searchForEndRange];
+
+	
+	NSRange contentRange = NSMakeRange(searchForEndRange.location, endingRange.location - searchForEndRange.location);
+	
+	NSString *theCoordinateString = [dataString substringWithRange:contentRange];
+	
+	NSArray* theCoordinateStrings = [theCoordinateString componentsSeparatedByString:@" "];
+	
+	for(NSString *theString in theCoordinateStrings)
+	{
+		NSArray* theComponets = [theString componentsSeparatedByString:@","];
+		
+		float longitude = [[theComponets objectAtIndex:0] floatValue];
+		float latitude = [[theComponets objectAtIndex:1] floatValue];
+
+		
+		NSLog(@"Point at long: %f lat: %f", longitude, latitude);
+		
+	}
+	
+//	NSLog(@" RESULTS: \"%@\" ", theCoordinateString);
+
+	
+	
+	
+	
+	/*
+	
+
+	
+
+	
+	[dataString replaceOccurrencesOfString:@"
+								withString:@""
+								   options:(NSStringCompareOptions)opts range:(NSRange)searchRange
+	 
+	
+	CXMLDocument* xmldoc = [[CXMLDocument alloc] initWithXMLString:dataString
+														   options:0
+															 error:NULL];
+	
+
+	NSArray *theResultingNodes = [xmldoc nodesForXPath:@"//gml:coordinates" error:NULL];
+								  
+	NSLog(@"found %d nodes", [theResultingNodes count]);
+
+	
 	NSLog(@"coverage results: %@", dataString);
+	 
+	 
+	 
+	 */
 	
 	loadingResults = NO;
 	[loadingSpinner stopAnimating];
