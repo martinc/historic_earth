@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "RMMapView.h"
 #import "RMOpenStreetMapSource.h"
+#import "RMPath.h"
 
 
 @interface CoverageController : UIViewController {
@@ -19,6 +20,10 @@
 	NSMutableData *receivedData;
 	NSURLConnection *theConnection;
 	
+	
+	
+	RMMapView* mapView;
+	RMPath* thePath;
 }
 
 @end

@@ -22,6 +22,8 @@
 		UIImage* featuredIcon = [UIImage imageNamed:@"28-star.png"];
 		UIImage* locationIcon = [UIImage imageNamed:@"74-location.png"];
 		UIImage* aboutIcon = [UIImage imageNamed:@"14-tag.png"];
+		UIImage* coverageIcon = [UIImage imageNamed:@"73-radar.png"];
+
 
 
 		
@@ -50,7 +52,7 @@
 						 [NSMutableDictionary dictionaryWithObjectsAndKeys:
 						  @"Coverage Area", @"name",
 						  @"coverageController", @"controller",
-						  nil, @"image",
+						  coverageIcon, @"image",
 						  nil],
 						 [NSMutableDictionary dictionaryWithObjectsAndKeys:
 						  @"Settings", @"name",

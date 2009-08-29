@@ -40,7 +40,7 @@
 	self.title = @"Coverage Area";
 	
 	
-	RMMapView* mapView = [[RMMapView alloc] initWithFrame:self.view.frame];
+	mapView = [[RMMapView alloc] initWithFrame:self.view.frame];
 	
 	CLLocationCoordinate2D center;
 	center.latitude = 39.943436;
@@ -50,7 +50,7 @@
 	mapView.contents = [[[RMMapContents alloc] initWithView:mapView
 													   tilesource:[[[RMOpenStreetMapSource alloc] init] autorelease]
 													 centerLatLon:center
-														zoomLevel:10.0
+														zoomLevel:12.0
 													 maxZoomLevel:18.0
 													 minZoomLevel:4.0
 												  backgroundImage:nil] autorelease];
@@ -75,9 +75,41 @@
 	
 	[self.view addSubview:loadingSpinner];
 	
+	RMLatLong pointOne, pointTwo;
+	pointOne.longitude = -71.156215667721;
+	pointOne.latitude = 42.346352644152;
 	
-	NSString *requestURL = 
-	@"http://www.historicmapworks.com/iPhone/request.php?typename=topp%3AGIS_Coverage&SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&SRS=EPSG%3A4326&BBOX=-71.156215667721,42.346352644152,-70.972881317143,42.377099036244";
+	pointTwo.longitude = -70.972881317143;
+	pointTwo.latitude = 42.377099036244;
+	
+	
+	//Want to see bounding box for debugging
+	
+	/*
+	RMPath* debuggingBox = [[RMPath alloc] initForMap:mapView];
+	debuggingBox.fillColor = [UIColor blueColor];
+	
+	RMLatLong cornerOne = { pointOne.latitude, pointTwo.longitude };
+	RMLatLong cornerTwo = { pointTwo.latitude, pointOne.longitude };
+
+	
+	[debuggingBox addLineToLatLong: pointOne];
+	[debuggingBox addLineToLatLong: cornerOne];
+	
+	[debuggingBox addLineToLatLong: pointTwo];
+	[debuggingBox addLineToLatLong: cornerTwo];
+	
+	[debuggingBox closePath];
+	
+	[mapView.contents.overlay addSublayer:debuggingBox];
+	*/
+	
+	NSString *requestURL = [[NSString stringWithFormat:
+	@"http://www.historicmapworks.com/iPhone/request.php?typename=topp:GIS_Coverage&SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&SRS=EPSG:4326&BBOX=%f,%f,%f,%f",
+							 pointOne.longitude, pointOne.latitude, pointTwo.longitude, pointTwo.latitude ]
+							stringByAddingPercentEscapesUsingEncoding: NSASCIIStringEncoding];
+	
+	NSLog(@"request URL is: \"%@\"", requestURL);
 	
 	
 	
@@ -180,71 +212,98 @@
 	//remove Namespace
 	
 	//	<gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
-
-	NSRange theRange = [dataString rangeOfString:@"<gml:coordinates xmlns:gml=\"http://www.opengis.net/gml\" decimal=\".\" cs=\",\" ts=\" \">"];
-	
-	NSLog(@"first occurrence at %d %d", theRange.location, theRange.length);
 	
 	
-	NSRange searchForEndRange = NSMakeRange( theRange.location+theRange.length, [dataString length] - (theRange.location+theRange.length) );
+	NSRange searchingRange = NSMakeRange(0, [dataString length]);
+	int loopCount = 0;
 	
+	NSRange theRange;
 	
-	NSRange endingRange = [dataString rangeOfString: @"</gml:coordinates>"
-					options: NSCaseInsensitiveSearch 
-					  range: searchForEndRange];
-
-	
-	NSRange contentRange = NSMakeRange(searchForEndRange.location, endingRange.location - searchForEndRange.location);
-	
-	NSString *theCoordinateString = [dataString substringWithRange:contentRange];
-	
-	NSArray* theCoordinateStrings = [theCoordinateString componentsSeparatedByString:@" "];
-	
-	for(NSString *theString in theCoordinateStrings)
-	{
-		NSArray* theComponets = [theString componentsSeparatedByString:@","];
+	//Loop for both sets of coordinates
+	do {
+		loopCount++;
+			
+		 theRange = [dataString rangeOfString:@"<gml:coordinates xmlns:gml=\"http://www.opengis.net/gml\" decimal=\".\" cs=\",\" ts=\" \">"
+											 options:0
+											   range: searchingRange];
 		
-		float longitude = [[theComponets objectAtIndex:0] floatValue];
-		float latitude = [[theComponets objectAtIndex:1] floatValue];
+		if(theRange.length > 0){
+			//NSLog(@"first occurrence at %d %d", theRange.location, theRange.length);
+			NSRange searchForEndRange = NSMakeRange( theRange.location+theRange.length, [dataString length] - (theRange.location+theRange.length) );
+			
+			
+			NSRange endingRange = [dataString rangeOfString: @"</gml:coordinates>"
+							options: 0 
+							  range: searchForEndRange];
 
+			
+			NSRange contentRange = NSMakeRange(searchForEndRange.location, endingRange.location - searchForEndRange.location);
+			
+			NSString *theCoordinateString = [dataString substringWithRange:contentRange];
+			
+			NSArray* theCoordinateStrings = [theCoordinateString componentsSeparatedByString:@" "];
+			
+			
+			NSMutableArray* coveragePoints = [[NSMutableArray alloc] initWithCapacity:100];
+			
+			
+			thePath = [[RMPath alloc] initForMap: mapView];
+			
+			//thePath.lineColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
+			
+			if(loopCount == 1)
+				thePath.fillColor = [[UIColor redColor] colorWithAlphaComponent: 0.2];
+			else
+				thePath.fillColor = [[UIColor greenColor] colorWithAlphaComponent: 0.2];
+
+			thePath.lineColor = [thePath.fillColor colorWithAlphaComponent:1.0];
+
+			thePath.lineWidth = 10;
+
+			BOOL firstPoint = YES;
+			
+			for(NSString *theString in theCoordinateStrings)
+			{
+
+				NSArray* theComponets = [theString componentsSeparatedByString:@","];
+				
+				NSNumber* longitude = [NSNumber numberWithFloat:[[theComponets objectAtIndex:0] floatValue]];
+				NSNumber* latitude = [NSNumber numberWithFloat:[[theComponets objectAtIndex:1] floatValue]];
+				
+				NSDictionary* theCoordinate = [NSDictionary dictionaryWithObjectsAndKeys: longitude, @"longitude", latitude, @"latitude", nil];
+				
+				[coveragePoints addObject:theCoordinate];
+
+				RMLatLong thePoint;
+				thePoint.longitude = [longitude doubleValue];
+				thePoint.latitude = [latitude doubleValue];
+				
+				[thePath addLineToLatLong: thePoint];
+				
+				
+				if(firstPoint){
+					firstPoint = NO;
+					[mapView moveToLatLong:thePoint];
+				}
+				
+				//NSLog(@"Point at long: %f lat: %f", longitude, latitude);
+				
+			}
+			
+			[thePath closePath];
+			[mapView.contents.overlay addSublayer:thePath];
+			
+			
+			searchingRange.location = contentRange.location + contentRange.length;
+			searchingRange.length = [dataString length] - searchingRange.location;
+			
+		}// end if therange.length > 0
 		
-		NSLog(@"Point at long: %f lat: %f", longitude, latitude);
 		
-	}
-	
-//	NSLog(@" RESULTS: \"%@\" ", theCoordinateString);
+	} while (theRange.length > 0);
+		
+		
 
-	
-	
-	
-	
-	/*
-	
-
-	
-
-	
-	[dataString replaceOccurrencesOfString:@"
-								withString:@""
-								   options:(NSStringCompareOptions)opts range:(NSRange)searchRange
-	 
-	
-	CXMLDocument* xmldoc = [[CXMLDocument alloc] initWithXMLString:dataString
-														   options:0
-															 error:NULL];
-	
-
-	NSArray *theResultingNodes = [xmldoc nodesForXPath:@"//gml:coordinates" error:NULL];
-								  
-	NSLog(@"found %d nodes", [theResultingNodes count]);
-
-	
-	NSLog(@"coverage results: %@", dataString);
-	 
-	 
-	 
-	 */
-	
 	loadingResults = NO;
 	[loadingSpinner stopAnimating];
 	
