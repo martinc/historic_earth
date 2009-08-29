@@ -15,12 +15,18 @@
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 - (id) initWithMaps: (NSMutableArray *) theMaps{
     if (self = [super initWithNibName:nil bundle:nil]) {
+		
+		compassRunning = NO;
         
 		maps = [theMaps retain];
 		
 		currentMapIndex = 0;
 		
 		infoController = [[InfoController alloc] initWithNibName:@"InfoView" bundle:nil];
+		
+		locationManager = [[CLLocationManager alloc] init];
+		locationManager.delegate = self;
+		locationManager.headingFilter = 1.0;
 		
 		[[NSNotificationCenter defaultCenter] addObserver:self
 												 selector:@selector(updateSettings:)
@@ -39,7 +45,32 @@
 	
 	locked = [[NSUserDefaults standardUserDefaults] boolForKey:kLOCK_ENABLED];
 	compassEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:kCOMPASS_ENABLED];
+	
+	if(compassEnabled && !compassRunning && locationManager.headingAvailable)
+	{
+		[locationManager startUpdatingHeading];
+		compassRunning = YES;
+	}
+	else if(!compassEnabled && compassRunning)
+	{
+		[locationManager stopUpdatingHeading];
+		compassRunning = NO;
+		currentRotation = 0.0;
+		[self rotate];
+	}
+}
 
+- (void)locationManager:(CLLocationManager *)manager didUpdateHeading:(CLHeading *)newHeading
+{
+	
+	currentRotation = newHeading.magneticHeading;
+	[self rotate];
+	
+}
+
+- (BOOL)locationManagerShouldDisplayHeadingCalibration:(CLLocationManager *)manager
+{
+	return YES;
 }
 
 
@@ -212,7 +243,7 @@
 		
 	
 	/*
-	currentRoation = 0;	
+	currentRotation = 0;	
 	[NSTimer scheduledTimerWithTimeInterval:1/30.0  target:self selector:@selector(rotate) userInfo:nil repeats:YES];
 	 */
 	
@@ -596,6 +627,7 @@
 - (void)viewWillAppear:(BOOL)animated {
 	
 	[self.navigationController setToolbarHidden:NO animated: animated];
+	
 
 	
 }
@@ -604,8 +636,15 @@
 	
 	if(!self.modalViewController)
 		[self.navigationController setToolbarHidden:YES animated: animated];
-
 	
+	if(compassRunning)
+	{
+		[locationManager stopUpdatingHeading];
+		currentRotation = 0.0;
+		[self rotate];
+		compassRunning = NO;
+	}
+
 }
 
 
@@ -628,8 +667,11 @@
 
 - (void)rotate
 {
-	currentRoation += .01;
-	//mapView.transform = CGAffineTransformMakeRotation(currentRoation);	
+	//currentRotation += .01;
+	modernMapView.transform = CGAffineTransformMakeRotation(currentRotation);
+	oldMapView.transform = CGAffineTransformMakeRotation(currentRotation);	
+
+	
 }
 
 

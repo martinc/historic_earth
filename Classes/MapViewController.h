@@ -18,11 +18,11 @@
 
 
 
-@interface MapViewController : UIViewController {
+@interface MapViewController : UIViewController <CLLocationManagerDelegate> {
 	
 	RMMapView *oldMapView, *modernMapView, *fadingOutView;
 	
-	float currentRoation;
+	float currentRotation;
 	NSMutableArray *maps;
 	int currentMapIndex;
 	NSMutableArray *mapViews;
@@ -46,6 +46,10 @@
 	
 	BOOL locked;
 	BOOL compassEnabled;
+	
+	CLLocationManager *locationManager;
+	
+	BOOL compassRunning;
 }
 
 - (id) initWithMaps: (NSMutableArray *) theMaps;
@@ -56,6 +60,8 @@
 - (void) updateArrows;
 
 -(void) updateSettings: (NSNotification *)notification;
+
+- (void)rotate;
 
 
 @end
