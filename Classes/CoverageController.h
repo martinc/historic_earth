@@ -10,7 +10,8 @@
 #import "RMMapView.h"
 #import "RMOpenStreetMapSource.h"
 #import "RMPath.h"
-
+#import "RMMarker.h"
+#import "RMMarkerManager.h"
 
 @interface CoverageController : UIViewController {
 
@@ -23,7 +24,13 @@
 	
 	
 	RMMapView* mapView;
-	RMPath* thePath;
+	
+	NSMutableArray* paths;
+	
+	UIBarButtonItem* refreshButton;
 }
+
+
+- (void) setRefreshButtonHidden: (BOOL) hidden;
 
 @end

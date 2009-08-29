@@ -273,7 +273,7 @@
 	
 	[self loadMapAtIndex: theIndex];
 
-	theMarker = [[RMMarker alloc] initWithUIImage: [UIImage imageNamed:@"marker-blue.png"]];
+	theMarker = [[RMMarker alloc] initWithUIImage: [UIImage imageNamed:@"marker-blue.png"] anchorPoint: CGPointMake(0.5, 1.0)];
 
 	[oldMapView.markerManager addMarker: theMarker AtLatLong: markerLocation];
 
