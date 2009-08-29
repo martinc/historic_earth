@@ -274,14 +274,21 @@
 	
 	//theSectionHeader.bounds = CGRectMake(0, 0, 200, 100);
 	
-	//theSectionHeader.font = [UIFont fontWithName:@"Georgia" size:16.0];
-	theSectionHeader.font = [UIFont boldSystemFontOfSize:12.0];
-	theSectionHeader.textColor = [UIColor blackColor];
+	theSectionHeader.font = [UIFont fontWithName:@"Zapfino" size:18.0];
+	//theSectionHeader.font = [UIFont boldSystemFontOfSize:12.0];
+	 // 0.6, 0.4, 0.2 RGB 
+	theSectionHeader.textColor = [UIColor colorWithRed:0.4 green:0.2 blue:0.05 alpha:1.0];
 	
 	//UIView *theView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 100)] autorelease];
 	
 	//[theView addSubview:theSectionHeader];
 	
+	//theSectionHeader.bounds = CGRectMake(0, 0, 50, 50);
+	
+	theSectionHeader.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
+	
+	
+	//theSectionHeader.clipsToBounds = NO;
 	
 	return theSectionHeader;
 	
@@ -290,7 +297,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
 	
-	return 60.0;
+	return 80.0;
 	
 }
 
