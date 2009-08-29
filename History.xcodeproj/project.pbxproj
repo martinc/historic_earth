@@ -115,6 +115,7 @@
 		5B8F1D2F10448E3E00DF8D8E /* he_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B8F1D2C10448E3E00DF8D8E /* he_small.png */; };
 		5B8F1D551044A29B00DF8D8E /* LocationGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B8F1D541044A29B00DF8D8E /* LocationGroup.m */; };
 		5BBD53341048FC56001AB004 /* 03-loopback.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BBD53331048FC56001AB004 /* 03-loopback.png */; };
+		5BBD537810490A34001AB004 /* he_mainmenu_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BBD537710490A34001AB004 /* he_mainmenu_2.png */; };
 		5BCD483D1025538D0066772E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BCD483C1025538D0066772E /* QuartzCore.framework */; };
 		5BCD503F102554980066772E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BCD503E102554980066772E /* CoreLocation.framework */; };
 		5BCD504A102555D00066772E /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BCD5049102555D00066772E /* MapViewController.m */; };
@@ -336,6 +337,7 @@
 		5B8F1D531044A29B00DF8D8E /* LocationGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationGroup.h; sourceTree = "<group>"; };
 		5B8F1D541044A29B00DF8D8E /* LocationGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationGroup.m; sourceTree = "<group>"; };
 		5BBD53331048FC56001AB004 /* 03-loopback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "03-loopback.png"; path = "Images/03-loopback.png"; sourceTree = "<group>"; };
+		5BBD537710490A34001AB004 /* he_mainmenu_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = he_mainmenu_2.png; path = Images/he_mainmenu_2.png; sourceTree = "<group>"; };
 		5BCD483C1025538D0066772E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		5BCD502A102554840066772E /* MapView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MapView.xcodeproj; path = ../routemeNT/MapView/MapView.xcodeproj; sourceTree = SOURCE_ROOT; };
 		5BCD503E102554980066772E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -477,6 +479,7 @@
 				5B119430103BC21F00A71E72 /* forwardarrow.png */,
 				5B37B577103B1D1F008CF2FC /* marker-blue.png */,
 				5B37B548103B1B12008CF2FC /* marker-crosshair.png */,
+				5BBD537710490A34001AB004 /* he_mainmenu_2.png */,
 				5B20C8F11022BD600003FE62 /* custombuttonpressed.png */,
 				5B20C8F21022BD600003FE62 /* custombuttonnormal.png */,
 			);
@@ -853,6 +856,7 @@
 				5B8D618A1047806C00208F64 /* Default.png in Resources */,
 				5B8D620610479B4500208F64 /* about.html in Resources */,
 				5BBD53341048FC56001AB004 /* 03-loopback.png in Resources */,
+				5BBD537810490A34001AB004 /* he_mainmenu_2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

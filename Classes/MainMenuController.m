@@ -174,10 +174,10 @@
 	[headerLabel release];
 	 */
 	
-	UIImage* headerImage = [UIImage imageNamed:@"he_mainmenu.png"];
+	UIImage* headerImage = [UIImage imageNamed:@"he_mainmenu_2.png"];
 	UIImageView* headerImageView = [[UIImageView alloc] initWithImage:headerImage];
 	
-	headerImageView.frame = CGRectMake(0, 0, 320, 200);
+	headerImageView.frame = CGRectMake(0, 0, 320, 160);
 	headerImageView.contentMode = UIViewContentModeBottom;
 	headerImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 		
