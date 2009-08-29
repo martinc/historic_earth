@@ -29,6 +29,8 @@
 	NSURLConnection *theConnection;
 }
 
+- (void) refreshWithLocation: (CLLocationCoordinate2D) theLocation;
+
 - (void) loadDataWithRequest: (NSURLRequest *) theRequest;
 - (void) loadDataWithRequest: (NSURLRequest *) theRequest searchLocation: (CLLocationCoordinate2D) loc;
 

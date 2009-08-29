@@ -7,7 +7,7 @@
 //
 
 #import "MapViewController.h"
-
+#import "AbstractMapListController.h"
 
 @implementation MapViewController
 
@@ -112,7 +112,7 @@
 	
 	
 	//UISlider* slider = [[UISlider alloc] init];
-	slider = [[LenientUISlider alloc] initWithFrame:CGRectMake(0,0,260,20)];
+	slider = [[LenientUISlider alloc] initWithFrame:CGRectMake(0,0,220,20)];
 //	slider = [[LenientUISlider alloc] init];
 
 	slider.value = 1.0;
@@ -173,8 +173,16 @@
 
 //	[self.navigationController.toolbar addSubview:infoButton];
 	
+	UIBarButtonItem* researchButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"03-loopback.png"]
+																						   style:UIBarButtonItemStylePlain
+																						  target:self
+																						  action:@selector(research)
+																			  ];
 	
-	NSArray* items = [[NSArray alloc] initWithObjects: item,  infoBarButton, nil ];
+	
+	NSArray* items = [[NSArray alloc] initWithObjects: researchButton, item,  infoBarButton, nil ];
+	
+	[researchButton release];
 	
 	[space release];
 	[item release];
@@ -212,6 +220,15 @@
 	
 }
 
+- (void) research
+{
+	
+	AbstractMapListController *controllerAbove = [self.navigationController.viewControllers objectAtIndex:
+												  [self.navigationController.viewControllers count]-2];
+	
+	[controllerAbove refreshWithLocation:oldMapView.contents.mapCenter];
+	[self.navigationController popViewControllerAnimated:YES];
+}
 - (void) showInfo
 {
 

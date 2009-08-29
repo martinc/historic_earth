@@ -300,6 +300,22 @@
     [receivedData release];
 }
 
+- (void) refreshWithLocation: (CLLocationCoordinate2D) theLocation
+{
+	
+	 NSString* request_url = [[NSString alloc] initWithFormat: @"%@lat=%f&long=%f", kLAT_LONG_SEARCH,
+					theLocation.latitude, theLocation.longitude];
+	 
+	 
+	 [self loadDataWithRequest: [NSURLRequest requestWithURL:[NSURL URLWithString:request_url]
+												 cachePolicy:NSURLRequestUseProtocolCachePolicy
+											 timeoutInterval:15.0]
+				searchLocation: theLocation ];
+	 
+	
+}
+
+
 #pragma mark Loaded Image
 
 	/*

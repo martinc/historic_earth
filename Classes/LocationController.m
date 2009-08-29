@@ -82,6 +82,16 @@
 	
 }
 
+- (void) refreshWithLocation: (CLLocationCoordinate2D) theLocation
+{
+//Override to stop location manager updates
+	
+	[super refreshWithLocation: theLocation];
+	
+	[locationManager stopUpdatingLocation];
+	
+}
+
 // Delegate method from the CLLocationManagerDelegate protocol.
 - (void)locationManager:(CLLocationManager *)manager
     didUpdateToLocation:(CLLocation *)newLocation
