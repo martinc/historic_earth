@@ -66,8 +66,17 @@
 	
 	
 	lockSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey: kLOCK_ENABLED];
-	compassSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey: kCOMPASS_ENABLED];
+	
+	CLLocationManager* testLocationManager = [[CLLocationManager alloc] init];
+	if(testLocationManager.headingAvailable){
+		compassSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey: kCOMPASS_ENABLED];
+	}
+	else{
+		compassSwitch.on = NO;
+		compassSwitch.enabled = NO;
+	}
 
+	[testLocationManager release];
 	
 }
  
