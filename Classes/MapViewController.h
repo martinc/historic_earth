@@ -50,6 +50,8 @@
 	CLLocationManager *locationManager;
 	
 	BOOL compassRunning;
+	
+	UIImageView *compassIndicator;
 }
 
 - (id) initWithMaps: (NSMutableArray *) theMaps;
@@ -62,6 +64,9 @@
 -(void) updateSettings: (NSNotification *)notification;
 
 - (void)rotate;
+
+- (void) hideChrome;
+- (void) showChrome;
 
 
 @end

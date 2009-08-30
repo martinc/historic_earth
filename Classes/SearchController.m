@@ -27,7 +27,8 @@
 	searching = NO;
 	letUserSelectRow = YES;
 	
-	searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
+	searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 40)];
+	searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
 	searchBar.delegate = self;
 	
 	searchBar.barStyle = self.navigationController.navigationBar.barStyle;

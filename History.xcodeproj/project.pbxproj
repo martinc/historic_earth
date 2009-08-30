@@ -59,7 +59,6 @@
 		5B2F723E10268EE100676DBD /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B2F723810268EE100676DBD /* SBJsonWriter.m */; };
 		5B2F727F1026C5A500676DBD /* libThree20.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B2F727E1026C59C00676DBD /* libThree20.a */; };
 		5B2F728F1026C98000676DBD /* Three20.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5B2F728E1026C98000676DBD /* Three20.bundle */; };
-		5B37B549103B1B12008CF2FC /* marker-crosshair.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B37B548103B1B12008CF2FC /* marker-crosshair.png */; };
 		5B37B578103B1D1F008CF2FC /* marker-blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B37B577103B1D1F008CF2FC /* marker-blue.png */; };
 		5B652E24103E63F900E3B3A4 /* SettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B652E22103E63F900E3B3A4 /* SettingsController.m */; };
 		5B652E25103E63F900E3B3A4 /* SettingsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B652E23103E63F900E3B3A4 /* SettingsController.xib */; };
@@ -121,6 +120,7 @@
 		5BCD504A102555D00066772E /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BCD5049102555D00066772E /* MapViewController.m */; };
 		5BCD507110255B880066772E /* libMapView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BCD5039102554840066772E /* libMapView.a */; };
 		5BCD51BB102570360066772E /* MainMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BCD51BA102570360066772E /* MainMenuController.m */; };
+		5BE9E387104A29950087539C /* marker-crosshair.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BE9E386104A29950087539C /* marker-crosshair.png */; };
 		5BF87E5B10366A3800787B2A /* PurchaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BF87E5A10366A3800787B2A /* PurchaseController.m */; };
 		5BF87E8B1036783300787B2A /* StoreObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BF87E8A1036783300787B2A /* StoreObserver.m */; };
 /* End PBXBuildFile section */
@@ -237,7 +237,6 @@
 		5B2F723810268EE100676DBD /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
 		5B2F72791026C59C00676DBD /* Three20.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Three20.xcodeproj; path = ../three20/src/Three20.xcodeproj; sourceTree = SOURCE_ROOT; };
 		5B2F728E1026C98000676DBD /* Three20.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Three20.bundle; path = ../three20/src/Three20.bundle; sourceTree = SOURCE_ROOT; };
-		5B37B548103B1B12008CF2FC /* marker-crosshair.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "marker-crosshair.png"; sourceTree = "<group>"; };
 		5B37B577103B1D1F008CF2FC /* marker-blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "marker-blue.png"; sourceTree = "<group>"; };
 		5B652E21103E63F900E3B3A4 /* SettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsController.h; sourceTree = "<group>"; };
 		5B652E22103E63F900E3B3A4 /* SettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsController.m; sourceTree = "<group>"; };
@@ -345,6 +344,7 @@
 		5BCD5049102555D00066772E /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		5BCD51B9102570360066772E /* MainMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuController.h; sourceTree = "<group>"; };
 		5BCD51BA102570360066772E /* MainMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuController.m; sourceTree = "<group>"; };
+		5BE9E386104A29950087539C /* marker-crosshair.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "marker-crosshair.png"; path = "Images/marker-crosshair.png"; sourceTree = "<group>"; };
 		5BF87E5910366A3800787B2A /* PurchaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PurchaseController.h; sourceTree = "<group>"; };
 		5BF87E5A10366A3800787B2A /* PurchaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurchaseController.m; sourceTree = "<group>"; };
 		5BF87E891036783300787B2A /* StoreObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreObserver.h; sourceTree = "<group>"; };
@@ -475,10 +475,10 @@
 				5B11942C103BC21F00A71E72 /* 73-radar.png */,
 				5B11942D103BC21F00A71E72 /* 74-location.png */,
 				5B11942E103BC21F00A71E72 /* 80-shopping-cart.png */,
+				5BE9E386104A29950087539C /* marker-crosshair.png */,
 				5B11942F103BC21F00A71E72 /* backarrow.png */,
 				5B119430103BC21F00A71E72 /* forwardarrow.png */,
 				5B37B577103B1D1F008CF2FC /* marker-blue.png */,
-				5B37B548103B1B12008CF2FC /* marker-crosshair.png */,
 				5BBD537710490A34001AB004 /* he_mainmenu_2.png */,
 				5B20C8F11022BD600003FE62 /* custombuttonpressed.png */,
 				5B20C8F21022BD600003FE62 /* custombuttonnormal.png */,
@@ -823,7 +823,6 @@
 				5B20C8F31022BD600003FE62 /* custombuttonpressed.png in Resources */,
 				5B20C8F41022BD600003FE62 /* custombuttonnormal.png in Resources */,
 				5B2F728F1026C98000676DBD /* Three20.bundle in Resources */,
-				5B37B549103B1B12008CF2FC /* marker-crosshair.png in Resources */,
 				5B37B578103B1D1F008CF2FC /* marker-blue.png in Resources */,
 				5B119350103B80E100A71E72 /* up.png in Resources */,
 				5B119351103B80E100A71E72 /* down.png in Resources */,
@@ -857,6 +856,7 @@
 				5B8D620610479B4500208F64 /* about.html in Resources */,
 				5BBD53341048FC56001AB004 /* 03-loopback.png in Resources */,
 				5BBD537810490A34001AB004 /* he_mainmenu_2.png in Resources */,
+				5BE9E387104A29950087539C /* marker-crosshair.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1024,8 +1024,8 @@
 					"-all_load",
 				);
 				PREBINDING = NO;
-				PROVISIONING_PROFILE = "3209CD61-D172-4EEE-9160-55C486291BCE";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3209CD61-D172-4EEE-9160-55C486291BCE";
+				PROVISIONING_PROFILE = "E891DE9A-8FF0-4760-A5AE-DDB3C0ED213E";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E891DE9A-8FF0-4760-A5AE-DDB3C0ED213E";
 				SDKROOT = iphoneos3.0;
 			};
 			name = Debug;
@@ -1052,8 +1052,8 @@
 					"-all_load",
 				);
 				PREBINDING = NO;
-				PROVISIONING_PROFILE = "3209CD61-D172-4EEE-9160-55C486291BCE";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3209CD61-D172-4EEE-9160-55C486291BCE";
+				PROVISIONING_PROFILE = "E891DE9A-8FF0-4760-A5AE-DDB3C0ED213E";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E891DE9A-8FF0-4760-A5AE-DDB3C0ED213E";
 				SDKROOT = iphoneos3.0;
 			};
 			name = Release;

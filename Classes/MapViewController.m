@@ -50,12 +50,15 @@
 	{
 		[locationManager startUpdatingHeading];
 		compassRunning = YES;
+		compassIndicator.hidden = NO;
+		[self.view bringSubviewToFront:compassIndicator];
 	}
 	else if(!compassEnabled && compassRunning)
 	{
 		[locationManager stopUpdatingHeading];
 		compassRunning = NO;
 		currentRotation = 0.0;
+		compassIndicator.hidden = YES;
 		[self rotate];
 	}
 }
@@ -231,6 +234,14 @@
 	
 	[items release];
 	self.hidesBottomBarWhenPushed = NO;
+	
+	
+	compassIndicator = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"marker-crosshair.png"]];
+	compassIndicator.center = CGPointMake(self.view.bounds.size.width - 40.0, self.view.bounds.size.height - 85.0);
+	compassIndicator.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin;
+	
+	compassIndicator.hidden = NO;
+	[self.view addSubview:compassIndicator];
 	
 	
 	
@@ -491,7 +502,7 @@
 	[self.view bringSubviewToFront:infoButton];
 
 	
-	
+	[self.view bringSubviewToFront: compassIndicator];
 	
 }
 
@@ -527,8 +538,8 @@
 	hasTouchMoved = YES;
 	
 	if(!self.navigationController.toolbar.hidden){
-		[self.navigationController setNavigationBarHidden:YES animated:YES]; 
-		[self.navigationController setToolbarHidden:YES animated:YES];
+
+		[self hideChrome];
 	}
 	
 	for (RMMapView* mv in mapViews){
@@ -569,10 +580,46 @@
 
 		BOOL newHiddenStatus = ! (self.navigationController.navigationBarHidden);
 		//NSLog(@"setting toolbar to hidden: %@", newHiddenStatus ? @"yes" : @"no" );
+		
+		if(newHiddenStatus)
+			[self hideChrome];
+		else
+			[self showChrome];
 
-		[self.navigationController setNavigationBarHidden:newHiddenStatus animated:YES]; 
-		[self.navigationController setToolbarHidden:newHiddenStatus animated:YES];
 	}
+}
+
+- (void) hideChrome
+{
+	[self.navigationController setNavigationBarHidden:YES animated:YES]; 
+	[self.navigationController setToolbarHidden:YES animated:YES];
+	
+	
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationDuration:0.2];
+	[UIView setAnimationCurve:UIViewAnimationCurveLinear];
+
+	
+	compassIndicator.center = CGPointMake(self.view.bounds.size.width - 40.0, self.view.bounds.size.height - 40.0);
+
+	
+	[UIView commitAnimations];
+	
+}
+- (void) showChrome
+{
+	[self.navigationController setNavigationBarHidden:NO animated:YES]; 
+	[self.navigationController setToolbarHidden:NO animated:YES];	
+	
+	
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationDuration:0.2];
+	[UIView setAnimationCurve:UIViewAnimationCurveLinear];
+	
+	compassIndicator.center = CGPointMake(self.view.bounds.size.width - 40.0, self.view.bounds.size.height - 85.0);
+	
+	
+	[UIView commitAnimations];
 	
 }
 
@@ -667,9 +714,13 @@
 
 - (void)rotate
 {
+//	NSLog(@"setting rotation to %f", currentRotation);
 	//currentRotation += .01;
-	modernMapView.transform = CGAffineTransformMakeRotation(currentRotation);
-	oldMapView.transform = CGAffineTransformMakeRotation(currentRotation);	
+	
+	CGFloat radianAngle = (currentRotation / 180.0) * -1 * M_PI;
+	modernMapView.transform = CGAffineTransformMakeRotation(radianAngle);
+	oldMapView.transform = CGAffineTransformMakeRotation(radianAngle);
+	compassIndicator.transform = CGAffineTransformMakeRotation(radianAngle);
 
 	
 }

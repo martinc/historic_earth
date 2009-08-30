@@ -261,27 +261,28 @@
 	NSRange searchingRange = NSMakeRange(0, [dataString length]);
 	int loopCount = 0;
 	
-	NSRange theRange;
+	NSRange openingTagRange;
+	
 	
 	//Loop for both sets of coordinates
 	do {
 		loopCount++;
 			
-		 theRange = [dataString rangeOfString:@"<gml:coordinates xmlns:gml=\"http://www.opengis.net/gml\" decimal=\".\" cs=\",\" ts=\" \">"
+		 openingTagRange = [dataString rangeOfString:@"<gml:coordinates xmlns:gml=\"http://www.opengis.net/gml\" decimal=\".\" cs=\",\" ts=\" \">"
 											 options:0
 											   range: searchingRange];
 		
-		if(theRange.length > 0){
-			//NSLog(@"first occurrence at %d %d", theRange.location, theRange.length);
-			NSRange searchForEndRange = NSMakeRange( theRange.location+theRange.length, [dataString length] - (theRange.location+theRange.length) );
+		if(openingTagRange.length > 0){
+			//NSLog(@"first occurrence at %d %d", openingTagRange.location, openingTagRange.length);
+			NSRange searchForEndRange = NSMakeRange( openingTagRange.location+openingTagRange.length, [dataString length] - (openingTagRange.location+openingTagRange.length) );
 			
 			
-			NSRange endingRange = [dataString rangeOfString: @"</gml:coordinates>"
+			NSRange endingTagRange = [dataString rangeOfString: @"</gml:coordinates>"
 							options: 0 
 							  range: searchForEndRange];
 
 			
-			NSRange contentRange = NSMakeRange(searchForEndRange.location, endingRange.location - searchForEndRange.location);
+			NSRange contentRange = NSMakeRange(searchForEndRange.location, endingTagRange.location - searchForEndRange.location);
 			
 			NSString *theCoordinateString = [dataString substringWithRange:contentRange];
 			
@@ -366,10 +367,10 @@
 			[mapView.markerManager addMarker:aMarker AtLatLong: averageLocation];
 			
 
-		}// end if therange.length > 0
+		}// end if openingTagRange.length > 0
 		
 		
-	} while (theRange.length > 0);
+	} while (openingTagRange.length > 0);
 		
 		
 
