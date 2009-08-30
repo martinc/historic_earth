@@ -51,6 +51,23 @@
 		[locationManager startUpdatingHeading];
 		compassRunning = YES;
 		compassIndicator.hidden = NO;
+	
+		/*
+		NSLog(@"map frame is %f %f %f %f, bounds is %f %f %f %f", oldMapView.frame.origin.x,oldMapView.frame.origin.y,
+			  oldMapView.frame.size.width, oldMapView.frame.size.height, 
+			  oldMapView.bounds.origin.x, oldMapView.bounds.origin.y, oldMapView.bounds.size.width, oldMapView.bounds.size.height);
+		*/
+		
+		//Resize frame
+		
+		float squareSize = 600.0;
+		
+		oldMapView.frame = CGRectMake( -1 * (squareSize - oldMapView.bounds.size.width)/2.0 , 0.0, squareSize, squareSize);
+		modernMapView.frame = CGRectMake( -1 * (squareSize - oldMapView.bounds.size.width)/2.0 , 0.0, squareSize, squareSize);
+
+		
+		
+		
 		[self.view bringSubviewToFront:compassIndicator];
 	}
 	else if(!compassEnabled && compassRunning)
@@ -240,7 +257,7 @@
 	compassIndicator.center = CGPointMake(self.view.bounds.size.width - 40.0, self.view.bounds.size.height - 85.0);
 	compassIndicator.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin;
 	
-	compassIndicator.hidden = NO;
+	compassIndicator.hidden = YES;
 	[self.view addSubview:compassIndicator];
 	
 	
