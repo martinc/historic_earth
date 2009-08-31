@@ -9,6 +9,12 @@
 #import "MapViewController.h"
 #import "AbstractMapListController.h"
 
+#define kFilteringFactor 0.05
+
+#define degreesToRadians(x) (M_PI * x / 180.0)
+
+
+
 @implementation MapViewController
 
 
@@ -17,6 +23,10 @@
     if (self = [super initWithNibName:nil bundle:nil]) {
 		
 		compassRunning = NO;
+		
+		locked = [[NSUserDefaults standardUserDefaults] boolForKey:kLOCK_ENABLED];
+		compassEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:kCOMPASS_ENABLED];
+
         
 		maps = [theMaps retain];
 		
@@ -26,17 +36,50 @@
 		
 		locationManager = [[CLLocationManager alloc] init];
 		locationManager.delegate = self;
-		locationManager.headingFilter = 1.0;
+		//locationManager.headingFilter = 1.0;
 		
 		[[NSNotificationCenter defaultCenter] addObserver:self
 												 selector:@selector(updateSettings:)
 													 name:NSUserDefaultsDidChangeNotification object:nil];
 		
-		[self updateSettings:nil];
 		
 		
     }
     return self;
+}
+-(void) startCompass
+{
+
+	if(!compassRunning){
+		NSLog(@"starting compass");
+		[locationManager startUpdatingHeading];
+		compassRunning = YES;
+		compassIndicator.hidden = NO;
+		[self.view bringSubviewToFront:compassIndicator];
+		
+		/*
+		 NSLog(@"map frame is %f %f %f %f, bounds is %f %f %f %f", oldMapView.frame.origin.x,oldMapView.frame.origin.y,
+		 oldMapView.frame.size.width, oldMapView.frame.size.height, 
+		 oldMapView.bounds.origin.x, oldMapView.bounds.origin.y, oldMapView.bounds.size.width, oldMapView.bounds.size.height);
+		 */
+		
+		//Resize frame
+		
+		//float squareSize = 600.0;
+		
+		//oldMapView.frame = CGRectMake( -1 * (squareSize - oldMapView.bounds.size.width)/2.0 , 0.0, squareSize, squareSize);
+		//modernMapView.frame = CGRectMake( -1 * (squareSize - oldMapView.bounds.size.width)/2.0 , 0.0, squareSize, squareSize);
+		
+	}
+	
+}
+-(void) stopCompass
+{
+	[locationManager stopUpdatingHeading];
+	compassRunning = NO;
+	compassIndicator.hidden = YES;
+
+	
 }
 -(void) updateSettings: (NSNotification *)notification
 {
@@ -46,45 +89,23 @@
 	locked = [[NSUserDefaults standardUserDefaults] boolForKey:kLOCK_ENABLED];
 	compassEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:kCOMPASS_ENABLED];
 	
-	if(compassEnabled && !compassRunning && locationManager.headingAvailable)
-	{
-		[locationManager startUpdatingHeading];
-		compassRunning = YES;
-		compassIndicator.hidden = NO;
-	
-		/*
-		NSLog(@"map frame is %f %f %f %f, bounds is %f %f %f %f", oldMapView.frame.origin.x,oldMapView.frame.origin.y,
-			  oldMapView.frame.size.width, oldMapView.frame.size.height, 
-			  oldMapView.bounds.origin.x, oldMapView.bounds.origin.y, oldMapView.bounds.size.width, oldMapView.bounds.size.height);
-		*/
-		
-		//Resize frame
-		
-		float squareSize = 600.0;
-		
-		oldMapView.frame = CGRectMake( -1 * (squareSize - oldMapView.bounds.size.width)/2.0 , 0.0, squareSize, squareSize);
-		modernMapView.frame = CGRectMake( -1 * (squareSize - oldMapView.bounds.size.width)/2.0 , 0.0, squareSize, squareSize);
 
-		
-		
-		
-		[self.view bringSubviewToFront:compassIndicator];
-	}
-	else if(!compassEnabled && compassRunning)
-	{
-		[locationManager stopUpdatingHeading];
-		compassRunning = NO;
-		currentRotation = 0.0;
-		compassIndicator.hidden = YES;
-		[self rotate];
-	}
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateHeading:(CLHeading *)newHeading
 {
+	//NSLog(@"received heading %@", newHeading);
 	
-	currentRotation = newHeading.magneticHeading;
-	[self rotate];
+	
+	if(newHeading.headingAccuracy >= 0)
+	{
+		
+		double inputHeading = newHeading.trueHeading >= 0 ? newHeading.trueHeading : newHeading.magneticHeading;
+		//currentRotation = inputHeading * kFilteringFactor + currentRotation * (1.0 - kFilteringFactor);
+		[self rotateToHeading:inputHeading animated:YES];
+
+	}
+	
 	
 }
 
@@ -257,11 +278,10 @@
 	compassIndicator.center = CGPointMake(self.view.bounds.size.width - 40.0, self.view.bounds.size.height - 85.0);
 	compassIndicator.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin;
 	
-	compassIndicator.hidden = YES;
+	compassIndicator.hidden = ! compassEnabled;
 	[self.view addSubview:compassIndicator];
 	
-	
-	
+
 	//Info button
 	
 	
@@ -520,6 +540,8 @@
 
 	
 	[self.view bringSubviewToFront: compassIndicator];
+
+
 	
 }
 
@@ -689,25 +711,37 @@
 
 
 - (void)viewWillAppear:(BOOL)animated {
-	
+	[super viewWillAppear:animated];
 	[self.navigationController setToolbarHidden:NO animated: animated];
+	
+	[locationManager startUpdatingLocation];
+	if(compassEnabled && !compassRunning)
+	{
+		[self startCompass];
+	}
+	else {
+		[self rotateToHeading:0.0 animated:NO];
+	}
+
 	
 
 	
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+	[super viewWillDisappear:animated];
+
 	
 	if(!self.modalViewController)
 		[self.navigationController setToolbarHidden:YES animated: animated];
 	
+	[locationManager stopUpdatingLocation];
 	if(compassRunning)
 	{
-		[locationManager stopUpdatingHeading];
-		currentRotation = 0.0;
-		[self rotate];
-		compassRunning = NO;
+		//NSLog(@"stopping compass on exit"); 
+		[self stopCompass];
 	}
+
 
 }
 
@@ -729,17 +763,43 @@
 }
 
 
-- (void)rotate
+#define kROTATION_CONSTANT 0.01
+
+- (void) rotateToHeading:(double)inputHeading animated:(BOOL)isAnimated
 {
 //	NSLog(@"setting rotation to %f", currentRotation);
 	//currentRotation += .01;
 	
-	CGFloat radianAngle = (currentRotation / 180.0) * -1 * M_PI;
+	CGFloat radianAngle = -1 * degreesToRadians(inputHeading);
+	
+	isAnimated = NO;
+
+	
+	if(isAnimated)
+	{
+		
+
+		double theDuration = kROTATION_CONSTANT * fabs(inputHeading-currentRotation);
+		
+		[UIView beginAnimations:nil context:NULL];
+		[UIView setAnimationBeginsFromCurrentState:YES];
+		[UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+		[UIView setAnimationDuration:theDuration];
+		
+		
+	}
+	
 	modernMapView.transform = CGAffineTransformMakeRotation(radianAngle);
 	oldMapView.transform = CGAffineTransformMakeRotation(radianAngle);
 	compassIndicator.transform = CGAffineTransformMakeRotation(radianAngle);
-
 	
+	
+	if(isAnimated){
+		[UIView commitAnimations];
+	}
+	
+	currentRotation = inputHeading;
+
 }
 
 

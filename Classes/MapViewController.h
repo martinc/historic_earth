@@ -22,7 +22,6 @@
 	
 	RMMapView *oldMapView, *modernMapView, *fadingOutView;
 	
-	float currentRotation;
 	NSMutableArray *maps;
 	int currentMapIndex;
 	NSMutableArray *mapViews;
@@ -52,6 +51,14 @@
 	BOOL compassRunning;
 	
 	UIImageView *compassIndicator;
+	
+	
+//	double targetRotation;
+	double currentRotation;
+//	double rotationVelocity
+//	double rotationAcceleration;
+	
+	
 }
 
 - (id) initWithMaps: (NSMutableArray *) theMaps;
@@ -63,10 +70,14 @@
 
 -(void) updateSettings: (NSNotification *)notification;
 
-- (void)rotate;
+- (void) rotateToHeading:(double)inputHeading animated:(BOOL)isAnimated;
 
 - (void) hideChrome;
 - (void) showChrome;
 
+
+
+-(void) stopCompass;
+-(void) startCompass;
 
 @end
