@@ -65,19 +65,121 @@
 		
 		//Resize frame
 		
-		//float squareSize = 600.0;
+		float squareSize = 640.0;
 		
-		//oldMapView.frame = CGRectMake( -1 * (squareSize - oldMapView.bounds.size.width)/2.0 , 0.0, squareSize, squareSize);
-		//modernMapView.frame = CGRectMake( -1 * (squareSize - oldMapView.bounds.size.width)/2.0 , 0.0, squareSize, squareSize);
+		//masterView.frame = CGRectMake(0, 0, 100, 480);
+		masterView.frame = CGRectMake(0.0, 0.0, squareSize, squareSize);
+
+		masterView.center = CGPointMake(self.view.frame.size.width/2.0, self.view.frame.size.height/2.0);	
 		
+		//NSStringFromCGRect()
+		
+		currentRotation = 0.0;
+		targetRotation = 0.0;
+		rotationVelocity = 0.0;
+		rotationAcceleration = 0.0;
+		
+		//changing accel:
+		
+		
+		rotationTimer = [NSTimer scheduledTimerWithTimeInterval:(1/30.0) target:self selector:@selector(stepRotation:) userInfo:nil repeats:YES];
+
 	}
 	
 }
+
+#define kACCEL_FACTOR 0.01
+
+- (void)stepRotation:(NSTimer*)theTimer
+{
+	
+	if(targetRotation != currentRotation)
+	{
+	   
+		double newRotation;
+		
+		
+		//Angle 0 to 90 .. +90
+		//Angle 0 to 270 .. -90
+		//Angle 270 to 0.. +90
+		//Angle 180 to 90.. - 90
+		//Angle 180 to 270.. +90
+		//point are never more than 180 degrees away
+		
+		//which direction to go in
+		
+		
+		double startAngle = currentRotation;
+		double endAngle = targetRotation;
+		
+		
+		if(endAngle-startAngle > 180)
+		{
+			startAngle += 360.0;
+		}
+		else if(endAngle-startAngle < -180)
+		{
+			endAngle += 360.0;
+		}
+		
+			
+		double theAccelForce = endAngle - startAngle;
+		
+		
+		rotationAcceleration = kACCEL_FACTOR * theAccelForce;
+		
+
+		rotationVelocity += rotationAcceleration;
+		
+		//Slow down close
+		
+		
+		if( fabs(theAccelForce) < 40)
+		{
+			float distanceFactor = fabs(theAccelForce) / 80 + 0.5;
+			/*
+			if(distanceFactor < 0.1)
+			{
+				rotationVelocity = targetRotation - currentRotation;
+			}
+			else{
+				rotationVelocity *= distanceFactor;
+			}
+			 */
+			rotationVelocity *= distanceFactor;
+
+		}
+		
+		if(fabs(rotationVelocity) < 1.0)
+			rotationVelocity = 1.0 * ( rotationVelocity >= 0 ? 1 : -1 );
+		
+		newRotation = currentRotation + rotationVelocity;
+		
+		if(newRotation < 0)
+			newRotation += 360.0;
+		
+		newRotation = ((int)newRotation % 360) + newRotation-((int)newRotation);
+		
+		if(fabs(newRotation-targetRotation) < 0.5)
+			newRotation = targetRotation;
+		
+		[self rotateToHeading:newRotation animated:NO];
+		
+		//NSLog(@"accel %f velcoity %f position %f force %f startAngle %f endAngle %f",
+		//	  rotationAcceleration, rotationVelocity, newRotation, theAccelForce, startAngle, endAngle);
+		
+	}
+}
+
 -(void) stopCompass
 {
+	[rotationTimer invalidate];
 	[locationManager stopUpdatingHeading];
 	compassRunning = NO;
 	compassIndicator.hidden = YES;
+	
+	masterView.frame = self.view.frame;
+	masterView.center = CGPointMake(self.view.frame.size.width/2.0, self.view.frame.size.height/2.0);	
 
 	
 }
@@ -100,10 +202,11 @@
 	if(newHeading.headingAccuracy >= 0)
 	{
 		
-		double inputHeading = newHeading.trueHeading >= 0 ? newHeading.trueHeading : newHeading.magneticHeading;
+		targetRotation = newHeading.trueHeading >= 0 ? newHeading.trueHeading : newHeading.magneticHeading;
 		//currentRotation = inputHeading * kFilteringFactor + currentRotation * (1.0 - kFilteringFactor);
-		[self rotateToHeading:inputHeading animated:YES];
-
+	//	[self rotateToHeading:inputHeading animated:YES];
+		
+			
 	}
 	
 	
@@ -118,6 +221,13 @@
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView {
 	[super loadView];
+	
+	
+	masterView = [[UIView alloc] initWithFrame:self.view.frame];
+	masterView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+	masterView.autoresizesSubviews = YES;
+	masterView.userInteractionEnabled = NO;
+	[self.view addSubview:masterView];
 	
 		
 	locked = YES;
@@ -466,7 +576,7 @@
 		modernMapView.userInteractionEnabled = NO;
 
 		
-		[self.view addSubview: modernMapView];
+		[masterView addSubview: modernMapView];
 
 
 
@@ -523,7 +633,7 @@
 	
 	oldMapView.alpha = 0.0;
 	
-	[self.view addSubview: oldMapView];
+	[masterView addSubview: oldMapView];
 
 	
 	[UIView beginAnimations:nil context:NULL];
@@ -721,6 +831,9 @@
 	}
 	else {
 		[self rotateToHeading:0.0 animated:NO];
+		masterView.frame = self.view.frame;
+		masterView.center = CGPointMake(self.view.frame.size.width/2.0, self.view.frame.size.height/2.0);	
+
 	}
 
 	
@@ -773,7 +886,7 @@
 	CGFloat radianAngle = -1 * degreesToRadians(inputHeading);
 	
 	isAnimated = NO;
-
+	
 	
 	if(isAnimated)
 	{
@@ -789,8 +902,7 @@
 		
 	}
 	
-	modernMapView.transform = CGAffineTransformMakeRotation(radianAngle);
-	oldMapView.transform = CGAffineTransformMakeRotation(radianAngle);
+	masterView.transform = CGAffineTransformMakeRotation(radianAngle);
 	compassIndicator.transform = CGAffineTransformMakeRotation(radianAngle);
 	
 	

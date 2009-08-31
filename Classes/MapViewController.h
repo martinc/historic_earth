@@ -20,6 +20,8 @@
 
 @interface MapViewController : UIViewController <CLLocationManagerDelegate> {
 	
+	UIView *masterView;
+	
 	RMMapView *oldMapView, *modernMapView, *fadingOutView;
 	
 	NSMutableArray *maps;
@@ -53,10 +55,12 @@
 	UIImageView *compassIndicator;
 	
 	
-//	double targetRotation;
+	NSTimer* rotationTimer;
+	
+	double targetRotation;
 	double currentRotation;
-//	double rotationVelocity
-//	double rotationAcceleration;
+	double rotationVelocity;
+	double rotationAcceleration;
 	
 	
 }
