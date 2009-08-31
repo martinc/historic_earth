@@ -27,6 +27,8 @@
 
 - (NSComparisonResult) mapOrder: (Map *) anotherMap;
 
+- (void) shufflePlateOrder;
+
 
 @property (nonatomic, retain) NSString *layerID;
 @property (nonatomic, retain) NSString *atlasName;

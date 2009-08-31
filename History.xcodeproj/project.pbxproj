@@ -61,6 +61,7 @@
 		5B2F728F1026C98000676DBD /* Three20.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5B2F728E1026C98000676DBD /* Three20.bundle */; };
 		5B37B578103B1D1F008CF2FC /* marker-blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B37B577103B1D1F008CF2FC /* marker-blue.png */; };
 		5B443C09104C3442006F52F9 /* he_small_no_text.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B443C08104C3442006F52F9 /* he_small_no_text.png */; };
+		5B443C87104C6080006F52F9 /* 05-shuffle.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B443C86104C6080006F52F9 /* 05-shuffle.png */; };
 		5B652E24103E63F900E3B3A4 /* SettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B652E22103E63F900E3B3A4 /* SettingsController.m */; };
 		5B652E25103E63F900E3B3A4 /* SettingsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B652E23103E63F900E3B3A4 /* SettingsController.xib */; };
 		5B7F3E1A10360CE500114D2D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B7F3E1910360CE500114D2D /* StoreKit.framework */; };
@@ -240,6 +241,7 @@
 		5B2F728E1026C98000676DBD /* Three20.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Three20.bundle; path = ../three20/src/Three20.bundle; sourceTree = SOURCE_ROOT; };
 		5B37B577103B1D1F008CF2FC /* marker-blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "marker-blue.png"; sourceTree = "<group>"; };
 		5B443C08104C3442006F52F9 /* he_small_no_text.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = he_small_no_text.png; path = Images/he_small_no_text.png; sourceTree = "<group>"; };
+		5B443C86104C6080006F52F9 /* 05-shuffle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "05-shuffle.png"; path = "Images/05-shuffle.png"; sourceTree = "<group>"; };
 		5B652E21103E63F900E3B3A4 /* SettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsController.h; sourceTree = "<group>"; };
 		5B652E22103E63F900E3B3A4 /* SettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsController.m; sourceTree = "<group>"; };
 		5B652E23103E63F900E3B3A4 /* SettingsController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsController.xib; sourceTree = "<group>"; };
@@ -471,6 +473,7 @@
 				5B119426103BC21F00A71E72 /* 20-gear2.png */,
 				5B119427103BC21F00A71E72 /* 24-gift.png */,
 				5B119428103BC21F00A71E72 /* 28-star.png */,
+				5B443C86104C6080006F52F9 /* 05-shuffle.png */,
 				5B119429103BC21F00A71E72 /* 30-key.png */,
 				5B11942A103BC21F00A71E72 /* 54-lock.png */,
 				5B11942B103BC21F00A71E72 /* 71-compass.png */,
@@ -861,6 +864,7 @@
 				5BBD537810490A34001AB004 /* he_mainmenu_2.png in Resources */,
 				5BE9E387104A29950087539C /* marker-crosshair.png in Resources */,
 				5B443C09104C3442006F52F9 /* he_small_no_text.png in Resources */,
+				5B443C87104C6080006F52F9 /* 05-shuffle.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

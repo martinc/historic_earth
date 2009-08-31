@@ -38,5 +38,22 @@
 	
 }
 
+- (void) shufflePlateOrder
+{
+	NSMutableArray* components = [self.layerID componentsSeparatedByString:@","];
+	
+	if([components count] > 1)
+	{
+		NSString* topLayer = [[components objectAtIndex:0] retain];
+		[components removeObjectAtIndex:0];
+		[components addObject:topLayer];
+		[topLayer release];
+		
+		self.layerID = [components componentsJoinedByString:@","];
+	}
+	
+	
+}
+
 
 @end

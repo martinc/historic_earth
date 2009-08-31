@@ -361,7 +361,7 @@
 
 //	[self.navigationController.toolbar addSubview:infoButton];
 	
-	UIBarButtonItem* researchButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"03-loopback.png"]
+	UIBarButtonItem* researchButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"05-shuffle.png"]
 																						   style:UIBarButtonItemStylePlain
 																						  target:self
 																						  action:@selector(research)
@@ -417,12 +417,19 @@
 
 - (void) research
 {
-	
+/*	
 	AbstractMapListController *controllerAbove = [self.navigationController.viewControllers objectAtIndex:
 												  [self.navigationController.viewControllers count]-2];
 	
 	[controllerAbove refreshWithLocation:oldMapView.contents.mapCenter];
 	[self.navigationController popViewControllerAnimated:YES];
+
+*/
+ 	Map* currentMap = [maps objectAtIndex: currentMapIndex];
+	[currentMap shufflePlateOrder];
+	
+	[self loadMapAtIndex:currentMapIndex];
+	
 }
 - (void) showInfo
 {
@@ -501,6 +508,9 @@
 	self.navigationController.toolbar.tintColor = self.navigationController.navigationBar.tintColor;
 	self.navigationController.toolbar.translucent = self.navigationController.navigationBar.translucent;
 	
+	BOOL shouldFadeOut = currentMapIndex != theIndex;	
+	
+	
 	currentMapIndex = theIndex;
 	
 	Map *theMap = [maps objectAtIndex:currentMapIndex];
@@ -536,18 +546,28 @@
 		fadingOutView = oldMapView;
 		oldMapView = nil;
 		
+		if(shouldFadeOut){
 		
-		[UIView beginAnimations:nil context:NULL];
-		[UIView setAnimationCurve:UIViewAnimationCurveLinear];
-		[UIView setAnimationDuration: kMAP_EXIT_DURATION ];
-		[UIView setAnimationDelegate:self];
-		[UIView setAnimationDidStopSelector:@selector(oldMapFadedOut)/*@selector(oldMapFadedOut: finished: context:)*/];
 		
+			[UIView beginAnimations:nil context:NULL];
+			[UIView setAnimationCurve:UIViewAnimationCurveLinear];
+			[UIView setAnimationDuration: kMAP_EXIT_DURATION ];
+			[UIView setAnimationDelegate:self];
+			[UIView setAnimationDidStopSelector:@selector(oldMapFadedOut)/*@selector(oldMapFadedOut: finished: context:)*/];
+			
+			//[oldMapView removeFromSuperview];
+			fadingOutView.alpha = 0.0;
+			
+			[UIView commitAnimations];
+			
+		}
+		
+		else{
+			
+		
+			[NSTimer scheduledTimerWithTimeInterval:kMAP_EXIT_DURATION target:self selector:@selector(oldMapFadedOut) userInfo:nil repeats:NO];
 
-		//[oldMapView removeFromSuperview];
-		fadingOutView.alpha = 0.0;
-		
-		[UIView commitAnimations];
+		}
 
 		
 //		[oldMapView release];
@@ -592,6 +612,7 @@
 	
 		oldMapView = [[RMMapView alloc] initWithFrame:self.view.frame];
 		
+	if(mapViews) [mapViews release];
 		mapViews = [[NSMutableArray alloc] initWithObjects:oldMapView,modernMapView, nil];
 		
 		
