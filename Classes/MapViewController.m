@@ -70,7 +70,12 @@
 		//masterView.frame = CGRectMake(0, 0, 100, 480);
 		masterView.frame = CGRectMake(0.0, 0.0, squareSize, squareSize);
 
-		masterView.center = CGPointMake(self.view.frame.size.width/2.0, self.view.frame.size.height/2.0);	
+		masterView.center = CGPointMake(self.view.frame.size.width/2.0, self.view.frame.size.height/2.0);
+		
+		for(RMMapView* themapview in mapViews)
+		{
+			[themapview.contents.tileLoader reload];
+		}
 		
 		//NSStringFromCGRect()
 		
@@ -833,7 +838,17 @@
 		[self rotateToHeading:0.0 animated:NO];
 		masterView.frame = self.view.frame;
 		masterView.center = CGPointMake(self.view.frame.size.width/2.0, self.view.frame.size.height/2.0);	
+		
 
+		for(RMMapView* themapview in mapViews)
+		{
+			themapview.frame = self.view.frame;
+			themapview.center = CGPointMake(self.view.frame.size.width/2.0, self.view.frame.size.height/2.0);	
+
+			[themapview.contents.tileLoader reload];
+		}
+		
+		NSLog(@"set to masterView.frame to %@ center to %@", NSStringFromCGRect(masterView.frame), NSStringFromCGPoint(masterView.center));
 	}
 
 	

@@ -38,7 +38,7 @@
 		mainMenuData = [[NSMutableArray alloc] initWithObjects:
 						[NSMutableArray arrayWithObjects:
 						 [NSMutableDictionary dictionaryWithObjectsAndKeys:
-						  @"Map Your Location", @"name",
+						  @"Map My Location", @"name",
 						  @"locationController", @"controller",
 						  locationIcon, @"image",
 						  nil],
