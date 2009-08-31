@@ -326,17 +326,23 @@
 			theAtlas.year = exampleMap.year;
 			theAtlas.minZoom = exampleMap.minZoom;
 			theAtlas.mapBounds = exampleMap.mapBounds;
-			theAtlas.mapCenter = exampleMap.mapCenter;
-					
+			
+			CLLocationCoordinate2D averageCenter = {0, 0};
 			
 			NSMutableArray* layerIDS = [NSMutableArray arrayWithCapacity:[componentMaps count]];
 			for(Map* component in componentMaps)
 			{
+				averageCenter.longitude += component.mapCenter.longitude;
+				averageCenter.latitude += component.mapCenter.latitude;
 				//[layerIDS addObject:component.layerID];
 				[layerIDS insertObject:component.layerID atIndex:0];
-
-				
 			}
+			
+			averageCenter.longitude /= [componentMaps count];
+			averageCenter.latitude /= [componentMaps count];
+			
+			theAtlas.mapCenter = averageCenter;
+			
 			theAtlas.layerID = [layerIDS componentsJoinedByString:@","];
 			NSLog(@"setting new atlas layer ID to %@", theAtlas.layerID);
 			theAtlas.name = [NSString stringWithFormat:@"%d Plates", [componentMaps count] ];
