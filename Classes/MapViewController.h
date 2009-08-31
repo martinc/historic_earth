@@ -65,6 +65,8 @@
 	
 }
 
+@property (nonatomic, retain) NSMutableArray* maps;
+
 - (id) initWithMaps: (NSMutableArray *) theMaps;
 
 - (void) loadMapAtIndex: (int) theIndex;

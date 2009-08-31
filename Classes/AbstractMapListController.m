@@ -285,6 +285,77 @@
 	// Now, let's sort the maps by date
 	
 	[maps sortUsingSelector:@selector(mapOrder:)];
+	
+	
+	// Grouping
+	
+#if(1)
+	
+	
+	NSMutableDictionary *atlasNames = [NSMutableDictionary dictionaryWithCapacity:5];
+	
+	for(Map* aMap in maps)
+	{
+		[atlasNames setObject:[NSNumber numberWithBool:YES] forKey: aMap.atlasName];
+	}
+	
+	NSLog(@"%d maps, %d atlases", [maps count], [atlasNames count]);
+	
+	NSMutableArray *atlases = [NSMutableArray arrayWithCapacity:[atlasNames count]];
+
+	
+	for(NSString* atlasName in [atlasNames allKeys])
+	{
+		NSMutableArray* componentMaps = [NSMutableArray arrayWithCapacity:5];
+		for(Map* searchingMap in maps)
+		{
+			if([atlasName isEqualToString:searchingMap.atlasName])
+			{
+				//Found a map
+				[componentMaps addObject:searchingMap];
+			}
+		}
+		
+		if([componentMaps count] > 0)
+		{
+			Map* exampleMap = [componentMaps objectAtIndex:0];
+			
+			
+			Map* theAtlas = [[Map alloc] init];
+			theAtlas.atlasName = exampleMap.atlasName;
+			theAtlas.year = exampleMap.year;
+			theAtlas.minZoom = exampleMap.minZoom;
+			theAtlas.mapBounds = exampleMap.mapBounds;
+			theAtlas.mapCenter = exampleMap.mapCenter;
+					
+			
+			NSMutableArray* layerIDS = [NSMutableArray arrayWithCapacity:[componentMaps count]];
+			for(Map* component in componentMaps)
+			{
+				//[layerIDS addObject:component.layerID];
+				[layerIDS insertObject:component.layerID atIndex:0];
+
+				
+			}
+			theAtlas.layerID = [layerIDS componentsJoinedByString:@","];
+			NSLog(@"setting new atlas layer ID to %@", theAtlas.layerID);
+			theAtlas.name = [NSString stringWithFormat:@"%d Plates", [componentMaps count] ];
+
+			[atlases addObject:theAtlas];
+			
+			[theAtlas release];
+	
+		}
+	}
+	
+	[atlases sortUsingSelector:@selector(mapOrder:)];
+
+	[maps release];
+	maps = [atlases retain];
+	mapController.maps = maps;
+	
+	
+#endif
 		
 	
 	loadingResults = NO;
