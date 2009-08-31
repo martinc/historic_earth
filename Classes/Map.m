@@ -40,7 +40,7 @@
 
 - (void) shufflePlateOrder
 {
-	NSMutableArray* components = [self.layerID componentsSeparatedByString:@","];
+	NSMutableArray* components = [NSMutableArray arrayWithArray:[self.layerID componentsSeparatedByString:@","]];
 	
 	if([components count] > 1)
 	{

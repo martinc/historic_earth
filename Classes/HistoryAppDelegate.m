@@ -58,9 +58,9 @@
 	
 	
 	//Fix to see Search in simulator as StoreKit doesn't work
-	//#if TARGET_IPHONE_SIMULATOR
+	#if TARGET_IPHONE_SIMULATOR
 		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:kSEARCH_ENABLED];
-	//#endif
+	#endif
 	
 
 

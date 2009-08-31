@@ -22,43 +22,33 @@
 	[self.navigationController setNavigationBarHidden:NO animated:animated];
 }
 
-/*
+
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
         // Custom initialization
+		
+		
     }
     return self;
 }
-*/
+
 
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-	
-	/*
-	NSMutableString* htmlBody = [[NSMutableString alloc] initWithCapacity:256];
-	
-	[htmlBody appendString:@"<head></head><body>"];
-	[htmlBody appendString:@"Developed by <a href=\"http://emergencestudios.com\">emergence studios</a>"];
-	[htmlBody appendString:@"</body>"];
-*/
-	
-	
-	 
 
+	
 	NSString* htmlBody = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"about" ofType:@"html"]
-							  encoding:NSUTF8StringEncoding
-								 error:NULL];
-	 
+												   encoding:NSUTF8StringEncoding
+													  error:NULL];
 
-	
-	
-	
 	[webView loadHTMLString:htmlBody baseURL:nil];
 	
 	webView.backgroundColor = [UIColor clearColor];
+
+
 	
 	id scrollView = [webView.subviews objectAtIndex:0];
 	if( [scrollView respondsToSelector:@selector(setAllowsRubberBanding:)] )

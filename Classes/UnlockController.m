@@ -17,6 +17,16 @@
     if (self = [super initWithStyle:style]) {
     }
 	
+	loadingResults = NO;
+	
+	loadingSpinner = [[UIActivityIndicatorView alloc]
+					  initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+	
+	loadingSpinner.hidesWhenStopped = YES;
+	loadingSpinner.center = CGPointMake(320/2, 480/2);
+	
+	
+	
 	products = [[NSArray array] retain];
 	
 	self.title = @"Unlock Content";
@@ -36,6 +46,8 @@
 	productsRequest= [[SKProductsRequest alloc] initWithProductIdentifiers: [NSSet setWithObject: kSEARCH_PRODUCT_ID]];
 	productsRequest.delegate = self;
 	[productsRequest start];
+	loadingResults = YES;
+	[loadingSpinner startAnimating];
 }
 
 //***************************************
@@ -71,17 +83,26 @@
 		NSLog(@”Product identifier: %@”, [product productIdentifier]);
 	}
 	 */
+	
+	loadingResults = NO;
+	[loadingSpinner stopAnimating];
+
 }
 
 
-/*
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+	
+	
+	
+	[self.view addSubview:loadingSpinner];
+	
 }
-*/
+
 
 
 - (void)viewWillAppear:(BOOL)animated {

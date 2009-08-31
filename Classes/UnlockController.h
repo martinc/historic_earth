@@ -17,6 +17,11 @@
 	NSArray *products;
 		
 	SKProductsRequest *productsRequest;
+	
+	
+	UIActivityIndicatorView *loadingSpinner;  
+	BOOL loadingResults;
+
 
 }
 

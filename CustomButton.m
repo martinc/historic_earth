@@ -36,19 +36,19 @@
 	if (!normalImage)
 	{
 		UIImage *image =
-		[[UIImage imageNamed:@"custombuttonnormal.png"] retain];
+		[UIImage imageNamed:@"custombuttonnormal.png"];
 		normalImage =
-		[image stretchableImageWithLeftCapWidth:12
-								   topCapHeight:12];
+		[[image stretchableImageWithLeftCapWidth:12
+								   topCapHeight:12] retain];
 	}
 	
 	if (!pressedImage)
 	{
 		UIImage *image =
-		[[UIImage imageNamed:@"custombuttonpressed.png"] retain];
+		[UIImage imageNamed:@"custombuttonpressed.png"];
 		pressedImage =
-		[image stretchableImageWithLeftCapWidth:12
-								   topCapHeight:12];
+		[[image stretchableImageWithLeftCapWidth:12
+								   topCapHeight:12] retain];
 	}
 	
 	[self setBackgroundImage:normalImage
@@ -61,8 +61,8 @@
 - (void) dealloc
 {
 	[super dealloc];
-//	[normalImage release];
-//	[pressedImage release];
+	[normalImage release];
+	[pressedImage release];
 }
 	
 

@@ -532,7 +532,7 @@
 	targetZoom = theMap.minZoom;
 
 	if(oldMapView){
-		if(locked) {
+		if(locked || !shouldFadeOut) {
 			targetCenter = oldMapView.contents.mapCenter;
 			targetZoom = oldMapView.contents.zoom;
 			targetMinZoom = oldMapView.contents.minZoom;
@@ -565,7 +565,7 @@
 		else{
 			
 		
-			[NSTimer scheduledTimerWithTimeInterval:kMAP_EXIT_DURATION target:self selector:@selector(oldMapFadedOut) userInfo:nil repeats:NO];
+			[NSTimer scheduledTimerWithTimeInterval:kMAP_EXIT_DURATION*2 target:self selector:@selector(oldMapFadedOut) userInfo:nil repeats:NO];
 
 		}
 

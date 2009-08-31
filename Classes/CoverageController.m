@@ -289,7 +289,7 @@
 			NSArray* theCoordinateStrings = [theCoordinateString componentsSeparatedByString:@" "];
 			
 			
-			NSMutableArray* coveragePoints = [[NSMutableArray alloc] initWithCapacity:100];
+			//NSMutableArray* coveragePoints = [[NSMutableArray alloc] initWithCapacity:100];
 			
 			
 			RMPath* thePath = [[RMPath alloc] initForMap: mapView];
@@ -318,9 +318,9 @@
 				NSNumber* longitude = [NSNumber numberWithFloat:[[theComponets objectAtIndex:0] floatValue]];
 				NSNumber* latitude = [NSNumber numberWithFloat:[[theComponets objectAtIndex:1] floatValue]];
 				
-				NSDictionary* theCoordinate = [NSDictionary dictionaryWithObjectsAndKeys: longitude, @"longitude", latitude, @"latitude", nil];
+				//NSDictionary* theCoordinate = [NSDictionary dictionaryWithObjectsAndKeys: longitude, @"longitude", latitude, @"latitude", nil];
 				
-				[coveragePoints addObject:theCoordinate];
+				//[coveragePoints addObject:theCoordinate];
 
 				RMLatLong thePoint;
 				thePoint.longitude = [longitude doubleValue];
@@ -365,6 +365,8 @@
 			RMMarker* aMarker = [[RMMarker alloc] initWithUIImage: [UIImage imageNamed:@"marker-blue.png"] anchorPoint: CGPointMake(0.5, 1.0)];
 			
 			[mapView.markerManager addMarker:aMarker AtLatLong: averageLocation];
+			
+			[aMarker release];
 			
 
 		}// end if openingTagRange.length > 0

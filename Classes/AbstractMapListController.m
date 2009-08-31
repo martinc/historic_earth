@@ -320,7 +320,7 @@
 		{
 			Map* exampleMap = [componentMaps objectAtIndex:0];
 			
-			
+			 
 			Map* theAtlas = [[Map alloc] init];
 			theAtlas.atlasName = exampleMap.atlasName;
 			theAtlas.year = exampleMap.year;
@@ -380,7 +380,7 @@
 - (void) refreshWithLocation: (CLLocationCoordinate2D) theLocation
 {
 	
-	 NSString* request_url = [[NSString alloc] initWithFormat: @"%@lat=%f&long=%f", kLAT_LONG_SEARCH,
+	 NSString* request_url = [NSString stringWithFormat: @"%@lat=%f&long=%f", kLAT_LONG_SEARCH,
 					theLocation.latitude, theLocation.longitude];
 	 
 	 
