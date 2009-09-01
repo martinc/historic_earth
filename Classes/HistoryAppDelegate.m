@@ -76,7 +76,9 @@
 
     // Override point for customization after app launch  
 	
-	UIImage *bgImage = [UIImage imageNamed:@"paperbackground.png"];
+//	UIImage *bgImage = [UIImage imageNamed:@"paperbackground.png"];
+	UIImage *bgImage = [UIImage imageNamed:@"vintage-paper.png"];
+
 	UIImageView *bg = [[UIImageView alloc] initWithImage:bgImage];
 	[window	addSubview:bg];
 	[bg release];

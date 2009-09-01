@@ -63,6 +63,8 @@
 	double rotationAcceleration;
 	
 	
+	BOOL amAnimating;
+	
 }
 
 @property (nonatomic, retain) NSMutableArray* maps;
@@ -85,5 +87,9 @@
 
 -(void) stopCompass;
 -(void) startCompass;
+
+
+- (void) oldMapFadedOut;
+- (void) oldMapHoldAndRemove;
 
 @end

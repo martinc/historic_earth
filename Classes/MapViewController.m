@@ -13,7 +13,7 @@
 
 #define degreesToRadians(x) (M_PI * x / 180.0)
 
-
+#define MAX_ZOOM 18.0
 
 @implementation MapViewController
 
@@ -24,6 +24,7 @@
     if (self = [super initWithNibName:nil bundle:nil]) {
 		
 		compassRunning = NO;
+		amAnimating = NO;
 		
 		locked = [[NSUserDefaults standardUserDefaults] boolForKey:kLOCK_ENABLED];
 		compassEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:kCOMPASS_ENABLED];
@@ -484,6 +485,19 @@
 		self.navigationItem.rightBarButtonItem = backForward;
 	}
 	
+	NSLog(@"tileLoaded");
+	if(fadingOutView && !amAnimating)
+	{
+		NSLog(@"removing temp view");
+
+
+		[fadingOutView removeFromSuperview];
+		[fadingOutView release];
+		fadingOutView = nil;
+	}
+	
+		
+	
 }
 
 - (void) loadMapAtIndex: (int) theIndex withMarkerLocation: (CLLocationCoordinate2D) loc
@@ -529,12 +543,12 @@
 	
 	targetCenter = theMap.mapCenter;
 	targetMinZoom = theMap.minZoom - 4.0;
-	targetZoom = theMap.minZoom;
+	targetZoom = fmin(theMap.minZoom, MAX_ZOOM);
 
 	if(oldMapView){
 		if(locked || !shouldFadeOut) {
 			targetCenter = oldMapView.contents.mapCenter;
-			targetZoom = oldMapView.contents.zoom;
+			targetZoom = fmin(oldMapView.contents.zoom, MAX_ZOOM);
 			targetMinZoom = oldMapView.contents.minZoom;
 
 		}
@@ -548,6 +562,7 @@
 		
 		if(shouldFadeOut){
 		
+			amAnimating = YES;
 		
 			[UIView beginAnimations:nil context:NULL];
 			[UIView setAnimationCurve:UIViewAnimationCurveLinear];
@@ -565,7 +580,7 @@
 		else{
 			
 		
-			[NSTimer scheduledTimerWithTimeInterval:kMAP_EXIT_DURATION*2 target:self selector:@selector(oldMapFadedOut) userInfo:nil repeats:NO];
+			[NSTimer scheduledTimerWithTimeInterval:kMAP_EXIT_DURATION*2 target:self selector:@selector(oldMapHoldAndRemove) userInfo:nil repeats:NO];
 
 		}
 
@@ -593,7 +608,7 @@
 														   tilesource:[[[RMOpenStreetMapSource alloc] init] autorelease]
 														 centerLatLon:targetCenter
 															zoomLevel:targetZoom
-														 maxZoomLevel:18.0
+														 maxZoomLevel:MAX_ZOOM
 														 minZoomLevel:targetMinZoom
 													  backgroundImage:nil] autorelease];
 		
@@ -633,7 +648,7 @@
 													 tilesource:myTilesource
 												   centerLatLon:targetCenter
 													  zoomLevel:targetZoom
-												   maxZoomLevel:18.0
+												   maxZoomLevel:MAX_ZOOM
 												   minZoomLevel:targetMinZoom
 												backgroundImage:nil] autorelease];
 		
@@ -682,9 +697,17 @@
 	
 }
 
+- (void) oldMapHoldAndRemove
+{
+
+	if(!spinner.isAnimating)
+		[self oldMapFadedOut];
+	
+}
 //- (void) oldMapFadedOut: (NSString *)animationID finished:(NSNumber *)finished context:(void *)context
 - (void) oldMapFadedOut
 {
+	amAnimating = NO;
 	//NSLog(@"oldMapFadedOut");
 	[fadingOutView removeFromSuperview];
 	[fadingOutView release];
@@ -949,6 +972,16 @@
 	
 	currentRotation = inputHeading;
 
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+	
+	for(RMMapView* mv in mapViews)
+	{
+		[mv.contents.tileLoader reload];
+	}
+	
 }
 
 
