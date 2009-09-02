@@ -19,15 +19,22 @@
 
 @synthesize maps;
 
- // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-- (id) initWithMaps: (NSMutableArray *) theMaps{
+- (id) initWithMaps: (NSMutableArray *) theMaps
+{
+	return [self initWithMaps: theMaps allowCompass: YES];
+	
+}
+
+
+// The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
+- (id) initWithMaps: (NSMutableArray *) theMaps allowCompass: (BOOL)compassAllowed{
     if (self = [super initWithNibName:nil bundle:nil]) {
 		
 		compassRunning = NO;
 		amAnimating = NO;
 		
 		locked = [[NSUserDefaults standardUserDefaults] boolForKey:kLOCK_ENABLED];
-		compassEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:kCOMPASS_ENABLED];
+		compassEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:kCOMPASS_ENABLED] && compassAllowed;
 
         
 		maps = [theMaps retain];
@@ -301,7 +308,7 @@
 	
 	
 	//UISlider* slider = [[UISlider alloc] init];
-	slider = [[LenientUISlider alloc] initWithFrame:CGRectMake(0,0,220,20)];
+	slider = [[UISlider alloc] initWithFrame:CGRectMake(0,0,220,20)];
 //	slider = [[LenientUISlider alloc] init];
 
 	slider.value = 1.0;
@@ -362,16 +369,16 @@
 
 //	[self.navigationController.toolbar addSubview:infoButton];
 	
-	UIBarButtonItem* researchButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"05-shuffle.png"]
+	shuffleButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"05-shuffle.png"]
 																						   style:UIBarButtonItemStylePlain
 																						  target:self
 																						  action:@selector(research)
 																			  ];
 	
 	
-	NSArray* items = [[NSArray alloc] initWithObjects: researchButton, item,  infoBarButton, nil ];
+	NSArray* items = [[NSArray alloc] initWithObjects: shuffleButton, item,  infoBarButton, nil ];
 	
-	[researchButton release];
+	[shuffleButton release];
 	
 	[space release];
 	[item release];
@@ -485,10 +492,10 @@
 		self.navigationItem.rightBarButtonItem = backForward;
 	}
 	
-	NSLog(@"tileLoaded");
-	if(fadingOutView && !amAnimating)
+	//NSLog(@"tileLoaded");
+	if(fadingOutView/* && !amAnimating*/)
 	{
-		NSLog(@"removing temp view");
+		//NSLog(@"removing temp view");
 
 
 		[fadingOutView removeFromSuperview];
@@ -530,11 +537,24 @@
 	Map *theMap = [maps objectAtIndex:currentMapIndex];
 	if(!theMap) return;
 	
-	self.title = [NSString stringWithFormat:@"%d",theMap.year];
+	/*
+	NSCalendar *gregorian = [[NSCalendar alloc]
+							 initWithCalendarIdentifier:NSGregorianCalendar];
+	NSInteger theyear =
+	[[gregorian components:NSYearCalendarUnit fromDate:[NSDate date]] year];
+	[gregorian release];
+	 */
+	
+	if(theMap.year != 2009)
+		self.title = [NSString stringWithFormat:@"%d",theMap.year];
 	
 	
 	[self updateArrows];
+	
+	
+	shuffleButton.enabled = ([theMap plateCount] > 1);
 
+	NSLog(@"plate count is %d", [theMap plateCount]);
 	
 	
 	float targetZoom;
@@ -543,7 +563,7 @@
 	
 	targetCenter = theMap.mapCenter;
 	targetMinZoom = theMap.minZoom - 4.0;
-	targetZoom = fmin(theMap.minZoom, MAX_ZOOM);
+	targetZoom = fmin(theMap.minZoom , MAX_ZOOM);
 
 	if(oldMapView){
 		if(locked || !shouldFadeOut) {
@@ -556,7 +576,13 @@
 		NSLog(@"are animations enabled? %d ", [UIView areAnimationsEnabled]);
 		
 		
-		if(fadingOutView) [fadingOutView release];
+		if(fadingOutView)
+		{
+			[fadingOutView removeFromSuperview];
+			[fadingOutView release];
+		}
+
+			
 		fadingOutView = oldMapView;
 		oldMapView = nil;
 		
@@ -872,7 +898,11 @@
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
+	[self.navigationController setNavigationBarHidden:NO animated: animated];
 	[self.navigationController setToolbarHidden:NO animated: animated];
+	
+	shuffleButton.enabled = ([[maps objectAtIndex:currentMapIndex] plateCount] > 1);
+
 	
 	[locationManager startUpdatingLocation];
 	if(compassEnabled && !compassRunning)

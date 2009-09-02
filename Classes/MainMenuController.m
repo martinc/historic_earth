@@ -121,12 +121,14 @@
 }
 - (void) coverageController
 {
+	/*
 	[self.navigationController pushViewController: [[[CoverageController alloc] init] autorelease]
 										 animated:YES];	
+	 */
 
-	/*
+	
 	Map* coverageMap = [[Map alloc] init];
-	coverageMap.layerID = @"topp:AGIS_Coverage";
+	coverageMap.layerID = @"topp:GIS_Coverage";
 	coverageMap.atlasName = @"Coverage Area";
 	coverageMap.name = @"Coverage";
 	coverageMap.year = 2009;
@@ -139,14 +141,14 @@
 	NSMutableArray* coverageMaps = [NSMutableArray arrayWithObject:coverageMap];
 	[coverageMap release];
 	
-	MapViewController* mapview = [[MapViewController alloc] initWithMaps:coverageMaps];
+	MapViewController* mapview = [[MapViewController alloc] initWithMaps:coverageMaps allowCompass:NO];
 	[mapview loadMapAtIndex:0];
 
 	
 	[self.navigationController pushViewController: mapview animated:YES];
 	
 	[mapview release];
-	 */
+	 
 }
 
 

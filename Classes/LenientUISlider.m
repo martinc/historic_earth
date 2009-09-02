@@ -1,7 +1,7 @@
 
 #import "LenientUISlider.h"
 
-#define SLIDER_X_BOUND 15
+#define SLIDER_X_BOUND 0
 #define SLIDER_Y_BOUND 20
 
 /*

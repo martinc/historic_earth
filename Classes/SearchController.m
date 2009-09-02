@@ -35,7 +35,7 @@
 	//searchBar.tintColor = self.navigationController.navigationBar.tintColor;
 	searchBar.translucent = self.navigationController.navigationBar.translucent;
 	
-	searchBar.placeholder = @"Enter Address Here";
+	searchBar.placeholder = @"Street, City, State";
 	
 
 
@@ -89,17 +89,45 @@
 	
 	NSString *searchText = searchBar.text;
 	
-	[[NSUserDefaults standardUserDefaults] setObject:searchText forKey:@"lastSearchText"];
+	NSArray *searchComponents = [searchText componentsSeparatedByString:@","];
+	
+	NSLog(@"search components are %@", searchComponents);
+	
+	if([searchComponents count] == 3)
+	{
+	
+			NSString *addressString = [[searchComponents objectAtIndex:0] stringByTrimmingCharactersInSet:
+									   [NSCharacterSet whitespaceAndNewlineCharacterSet]];
+			NSString *cityString = [[searchComponents objectAtIndex:1] stringByTrimmingCharactersInSet:
+									   [NSCharacterSet whitespaceAndNewlineCharacterSet]];
+			NSString *stateString = [[searchComponents objectAtIndex:2] stringByTrimmingCharactersInSet:
+									   [NSCharacterSet whitespaceAndNewlineCharacterSet]];
 
-	
-	NSString *requestURL = [NSString stringWithFormat:@"%@a=%@", kSEARCH_BY_ADDRESS_URL, [searchText stringByAddingPercentEscapesUsingEncoding: NSASCIIStringEncoding]];
-	
-	NSLog(@"search request url is \"%@\"", requestURL);
+			
+			
 
-	
-	[self loadDataWithRequest: [NSURLRequest requestWithURL:[NSURL URLWithString:requestURL]
-												cachePolicy:NSURLRequestUseProtocolCachePolicy
-											timeoutInterval:15.0]];
+		
+		NSString *requestURL = [[NSString stringWithFormat:@"%@a=\"%@\"&c=\"%@\"&s=\"%@\"",
+								kSEARCH_BY_ADDRESS_URL,
+								addressString,
+								cityString,
+								stateString] stringByAddingPercentEscapesUsingEncoding: NSASCIIStringEncoding];
+		
+		NSLog(@"search request url is \"%@\"", requestURL);
+
+		
+		[self loadDataWithRequest: [NSURLRequest requestWithURL:[NSURL URLWithString:requestURL]
+													cachePolicy:NSURLRequestUseProtocolCachePolicy
+												timeoutInterval:15.0]];
+		
+		[[NSUserDefaults standardUserDefaults] setObject:searchText forKey:@"lastSearchText"];
+
+	}
+	else{
+		searchBar.text = @"";
+		
+		
+	}
 	
 	[self doneSearching];
 	

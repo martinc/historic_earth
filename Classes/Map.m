@@ -55,5 +55,10 @@
 	
 }
 
+- (int) plateCount
+{
+	return [[self.layerID componentsSeparatedByString:@","] count];
+}
+
 
 @end

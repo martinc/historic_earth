@@ -27,6 +27,8 @@
 	CLLocationCoordinate2D searchLocation;
 	
 	NSURLConnection *theConnection;
+	
+	UILabel *statusLabel;
 }
 
 - (void) refreshWithLocation: (CLLocationCoordinate2D) theLocation;

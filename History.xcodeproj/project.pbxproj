@@ -53,6 +53,8 @@
 		5B22B605103CB6EE0026281D /* FeaturedLocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B22B604103CB6EE0026281D /* FeaturedLocationController.m */; };
 		5B22B60A103CB91D0026281D /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B22B609103CB91D0026281D /* Location.m */; };
 		5B22B8CD103E0DA20026281D /* NSDataBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B22B8CC103E0DA20026281D /* NSDataBase64.m */; };
+		5B2A5292104D97DF00B7D526 /* he_small_v2.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B2A5291104D97DF00B7D526 /* he_small_v2.png */; };
+		5B2A52B2104DA34D00B7D526 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B2A52B1104DA34D00B7D526 /* icon.png */; };
 		5B2F723910268EE100676DBD /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B2F722E10268EE100676DBD /* NSObject+SBJSON.m */; };
 		5B2F723A10268EE100676DBD /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B2F723010268EE100676DBD /* NSString+SBJSON.m */; };
 		5B2F723B10268EE100676DBD /* SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B2F723210268EE100676DBD /* SBJSON.m */; };
@@ -192,6 +194,8 @@
 		5B22B609103CB91D0026281D /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
 		5B22B8CB103E0DA20026281D /* NSDataBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDataBase64.h; sourceTree = "<group>"; };
 		5B22B8CC103E0DA20026281D /* NSDataBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDataBase64.m; sourceTree = "<group>"; };
+		5B2A5291104D97DF00B7D526 /* he_small_v2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = he_small_v2.png; path = Images/he_small_v2.png; sourceTree = "<group>"; };
+		5B2A52B1104DA34D00B7D526 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		5B2F722C10268EE100676DBD /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
 		5B2F722D10268EE100676DBD /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
 		5B2F722E10268EE100676DBD /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJSON.m"; sourceTree = "<group>"; };
@@ -358,6 +362,7 @@
 				5B11941F103BC21F00A71E72 /* 02-redo.png */,
 				5B119420103BC21F00A71E72 /* 06-magnifying-glass.png */,
 				5B119421103BC21F00A71E72 /* 07-map-marker.png */,
+				5B2A52B1104DA34D00B7D526 /* icon.png */,
 				5B119422103BC21F00A71E72 /* 11-clock.png */,
 				5B119423103BC21F00A71E72 /* 12-eye.png */,
 				5B119424103BC21F00A71E72 /* 13-target.png */,
@@ -380,6 +385,7 @@
 				5BBD537710490A34001AB004 /* he_mainmenu_2.png */,
 				5B443C08104C3442006F52F9 /* he_small_no_text.png */,
 				5B20C8F11022BD600003FE62 /* custombuttonpressed.png */,
+				5B2A5291104D97DF00B7D526 /* he_small_v2.png */,
 				5B20C8F21022BD600003FE62 /* custombuttonnormal.png */,
 			);
 			name = Images;
@@ -643,6 +649,8 @@
 				5B443C09104C3442006F52F9 /* he_small_no_text.png in Resources */,
 				5B443C87104C6080006F52F9 /* 05-shuffle.png in Resources */,
 				5B04705F104CF2A6001C7DA1 /* vintage-paper.png in Resources */,
+				5B2A5292104D97DF00B7D526 /* he_small_v2.png in Resources */,
+				5B2A52B2104DA34D00B7D526 /* icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

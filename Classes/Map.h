@@ -29,6 +29,9 @@
 
 - (void) shufflePlateOrder;
 
+- (int) plateCount;
+
+
 
 @property (nonatomic, retain) NSString *layerID;
 @property (nonatomic, retain) NSString *atlasName;

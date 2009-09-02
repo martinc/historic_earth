@@ -74,6 +74,17 @@
 
 	[loadingSpinner startAnimating];
 
+	
+	statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 40, self.view.frame.size.width-80, 100)];
+	statusLabel.backgroundColor = [UIColor clearColor];
+	statusLabel.hidden = YES;
+	statusLabel.textAlignment = UITextAlignmentCenter;
+	statusLabel.font = [UIFont boldSystemFontOfSize:16.0];
+	statusLabel.lineBreakMode = UILineBreakModeWordWrap;
+	statusLabel.numberOfLines = 4;
+	statusLabel.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+	
+	[self.view addSubview:statusLabel];
 
 	
 }
@@ -90,6 +101,7 @@
 - (void) loadDataWithRequest: (NSURLRequest *) theRequest
 {
 	
+	statusLabel.hidden = YES;
 	
 	// create the connection with the request
 	// and start loading the data
@@ -166,17 +178,41 @@
 		
 		NSNumber *status = [jsonData objectForKey:@"status"];
 
+
+
 		if([status intValue] == -1)
 		{
 			// Error case for invalid search
+			
+			statusLabel.text = @"Invalid search terms.";
+			statusLabel.hidden = NO;
+
 		}
 		else if([status intValue] == 0)
 		{
 			//Error case for no matches found
+			
+			statusLabel.text = @"Sorry, no results were found for your location.";
+			statusLabel.hidden = NO;
+			
 		}
 		else{
 		
 			//Success
+			
+			
+			
+			NSNumber *searchLat = [jsonData objectForKey:@"lat"];
+			NSNumber *searchLong = [jsonData objectForKey:@"long"];
+			
+			CLLocationCoordinate2D searchCoordinates;
+			if(searchLat && searchLong)
+			{
+				searchCoordinates.latitude = [searchLat doubleValue];
+				searchCoordinates.longitude = [searchLong doubleValue];
+			}
+			
+			
 			
 			
 			NSArray* theMaps = [jsonData objectForKey:@"Maps"];
@@ -204,6 +240,7 @@
 						
 						if(theAtlasName && theBL && theTR && theLayer && theName && theYear && theMinZoom){
 							
+							BOOL hasLocation = YES;
 							
 							Map* theMap = [[Map alloc] init];
 							
@@ -213,7 +250,7 @@
 							theMap.year = [theYear intValue];
 							theMap.minZoom = [theMinZoom intValue];
 							if(theMap.minZoom == 0)
-								theMap.minZoom = 10;
+								theMap.minZoom = 16;
 							
 							
 							NSArray* southWestStrings = [theBL componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
@@ -228,8 +265,24 @@
 								mapBounds.southwest.latitude = [[southWestStrings objectAtIndex:1] doubleValue];
 								mapBounds.northeast.longitude = [[northEastStrings objectAtIndex:0] doubleValue];
 								mapBounds.northeast.latitude = [[northEastStrings objectAtIndex:1] doubleValue];
-								//NSLog(@"set corners to %f,%f %f,%f", mapBounds.southwest.latitude, mapBounds.southwest.longitude, mapBounds.northeast.latitude, mapBounds.northeast.longitude);
+								
+								
 								theMap.mapBounds = mapBounds;
+
+								
+								if(mapBounds.southwest.latitude == 0 ||
+								   mapBounds.southwest.longitude == 0 ||
+								   mapBounds.northeast.latitude == 0 ||
+								   mapBounds.northeast.longitude == 0)
+								{
+									hasLocation = NO;
+									
+									theMap.mapCenter = searchCoordinates;
+									NSLog(@"defaulting to search location");
+									
+								}
+								
+								//NSLog(@"set corners to %f,%f %f,%f", mapBounds.southwest.latitude, mapBounds.southwest.longitude, mapBounds.northeast.latitude, mapBounds.northeast.longitude);
 								
 							}
 							else{
@@ -345,7 +398,7 @@
 			
 			theAtlas.layerID = [layerIDS componentsJoinedByString:@","];
 			NSLog(@"setting new atlas layer ID to %@", theAtlas.layerID);
-			theAtlas.name = [NSString stringWithFormat:@"%d Plates", [componentMaps count] ];
+			theAtlas.name = [NSString stringWithFormat:@"%d Plate%@", [componentMaps count], [componentMaps count] > 1 ? @"s" : @"" ];
 
 			[atlases addObject:theAtlas];
 			

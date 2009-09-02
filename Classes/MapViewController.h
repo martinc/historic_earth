@@ -28,11 +28,13 @@
 	int currentMapIndex;
 	NSMutableArray *mapViews;
 	
-	LenientUISlider* slider;
+	UISlider* slider;
 	UIActivityIndicatorView *spinner;
 	UIBarButtonItem* backForward;
 	UIBarButtonItem* barSpinner;
 	UISegmentedControl* segmented;
+	
+	UIBarButtonItem* shuffleButton;
 	
 	BOOL hasTouchMoved;
 	
@@ -70,6 +72,7 @@
 @property (nonatomic, retain) NSMutableArray* maps;
 
 - (id) initWithMaps: (NSMutableArray *) theMaps;
+- (id) initWithMaps: (NSMutableArray *) theMaps allowCompass: (BOOL)compassAllowed;
 
 - (void) loadMapAtIndex: (int) theIndex;
 - (void) loadMapAtIndex: (int) theIndex withMarkerLocation: (CLLocationCoordinate2D) loc;
