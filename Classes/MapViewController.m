@@ -9,6 +9,8 @@
 #import "MapViewController.h"
 #import "AbstractMapListController.h"
 
+#import "TargetConditionals.h"
+
 #define kFilteringFactor 0.05
 
 #define degreesToRadians(x) (M_PI * x / 180.0)
@@ -60,7 +62,7 @@
 {
 
 	if(!compassRunning){
-		NSLog(@"starting compass");
+		//NSLog(@"starting compass");
 		[locationManager startUpdatingHeading];
 		compassRunning = YES;
 		compassIndicator.hidden = NO;
@@ -231,6 +233,27 @@
 	return YES;
 }
 
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+{
+
+	markerLocation = newLocation.coordinate;
+
+	if(!theMarker){
+		theMarker = [[RMMarker alloc] initWithUIImage: [UIImage imageNamed:@"marker-blue.png"] anchorPoint: CGPointMake(0.5, 1.0)];
+	}
+	
+	if([oldMapView.markerManager managingMarker:theMarker])
+	{
+		[oldMapView.markerManager moveMarker: theMarker AtLatLon: markerLocation];
+	}
+	else
+	{
+		[oldMapView.markerManager addMarker: theMarker AtLatLong: markerLocation];
+		
+	}
+	
+}
+
 
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView {
@@ -372,7 +395,7 @@
 	shuffleButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"05-shuffle.png"]
 																						   style:UIBarButtonItemStylePlain
 																						  target:self
-																						  action:@selector(research)
+																						  action:@selector(shuffleMaps)
 																			  ];
 	
 	
@@ -423,7 +446,7 @@
 	
 }
 
-- (void) research
+- (void) shuffleMaps
 {
 /*	
 	AbstractMapListController *controllerAbove = [self.navigationController.viewControllers objectAtIndex:
@@ -442,7 +465,7 @@
 - (void) showInfo
 {
 
-	NSLog(@"showInfo");
+	//NSLog(@"showInfo");
 	//self.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
 	infoController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
 	[self presentModalViewController:infoController animated:YES];
@@ -507,17 +530,17 @@
 	
 }
 
+
 - (void) loadMapAtIndex: (int) theIndex withMarkerLocation: (CLLocationCoordinate2D) loc
 {
-	markerLocation = loc;
 	
 	[self loadMapAtIndex: theIndex];
 
-	theMarker = [[RMMarker alloc] initWithUIImage: [UIImage imageNamed:@"marker-blue.png"] anchorPoint: CGPointMake(0.5, 1.0)];
-
-	[oldMapView.markerManager addMarker: theMarker AtLatLong: markerLocation];
-
 	
+	
+	markerLocation = loc;
+	theMarker = [[RMMarker alloc] initWithUIImage: [UIImage imageNamed:@"marker-blue.png"] anchorPoint: CGPointMake(0.5, 1.0)];
+	[oldMapView.markerManager addMarker: theMarker AtLatLong: markerLocation];
 }
 
 
@@ -678,7 +701,17 @@
 												   minZoomLevel:targetMinZoom
 												backgroundImage:nil] autorelease];
 		
-		
+	
+		if(fadingOutView)
+		{
+			if(theMarker && [fadingOutView.markerManager managingMarker:theMarker])
+			{
+				[fadingOutView.markerManager removeMarker:theMarker];
+				[oldMapView.markerManager addMarker:theMarker AtLatLong:markerLocation];
+			}
+		}
+				
+	
 		
 		 //modernMapView.contents = [[RMMapContents alloc] initForView:modernMapView];
 		 //modernMapView.contents.tileSource = [[RMCloudMadeMapSource alloc]
@@ -719,7 +752,8 @@
 	
 	[self.view bringSubviewToFront: compassIndicator];
 
-
+	
+	
 	
 }
 
@@ -903,8 +937,20 @@
 	
 	shuffleButton.enabled = ([[maps objectAtIndex:currentMapIndex] plateCount] > 1);
 
+#ifdef TARGET_IPHONE_SIMULATOR
+	[self locationManager:nil didUpdateToLocation:
+	 [[[CLLocation alloc] initWithLatitude:39.95249714905981 longitude:-75.16377925872803] autorelease]  
+			 fromLocation:nil];
 	
+	dummyLocationTimer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(dummyLocationMove) userInfo:nil repeats:YES];
+	
+	
+#else
 	[locationManager startUpdatingLocation];
+
+#endif
+	
+	
 	if(compassEnabled && !compassRunning)
 	{
 		[self startCompass];
@@ -930,6 +976,19 @@
 
 	
 }
+- (void) dummyLocationMove
+{
+	
+	markerLocation.latitude += 0.001;
+	markerLocation.longitude += 0.001;
+	
+	[self locationManager:nil didUpdateToLocation:
+	 [[[CLLocation alloc] initWithLatitude:markerLocation.latitude longitude:markerLocation.longitude] autorelease]  
+			 fromLocation:nil];
+	
+
+	
+}
 
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
@@ -938,7 +997,14 @@
 	if(!self.modalViewController)
 		[self.navigationController setToolbarHidden:YES animated: animated];
 	
+	
+	
+#ifdef TARGET_IPHONE_SIMULATOR
+	[dummyLocationTimer invalidate];	
+#else
 	[locationManager stopUpdatingLocation];
+#endif
+	
 	if(compassRunning)
 	{
 		//NSLog(@"stopping compass on exit"); 

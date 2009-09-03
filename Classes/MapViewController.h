@@ -43,6 +43,7 @@
 	
 	RMMarker* theMarker;
 	
+	
 	UIButton* infoButton;
 	
 	InfoController* infoController;
@@ -66,6 +67,8 @@
 	
 	
 	BOOL amAnimating;
+	
+	NSTimer* dummyLocationTimer;
 	
 }
 

@@ -71,8 +71,8 @@
 - (void)refreshData
 {
 	//Sample Data
-	//currentLocation.longitude = -75.16377925872803;
-	//currentLocation.latitude =  39.95249714905981;
+	currentLocation.longitude = -75.16377925872803;
+	currentLocation.latitude =  39.95249714905981;
 	REQUEST_URL = [[NSString alloc] initWithFormat: @"%@lat=%f&long=%f", kLAT_LONG_SEARCH,
 				   currentLocation.latitude, currentLocation.longitude];
 	
@@ -135,5 +135,25 @@
 		// Do something with the event data.
 	}
 }
+
+
+/*
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	
+	
+	NSUInteger row = indexPath.row;
+    if (row != NSNotFound) {
+		
+		[mapController loadMapAtIndex: indexPath.row withLocationManager: locMan];
+		
+        [[self navigationController] pushViewController:mapController animated:YES];
+		
+    }
+	
+}
+ */
+
+
 
 @end
