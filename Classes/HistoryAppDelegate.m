@@ -135,10 +135,8 @@
 		else 
 			alertText = @"The network connection has been lost.";
 			
-			
-		alert = [[UIAlertView alloc] initWithTitle:@"Network Status"
-														message:alertText delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-        [alert show];
+
+		[self showAlertWithText: alertText];
 		
 		shownNetworkError = YES;
 
@@ -146,18 +144,35 @@
 	else if(shownNetworkError &&  (remoteHostStatus != NotReachable))
 	{
 		NSString* alertText = @"A network connection has been established.";
-		alert = [[UIAlertView alloc] initWithTitle:@"Network Status"
-														message:alertText delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-        [alert show];
-		
+	
+		[self showAlertWithText: alertText];
+	
 		shownNetworkError = NO;
 	}
 		
 }
 
+- (void) showAlertWithText: (NSString*) thetext
+{
+	if(!alert){
+		alert = [[UIAlertView alloc] initWithTitle:@"Network Status"
+										   message:thetext delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+	}
+	else{
+		if(alert.visible){
+			[alert dismissWithClickedButtonIndex:0 animated:YES];
+		}		
+		alert.message = thetext;
+	}
+	
+	[alert show];
+	
+	
+}
+
 #pragma mark AlertView delegate methods
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    [alert release];
+	[alert dismissWithClickedButtonIndex:buttonIndex animated:YES];
 }
 
 

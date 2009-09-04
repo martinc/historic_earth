@@ -35,6 +35,8 @@
 	UISegmentedControl* segmented;
 	
 	UIBarButtonItem* shuffleButton;
+	UIBarButtonItem* reframeButton;
+
 	
 	BOOL hasTouchMoved;
 	
@@ -89,7 +91,8 @@
 - (void) hideChrome;
 - (void) showChrome;
 
-
+- (void) reframeSearch;
+- (void) shuffleMaps;
 
 -(void) stopCompass;
 -(void) startCompass;

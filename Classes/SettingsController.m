@@ -53,6 +53,11 @@
 	
 	cacheSizeLabel.text = [NSString stringWithFormat:@"%.1f MB", totalSize];
 	
+	/*
+	float memoryUsage = [[NSURLCache sharedURLCache] currentMemoryUsage] / 1048576.0;
+	float diskUsage = [[NSURLCache sharedURLCache] currentDiskUsage] / 1048576.0;
+	NSLog(@"NSURL cache using %f mb memory and %f mb disk", memoryUsage, diskUsage);
+	 */
 }
 
 - (IBAction) done
@@ -77,7 +82,11 @@
 	NSString* rmcachePath = [base stringByAppendingPathComponent:@"__RMCache"];
 	[[NSFileManager defaultManager] removeItemAtPath:rmcachePath error:NULL];
 
+	
+	[[NSURLCache sharedURLCache] removeAllCachedResponses];
+	 
 	[self calculateSize];
+
 }
 
 

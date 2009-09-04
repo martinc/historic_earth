@@ -68,6 +68,7 @@
 		5B443C87104C6080006F52F9 /* 05-shuffle.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B443C86104C6080006F52F9 /* 05-shuffle.png */; };
 		5B652E24103E63F900E3B3A4 /* SettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B652E22103E63F900E3B3A4 /* SettingsController.m */; };
 		5B652E25103E63F900E3B3A4 /* SettingsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B652E23103E63F900E3B3A4 /* SettingsController.xib */; };
+		5B664ABF1050DEC2008C3974 /* reframe.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B664ABE1050DEC2008C3974 /* reframe.png */; };
 		5B7F3E1A10360CE500114D2D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B7F3E1910360CE500114D2D /* StoreKit.framework */; };
 		5B7F3E2310360D2600114D2D /* UnlockController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7F3E2210360D2600114D2D /* UnlockController.m */; };
 		5B8D614D10477D2F00208F64 /* 14-tag.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B8D614C10477D2F00208F64 /* 14-tag.png */; };
@@ -217,6 +218,7 @@
 		5B652E21103E63F900E3B3A4 /* SettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsController.h; sourceTree = "<group>"; };
 		5B652E22103E63F900E3B3A4 /* SettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsController.m; sourceTree = "<group>"; };
 		5B652E23103E63F900E3B3A4 /* SettingsController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsController.xib; sourceTree = "<group>"; };
+		5B664ABE1050DEC2008C3974 /* reframe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = reframe.png; path = Images/reframe.png; sourceTree = "<group>"; };
 		5B7F3E1910360CE500114D2D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		5B7F3E2110360D2600114D2D /* UnlockController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnlockController.h; sourceTree = "<group>"; };
 		5B7F3E2210360D2600114D2D /* UnlockController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnlockController.m; sourceTree = "<group>"; };
@@ -353,6 +355,7 @@
 		5B20C8CF1022BA500003FE62 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				5B664ABE1050DEC2008C3974 /* reframe.png */,
 				5BBD53331048FC56001AB004 /* 03-loopback.png */,
 				5B8D614C10477D2F00208F64 /* 14-tag.png */,
 				5B8F1D2A10448E3E00DF8D8E /* he_large.png */,
@@ -651,6 +654,7 @@
 				5B04705F104CF2A6001C7DA1 /* vintage-paper.png in Resources */,
 				5B2A5292104D97DF00B7D526 /* he_small_v2.png in Resources */,
 				5B2A52B2104DA34D00B7D526 /* icon.png in Resources */,
+				5B664ABF1050DEC2008C3974 /* reframe.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

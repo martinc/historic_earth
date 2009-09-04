@@ -26,5 +26,7 @@
 
 - (void)startUpdates;
 
+- (id) initWithLocation:(CLLocationCoordinate2D) theLoc;
+
 
 @end

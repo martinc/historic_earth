@@ -137,6 +137,7 @@
 	center.longitude = -75.344238;
 	coverageMap.mapCenter = center;
 	coverageMap.minZoom = 4;
+	coverageMap.initialOpacity = 0.5;
 	
 	NSMutableArray* coverageMaps = [NSMutableArray arrayWithObject:coverageMap];
 	[coverageMap release];
@@ -159,7 +160,7 @@
 
 	
 	
-	self.title = @"Historic Earth";
+	self.title = @"Menu";
 	
 	self.view.backgroundColor = [UIColor clearColor];
 	

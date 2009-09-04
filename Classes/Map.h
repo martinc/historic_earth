@@ -18,6 +18,8 @@
 	
 	int year, minZoom;
 	
+	float initialOpacity;
+	
 	RMSphericalTrapezium mapBounds;
 	
 	CLLocationCoordinate2D mapCenter;
@@ -41,6 +43,8 @@
 @property (nonatomic, assign) int minZoom;
 @property (nonatomic, assign) RMSphericalTrapezium mapBounds;
 @property (nonatomic, readwrite) CLLocationCoordinate2D mapCenter;
+
+@property (nonatomic, assign) float initialOpacity;
 
 
 @end

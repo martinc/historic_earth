@@ -49,5 +49,8 @@
 
 - (void) purchasedSearch;
 
+- (void) showAlertWithText: (NSString*) thetext;
+
+
 @end
 

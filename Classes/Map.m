@@ -11,8 +11,15 @@
 
 @implementation Map
 
-@synthesize layerID, atlasName, name, year, minZoom, mapBounds, mapCenter;
+@synthesize layerID, atlasName, name, year, minZoom, mapBounds, mapCenter, initialOpacity;
 
+- (id) init
+{
+	self = [super init];
+	initialOpacity = 1.0;
+	
+	return self;
+}
 - (void) setMapBounds:(RMSphericalTrapezium) newMapBounds
 {
 	

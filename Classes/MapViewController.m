@@ -8,6 +8,7 @@
 
 #import "MapViewController.h"
 #import "AbstractMapListController.h"
+#import "LocationController.h"
 
 #import "TargetConditionals.h"
 
@@ -254,10 +255,12 @@
 	
 }
 
+- (void)viewDidLoad {
+	[super viewDidLoad];
 
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView {
-	[super loadView];
+//- (void)loadView {
+//	[super loadView];
 	
 	
 	masterView = [[UIView alloc] initWithFrame:self.view.frame];
@@ -330,8 +333,8 @@
 	
 	
 	
-	//UISlider* slider = [[UISlider alloc] init];
-	slider = [[UISlider alloc] initWithFrame:CGRectMake(0,0,220,20)];
+	slider = [[UISlider alloc] init];
+	//slider = [[UISlider alloc] initWithFrame:CGRectMake(0,0, self.view.frame.size.width - 120 ,20)];
 //	slider = [[LenientUISlider alloc] init];
 
 	slider.value = 1.0;
@@ -364,6 +367,7 @@
 	 */
 	 
 	 UIBarButtonItem* item = [[UIBarButtonItem alloc] initWithCustomView: slider];
+
 	
 	//item.customView.bounds = CGRectMake(0, 0, 100, 100);
 	//item.width = 170;
@@ -398,10 +402,32 @@
 																						  action:@selector(shuffleMaps)
 																			  ];
 	
+	reframeButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reframe.png"]
+													 style:UIBarButtonItemStylePlain
+													target:self
+													action:@selector(reframeSearch)
+					 ];
 	
-	NSArray* items = [[NSArray alloc] initWithObjects: shuffleButton, item,  infoBarButton, nil ];
+	NSArray* items;
+	
+	UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
+	BOOL isLandscape = (orientation == UIDeviceOrientationLandscapeLeft || orientation == UIDeviceOrientationLandscapeRight);
+	
+	if(kREFRAME_ENABLED)
+	{
+		slider.frame = CGRectMake(0,0, isLandscape ? 360 : 195 ,20);
+		items = [[NSArray alloc] initWithObjects: shuffleButton, reframeButton, item,  infoBarButton, nil ];
+	}
+	else
+	{
+		slider.frame = CGRectMake(0,0, isLandscape ? 390 : 225  ,20);
+		items = [[NSArray alloc] initWithObjects: shuffleButton, item, infoBarButton, nil ];
+	}
+	
+
 	
 	[shuffleButton release];
+	[reframeButton release];
 	
 	[space release];
 	[item release];
@@ -443,6 +469,24 @@
 	 */
 	
 //	[self.navigationController setToolbarHidden:NO animated: YES];
+	
+}
+
+- (void) reframeSearch
+{
+	
+	UIViewController* mainMenu = [[self.navigationController viewControllers] objectAtIndex:0];
+	
+	LocationController* newSearch = [[[LocationController alloc] initWithLocation: oldMapView.contents.mapCenter ] autorelease];
+	
+	[self.navigationController setNavigationBarHidden:YES animated: YES];
+	[self.navigationController setToolbarHidden:YES animated: YES];
+	
+	
+	[self.navigationController setViewControllers:[NSArray arrayWithObjects:mainMenu,newSearch,nil] animated:YES];
+	 
+
+	
 	
 }
 
@@ -741,9 +785,12 @@
 	[UIView setAnimationCurve:UIViewAnimationCurveLinear];
 	[UIView setAnimationDuration:kMAP_ENTRANCE_DURATION];
 	
-	oldMapView.alpha = 1.0;
+	oldMapView.alpha = theMap.initialOpacity;
 	
 	[UIView commitAnimations];
+	
+	[slider setValue:theMap.initialOpacity animated: YES];
+
 		
 		
 	
@@ -937,7 +984,7 @@
 	
 	shuffleButton.enabled = ([[maps objectAtIndex:currentMapIndex] plateCount] > 1);
 
-#ifdef TARGET_IPHONE_SIMULATOR
+#if TARGET_IPHONE_SIMULATOR
 	[self locationManager:nil didUpdateToLocation:
 	 [[[CLLocation alloc] initWithLatitude:39.95249714905981 longitude:-75.16377925872803] autorelease]  
 			 fromLocation:nil];
@@ -969,7 +1016,7 @@
 			[themapview.contents.tileLoader reload];
 		}
 		
-		NSLog(@"set to masterView.frame to %@ center to %@", NSStringFromCGRect(masterView.frame), NSStringFromCGPoint(masterView.center));
+		//NSLog(@"set to masterView.frame to %@ center to %@", NSStringFromCGRect(masterView.frame), NSStringFromCGPoint(masterView.center));
 	}
 
 	
@@ -999,7 +1046,7 @@
 	
 	
 	
-#ifdef TARGET_IPHONE_SIMULATOR
+#if TARGET_IPHONE_SIMULATOR
 	[dummyLocationTimer invalidate];	
 #else
 	[locationManager stopUpdatingLocation];

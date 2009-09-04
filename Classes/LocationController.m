@@ -15,6 +15,18 @@
 @implementation LocationController
 
 
+- (id) initWithLocation:(CLLocationCoordinate2D) theLoc
+{
+	self = [super initWithStyle:UITableViewStyleGrouped];
+	
+	currentLocation = theLoc;
+	
+	haveLoadedLocation = YES;
+	
+	[self refreshData];
+	
+	return self;
+}
 
 - (id) initWithStyle:(UITableViewStyle)style
 {
