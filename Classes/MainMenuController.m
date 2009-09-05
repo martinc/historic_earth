@@ -314,27 +314,26 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+{
+	
+	id theController = [[[mainMenuData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"controller"];
+	if(theController != [NSNull null]){
+		[self performSelector:NSSelectorFromString(theController)];
+	}
+	
+	
+	
+}
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	
-	//if(indexPath.section == 0 && indexPath.row == 0){
-		
-	//	[self.navigationController pushViewController:locationController animated:YES];
-		
-		id theController = [[[mainMenuData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"controller"];
-		
-		if(theController != [NSNull null]){
-			//[self.navigationController pushViewController:(UIViewController *)theController animated:YES];
-			
-			[self performSelector:NSSelectorFromString(theController)];
-		}
-
-		
-	//}
-    // Navigation logic may go here. Create and push another view controller.
-	// AnotherViewController *anotherViewController = [[AnotherViewController alloc] initWithNibName:@"AnotherView" bundle:nil];
-	// [self.navigationController pushViewController:anotherViewController];
-	// [anotherViewController release];
+	id theController = [[[mainMenuData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"controller"];
+	if(theController != [NSNull null]){
+		[self performSelector:NSSelectorFromString(theController)];
+	}
+	
 }
 
 

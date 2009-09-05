@@ -413,7 +413,7 @@
 	UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
 	BOOL isLandscape = (orientation == UIDeviceOrientationLandscapeLeft || orientation == UIDeviceOrientationLandscapeRight);
 	
-	if(kREFRAME_ENABLED)
+	if([[NSUserDefaults standardUserDefaults] boolForKey:kSEARCH_ENABLED])
 	{
 		slider.frame = CGRectMake(0,0, isLandscape ? 360 : 195 ,20);
 		items = [[NSArray alloc] initWithObjects: shuffleButton, reframeButton, item,  infoBarButton, nil ];
@@ -752,6 +752,7 @@
 			{
 				[fadingOutView.markerManager removeMarker:theMarker];
 				[oldMapView.markerManager addMarker:theMarker AtLatLong:markerLocation];
+
 			}
 		}
 				
