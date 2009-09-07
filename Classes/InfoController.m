@@ -8,11 +8,15 @@
 
 #import <CoreLocation/CoreLocation.h>
 #import "InfoController.h"
+#import "MapViewController.h"
+#import "Map.h"
 
 
 @implementation InfoController
 
-@synthesize lockSwitch, compassSwitch;
+@synthesize lockSwitch, lockLabel, lockImage;
+@synthesize compassSwitch, compassLabel, compassImage;
+@synthesize yearLabel, atlasLabel, plateLabel, longLabel, latLabel;
 
 - (IBAction) closeWindow
 {
@@ -21,12 +25,13 @@
 	
 }
 
- // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        // Custom initialization
+- (id)initWithMapView:(MapViewController *) theMapViewController {
+    if (self = [super initWithNibName:@"InfoView" bundle:nil]) {
+		
 		self.hidesBottomBarWhenPushed = NO;
 
+		mapViewController = theMapViewController;
+		
 
 		
     }
@@ -41,13 +46,13 @@
 	[defaults setBool:compassSwitch.on forKey:kCOMPASS_ENABLED];
 
 	
-	NSLog(@"lockSwitchIs %d", lockSwitch.on);
-	NSLog(@"compassSwitch %d", compassSwitch.on);
+	//NSLog(@"lockSwitchIs %d", lockSwitch.on);
+	//NSLog(@"compassSwitch %d", compassSwitch.on);
 
 	
 	[defaults synchronize];
 	
-	NSLog(@"set switches");
+	//NSLog(@"set switches");
 	
 }
 
@@ -63,8 +68,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
 	
+	Map* theMap = [mapViewController.maps objectAtIndex:mapViewController.currentMapIndex];
+	
+	yearLabel.text = [NSString stringWithFormat:@"%d", theMap.year];
+	atlasLabel.text = theMap.atlasName;
+	plateLabel.text = theMap.name;
+	
+	CLLocationCoordinate2D theCenter = mapViewController.oldMapView.contents.mapCenter;
+	
+	longLabel.text = [NSString stringWithFormat:@"%0.3f°", theCenter.longitude];
+	latLabel.text = [NSString stringWithFormat:@"%0.3f°", theCenter.latitude];
+
+
 	
 	lockSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey: kLOCK_ENABLED];
 	
@@ -75,6 +91,8 @@
 	else{
 		compassSwitch.on = NO;
 		compassSwitch.enabled = NO;
+		compassLabel.enabled = NO;
+		compassImage.alpha = 0.5;
 	}
 
 	[testLocationManager release];

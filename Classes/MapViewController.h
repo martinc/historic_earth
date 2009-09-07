@@ -48,7 +48,7 @@
 	
 	UIButton* infoButton;
 	
-	InfoController* infoController;
+	//InfoController* infoController;
 	
 	BOOL locked;
 	BOOL compassEnabled;
@@ -75,6 +75,9 @@
 }
 
 @property (nonatomic, retain) NSMutableArray* maps;
+@property (nonatomic, readonly) int currentMapIndex;
+@property (nonatomic, readonly) RMMapView* oldMapView;
+
 
 - (id) initWithMaps: (NSMutableArray *) theMaps;
 - (id) initWithMaps: (NSMutableArray *) theMaps allowCompass: (BOOL)compassAllowed;

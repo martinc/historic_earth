@@ -20,7 +20,7 @@
 
 @implementation MapViewController
 
-@synthesize maps;
+@synthesize maps, currentMapIndex, oldMapView;
 
 - (id) initWithMaps: (NSMutableArray *) theMaps
 {
@@ -44,7 +44,6 @@
 		
 		currentMapIndex = 0;
 		
-		infoController = [[InfoController alloc] initWithNibName:@"InfoView" bundle:nil];
 		
 		locationManager = [[CLLocationManager alloc] init];
 		locationManager.delegate = self;
@@ -508,12 +507,10 @@
 }
 - (void) showInfo
 {
-
-	//NSLog(@"showInfo");
-	//self.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-	infoController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-	[self presentModalViewController:infoController animated:YES];
 	
+	InfoController* infoController = [[[InfoController alloc] initWithMapView:self] autorelease];
+	infoController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+	[self presentModalViewController:infoController animated:YES];	
 	
 }
 
