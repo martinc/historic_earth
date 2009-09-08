@@ -33,7 +33,11 @@
 						  searchIcon, @"image",
 					   nil];
 
-
+		additionContentData = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
+					 @"Additional Content", @"name",
+					 @"unlockController", @"controller",
+					 unlockIcon, @"image",
+					 nil];
 		
 		mainMenuData = [[NSMutableArray alloc] initWithObjects:
 						[NSMutableArray arrayWithObjects:
@@ -60,11 +64,6 @@
 						  settingsIcon, @"image",
 						  nil],
 						 [NSMutableDictionary dictionaryWithObjectsAndKeys:
-						  @"Additional Content", @"name",
-						  @"unlockController", @"controller",
-						  unlockIcon, @"image",
-						  nil],
-						 [NSMutableDictionary dictionaryWithObjectsAndKeys:
 						  @"About", @"name",
 						  @"aboutController", @"controller",
 						  aboutIcon, @"image",
@@ -82,6 +81,9 @@
 		}
 		else{
 			searchVisible = NO;
+			[[mainMenuData objectAtIndex:1] insertObject: additionContentData
+												 atIndex:2];
+
 		}
 
     }
@@ -204,11 +206,18 @@
 	
 	if(!searchVisible)
 	{
+		[self.tableView beginUpdates];
 		
-		NSIndexPath* newIndexPath = [NSIndexPath indexPathForRow:[[mainMenuData objectAtIndex:0] count] inSection:0];
-		[[mainMenuData objectAtIndex:0] insertObject:searchData atIndex:newIndexPath.row];		
-		[self.tableView insertRowsAtIndexPaths: [NSArray arrayWithObject: newIndexPath]
-							  withRowAnimation:UITableViewRowAnimationTop];
+			NSIndexPath* newIndexPath = [NSIndexPath indexPathForRow:[[mainMenuData objectAtIndex:0] count] inSection:0];
+			[[mainMenuData objectAtIndex:0] insertObject:searchData atIndex:newIndexPath.row];		
+			[self.tableView insertRowsAtIndexPaths: [NSArray arrayWithObject: newIndexPath] withRowAnimation:UITableViewRowAnimationTop];
+
+			NSIndexPath* additionContentIndex = [NSIndexPath indexPathForRow:[[mainMenuData objectAtIndex:1] count]-2 inSection:1];
+			[[mainMenuData objectAtIndex:1] removeObject:additionContentData];
+			[self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject: additionContentIndex] withRowAnimation:UITableViewRowAnimationFade];
+
+		[self.tableView endUpdates];
+
 
 	}
 }

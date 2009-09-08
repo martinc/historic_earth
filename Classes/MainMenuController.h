@@ -21,6 +21,7 @@
 	
 	NSMutableArray* mainMenuData;
 	NSMutableDictionary* searchData;
+	NSMutableDictionary* additionContentData;
 	
 	BOOL searchVisible;
 }
