@@ -56,6 +56,20 @@
 	
 	//View Controllers
 	
+
+
+#ifdef BETA
+	//Give beta testers full access
+	[[NSUserDefaults standardUserDefaults] setBool:YES forKey:kSEARCH_ENABLED];
+#endif
+/*
+#ifdef DEBUG
+#endif
+ 
+#ifdef RELEASE
+#endif
+*/	
+	
 	
 	//Fix to see Search in simulator as StoreKit doesn't work
 	#if TARGET_IPHONE_SIMULATOR
