@@ -160,13 +160,13 @@
 {
     // do something with the data
     // receivedData is declared as a method instance elsewhere
-    NSLog(@"Succeeded! Received %d bytes of data",[receivedData length]);
+    //NSLog(@"Succeeded! Received %d bytes of data",[receivedData length]);
 	
 	NSString* dataString =  [[NSString alloc]
 						  initWithData: receivedData
 						  encoding: NSUTF8StringEncoding];
 	
-	NSLog(@"response is : %@",dataString);
+	//NSLog(@"response is : %@",dataString);
 
 	
 	NSDictionary* jsonData = [dataString JSONValue];
@@ -278,7 +278,7 @@
 									hasLocation = NO;
 									
 									theMap.mapCenter = searchCoordinates;
-									NSLog(@"defaulting to search location");
+								//	NSLog(@"defaulting to search location");
 									
 								}
 								
@@ -352,7 +352,7 @@
 		[atlasNames setObject:[NSNumber numberWithBool:YES] forKey: aMap.atlasName];
 	}
 	
-	NSLog(@"%d maps, %d atlases", [maps count], [atlasNames count]);
+	//NSLog(@"%d maps, %d atlases", [maps count], [atlasNames count]);
 	
 	NSMutableArray *atlases = [NSMutableArray arrayWithCapacity:[atlasNames count]];
 
@@ -397,7 +397,7 @@
 			theAtlas.mapCenter = averageCenter;
 			
 			theAtlas.layerID = [layerIDS componentsJoinedByString:@","];
-			NSLog(@"setting new atlas layer ID to %@", theAtlas.layerID);
+			//NSLog(@"setting new atlas layer ID to %@", theAtlas.layerID);
 			theAtlas.name = [NSString stringWithFormat:@"%d Plate%@", [componentMaps count], [componentMaps count] > 1 ? @"s" : @"" ];
 
 			[atlases addObject:theAtlas];

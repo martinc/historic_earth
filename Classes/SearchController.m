@@ -91,7 +91,7 @@
 	
 	NSArray *searchComponents = [searchText componentsSeparatedByString:@","];
 	
-	NSLog(@"search components are %@", searchComponents);
+	//NSLog(@"search components are %@", searchComponents);
 	
 	if([searchComponents count] == 3)
 	{
@@ -113,7 +113,7 @@
 								cityString,
 								stateString] stringByAddingPercentEscapesUsingEncoding: NSASCIIStringEncoding];
 		
-		NSLog(@"search request url is \"%@\"", requestURL);
+		//NSLog(@"search request url is \"%@\"", requestURL);
 
 		
 		[self loadDataWithRequest: [NSURLRequest requestWithURL:[NSURL URLWithString:requestURL]
@@ -125,6 +125,10 @@
 	}
 	else{
 		searchBar.text = @"";
+		UIAlertView* alert = [[[UIAlertView alloc] initWithTitle:@"Invalid Search"
+										   message:@"Please enter your address in the form Street, City, State." delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil] autorelease];
+
+		[alert show];
 		
 		
 	}

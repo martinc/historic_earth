@@ -289,7 +289,7 @@
     }
     
     // Set up the cell...
-	NSLog(@"setting up cell %d, %d", indexPath.section, indexPath.row);
+	//NSLog(@"setting up cell %d, %d", indexPath.section, indexPath.row);
 	cell.textLabel.text = [[[mainMenuData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"name"];
 
 	
@@ -316,7 +316,7 @@
 	
 	UIImage* theIcon = [[[mainMenuData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"image"];
 
-	NSLog(@"the icon size is %f,%f", theIcon.size.width, theIcon.size.height);
+	//NSLog(@"the icon size is %f,%f", theIcon.size.width, theIcon.size.height);
 	
 	cell.imageView.image = 	theIcon;
 

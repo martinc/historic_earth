@@ -618,7 +618,7 @@
 	
 	shuffleButton.enabled = ([theMap plateCount] > 1);
 
-	NSLog(@"plate count is %d", [theMap plateCount]);
+	//NSLog(@"plate count is %d", [theMap plateCount]);
 	
 	
 	float targetZoom;
@@ -637,7 +637,7 @@
 
 		}
 		
-		NSLog(@"are animations enabled? %d ", [UIView areAnimationsEnabled]);
+		//NSLog(@"are animations enabled? %d ", [UIView areAnimationsEnabled]);
 		
 		
 		if(fadingOutView)

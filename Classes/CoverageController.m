@@ -247,7 +247,7 @@
 {
     // do something with the data
     // receivedData is declared as a method instance elsewhere
-    NSLog(@"Succeeded! Received featured collections list",[receivedData length]);
+    // NSLog(@"Succeeded! Received featured collections list",[receivedData length]);
 	
 	NSMutableString* dataString =  [[NSMutableString alloc]
 							 initWithData: receivedData
