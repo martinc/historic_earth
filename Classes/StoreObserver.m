@@ -65,10 +65,10 @@
 - (void) restoreTransaction: (SKPaymentTransaction *)transaction
 {
 	
-	NSLog(@"Restore transaction");
+	//NSLog(@"Restore transaction");
 	
-	NSLog(@"transaction.transactionReceipt: %@",transaction.transactionReceipt);
-	NSLog(@"transaction.originalTransaction.transactionReceipt: %@",transaction.originalTransaction.transactionReceipt);
+	//NSLog(@"transaction.transactionReceipt: %@",transaction.transactionReceipt);
+	//NSLog(@"transaction.originalTransaction.transactionReceipt: %@",transaction.originalTransaction.transactionReceipt);
 
 	
 	[self validateReceipt: transaction.transactionReceipt];
@@ -107,18 +107,20 @@
 - (void) validateReceipt: (NSData *) theReceipt
 {
 
-	//NSURL *realStoreURL = [[NSURL alloc] initWithString: @"https://buy.itunes.apple.com/verifyReceipt"];
+
+#ifdef RELEASE
+	NSURL *storeURL = [NSURL URLWithString: kVERIFY_REAL];
+#else
+	NSURL *storeURL = [NSURL URLWithString: kVERIFY_SANDBOX];
+#endif
 	
-	NSURL *sandboxStoreURL = [NSURL URLWithString: @"https://sandbox.itunes.apple.com/verifyReceipt"];
-	NSString *jsonOut = [NSString stringWithFormat:@"{\"receipt-data\":\"%@\" }",
-						//	[[[NSString alloc] initWithData:theReceipt encoding:NSUTF8StringEncoding] autorelease]
-						 [theReceipt base64Encoding]
-						 ];
 	
-	NSLog(@"jsonOut is %@", jsonOut);
+	NSString *jsonOut = [NSString stringWithFormat:@"{\"receipt-data\":\"%@\" }", [theReceipt base64Encoding] ];
+	
+	//NSLog(@"jsonOut is %@", jsonOut);
 	
 	// create the request
-	NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:sandboxStoreURL
+	NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:storeURL
 											  cachePolicy:NSURLRequestReloadIgnoringCacheData
 										  timeoutInterval:15.0];
 	
@@ -183,12 +185,12 @@
 	
 	[dataString release];
 	
-	NSLog(@"json receipt validation is : %@",jsonData);
+	//NSLog(@"json receipt validation is : %@",jsonData);
 	
 	NSNumber* result = [jsonData objectForKey:@"status"];
 	
 	if(result && [result intValue] == 0){
-		NSLog(@"receipt status successful");
+		//NSLog(@"receipt status successful");
 		
 		NSString* product_id = [[jsonData objectForKey:@"receipt"] objectForKey:@"product_id"];
 		

@@ -18,6 +18,9 @@
 #define kCOMPASS_ENABLED @"kCOMPASS_ENABLED"
 #define kSEARCH_ENABLED @"kSEARCH_ENABLED"
 
+#define kVERIFY_REAL @"https://buy.itunes.apple.com/verifyReceipt"
+#define kVERIFY_SANDBOX @"https://sandbox.itunes.apple.com/verifyReceipt"
+
 #define kTILES_BEGAN_LOADING_NOTIFICATION @"kTILES_BEGAN_LOADING_NOTIFICATION"
 #define kTILES_LOADED_NOTIFICATION @"kTILES_LOADED_NOTIFICATION"
 

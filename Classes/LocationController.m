@@ -83,11 +83,14 @@
 - (void)refreshData
 {
 	//Sample Data
-	currentLocation.longitude = -75.16377925872803;
-	currentLocation.latitude =  39.95249714905981;
+	//currentLocation.longitude = -75.16377925872803;
+	//currentLocation.latitude =  39.95249714905981;
 	REQUEST_URL = [[NSString alloc] initWithFormat: @"%@lat=%f&long=%f", kLAT_LONG_SEARCH,
 				   currentLocation.latitude, currentLocation.longitude];
 	
+#ifdef DEBUG
+	NSLog(REQUEST_URL);
+#endif
 			
 		[self loadDataWithRequest: [NSURLRequest requestWithURL:[NSURL URLWithString:REQUEST_URL]
 													cachePolicy:NSURLRequestUseProtocolCachePolicy

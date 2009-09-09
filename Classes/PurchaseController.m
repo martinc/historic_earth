@@ -18,6 +18,8 @@
 	self = [super init];
 	
 	product = [theProduct retain];
+	
+	self.title = @"Additional Content";
 
 
 	return self;
@@ -34,36 +36,56 @@
 */
 
 
+
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+	
+	[self.navigationController setNavigationBarHidden:NO animated: YES];
+	
+}
+
+
+
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView {
 	
 	
 	UIView *view = [[UIView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame];
     view.autoresizingMask = (UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth);
-    view.backgroundColor = [UIColor clearColor];
+    view.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.3];
 	
 	
-	nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 50, 320, 150)];
-	priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 100, 320, 100)];
-	descriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 200, 280, 100)];
+	nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(95, 30, 320, 150)];
+	priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(95, 80, 320, 100)];
+	
+	descriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, 150, 260, 200)];
+	
+	
+	UIImageView* searchIcon = [[UIImageView alloc] initWithImage: [UIImage imageNamed:@"06-magnifying-glass.png"]];
+	
+	
+	searchIcon.center = CGPointMake(65, 115);
+
+	
 	
     nameLabel.backgroundColor = [UIColor clearColor];
 	priceLabel.backgroundColor = [UIColor clearColor];
     descriptionLabel.backgroundColor = [UIColor clearColor];
 	
-	nameLabel.textAlignment = UITextAlignmentCenter;
-	priceLabel.textAlignment = UITextAlignmentCenter;
+	nameLabel.textAlignment = UITextAlignmentLeft;
+	priceLabel.textAlignment = UITextAlignmentLeft;
 	descriptionLabel.textAlignment = UITextAlignmentLeft;
 
 	
 	nameLabel.font = [UIFont fontWithName:@"Georgia" size:24.0];
 	priceLabel.font = [UIFont boldSystemFontOfSize:18.0];
-	descriptionLabel.font = [UIFont fontWithName:@"Georgia" size:16.0];
+	descriptionLabel.font = [UIFont fontWithName:@"Georgia" size:14.0];
 	
 	buyButton = [[CustomButton alloc] initWithFrame:CGRectMake(50, 380, 220, 50)];
 	
 	
-	[buyButton setTitle:@"Buy Content" forState:UIControlStateNormal];
+	[buyButton setTitle:@"Buy Upgrade" forState:UIControlStateNormal];
 	buyButton.titleLabel.textColor = [UIColor blackColor];
 	
 	[buyButton addTarget:self action:@selector(buyProduct) forControlEvents:UIControlEventTouchUpInside];
@@ -110,10 +132,12 @@
 	[view addSubview: priceLabel];
 	[view addSubview: descriptionLabel];
 	[view addSubview: buyButton];
+	[view addSubview: searchIcon];
 	
     self.view = view;
     [view release];
 	
+	[searchIcon release];
 	
 	
 
@@ -137,13 +161,13 @@
 }
 */
 
-/*
+
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
-*/
+
 
 - (void)didReceiveMemoryWarning {
 	// Releases the view if it doesn't have a superview.

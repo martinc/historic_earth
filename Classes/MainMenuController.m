@@ -81,8 +81,6 @@
 		}
 		else{
 			searchVisible = NO;
-			[[mainMenuData objectAtIndex:1] insertObject: additionContentData
-												 atIndex:2];
 
 		}
 
@@ -98,8 +96,15 @@
 }
 - (void) unlockController
 {
-	[self.navigationController pushViewController: [[[UnlockController alloc] initWithStyle:UITableViewStyleGrouped] autorelease]
-										 animated:YES];
+//	[self.navigationController pushViewController: [[[UnlockController alloc] initWithStyle:UITableViewStyleGrouped] autorelease]
+//										 animated:YES];
+
+
+	[self.navigationController pushViewController:
+	 [[[PurchaseController alloc] initWithProduct:product] autorelease]
+										 animated: YES];
+	
+
 }
 - (void) featuredController
 {
@@ -212,14 +217,31 @@
 			[[mainMenuData objectAtIndex:0] insertObject:searchData atIndex:newIndexPath.row];		
 			[self.tableView insertRowsAtIndexPaths: [NSArray arrayWithObject: newIndexPath] withRowAnimation:UITableViewRowAnimationTop];
 
-			NSIndexPath* additionContentIndex = [NSIndexPath indexPathForRow:[[mainMenuData objectAtIndex:1] count]-2 inSection:1];
-			[[mainMenuData objectAtIndex:1] removeObject:additionContentData];
-			[self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject: additionContentIndex] withRowAnimation:UITableViewRowAnimationFade];
+			if([[mainMenuData objectAtIndex:1] count] == 4)
+			{
+				NSIndexPath* additionContentIndex = [NSIndexPath indexPathForRow:[[mainMenuData objectAtIndex:1] count]-1 inSection:1];
+				[[mainMenuData objectAtIndex:1] removeObject:additionContentData];
+				[self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject: additionContentIndex] withRowAnimation:UITableViewRowAnimationFade];
+			}
 
 		[self.tableView endUpdates];
 
 
 	}
+}
+
+-(void) addStoreWithProduct: (SKProduct *) theProduct
+{
+	
+	product = [theProduct retain];
+	NSIndexPath* newIndexPath = [NSIndexPath indexPathForRow:[[mainMenuData objectAtIndex:1] count] inSection:1];
+
+	[[mainMenuData objectAtIndex:1] insertObject: additionContentData
+										 atIndex: newIndexPath.row ];
+	
+	[self.tableView insertRowsAtIndexPaths: [NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationTop];
+	
+	
 }
 
 
@@ -247,8 +269,8 @@
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
-    //return (interfaceOrientation == UIInterfaceOrientationPortrait);
-	return YES;
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+	//return YES;
 }
 
 

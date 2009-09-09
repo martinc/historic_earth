@@ -166,8 +166,9 @@
 						  initWithData: receivedData
 						  encoding: NSUTF8StringEncoding];
 	
-	//NSLog(@"response is : %@",dataString);
-
+#ifdef DEBUG
+	NSLog(@"response is : %@",dataString);
+#endif
 	
 	NSDictionary* jsonData = [dataString JSONValue];
 	[dataString release];

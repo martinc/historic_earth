@@ -34,60 +34,14 @@
 	self.tableView.backgroundColor = [UIColor clearColor];
 	//self.tableView.rowHeight = 200;
 	
-	[self requestProductData];
+	//[self requestProductData];
 	
 		
     return self;
 }
 
 
-- (void) requestProductData
-{
-	productsRequest= [[SKProductsRequest alloc] initWithProductIdentifiers: [NSSet setWithObject: kSEARCH_PRODUCT_ID]];
-	productsRequest.delegate = self;
-	[productsRequest start];
-	loadingResults = YES;
-	[loadingSpinner startAnimating];
-}
 
-//***************************************
-// PRAGMA_MARK: Delegate Methods
-//***************************************
-- (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response
-{
-	//NSLog(@"received storekit response");
-	
-	for(NSString* invalidID in response.invalidProductIdentifiers){
-		NSLog(@"Invalid id: %@", invalidID);
-	}
-		
-	
-	//NSArray *myProduct = response.products;
-	if(products) [products release];
-	products = [response.products retain];
-	
-	for(SKProduct* validProduct in response.products){
-		NSLog(@"Valid id: %@", validProduct.productIdentifier);
-	}
-	
-	
-	[self.tableView reloadData];
-	
-	[productsRequest release];
-	// populate UI
-	/*
-	for(int i=0;i<[myProduct count];i++)
-	{
-		SKProduct *product = [myProduct objectAtIndex:i];
-		NSLog(@”Name: %@ - Price: %f”,[product localizedTitle],[[product price] doubleValue]);
-		NSLog(@”Product identifier: %@”, [product productIdentifier]);
-	}
-	 */
-	
-	loadingResults = NO;
-	[loadingSpinner stopAnimating];
-
-}
 
 
 

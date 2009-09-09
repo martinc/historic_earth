@@ -12,12 +12,9 @@
 #import "TargetConditionals.h"
 
 
-@interface UnlockController : UITableViewController <SKProductsRequestDelegate> {
+@interface UnlockController : UITableViewController  {
 	
 	NSArray *products;
-		
-	SKProductsRequest *productsRequest;
-	
 	
 	UIActivityIndicatorView *loadingSpinner;  
 	BOOL loadingResults;
@@ -26,7 +23,6 @@
 }
 
 
-- (void) requestProductData;
 
 
 @end

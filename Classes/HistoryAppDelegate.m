@@ -98,6 +98,13 @@
 	[bg release];
     [window addSubview:navController.view];
     [window makeKeyAndVisible];
+	
+	
+	if( ! [[NSUserDefaults standardUserDefaults] boolForKey:kSEARCH_ENABLED] )
+	{
+		[self requestProductData];
+	}
+
 }
 
 - (void) purchasedSearch
@@ -118,6 +125,66 @@
 
 	
 }
+
+- (void) requestProductData
+{
+	productsRequest= [[SKProductsRequest alloc] initWithProductIdentifiers: [NSSet setWithObject: kSEARCH_PRODUCT_ID]];
+	productsRequest.delegate = self;
+	[productsRequest start];
+}
+
+
+//***************************************
+// PRAGMA_MARK: Delegate Methods
+//***************************************
+- (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response
+{
+	//NSLog(@"received storekit response");
+	
+	for(NSString* invalidID in response.invalidProductIdentifiers){
+		NSLog(@"Invalid id: %@", invalidID);
+	}
+	
+	
+	//NSArray *myProduct = response.products;
+	if(products) [products release];
+	products = [response.products retain];
+	
+	
+	if([products count] == 1)
+	{
+		SKProduct* theProduct = [products objectAtIndex:0];
+		if([theProduct.productIdentifier isEqualToString:kSEARCH_PRODUCT_ID])
+		{
+	
+			[main addStoreWithProduct: theProduct];
+			
+			
+		}
+	}
+	
+	
+	
+	//for(SKProduct* validProduct in response.products){
+	//	NSLog(@"Valid id: %@", validProduct.productIdentifier);
+	//}
+	
+	
+	//[self.tableView reloadData];
+	
+	[productsRequest release];
+	// populate UI
+	/*
+	 for(int i=0;i<[myProduct count];i++)
+	 {
+	 SKProduct *product = [myProduct objectAtIndex:i];
+	 NSLog(@”Name: %@ - Price: %f”,[product localizedTitle],[[product price] doubleValue]);
+	 NSLog(@”Product identifier: %@”, [product productIdentifier]);
+	 }
+	 */
+}
+
+
 
 - (void)reachabilityChanged:(NSNotification *)note {
     [self updateStatus];

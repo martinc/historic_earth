@@ -15,7 +15,7 @@
 
 @class StoreObserver;
 
-@interface HistoryAppDelegate : NSObject <UIApplicationDelegate> {
+@interface HistoryAppDelegate : NSObject <UIApplicationDelegate, SKProductsRequestDelegate> {
     UIWindow *window;
 	UINavigationController* navController;
 	MainMenuController* main;
@@ -34,6 +34,10 @@
 	
 	
 	UIAlertView *alert;
+	
+	
+	NSArray *products;
+	SKProductsRequest *productsRequest;
 
 
 }
@@ -50,6 +54,8 @@
 - (void) purchasedSearch;
 
 - (void) showAlertWithText: (NSString*) thetext;
+
+- (void) requestProductData;
 
 
 @end

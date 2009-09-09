@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <StoreKit/StoreKit.h>
 #import "LocationController.h"
 #import "SearchController.h"
 #import "UnlockController.h"
@@ -14,6 +15,7 @@
 #import "SettingsController.h"
 #import "AboutController.h"
 #import "CoverageController.h"
+#import "PurchaseController.h"
 
 
 @interface MainMenuController : UITableViewController {
@@ -24,8 +26,12 @@
 	NSMutableDictionary* additionContentData;
 	
 	BOOL searchVisible;
+	
+	SKProduct* product;
 }
 
 -(void) makeSearchAppear;
+
+-(void) addStoreWithProduct: (SKProduct *) theProduct;
 
 @end

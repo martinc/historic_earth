@@ -28,5 +28,6 @@
 
 - (id) initWithLocation:(CLLocationCoordinate2D) theLoc;
 
+- (void)refreshData;
 
 @end
