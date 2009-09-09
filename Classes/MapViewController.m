@@ -112,6 +112,7 @@
 	if(targetRotation != currentRotation)
 	{
 	   
+		
 		double newRotation;
 		
 		
@@ -138,6 +139,22 @@
 			endAngle += 360.0;
 		}
 		
+		
+		if( fabs(endAngle-startAngle) < 0.25)
+		{
+			newRotation = targetRotation;
+		}
+		else {
+			
+			newRotation = startAngle + (0.3 * (endAngle - startAngle));
+			
+		}
+
+		[self rotateToHeading:newRotation animated:NO];
+
+		
+		/*
+		
 			
 		double theAccelForce = endAngle - startAngle;
 		
@@ -161,7 +178,7 @@
 			else{
 				rotationVelocity *= distanceFactor;
 			}
-			 */
+			 *//*
 			rotationVelocity *= distanceFactor;
 
 		}
@@ -184,6 +201,8 @@
 		//NSLog(@"accel %f velcoity %f position %f force %f startAngle %f endAngle %f",
 		//	  rotationAcceleration, rotationVelocity, newRotation, theAccelForce, startAngle, endAngle);
 		
+	*/
+	
 	}
 }
 
