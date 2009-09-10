@@ -345,6 +345,9 @@
 																										   atIndex: indexPath.row];
 	[self.navigationController pushViewController:featuredLocationController animated:YES];
 	[featuredLocationController release];
+	
+	[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+
 }
 
 

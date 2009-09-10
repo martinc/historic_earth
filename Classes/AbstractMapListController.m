@@ -621,6 +621,8 @@
 		
         [[self navigationController] pushViewController:mapController animated:YES];
 		
+		[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+		
     }
 	
 }
