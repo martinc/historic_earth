@@ -142,7 +142,7 @@
 		
 		
 		UIAlertView* alert = [[[UIAlertView alloc] initWithTitle:@"Invalid Search"
-										   message:@"Please enter your address in the form Street, City, State." delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil] autorelease];
+										   message:@"Please enter your address using two commas in the form Street, City, State." delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil] autorelease];
 
 		[alert show];
 		

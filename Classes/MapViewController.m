@@ -534,12 +534,14 @@
 	
 	[self loadMapAtIndex:currentMapIndex];
 	
+	
 }
 - (void) showInfo
 {
 	
 	InfoController* infoController = [[[InfoController alloc] initWithMapView:self] autorelease];
 	infoController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+	//infoController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
 	[self presentModalViewController:infoController animated:YES];	
 	
 }

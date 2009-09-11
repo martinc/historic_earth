@@ -18,6 +18,9 @@
 @synthesize compassSwitch, compassLabel, compassImage;
 @synthesize yearLabel, atlasLabel, plateLabel, longLabel, latLabel;
 
+@synthesize arrowsLabel, browseLabel, shuffleLabel, shuffleImage, browseImage, arrowsImage;
+
+
 - (IBAction) closeWindow
 {
 
@@ -96,6 +99,27 @@
 	}
 
 	[testLocationManager release];
+	
+	
+	if( ! [[NSUserDefaults standardUserDefaults] boolForKey: kSEARCH_ENABLED])
+	{
+		browseLabel.hidden = YES;
+		browseImage.hidden = YES;
+		
+		shuffleLabel.center = CGPointMake(shuffleLabel.center.x + 30, shuffleLabel.center.y);
+		shuffleImage.center = CGPointMake(shuffleImage.center.x + 30, shuffleImage.center.y);
+		
+		shuffleLabel.frame = CGRectMake(shuffleLabel.frame.origin.x - 20, shuffleLabel.frame.origin.y, shuffleLabel.frame.size.width + 40 , shuffleLabel.frame.size.height);
+
+		arrowsLabel.center = CGPointMake(arrowsLabel.center.x - 30, arrowsLabel.center.y);
+		arrowsImage.center = CGPointMake(arrowsImage.center.x - 30, arrowsImage.center.y);
+		
+		arrowsLabel.frame = CGRectMake(arrowsLabel.frame.origin.x - 20, arrowsLabel.frame.origin.y, arrowsLabel.frame.size.width + 40 , arrowsLabel.frame.size.height);
+
+
+		
+	}
+
 	
 }
  

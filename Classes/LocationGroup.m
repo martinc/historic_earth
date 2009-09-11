@@ -16,6 +16,7 @@
 
 - (id) initWithDictionary: (NSDictionary *) jsonData
 {
+		
 	self = [super init];
 	
 	locations = [[NSMutableArray alloc] init];

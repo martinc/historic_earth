@@ -15,6 +15,8 @@
 		2899E5220DE3E06400AC0155 /* HistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* HistoryViewController.xib */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		28D7ACF80DDB3853001CB0EB /* AbstractMapListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* AbstractMapListController.m */; };
+		5B0233A1105A2687001A12CD /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B0233A0105A2687001A12CD /* Entitlements.plist */; };
+		5B0233EF105AD698001A12CD /* updown-black.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B0233EE105AD698001A12CD /* updown-black.png */; };
 		5B03BCD310390DBD00D6E9DD /* LocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B03BCD210390DBD00D6E9DD /* LocationController.m */; };
 		5B03BCD810390E2B00D6E9DD /* SearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B03BCD710390E2B00D6E9DD /* SearchController.m */; };
 		5B0405DA1039A82400F7C25B /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B0405D91039A82400F7C25B /* Map.m */; };
@@ -146,6 +148,8 @@
 		28D7ACF70DDB3853001CB0EB /* AbstractMapListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractMapListController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* History_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = History_Prefix.pch; sourceTree = "<group>"; };
+		5B0233A0105A2687001A12CD /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
+		5B0233EE105AD698001A12CD /* updown-black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "updown-black.png"; path = "Images/updown-black.png"; sourceTree = "<group>"; };
 		5B03BCD110390DBD00D6E9DD /* LocationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationController.h; sourceTree = "<group>"; };
 		5B03BCD210390DBD00D6E9DD /* LocationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationController.m; sourceTree = "<group>"; };
 		5B03BCD610390E2B00D6E9DD /* SearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchController.h; sourceTree = "<group>"; };
@@ -252,7 +256,7 @@
 		5BF87E5A10366A3800787B2A /* PurchaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurchaseController.m; sourceTree = "<group>"; };
 		5BF87E891036783300787B2A /* StoreObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreObserver.h; sourceTree = "<group>"; };
 		5BF87E8A1036783300787B2A /* StoreObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreObserver.m; sourceTree = "<group>"; };
-		8D1107310486CEB800E47090 /* History-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "History-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = info.plist; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -319,6 +323,7 @@
 				5B7F3E1910360CE500114D2D /* StoreKit.framework */,
 				5B040872103A5AD700F7C25B /* SystemConfiguration.framework */,
 				5B8D636E1048978300208F64 /* libxml2.dylib */,
+				5B0233A0105A2687001A12CD /* Entitlements.plist */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -337,7 +342,7 @@
 			children = (
 				2899E5210DE3E06400AC0155 /* HistoryViewController.xib */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
-				8D1107310486CEB800E47090 /* History-Info.plist */,
+				8D1107310486CEB800E47090 /* info.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -355,6 +360,7 @@
 		5B20C8CF1022BA500003FE62 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				5B0233EE105AD698001A12CD /* updown-black.png */,
 				5B664ABE1050DEC2008C3974 /* reframe.png */,
 				5BBD53331048FC56001AB004 /* 03-loopback.png */,
 				5B8D614C10477D2F00208F64 /* 14-tag.png */,
@@ -655,6 +661,8 @@
 				5B2A5292104D97DF00B7D526 /* he_small_v2.png in Resources */,
 				5B2A52B2104DA34D00B7D526 /* icon.png in Resources */,
 				5B664ABF1050DEC2008C3974 /* reframe.png in Resources */,
+				5B0233A1105A2687001A12CD /* Entitlements.plist in Resources */,
+				5B0233EF105AD698001A12CD /* updown-black.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -729,7 +737,7 @@
 					"../routemeNT/MapView/**",
 					"/usr/include/libxml2/**",
 				);
-				INFOPLIST_FILE = "History-Info.plist";
+				INFOPLIST_FILE = info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../routemeNT/MapView/build/Debug-iphoneos\"",
@@ -754,7 +762,7 @@
 					"../routemeNT/MapView/**",
 					"/usr/include/libxml2/**",
 				);
-				INFOPLIST_FILE = "History-Info.plist";
+				INFOPLIST_FILE = info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../routemeNT/MapView/build/Debug-iphoneos\"",
@@ -772,6 +780,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Historic Map Works";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Historic Map Works";
+				CURRENT_PROJECT_VERSION = 2;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -791,6 +800,7 @@
 				PROVISIONING_PROFILE = "D4B4688F-121B-40DF-93E3-A3ED6C526ED0";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D4B4688F-121B-40DF-93E3-A3ED6C526ED0";
 				SDKROOT = iphoneos3.0;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Beta;
 		};
@@ -798,6 +808,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = History_Prefix.pch;
@@ -807,7 +818,7 @@
 					"../routemeNT/MapView/**",
 					"/usr/include/libxml2/**",
 				);
-				INFOPLIST_FILE = "History-Info.plist";
+				INFOPLIST_FILE = info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../routemeNT/MapView/build/Debug-iphoneos\"",
@@ -825,6 +836,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Charles Carpenter (5A8YNUQFJA)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Charles Carpenter (5A8YNUQFJA)";
+				CURRENT_PROJECT_VERSION = 2;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -844,6 +856,7 @@
 				PROVISIONING_PROFILE = "CEEAAC75-5E28-4E5C-BAE8-EB07238FE945";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CEEAAC75-5E28-4E5C-BAE8-EB07238FE945";
 				SDKROOT = iphoneos3.0;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
@@ -853,6 +866,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Charles Carpenter (5A8YNUQFJA)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Charles Carpenter (5A8YNUQFJA)";
+				CURRENT_PROJECT_VERSION = 2;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -872,6 +886,7 @@
 				PROVISIONING_PROFILE = "CEEAAC75-5E28-4E5C-BAE8-EB07238FE945";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CEEAAC75-5E28-4E5C-BAE8-EB07238FE945";
 				SDKROOT = iphoneos3.0;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};

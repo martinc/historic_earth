@@ -83,7 +83,7 @@
 	statusLabel.font = [UIFont boldSystemFontOfSize:16.0];
 	statusLabel.lineBreakMode = UILineBreakModeWordWrap;
 	statusLabel.numberOfLines = 4;
-	statusLabel.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+	statusLabel.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
 	
 	[self.view addSubview:statusLabel];
 
