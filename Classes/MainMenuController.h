@@ -20,6 +20,7 @@
 
 @interface MainMenuController : UITableViewController {
 	
+	BOOL contentEnabled;
 	
 	NSMutableArray* mainMenuData;
 	NSMutableDictionary* searchData;
@@ -33,5 +34,11 @@
 -(void) makeSearchAppear;
 
 -(void) addStoreWithProduct: (SKProduct *) theProduct;
+
+-(void) enableContent;
+
+-(void) disableContent;
+
+
 
 @end

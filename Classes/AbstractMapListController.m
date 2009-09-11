@@ -10,6 +10,7 @@
 #import "JSON.h"
 #import "Three20/Three20.h"
 #import "UIKit/UITableView.h"
+#import "LocationController.h"
 
 @implementation AbstractMapListController
 
@@ -75,7 +76,7 @@
 	[loadingSpinner startAnimating];
 
 	
-	statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 40, self.view.frame.size.width-80, 100)];
+	statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 20, self.view.frame.size.width-80, 100)];
 	statusLabel.backgroundColor = [UIColor clearColor];
 	statusLabel.hidden = YES;
 	statusLabel.textAlignment = UITextAlignmentCenter;
@@ -100,6 +101,9 @@
 
 - (void) loadDataWithRequest: (NSURLRequest *) theRequest
 {
+	
+	[maps removeAllObjects];
+	[self.tableView reloadData];
 	
 	statusLabel.hidden = YES;
 	
@@ -193,7 +197,13 @@
 		{
 			//Error case for no matches found
 			
-			statusLabel.text = @"Sorry, no results were found for your location.";
+			if([self isKindOfClass:[LocationController class]]){
+				statusLabel.text = @"Sorry, we don't have maps for your location.";
+			}
+			else{
+			   statusLabel.text = @"No maps were found for that location.";
+
+			}
 			statusLabel.hidden = NO;
 			
 		}
@@ -215,10 +225,12 @@
 			
 			
 			
+			id theRawMaps = [jsonData objectForKey:@"Maps"];
 			
-			NSArray* theMaps = [jsonData objectForKey:@"Maps"];
-			
-			if(theMaps){
+			if(theRawMaps && theRawMaps != [NSNull null] ){
+				
+				NSArray* theMaps = theRawMaps;
+
 				
 				[maps removeAllObjects];
 
@@ -335,6 +347,11 @@
 		[[TTURLRequestQueue mainQueue]  sendRequest: request];
 		 */
 	
+	if([maps count] == 0)
+	{
+		statusLabel.text = @"No maps were found for that location.";
+		statusLabel.hidden = NO;
+	}
 	
 	// Now, let's sort the maps by date
 	

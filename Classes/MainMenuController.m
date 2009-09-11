@@ -15,6 +15,8 @@
 - (id)initWithStyle:(UITableViewStyle)style {
     if (self = [super initWithStyle:style]) {
 		
+		contentEnabled = YES;
+		
 
 		UIImage* searchIcon = [UIImage imageNamed:@"06-magnifying-glass.png"];
 		UIImage* unlockIcon = [UIImage imageNamed:@"24-gift.png"];
@@ -113,8 +115,9 @@
 }
 - (void) settingsController
 {
-	[self.navigationController pushViewController: [[[SettingsController alloc] initWithNibName:@"SettingsController" bundle:nil] autorelease]
+	[self.navigationController pushViewController: [[[SettingsController alloc] initHaveNetwork:contentEnabled] autorelease]
 										 animated:YES];
+
 }
 - (void) searchController
 {
@@ -140,10 +143,10 @@
 	coverageMap.name = @"Coverage";
 	coverageMap.year = 2009;
 	CLLocationCoordinate2D center;
-	center.latitude = 39.943436;
-	center.longitude = -75.344238;
+	center.latitude = 41.866;
+	center.longitude = -72.936;
 	coverageMap.mapCenter = center;
-	coverageMap.minZoom = 4;
+	coverageMap.minZoom = 6;
 	coverageMap.initialOpacity = 0.5;
 	
 	NSMutableArray* coverageMaps = [NSMutableArray arrayWithObject:coverageMap];
@@ -366,6 +369,32 @@
 	}
 	
 }
+
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	if(contentEnabled)
+		return indexPath;
+	
+	//Allow settings and about to go through without network connection
+	if( indexPath.section == 1 && (indexPath.row == 1 || indexPath.row == 2) )
+		return indexPath;
+
+	
+	return nil;
+	
+}
+
+-(void) enableContent
+{
+	contentEnabled = YES;
+	
+}
+-(void) disableContent
+{
+	contentEnabled = NO;
+}
+
+
 
 
 /*

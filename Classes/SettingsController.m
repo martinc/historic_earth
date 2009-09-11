@@ -12,14 +12,28 @@
 
 @implementation SettingsController
 
-@synthesize cacheSizeLabel;
+@synthesize cacheSizeLabel, restoreButton;
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+
+
+- (id) initHaveNetwork: (BOOL) haveNetwork {
+
+	self = [super initWithNibName:@"SettingsController" bundle:nil];
 	
+	
+	networkAvailable = haveNetwork;
+	
+	return self;
+	
+}
+
+- (void) viewDidLoad {
+	
+    [super viewDidLoad];
 	[self calculateSize];
-
-
+	
+	if(!networkAvailable)
+		restoreButton.enabled = NO;
 	
 }
 

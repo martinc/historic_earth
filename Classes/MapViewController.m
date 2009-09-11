@@ -18,6 +18,9 @@
 
 #define MAX_ZOOM 18.0
 
+#define LARGE_FRAME_SIZE 640.0
+
+
 @implementation MapViewController
 
 @synthesize maps, currentMapIndex, oldMapView;
@@ -33,6 +36,7 @@
 - (id) initWithMaps: (NSMutableArray *) theMaps allowCompass: (BOOL)compassAllowed{
     if (self = [super initWithNibName:nil bundle:nil]) {
 		
+		currentRotation = 0.0;
 		compassRunning = NO;
 		amAnimating = NO;
 		
@@ -76,27 +80,31 @@
 		
 		//Resize frame
 		
-		float squareSize = 640.0;
+		
 		
 		//masterView.frame = CGRectMake(0, 0, 100, 480);
-		masterView.frame = CGRectMake(0.0, 0.0, squareSize, squareSize);
+		
+		
+		if(currentRotation == 0.0){
+			
+			masterView.frame = CGRectMake(0.0, 0.0, LARGE_FRAME_SIZE, LARGE_FRAME_SIZE);
 
-		masterView.center = CGPointMake(self.view.frame.size.width/2.0, self.view.frame.size.height/2.0);
-		
-		for(RMMapView* themapview in mapViews)
-		{
-			[themapview.contents.tileLoader reload];
+			masterView.center = CGPointMake(self.view.frame.size.width/2.0, self.view.frame.size.height/2.0);
+			
+			for(RMMapView* themapview in mapViews)
+			{
+				[themapview.contents.tileLoader reload];
+			}
+			
+			//NSStringFromCGRect()
+			
+			currentRotation = 0.0;
+			targetRotation = 0.0;
+			rotationVelocity = 0.0;
+			rotationAcceleration = 0.0;
+			
+			//changing accel:
 		}
-		
-		//NSStringFromCGRect()
-		
-		currentRotation = 0.0;
-		targetRotation = 0.0;
-		rotationVelocity = 0.0;
-		rotationAcceleration = 0.0;
-		
-		//changing accel:
-		
 		
 		rotationTimer = [NSTimer scheduledTimerWithTimeInterval:(1/30.0) target:self selector:@selector(stepRotation:) userInfo:nil repeats:YES];
 
@@ -213,8 +221,8 @@
 	compassRunning = NO;
 	compassIndicator.hidden = YES;
 	
-	masterView.frame = self.view.frame;
-	masterView.center = CGPointMake(self.view.frame.size.width/2.0, self.view.frame.size.height/2.0);	
+	//masterView.frame = self.view.frame;
+	//masterView.center = CGPointMake(self.view.frame.size.width/2.0, self.view.frame.size.height/2.0);	
 
 	
 }
@@ -286,6 +294,9 @@
 	masterView.autoresizesSubviews = YES;
 	masterView.userInteractionEnabled = NO;
 	[self.view addSubview:masterView];
+	
+	//debugging
+	masterView.backgroundColor = [UIColor clearColor];
 	
 		
 	locked = YES;
@@ -649,6 +660,12 @@
 	targetZoom = fmin(theMap.minZoom , MAX_ZOOM);
 
 	if(oldMapView){
+		
+		//CGRect oldmapFrame = oldMapView.frame;
+		//CGPoint oldmapCenter = oldMapView.center;
+		//NSLog(@"old map view frame %@ center %@", NSStringFromCGRect(oldmapFrame), NSStringFromCGPoint(oldmapCenter));
+
+		
 		if(locked || !shouldFadeOut) {
 			targetCenter = oldMapView.contents.mapCenter;
 			targetZoom = fmin(oldMapView.contents.zoom, MAX_ZOOM);
@@ -733,9 +750,10 @@
 		
 	}
 	
+
+	oldMapView = [[RMMapView alloc] initWithFrame:modernMapView.frame];
+
 	
-		oldMapView = [[RMMapView alloc] initWithFrame:self.view.frame];
-		
 	if(mapViews) [mapViews release];
 		mapViews = [[NSMutableArray alloc] initWithObjects:oldMapView,modernMapView, nil];
 		
@@ -982,7 +1000,7 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
     //return (interfaceOrientation == UIInterfaceOrientationPortrait);
-	return YES;
+	return  ! compassRunning;
 }
 
 
@@ -996,6 +1014,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
+	
+
+	
 	[self.navigationController setNavigationBarHidden:NO animated: animated];
 	[self.navigationController setToolbarHidden:NO animated: animated];
 	
@@ -1134,15 +1155,32 @@
 
 }
 
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+CLLocationCoordinate2D theMapCenter;
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
+	theMapCenter = oldMapView.contents.mapCenter;
 	
+}
+
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+//- (void)didAnimateFirstHalfOfRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+//- (void)willAnimateSecondHalfOfRotationFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation duration:(NSTimeInterval)duration
+{
+	[self performSelector:@selector(updateCenter) withObject:nil afterDelay:0.1];
+	 
+
+	
+}
+- (void) updateCenter
+{
 	for(RMMapView* mv in mapViews)
 	{
+		mv.contents.mapCenter = theMapCenter;
 		[mv.contents.tileLoader reload];
 	}
 	
 }
-
 
 @end

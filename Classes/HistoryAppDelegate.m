@@ -220,6 +220,9 @@
 		[self showAlertWithText: alertText];
 		
 		shownNetworkError = YES;
+		
+		[main disableContent];
+		
 
     }
 	else if(shownNetworkError &&  (remoteHostStatus != NotReachable))
@@ -229,6 +232,8 @@
 		[self showAlertWithText: alertText];
 	
 		shownNetworkError = NO;
+		
+		[main enableContent];
 	}
 		
 }

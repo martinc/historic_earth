@@ -13,6 +13,11 @@
 
 	IBOutlet UILabel* cacheSizeLabel;
 	
+	IBOutlet UIButton* restoreButton;
+
+	
+	BOOL networkAvailable;
+	
 }
 
 - (IBAction) done;
@@ -23,6 +28,11 @@
 
 - (void) calculateSize;
 
+- (id) initHaveNetwork: (BOOL) haveNetwork;
+
+
 @property (nonatomic, retain) IBOutlet UILabel* cacheSizeLabel;
+@property (nonatomic, retain) IBOutlet UIButton* restoreButton;
+
 
 @end
