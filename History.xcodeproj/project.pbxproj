@@ -864,8 +864,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Charles Carpenter (5A8YNUQFJA)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Charles Carpenter (5A8YNUQFJA)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Historic Map Works";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Historic Map Works";
 				CURRENT_PROJECT_VERSION = 2;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -883,8 +883,8 @@
 					"-all_load",
 				);
 				PREBINDING = NO;
-				PROVISIONING_PROFILE = "CEEAAC75-5E28-4E5C-BAE8-EB07238FE945";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CEEAAC75-5E28-4E5C-BAE8-EB07238FE945";
+				PROVISIONING_PROFILE = "6A5FDDB7-DF7A-482E-834F-F765D4C9CF0A";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6A5FDDB7-DF7A-482E-834F-F765D4C9CF0A";
 				SDKROOT = iphoneos3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
