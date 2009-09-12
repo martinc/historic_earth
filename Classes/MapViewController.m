@@ -608,12 +608,16 @@
 {
 	
 	[self loadMapAtIndex: theIndex];
-
-	
 	
 	markerLocation = loc;
-	theMarker = [[RMMarker alloc] initWithUIImage: [UIImage imageNamed:@"marker-blue.png"] anchorPoint: CGPointMake(0.5, 1.0)];
-	[oldMapView.markerManager addMarker: theMarker AtLatLong: markerLocation];
+	
+	if(!theMarker){
+		theMarker = [[RMMarker alloc] initWithUIImage: [UIImage imageNamed:@"marker-blue.png"] anchorPoint: CGPointMake(0.5, 1.0)];
+		[oldMapView.markerManager addMarker: theMarker AtLatLong: markerLocation];
+	}
+	else{
+		[oldMapView.markerManager moveMarker:theMarker AtLatLon: markerLocation];
+	}
 }
 
 

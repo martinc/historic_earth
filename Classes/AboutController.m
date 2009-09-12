@@ -12,7 +12,7 @@
 
 @implementation AboutController
 
-@synthesize webView;
+@synthesize webView, versionButton;
 
 
 - (void) viewWillAppear:(BOOL)animated
@@ -38,6 +38,13 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
+	
+	//Update version number
+	NSString* version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+	NSString* build = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+
+	[versionButton setTitle:[NSString stringWithFormat:@"Version %@",version] forState:UIControlStateNormal];
+	[versionButton setTitle:[NSString stringWithFormat:@"Build %@",build] forState:UIControlStateHighlighted];
 
 	
 	NSString* htmlBody = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"about" ofType:@"html"]

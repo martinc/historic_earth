@@ -12,12 +12,14 @@
 @interface AboutController : UIViewController <UIWebViewDelegate>  {
 	
 	IBOutlet UIWebView* webView;
+	IBOutlet UIButton* versionButton;
 
 
 }
 
 
 @property (nonatomic, retain) IBOutlet UIWebView* webView;
+@property (nonatomic, retain) IBOutlet UIButton* versionButton;
 
 
 @end
