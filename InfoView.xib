@@ -43,14 +43,14 @@
 					<object class="IBUILabel" id="25233315">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{175, 300}, {140, 47}}</string>
+						<string key="NSFrame">{{41, 293}, {99, 47}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string key="IBUIText">Lock position when switching maps</string>
-						<object class="NSFont" key="IBUIFont" id="58662608">
-							<string key="NSName">Georgia-Bold</string>
+						<string key="IBUIText">Lock frame when switching maps</string>
+						<object class="NSFont" key="IBUIFont" id="299147261">
+							<string key="NSName">Georgia</string>
 							<double key="NSSize">12</double>
 							<int key="NSfFlags">16</int>
 						</object>
@@ -68,7 +68,7 @@
 					<object class="IBUILabel" id="285626253">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{86, 126}, {66, 21}}</string>
+						<string key="NSFrame">{{88, 104}, {66, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -87,7 +87,7 @@
 					<object class="IBUISwitch" id="115001332">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{221, 351}, {94, 27}}</string>
+						<string key="NSFrame">{{46, 338}, {94, 27}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -98,7 +98,7 @@
 					<object class="IBUIButton" id="645060218">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{104, 414}, {107, 40}}</string>
+						<string key="NSFrame">{{102, 416}, {107, 40}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -127,7 +127,7 @@
 					<object class="IBUIImageView" id="135114272">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">256</int>
-						<string key="NSFrame">{{12, 352}, {24, 24}}</string>
+						<string key="NSFrame">{{221, 272}, {24, 24}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -141,13 +141,13 @@
 					<object class="IBUILabel" id="519587535">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{29, 308}, {117, 31}}</string>
+						<string key="NSFrame">{{185, 304}, {107, 31}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="IBUIText">Compass rotates the map</string>
-						<reference key="IBUIFont" ref="58662608"/>
+						<reference key="IBUIFont" ref="299147261"/>
 						<reference key="IBUITextColor" ref="846890975"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
@@ -158,7 +158,7 @@
 					<object class="IBUISwitch" id="533886047">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{52, 351}, {94, 27}}</string>
+						<string key="NSFrame">{{193, 338}, {94, 27}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -169,7 +169,7 @@
 					<object class="IBUIImageView" id="147422536">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">256</int>
-						<string key="NSFrame">{{184, 351}, {20, 24}}</string>
+						<string key="NSFrame">{{80, 272}, {20, 24}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -183,17 +183,13 @@
 					<object class="IBUILabel" id="945746492">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 97}, {55, 21}}</string>
+						<string key="NSFrame">{{22, 75}, {55, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="IBUIText">Atlas:</string>
-						<object class="NSFont" key="IBUIFont" id="299147261">
-							<string key="NSName">Georgia</string>
-							<double key="NSSize">12</double>
-							<int key="NSfFlags">16</int>
-						</object>
+						<reference key="IBUIFont" ref="299147261"/>
 						<reference key="IBUITextColor" ref="846890975"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
@@ -202,7 +198,7 @@
 					<object class="IBUILabel" id="6551756">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">-2147483356</int>
-						<string key="NSFrame">{{20, 64}, {55, 21}}</string>
+						<string key="NSFrame">{{20, 0}, {55, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -217,7 +213,7 @@
 					<object class="IBUILabel" id="117048984">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 126}, {80, 21}}</string>
+						<string key="NSFrame">{{22, 104}, {65, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -232,7 +228,7 @@
 					<object class="IBUILabel" id="869567029">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{157, 126}, {80, 21}}</string>
+						<string key="NSFrame">{{159, 104}, {80, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -247,7 +243,7 @@
 					<object class="IBUILabel" id="763239455">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{219, 126}, {78, 21}}</string>
+						<string key="NSFrame">{{221, 104}, {78, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -282,7 +278,7 @@
 					<object class="IBUILabel" id="506853155">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{58, 97}, {223, 21}}</string>
+						<string key="NSFrame">{{60, 75}, {223, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -297,7 +293,7 @@
 					<object class="IBUILabel" id="177632512">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">-2147483356</int>
-						<string key="NSFrame">{{58, 64}, {223, 21}}</string>
+						<string key="NSFrame">{{58, 0}, {223, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -312,7 +308,7 @@
 					<object class="IBUIImageView" id="128794035">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">256</int>
-						<string key="NSFrame">{{29, 185}, {28, 20}}</string>
+						<string key="NSFrame">{{34, 165}, {28, 20}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -326,7 +322,7 @@
 					<object class="IBUIImageView" id="685165598">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">256</int>
-						<string key="NSFrame">{{139, 185}, {24, 24}}</string>
+						<string key="NSFrame">{{145, 165}, {24, 24}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -340,7 +336,7 @@
 					<object class="IBUIImageView" id="758264540">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">256</int>
-						<string key="NSFrame">{{241, 185}, {41, 21}}</string>
+						<string key="NSFrame">{{244, 165}, {41, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -354,7 +350,7 @@
 					<object class="IBUILabel" id="619011320">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{12, 211}, {83, 59}}</string>
+						<string key="NSFrame">{{17, 191}, {83, 59}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -371,7 +367,7 @@
 					<object class="IBUILabel" id="700181071">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{100, 208}, {111, 66}}</string>
+						<string key="NSFrame">{{105, 188}, {111, 66}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -388,12 +384,12 @@
 					<object class="IBUILabel" id="143080267">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{219, 208}, {108, 66}}</string>
+						<string key="NSFrame">{{225, 180}, {94, 83}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string key="IBUIText">The Arrows cycle through the maps in your search results.</string>
+						<string key="IBUIText">The arrows cycle through the maps in your search results.</string>
 						<reference key="IBUIFont" ref="299147261"/>
 						<reference key="IBUITextColor" ref="846890975"/>
 						<nil key="IBUIHighlightedColor"/>
@@ -401,6 +397,57 @@
 						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 						<float key="IBUIMinimumFontSize">10</float>
 						<int key="IBUINumberOfLines">4</int>
+					</object>
+					<object class="IBUILabel" id="558890759">
+						<reference key="NSNextResponder" ref="191373211"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{46, 382}, {245, 21}}</string>
+						<reference key="NSSuperview" ref="191373211"/>
+						<bool key="IBUIOpaque">NO</bool>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="IBUIText">Is this map positioned incorrectly?</string>
+						<object class="NSFont" key="IBUIFont">
+							<string key="NSName">Helvetica</string>
+							<double key="NSSize">12</double>
+							<int key="NSfFlags">16</int>
+						</object>
+						<reference key="IBUITextColor" ref="846890975"/>
+						<nil key="IBUIHighlightedColor"/>
+						<int key="IBUIBaselineAdjustment">1</int>
+						<float key="IBUIMinimumFontSize">10</float>
+					</object>
+					<object class="IBUIButton" id="616591522">
+						<reference key="NSNextResponder" ref="191373211"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{216, 379}, {79, 27}}</string>
+						<reference key="NSSuperview" ref="191373211"/>
+						<object class="NSColor" key="IBUIBackgroundColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MSAxIDEgMAA</bytes>
+						</object>
+						<bool key="IBUIOpaque">NO</bool>
+						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
+						<int key="IBUIContentHorizontalAlignment">0</int>
+						<int key="IBUIContentVerticalAlignment">0</int>
+						<object class="NSFont" key="IBUIFont">
+							<string key="NSName">Helvetica-Bold</string>
+							<double key="NSSize">14</double>
+							<int key="NSfFlags">16</int>
+						</object>
+						<string key="IBUINormalTitle">Flag it</string>
+						<object class="NSColor" key="IBUIHighlightedTitleColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC41ODY5NTY1MjE3IDAuNTg2OTU2NTIxNyAwLjU4Njk1NjUyMTcAA</bytes>
+						</object>
+						<object class="NSColor" key="IBUINormalTitleColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC4xMTQxMzA0MzQ4IDAuMTE0MTMwNDM0OCAwLjExNDEzMDQzNDgAA</bytes>
+						</object>
+						<object class="NSColor" key="IBUINormalTitleShadowColor">
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MAA</bytes>
+						</object>
 					</object>
 				</object>
 				<string key="NSFrameSize">{327, 467}</string>
@@ -586,6 +633,23 @@
 					</object>
 					<int key="connectionID">48</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">flagMap</string>
+						<reference key="source" ref="616591522"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">64</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">flagButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="616591522"/>
+					</object>
+					<int key="connectionID">65</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -601,10 +665,10 @@
 						<reference key="object" ref="191373211"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="645060218"/>
 							<reference ref="674722186"/>
 							<reference ref="6551756"/>
 							<reference ref="177632512"/>
+							<reference ref="645060218"/>
 							<reference ref="285626253"/>
 							<reference ref="945746492"/>
 							<reference ref="117048984"/>
@@ -612,17 +676,19 @@
 							<reference ref="763239455"/>
 							<reference ref="506853155"/>
 							<reference ref="128794035"/>
+							<reference ref="685165598"/>
+							<reference ref="758264540"/>
+							<reference ref="619011320"/>
+							<reference ref="700181071"/>
+							<reference ref="143080267"/>
 							<reference ref="25233315"/>
 							<reference ref="115001332"/>
+							<reference ref="135114272"/>
 							<reference ref="519587535"/>
 							<reference ref="533886047"/>
 							<reference ref="147422536"/>
-							<reference ref="135114272"/>
-							<reference ref="143080267"/>
-							<reference ref="758264540"/>
-							<reference ref="685165598"/>
-							<reference ref="619011320"/>
-							<reference ref="700181071"/>
+							<reference ref="558890759"/>
+							<reference ref="616591522"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -747,6 +813,16 @@
 						<reference key="object" ref="143080267"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">62</int>
+						<reference key="object" ref="558890759"/>
+						<reference key="parent" ref="191373211"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">63</int>
+						<reference key="object" ref="616591522"/>
+						<reference key="parent" ref="191373211"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -773,6 +849,8 @@
 					<string>40.IBPluginDependency</string>
 					<string>42.IBPluginDependency</string>
 					<string>5.IBPluginDependency</string>
+					<string>62.IBPluginDependency</string>
+					<string>63.IBPluginDependency</string>
 					<string>7.CustomClassName</string>
 					<string>7.IBPluginDependency</string>
 				</object>
@@ -780,7 +858,9 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>InfoController</string>
 					<string>UIResponder</string>
-					<string>{{767, 312}, {327, 467}}</string>
+					<string>{{767, 341}, {327, 467}}</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -818,7 +898,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">48</int>
+			<int key="maxID">65</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -839,10 +919,12 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>closeWindow</string>
+							<string>flagMap</string>
 							<string>switchesChanged</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 						</object>
@@ -859,6 +941,7 @@
 							<string>compassImage</string>
 							<string>compassLabel</string>
 							<string>compassSwitch</string>
+							<string>flagButton</string>
 							<string>latLabel</string>
 							<string>lockImage</string>
 							<string>lockLabel</string>
@@ -879,6 +962,7 @@
 							<string>UIImageView</string>
 							<string>UILabel</string>
 							<string>UISwitch</string>
+							<string>UIButton</string>
 							<string>UILabel</string>
 							<string>UIImageView</string>
 							<string>UILabel</string>

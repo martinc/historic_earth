@@ -176,18 +176,24 @@
 	// Release any cached data, images, etc that aren't in use.
 }
 
+/*
 - (void)viewDidUnload {
 	// Release any retained subviews of the main view.
 	// e.g. self.myOutlet = nil;
 	
-	[nameLabel release];
-	[descriptionLabel release];
-	[priceLabel release];
-	
-}
+}*/
 
 
 - (void)dealloc {
+	
+	[product release];
+	
+	[buyButton release];
+	
+	[nameLabel release];
+	[priceLabel release];
+	[descriptionLabel release];
+	
     [super dealloc];
 }
 

@@ -9,8 +9,8 @@
 #import "MapViewController.h"
 #import "AbstractMapListController.h"
 #import "LocationController.h"
-
 #import "TargetConditionals.h"
+#import "RMTileFactory.h"
 
 #define kFilteringFactor 0.05
 
@@ -454,20 +454,14 @@
 	}
 	
 
-	
-	[shuffleButton release];
-	[reframeButton release];
-	
+		
 	[space release];
 	[item release];
-	/*[past release];
-	[present release];*/
-	[slider release];
-	[infoBarButton release];
 	
 	self.navigationController.toolbar.barStyle = self.navigationController.navigationBar.barStyle;
 	self.navigationController.toolbar.tintColor = self.navigationController.navigationBar.tintColor;
 	self.navigationController.toolbar.translucent = self.navigationController.navigationBar.translucent;
+	
 	
 	[self setToolbarItems:items animated: NO ];
 
@@ -503,6 +497,11 @@
 
 - (void) reframeSearch
 {
+	UIImageView* bigSearch = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"big-search.png"]] autorelease];
+	
+	bigSearch.center = self.view.center;
+	
+	[self.view addSubview:bigSearch];
 	
 	UIViewController* mainMenu = [[self.navigationController viewControllers] objectAtIndex:0];
 	
@@ -625,9 +624,11 @@
 - (void) loadMapAtIndex: (int) theIndex
 {
 	
+	
 	self.navigationController.toolbar.barStyle = self.navigationController.navigationBar.barStyle;
 	self.navigationController.toolbar.tintColor = self.navigationController.navigationBar.tintColor;
 	self.navigationController.toolbar.translucent = self.navigationController.navigationBar.translucent;
+	
 	
 	BOOL shouldFadeOut = currentMapIndex != theIndex;	
 	
@@ -1119,7 +1120,48 @@
 
 
 - (void)dealloc {
-    [super dealloc];
+	
+#ifdef DEBUG 
+	NSLog(@"MapviewController dealloc.");
+#endif
+	
+	[[RMTileFactory primaryCache] empty];
+	
+	[self setToolbarItems: [NSArray array] animated:NO]; 
+
+	
+	[maps release];
+	[mapViews release];
+	
+	if(oldMapView)
+		[oldMapView release];
+	if(modernMapView)
+		[modernMapView release];
+	if(fadingOutView)
+		[fadingOutView release];
+	if(theMarker)
+		[theMarker release];
+
+	
+	[masterView release];
+	
+	[slider release];
+	[spinner release];
+	[backForward release];
+	[barSpinner release];
+	[segmented release];
+	[shuffleButton release];
+	[reframeButton release];
+	[infoButton release];
+	
+	
+	[locationManager release];
+	[compassIndicator release];
+	
+	
+	[super dealloc];
+
+	
 }
 
 

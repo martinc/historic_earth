@@ -372,7 +372,7 @@
 	
 	//NSLog(@"%d maps, %d atlases", [maps count], [atlasNames count]);
 	
-	NSMutableArray *atlases = [NSMutableArray arrayWithCapacity:[atlasNames count]];
+	NSMutableArray *atlases = [[NSMutableArray alloc] initWithCapacity:[atlasNames count]];
 
 	
 	for(NSString* atlasName in [atlasNames allKeys])
@@ -407,6 +407,8 @@
 				averageCenter.latitude += component.mapCenter.latitude;
 				//[layerIDS addObject:component.layerID];
 				[layerIDS insertObject:component.layerID atIndex:0];
+				
+				[theAtlas.plates addObject:component];
 			}
 			
 			averageCenter.longitude /= [componentMaps count];
@@ -426,10 +428,11 @@
 	}
 	
 	[atlases sortUsingSelector:@selector(mapOrder:)];
-
-	[maps release];
-	maps = [atlases retain];
-	mapController.maps = maps;
+	
+	[maps removeAllObjects];
+	[maps addObjectsFromArray:atlases];
+	
+	[atlases release];
 	
 	
 #endif
@@ -515,7 +518,23 @@
 
 
 - (void)dealloc {
-    [super dealloc];
+	
+#ifdef DEBUG 
+	
+	NSLog(@"AbstractMapListController dealloc.");
+	
+#endif
+	
+	[mapController release];
+	[maps release];
+	
+	[loadingSpinner release];
+	[statusLabel release];
+	
+	[super dealloc];
+
+	
+	
 }
 
 

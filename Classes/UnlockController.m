@@ -217,6 +217,10 @@
 
 
 - (void)dealloc {
+	
+	[products release];
+	[loadingSpinner release];
+	
     [super dealloc];
 }
 

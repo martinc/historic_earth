@@ -215,4 +215,13 @@
 		return nil;
 }
 
+- (void) dealloc
+{
+
+	[REQUEST_URL release];
+	[searchBar release];
+	[super dealloc];
+	
+}
+
 @end

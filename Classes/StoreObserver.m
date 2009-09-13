@@ -20,7 +20,7 @@
 {
 
 	self = [super init];
-	app = [del retain];
+	app = del;
 	
 	return self;
 	

@@ -17,7 +17,7 @@
 
 }
 
-@property (nonatomic, retain) NSString* name;
+@property (nonatomic, copy) NSString* name;
 @property (nonatomic, readonly) NSMutableArray* locations;
 
 

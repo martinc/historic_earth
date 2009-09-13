@@ -36,8 +36,11 @@
 
 	
 	MapViewController* mapViewController;
+	
+	IBOutlet UIButton* flagButton;
 
 }
+@property (nonatomic, retain) IBOutlet UIButton* flagButton;
 
 @property (nonatomic, retain) IBOutlet UISwitch* lockSwitch;
 @property (nonatomic, retain) IBOutlet UIImageView* lockImage;
@@ -64,9 +67,10 @@
 
 
 
-
 - (id)initWithMapView:(MapViewController *) mapViewController;
 - (IBAction) closeWindow;
 - (IBAction) switchesChanged;
+- (IBAction) flagMap;
+
 
 @end

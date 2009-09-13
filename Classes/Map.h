@@ -24,6 +24,8 @@
 	
 	CLLocationCoordinate2D mapCenter;
 	
+	NSMutableArray *plates;
+	
 }
 
 
@@ -35,9 +37,12 @@
 
 
 
-@property (nonatomic, retain) NSString *layerID;
-@property (nonatomic, retain) NSString *atlasName;
-@property (nonatomic, retain) NSString *name;
+@property (nonatomic, readonly) NSMutableArray *plates;
+
+
+@property (nonatomic, copy) NSString *layerID;
+@property (nonatomic, copy) NSString *atlasName;
+@property (nonatomic, copy) NSString *name;
 
 @property (nonatomic, assign) int year;
 @property (nonatomic, assign) int minZoom;

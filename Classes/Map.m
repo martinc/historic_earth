@@ -11,12 +11,14 @@
 
 @implementation Map
 
-@synthesize layerID, atlasName, name, year, minZoom, mapBounds, mapCenter, initialOpacity;
+@synthesize layerID, atlasName, name, year, minZoom, mapBounds, mapCenter, initialOpacity, plates;
 
 - (id) init
 {
 	self = [super init];
 	initialOpacity = 1.0;
+	
+	plates = [[NSMutableArray alloc] initWithCapacity:1];
 	
 	return self;
 }
@@ -67,5 +69,19 @@
 	return [[self.layerID componentsSeparatedByString:@","] count];
 }
 
+
+- (void)dealloc {
+	
+	[plates release];
+	
+	if(atlasName)
+		[atlasName release];
+	if(name)
+		[name release];
+	if(layerID)
+		[layerID release];
+	
+    [super dealloc];
+}
 
 @end

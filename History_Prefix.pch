@@ -33,6 +33,7 @@
 #define kLAT_LONG_SEARCH @"http://www.historicmapworks.com/iPhone/?"
 #define kSEARCH_BY_ADDRESS_URL @"http://www.historicmapworks.com/iPhone/address.php?"
 
+#define kFLAG_MAP_URL @"http://emergencestudios.com/historicearth/flag?"
 
 #define kMAP_ATLAS_NAME @"Atlas Name"
 #define kMAP_BL @"BL"

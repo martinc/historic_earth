@@ -41,4 +41,11 @@
 	
 }
 
+-(void)dealloc
+{
+	[locations release];
+	[super dealloc];
+	
+}
+
 @end

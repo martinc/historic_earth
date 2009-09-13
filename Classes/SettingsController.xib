@@ -2,9 +2,9 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">768</int>
-		<string key="IBDocument.SystemVersion">10A432</string>
+		<string key="IBDocument.SystemVersion">10B504</string>
 		<string key="IBDocument.InterfaceBuilderVersion">732</string>
-		<string key="IBDocument.AppKitVersion">1038</string>
+		<string key="IBDocument.AppKitVersion">1038.2</string>
 		<string key="IBDocument.HIToolboxVersion">437.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -91,7 +91,7 @@
 					<object class="IBUILabel" id="911930634">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{70, 362}, {190, 63}}</string>
+						<string key="NSFrame">{{33, 359}, {267, 63}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -116,7 +116,7 @@
 					<object class="IBUILabel" id="830775003">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{72, 182}, {188, 61}}</string>
+						<string key="NSFrame">{{33, 169}, {267, 61}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -241,10 +241,10 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="394850938"/>
 							<reference ref="709238140"/>
-							<reference ref="911930634"/>
-							<reference ref="830775003"/>
 							<reference ref="481039891"/>
 							<reference ref="994575051"/>
+							<reference ref="830775003"/>
+							<reference ref="911930634"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>

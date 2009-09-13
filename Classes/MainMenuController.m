@@ -159,6 +159,7 @@
 	[self.navigationController pushViewController: mapview animated:YES];
 	
 	[mapview release];
+	
 	 
 }
 
@@ -439,6 +440,14 @@
 
 - (void)dealloc {
     [super dealloc];
+	
+	[searchData release];
+	[additionContentData release];
+	[mainMenuData release];
+	
+	if(product)
+		[product release];
+	
 }
 
 

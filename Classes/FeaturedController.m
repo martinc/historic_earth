@@ -392,6 +392,10 @@
 
 
 - (void)dealloc {
+	
+	[loadingSpinner release];
+	[groups release];
+	
     [super dealloc];
 }
 

@@ -203,11 +203,6 @@
 }
 
 
-- (void)dealloc {
-    [super dealloc];
-}
-
-
 #pragma mark url connection
 
 
@@ -388,5 +383,17 @@
 	[receivedData release];
 }
 
+- (void) dealloc
+{
+	[loadingSpinner release]; 
+	[mapView release];
+	[paths release];
+	
+	if(refreshButton)
+		[refreshButton release];
+	
+
+	[super dealloc];
+}
 
 @end

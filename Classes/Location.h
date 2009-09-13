@@ -19,6 +19,6 @@
 - (id) initWithName: (NSString *) theName andID: (int) theID;
 
 @property (nonatomic, assign) int locationID;
-@property (nonatomic, retain) NSString* name;
+@property (nonatomic, copy) NSString* name;
 
 @end

@@ -87,6 +87,9 @@
 		5B8F1D551044A29B00DF8D8E /* LocationGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B8F1D541044A29B00DF8D8E /* LocationGroup.m */; };
 		5BBD53341048FC56001AB004 /* 03-loopback.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BBD53331048FC56001AB004 /* 03-loopback.png */; };
 		5BBD537810490A34001AB004 /* he_mainmenu_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BBD537710490A34001AB004 /* he_mainmenu_2.png */; };
+		5BCB849A105CB28D00FF60FE /* big-search.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BCB8499105CB28D00FF60FE /* big-search.png */; };
+		5BCB8593105CD74100FF60FE /* 59-flag.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BCB8592105CD74100FF60FE /* 59-flag.png */; };
+		5BCB85A1105CDC5900FF60FE /* 59-flag-large.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BCB85A0105CDC5900FF60FE /* 59-flag-large.png */; };
 		5BCD483D1025538D0066772E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BCD483C1025538D0066772E /* QuartzCore.framework */; };
 		5BCD503F102554980066772E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BCD503E102554980066772E /* CoreLocation.framework */; };
 		5BCD504A102555D00066772E /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BCD5049102555D00066772E /* MapViewController.m */; };
@@ -244,6 +247,9 @@
 		5B8F1D541044A29B00DF8D8E /* LocationGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationGroup.m; sourceTree = "<group>"; };
 		5BBD53331048FC56001AB004 /* 03-loopback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "03-loopback.png"; path = "Images/03-loopback.png"; sourceTree = "<group>"; };
 		5BBD537710490A34001AB004 /* he_mainmenu_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = he_mainmenu_2.png; path = Images/he_mainmenu_2.png; sourceTree = "<group>"; };
+		5BCB8499105CB28D00FF60FE /* big-search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "big-search.png"; path = "Images/big-search.png"; sourceTree = "<group>"; };
+		5BCB8592105CD74100FF60FE /* 59-flag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "59-flag.png"; path = "Images/59-flag.png"; sourceTree = "<group>"; };
+		5BCB85A0105CDC5900FF60FE /* 59-flag-large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "59-flag-large.png"; path = "Images/59-flag-large.png"; sourceTree = "<group>"; };
 		5BCD483C1025538D0066772E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		5BCD502A102554840066772E /* MapView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MapView.xcodeproj; path = ../routemeNT/MapView/MapView.xcodeproj; sourceTree = SOURCE_ROOT; };
 		5BCD503E102554980066772E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -360,6 +366,9 @@
 		5B20C8CF1022BA500003FE62 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				5BCB8592105CD74100FF60FE /* 59-flag.png */,
+				5BCB85A0105CDC5900FF60FE /* 59-flag-large.png */,
+				5BCB8499105CB28D00FF60FE /* big-search.png */,
 				5B0233EE105AD698001A12CD /* updown-black.png */,
 				5B664ABE1050DEC2008C3974 /* reframe.png */,
 				5BBD53331048FC56001AB004 /* 03-loopback.png */,
@@ -663,6 +672,9 @@
 				5B664ABF1050DEC2008C3974 /* reframe.png in Resources */,
 				5B0233A1105A2687001A12CD /* Entitlements.plist in Resources */,
 				5B0233EF105AD698001A12CD /* updown-black.png in Resources */,
+				5BCB849A105CB28D00FF60FE /* big-search.png in Resources */,
+				5BCB8593105CD74100FF60FE /* 59-flag.png in Resources */,
+				5BCB85A1105CDC5900FF60FE /* 59-flag-large.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

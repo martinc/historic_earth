@@ -20,6 +20,7 @@
 
 @synthesize arrowsLabel, browseLabel, shuffleLabel, shuffleImage, browseImage, arrowsImage;
 
+@synthesize flagButton;
 
 - (IBAction) closeWindow
 {
@@ -123,6 +124,25 @@
 	
 }
  
+- (void)flagMap
+{
+	Map* badMap = [mapViewController.maps objectAtIndex:mapViewController.currentMapIndex];
+	
+	
+	NSString* theMessage = [[NSString stringWithFormat:@"atlas=\"%@\"&year=\"%d\"&layers=\"%@\"", badMap.atlasName, badMap.year, badMap.layerID]
+							stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+	
+
+	NSURL* theURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kFLAG_MAP_URL,theMessage]]; 
+	
+	NSString* theResponse = [NSString stringWithContentsOfURL:theURL encoding:NSUTF8StringEncoding error:NULL];
+	
+	
+	[flagButton setTitle:@"Thanks!" forState:UIControlStateNormal];
+	flagButton.enabled = NO;
+	
+	
+}
 
 
 /*

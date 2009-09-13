@@ -18,10 +18,18 @@
 {
 	self = [super init];
 	
-	name = [theName retain];
+	name = [theName copy];
 	locationID = theID;
 	
 	return self;
 }
+
+- (void) dealloc
+{
+
+	[name release];
+	[super dealloc];
+	
+}	
 
 @end

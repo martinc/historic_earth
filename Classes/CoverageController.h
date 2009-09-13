@@ -16,17 +16,14 @@
 @interface CoverageController : UIViewController {
 
 	
-	UIActivityIndicatorView *loadingSpinner;  
 	BOOL loadingResults;
 	NSMutableData *receivedData;
 	NSURLConnection *theConnection;
 	
 	
-	
+	UIActivityIndicatorView *loadingSpinner;  
 	RMMapView* mapView;
-	
 	NSMutableArray* paths;
-	
 	UIBarButtonItem* refreshButton;
 }
 

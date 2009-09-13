@@ -45,4 +45,12 @@
 	
 }
 
+- (void) dealloc
+{
+
+	[name release];
+	[locations release];
+	[super dealloc];
+}
+
 @end

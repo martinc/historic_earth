@@ -265,6 +265,18 @@
 - (void)dealloc {
 	[main release];
     [window release];
+	
+	[navController release];
+	[observer release];
+	[hostReach release];
+	
+	if(alert)
+		[alert release];
+	if(products)
+		[products release];
+	if(productsRequest)
+		[productsRequest release];
+	
     [super dealloc];
 }
 
