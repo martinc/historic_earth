@@ -439,9 +439,10 @@
 	
 	NSArray* items;
 	
-	UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
-	BOOL isLandscape = (orientation == UIDeviceOrientationLandscapeLeft || orientation == UIDeviceOrientationLandscapeRight);
-	
+	//UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
+	//BOOL isLandscape = (orientation == UIDeviceOrientationLandscapeLeft || orientation == UIDeviceOrientationLandscapeRight);
+	BOOL isLandscape = NO;
+
 	if([[NSUserDefaults standardUserDefaults] boolForKey:kSEARCH_ENABLED])
 	{
 		slider.frame = CGRectMake(0,0, isLandscape ? 360 : 195 ,20);
