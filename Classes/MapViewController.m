@@ -21,6 +21,13 @@
 #define LARGE_FRAME_SIZE 640.0
 
 
+#define SLIDER_WIDTH_PORTRAIT 225
+#define SLIDER_WIDTH_PORTRAIT_SEARCH 195
+#define SLIDER_WIDTH_LANDSCAPE 390
+#define SLIDER_WIDTH_LANDSCAPE_SEARCH 360
+
+
+
 @implementation MapViewController
 
 @synthesize maps, currentMapIndex, oldMapView;
@@ -283,11 +290,16 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+	
+	if(loadTime) [loadTime release];
+	loadTime = [[NSDate alloc] init];
+
 
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 //- (void)loadView {
 //	[super loadView];
 	
+	self.view.multipleTouchEnabled = YES;
 	
 	masterView = [[UIView alloc] initWithFrame:self.view.frame];
 	masterView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -439,18 +451,24 @@
 	
 	NSArray* items;
 	
-	//UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
-	//BOOL isLandscape = (orientation == UIDeviceOrientationLandscapeLeft || orientation == UIDeviceOrientationLandscapeRight);
-	BOOL isLandscape = NO;
+	
+	UIDeviceOrientation orientation = self.interfaceOrientation;
+	UIDeviceOrientation deviceOrientation = [[UIDevice currentDevice] orientation];
+	BOOL isLandscape = (orientation == UIDeviceOrientationLandscapeLeft || orientation == UIDeviceOrientationLandscapeRight);
+	BOOL deviceIsLandscape = (deviceOrientation == UIDeviceOrientationLandscapeLeft || deviceOrientation == UIDeviceOrientationLandscapeRight);
+#ifdef DEBUG
+	NSLog(@"mapviewcontroller opening with view frame %@", NSStringFromCGRect(self.view.frame));
+	NSLog(@"is landscape? %d device says? %d", isLandscape, deviceIsLandscape);
+#endif
 
 	if([[NSUserDefaults standardUserDefaults] boolForKey:kSEARCH_ENABLED])
 	{
-		slider.frame = CGRectMake(0,0, isLandscape ? 360 : 195 ,20);
+		slider.frame = CGRectMake(0,0, isLandscape ? SLIDER_WIDTH_LANDSCAPE_SEARCH : SLIDER_WIDTH_PORTRAIT_SEARCH ,20);
 		items = [[NSArray alloc] initWithObjects: shuffleButton, reframeButton, item,  infoBarButton, nil ];
 	}
 	else
 	{
-		slider.frame = CGRectMake(0,0, isLandscape ? 390 : 225  ,20);
+		slider.frame = CGRectMake(0,0, isLandscape ? SLIDER_WIDTH_LANDSCAPE : SLIDER_WIDTH_PORTRAIT  ,20);
 		items = [[NSArray alloc] initWithObjects: shuffleButton, item, infoBarButton, nil ];
 	}
 	
@@ -625,6 +643,7 @@
 - (void) loadMapAtIndex: (int) theIndex
 {
 	
+
 	
 	self.navigationController.toolbar.barStyle = self.navigationController.navigationBar.barStyle;
 	self.navigationController.toolbar.tintColor = self.navigationController.navigationBar.tintColor;
@@ -664,8 +683,13 @@
 	CLLocationCoordinate2D targetCenter;
 	
 	targetCenter = theMap.mapCenter;
-	targetMinZoom = theMap.minZoom - 4.0;
-	targetZoom = fmin(theMap.minZoom , MAX_ZOOM);
+	targetMinZoom = theMap.minZoom - 2.0;
+	targetZoom = fmin(theMap.minZoom + 1.0 , MAX_ZOOM);
+	
+	if(targetMinZoom >= targetZoom)
+	{
+		targetMinZoom = targetZoom - 3.0;
+	}
 
 	if(oldMapView){
 		
@@ -908,9 +932,33 @@
 	
 	UITouch *touch = [touches anyObject];
 	
-    if ([touch tapCount] == 1) {
-		[self performSelector:@selector(singleTouch:) withObject:[NSValue valueWithNonretainedObject:touch]  afterDelay:kSINGLE_TOUCH_DELAY];
-        //CGPoint tapPoint = [theTouch locationInView:self];
+	NSSet *allTouches = [event allTouches];
+	
+#ifdef DEBUG
+	NSLog(@"%d allTouches in touchesEnded", [allTouches count]);
+#endif
+	
+    if ([touch tapCount] == 1)
+	{
+		if([allTouches count] == 1)
+		{
+			[self performSelector:@selector(singleTouch:) withObject:[NSValue valueWithNonretainedObject:touch]  afterDelay:kSINGLE_TOUCH_DELAY];
+		}
+		else if([allTouches count] == 2)
+		{
+			CGPoint centerPoint = CGPointMake(0.0, 0.0);
+			for(UITouch* aTouch in allTouches)
+			{
+				CGPoint touchPoint = [aTouch locationInView: modernMapView];
+				centerPoint.x += touchPoint.x;
+				centerPoint.y += touchPoint.y;
+			}
+			centerPoint.x /= 2.0;
+			centerPoint.y /= 2.0;
+			
+			[self performSelector:@selector(doubleTouch:) withObject:[NSValue valueWithCGPoint:centerPoint]  afterDelay:kSINGLE_TOUCH_DELAY];
+		}
+
     }
 
 	
@@ -937,6 +985,19 @@
 
 	}
 }
+- (void) doubleTouch: (NSValue *) val
+{
+	CGPoint thePoint = [val CGPointValue];
+	if(!hasTouchMoved){
+		
+		for (RMMapView* mv in mapViews){
+			[mv.contents zoomOutToNextNativeZoomAt:thePoint animated:NO];
+		}
+		
+
+	}
+}
+
 
 - (void) hideChrome
 {
@@ -1008,7 +1069,21 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
     //return (interfaceOrientation == UIInterfaceOrientationPortrait);
-	return  ! compassRunning;
+	/*
+	if(!loadTime)
+		return (interfaceOrientation == UIInterfaceOrientationPortrait);
+	
+	NSTimeInterval timeInterval = [loadTime timeIntervalSinceNow];
+	
+	if(timeInterval > 5.0)
+		return  ! compassRunning;
+	else {
+		return (interfaceOrientation == UIInterfaceOrientationPortrait);
+	}
+	 */
+	 
+	return !compassRunning;
+	 
 }
 
 
@@ -1021,8 +1096,30 @@
 
 
 - (void)viewWillAppear:(BOOL)animated {
-	[super viewWillAppear:animated];
 	
+	
+	UIDeviceOrientation orientation = self.interfaceOrientation;
+	UIDeviceOrientation deviceOrientation = [[UIDevice currentDevice] orientation];
+	BOOL isLandscape = (orientation == UIDeviceOrientationLandscapeLeft || orientation == UIDeviceOrientationLandscapeRight);
+	BOOL deviceIsLandscape = (deviceOrientation == UIDeviceOrientationLandscapeLeft || deviceOrientation == UIDeviceOrientationLandscapeRight);
+#ifdef DEBUG
+	NSLog(@"mapviewcontroller viewWillAppear with view frame %@", NSStringFromCGRect(self.view.frame));
+	NSLog(@"viewWillAppear is landscape? %d device says? %d", isLandscape, deviceIsLandscape);
+#endif
+	if([[NSUserDefaults standardUserDefaults] boolForKey:kSEARCH_ENABLED])
+	{
+		slider.frame = CGRectMake(0,0, isLandscape ? SLIDER_WIDTH_LANDSCAPE_SEARCH : SLIDER_WIDTH_PORTRAIT_SEARCH ,20);
+		slider.superview.frame = CGRectMake(0,0, isLandscape ? SLIDER_WIDTH_LANDSCAPE_SEARCH : SLIDER_WIDTH_PORTRAIT_SEARCH ,20);
+
+	}
+	else
+	{
+		slider.frame = CGRectMake(0,0, isLandscape ? SLIDER_WIDTH_LANDSCAPE : SLIDER_WIDTH_PORTRAIT  ,20);
+		slider.superview.frame = CGRectMake(0,0, isLandscape ? SLIDER_WIDTH_LANDSCAPE : SLIDER_WIDTH_PORTRAIT  ,20);
+
+	}
+
+
 
 	
 	[self.navigationController setNavigationBarHidden:NO animated: animated];
@@ -1067,7 +1164,8 @@
 
 	
 
-	
+	[super viewWillAppear:animated];
+
 }
 - (void) dummyLocationMove
 {
@@ -1154,7 +1252,7 @@
 	[shuffleButton release];
 	[reframeButton release];
 	[infoButton release];
-	
+	[loadTime release];
 	
 	[locationManager release];
 	[compassIndicator release];

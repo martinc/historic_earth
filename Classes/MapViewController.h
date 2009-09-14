@@ -72,6 +72,8 @@
 	
 	NSTimer* dummyLocationTimer;
 	
+	NSDate* loadTime;
+	
 }
 
 @property (nonatomic, retain) NSMutableArray* maps;

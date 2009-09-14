@@ -38,6 +38,16 @@
 - (void) viewWillAppear:(BOOL)animated {
 	
 	[self.navigationController setNavigationBarHidden:NO animated: YES];
+/*	
+	UIDeviceOrientation deviceOrientation = [[UIDevice currentDevice] orientation];
+	UIDeviceOrientation controllerOrientation = self.interfaceOrientation;
+	
+	if( (deviceOrientation == UIDeviceOrientationLandscapeLeft || deviceOrientation == UIDeviceOrientationLandscapeRight)
+	   && (controllerOrientation == UIDeviceOrientationPortrait || controllerOrientation == UIDeviceOrientationPortraitUpsideDown))
+	{
+		[[UIDevice currentDevice] setOrientation: deviceOrientation];
+	}
+*/
 
 }
 
@@ -659,8 +669,8 @@
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-	//return YES;
+    //return (interfaceOrientation == UIInterfaceOrientationPortrait);
+	return YES;
 }
 
 
