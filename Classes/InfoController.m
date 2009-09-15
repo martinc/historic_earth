@@ -77,7 +77,7 @@
 	
 	yearLabel.text = [NSString stringWithFormat:@"%d", theMap.year];
 	atlasLabel.text = theMap.atlasName;
-	plateLabel.text = theMap.name;
+	//plateLabel.text = theMap.name;
 	
 	CLLocationCoordinate2D theCenter = mapViewController.oldMapView.contents.mapCenter;
 	
@@ -101,7 +101,7 @@
 
 	[testLocationManager release];
 	
-	
+	/*
 	if( ! [[NSUserDefaults standardUserDefaults] boolForKey: kSEARCH_ENABLED])
 	{
 		browseLabel.hidden = YES;
@@ -120,6 +120,7 @@
 
 		
 	}
+	 */
 
 	
 }
@@ -128,14 +129,29 @@
 {
 	Map* badMap = [mapViewController.maps objectAtIndex:mapViewController.currentMapIndex];
 	
+	NSMutableString* plateList = [NSMutableString stringWithCapacity:100];
 	
-	NSString* theMessage = [[NSString stringWithFormat:@"atlas=\"%@\"&year=\"%d\"&layers=\"%@\"", badMap.atlasName, badMap.year, badMap.layerID]
+	for(Map* plate in badMap.plates){
+		[plateList appendFormat:@"%@,", plate.name];
+	}
+	//Delete last comma
+	[plateList deleteCharactersInRange: NSMakeRange([plateList length]-1, 1)];
+	
+	
+	CLLocationCoordinate2D theCenter = mapViewController.oldMapView.contents.mapCenter;	
+	NSString* latLonText = [NSString stringWithFormat:@"%0.4f,%0.4f", theCenter.latitude, theCenter.longitude];
+
+		
+	
+	NSString* theMessage = [[NSString stringWithFormat:@"atlas=%@&year=%d&layers=%@&plates=%@&latlon=%@",
+							 badMap.atlasName, badMap.year, badMap.layerID, plateList, latLonText]
 							stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
 	
 
 	NSURL* theURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kFLAG_MAP_URL,theMessage]]; 
 	
-	NSString* theResponse = [NSString stringWithContentsOfURL:theURL encoding:NSUTF8StringEncoding error:NULL];
+	
+	[NSString stringWithContentsOfURL:theURL encoding:NSUTF8StringEncoding error:NULL];
 	
 	
 	[flagButton setTitle:@"Thanks!" forState:UIControlStateNormal];

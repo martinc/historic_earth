@@ -16,6 +16,7 @@
 #import "AboutController.h"
 #import "CoverageController.h"
 #import "PurchaseController.h"
+#import "HelpController.h"
 
 
 @interface MainMenuController : UITableViewController {

@@ -226,11 +226,11 @@
 			NSNumber *searchLat = [jsonData objectForKey:@"lat"];
 			NSNumber *searchLong = [jsonData objectForKey:@"long"];
 			
-			CLLocationCoordinate2D searchCoordinates;
 			if(searchLat && searchLong)
 			{
-				searchCoordinates.latitude = [searchLat doubleValue];
-				searchCoordinates.longitude = [searchLong doubleValue];
+				searchLocation.latitude = [searchLat doubleValue];
+				searchLocation.longitude = [searchLong doubleValue];
+				haveLocation = YES;
 			}
 			
 			
@@ -272,9 +272,13 @@
 							theMap.name = theName;
 							theMap.year = [theYear intValue];
 							theMap.minZoom = [theMinZoom intValue];
-							if(theMap.minZoom == 0)
-								theMap.minZoom = 16;
-							
+							if(theMap.minZoom == 0){
+								theMap.minZoom = kDEFAULT_MIN_ZOOM;
+								#ifdef DEBUG
+									NSLog(@"setting map minZoom to %d", theMap.minZoom);
+								#endif
+							}
+								
 							
 							NSArray* southWestStrings = [theBL componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 							NSArray* northEastStrings = [theTR componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
@@ -298,9 +302,9 @@
 								   mapBounds.northeast.latitude == 0 ||
 								   mapBounds.northeast.longitude == 0)
 								{
-									hasLocation = NO;
+									//hasLocation = NO;
 									
-									theMap.mapCenter = searchCoordinates;
+									theMap.mapCenter = searchLocation;
 								//	NSLog(@"defaulting to search location");
 									
 								}
@@ -650,7 +654,8 @@
 		
 		if(haveLocation)
 		{
-			[mapController loadMapAtIndex: indexPath.row withMarkerLocation: searchLocation];
+			BOOL shouldUpdateMarker = [self isKindOfClass:[LocationController class]];
+			[mapController loadMapAtIndex: indexPath.row withMarkerLocation: searchLocation shouldUpdate: shouldUpdateMarker];
 		}
 		else
 		{

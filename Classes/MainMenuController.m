@@ -25,6 +25,7 @@
 		UIImage* locationIcon = [UIImage imageNamed:@"74-location.png"];
 		UIImage* aboutIcon = [UIImage imageNamed:@"14-tag.png"];
 		UIImage* coverageIcon = [UIImage imageNamed:@"73-radar.png"];
+		UIImage* helpIcon = [UIImage imageNamed:@"question-mark.png"];
 
 
 
@@ -59,6 +60,11 @@
 						  @"Coverage Area", @"name",
 						  @"coverageController", @"controller",
 						  coverageIcon, @"image",
+						  nil],
+						 [NSMutableDictionary dictionaryWithObjectsAndKeys:
+						  @"Help", @"name",
+						  @"helpController", @"controller",
+						  helpIcon, @"image",
 						  nil],
 						 [NSMutableDictionary dictionaryWithObjectsAndKeys:
 						  @"Settings", @"name",
@@ -129,6 +135,11 @@
 	[self.navigationController pushViewController: [[[AboutController alloc] initWithNibName:@"AboutController" bundle:nil] autorelease]
 										 animated:YES];	
 }
+- (void) helpController
+{
+	[self.navigationController pushViewController: [[[HelpController alloc] init] autorelease]
+										 animated:YES];	
+}
 - (void) coverageController
 {
 	/*
@@ -138,7 +149,7 @@
 
 	
 	Map* coverageMap = [[Map alloc] init];
-	coverageMap.layerID = @"topp:GIS_Coverage";
+	coverageMap.layerID = kCOVERAGE_LAYER_ID;
 	coverageMap.atlasName = @"Coverage Area";
 	coverageMap.name = @"Coverage";
 	coverageMap.year = 2009;
@@ -146,7 +157,7 @@
 	center.latitude = 41.866;
 	center.longitude = -72.936;
 	coverageMap.mapCenter = center;
-	coverageMap.minZoom = 6;
+	coverageMap.minZoom = 4;
 	coverageMap.initialOpacity = 0.5;
 	
 	NSMutableArray* coverageMaps = [NSMutableArray arrayWithObject:coverageMap];
@@ -191,7 +202,7 @@
 	UIImage* headerImage = [UIImage imageNamed:@"he_mainmenu_2.png"];
 	UIImageView* headerImageView = [[UIImageView alloc] initWithImage:headerImage];
 	
-	headerImageView.frame = CGRectMake(0, 0, 320, 160);
+	headerImageView.frame = CGRectMake(0, 0, 320, 130);
 	headerImageView.contentMode = UIViewContentModeBottom;
 	headerImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 		
@@ -217,11 +228,15 @@
 	{
 		[self.tableView beginUpdates];
 		
+		//Insert search at end of first section
+		
 			NSIndexPath* newIndexPath = [NSIndexPath indexPathForRow:[[mainMenuData objectAtIndex:0] count] inSection:0];
 			[[mainMenuData objectAtIndex:0] insertObject:searchData atIndex:newIndexPath.row];		
 			[self.tableView insertRowsAtIndexPaths: [NSArray arrayWithObject: newIndexPath] withRowAnimation:UITableViewRowAnimationTop];
 
-			if([[mainMenuData objectAtIndex:1] count] == 4)
+		//If store is present remove it from end of second section -- count HARD CODED
+		
+			if([[mainMenuData objectAtIndex:1] count] == 5)
 			{
 				NSIndexPath* additionContentIndex = [NSIndexPath indexPathForRow:[[mainMenuData objectAtIndex:1] count]-1 inSection:1];
 				[[mainMenuData objectAtIndex:1] removeObject:additionContentData];

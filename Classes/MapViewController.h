@@ -74,6 +74,9 @@
 	
 	NSDate* loadTime;
 	
+	
+	BOOL canUpdateMarker;
+	
 }
 
 @property (nonatomic, retain) NSMutableArray* maps;
@@ -85,7 +88,7 @@
 - (id) initWithMaps: (NSMutableArray *) theMaps allowCompass: (BOOL)compassAllowed;
 
 - (void) loadMapAtIndex: (int) theIndex;
-- (void) loadMapAtIndex: (int) theIndex withMarkerLocation: (CLLocationCoordinate2D) loc;
+- (void) loadMapAtIndex: (int) theIndex withMarkerLocation: (CLLocationCoordinate2D) loc shouldUpdate: (BOOL) amUpdating;
 
 - (void) updateArrows;
 

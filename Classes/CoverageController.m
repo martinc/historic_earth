@@ -357,7 +357,7 @@
 			
 			//Marker
 			
-			RMMarker* aMarker = [[RMMarker alloc] initWithUIImage: [UIImage imageNamed:@"marker-blue.png"] anchorPoint: CGPointMake(0.5, 1.0)];
+			RMMarker* aMarker = [[RMMarker alloc] initWithUIImage: [UIImage imageNamed:kMARKER_IMAGE] anchorPoint: CGPointMake(0.5, 1.0)];
 			
 			[mapView.markerManager addMarker:aMarker AtLatLong: averageLocation];
 			

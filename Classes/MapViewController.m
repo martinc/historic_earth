@@ -16,7 +16,6 @@
 
 #define degreesToRadians(x) (M_PI * x / 180.0)
 
-#define MAX_ZOOM 18.0
 
 #define LARGE_FRAME_SIZE 640.0
 
@@ -46,6 +45,7 @@
 		currentRotation = 0.0;
 		compassRunning = NO;
 		amAnimating = NO;
+		canUpdateMarker = YES;
 		
 		locked = [[NSUserDefaults standardUserDefaults] boolForKey:kLOCK_ENABLED];
 		compassEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:kCOMPASS_ENABLED] && compassAllowed;
@@ -270,19 +270,27 @@
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
 
-	markerLocation = newLocation.coordinate;
+	if(canUpdateMarker)
+	{
+#ifdef DEBUG
+		NSLog(@"updating marker position");
+#endif
+		
+		markerLocation = newLocation.coordinate;
 
-	if(!theMarker){
-		theMarker = [[RMMarker alloc] initWithUIImage: [UIImage imageNamed:@"marker-blue.png"] anchorPoint: CGPointMake(0.5, 1.0)];
-	}
-	
-	if([oldMapView.markerManager managingMarker:theMarker])
-	{
-		[oldMapView.markerManager moveMarker: theMarker AtLatLon: markerLocation];
-	}
-	else
-	{
-		[oldMapView.markerManager addMarker: theMarker AtLatLong: markerLocation];
+		if(!theMarker){
+			theMarker = [[RMMarker alloc] initWithUIImage: [UIImage imageNamed:kMARKER_IMAGE] anchorPoint: CGPointMake(0.5, 1.0)];
+		}
+		
+		if([oldMapView.markerManager managingMarker:theMarker])
+		{
+			[oldMapView.markerManager moveMarker: theMarker AtLatLon: markerLocation];
+		}
+		else
+		{
+			[oldMapView.markerManager addMarker: theMarker AtLatLong: markerLocation];
+			
+		}
 		
 	}
 	
@@ -622,19 +630,28 @@
 }
 
 
-- (void) loadMapAtIndex: (int) theIndex withMarkerLocation: (CLLocationCoordinate2D) loc
+- (void) loadMapAtIndex: (int) theIndex withMarkerLocation: (CLLocationCoordinate2D) loc shouldUpdate: (BOOL) amUpdating
 {
+	canUpdateMarker = amUpdating;
 	
 	[self loadMapAtIndex: theIndex];
 	
 	markerLocation = loc;
 	
 	if(!theMarker){
-		theMarker = [[RMMarker alloc] initWithUIImage: [UIImage imageNamed:@"marker-blue.png"] anchorPoint: CGPointMake(0.5, 1.0)];
+		theMarker = [[RMMarker alloc] initWithUIImage: [UIImage imageNamed:kMARKER_IMAGE] anchorPoint: CGPointMake(0.5, 1.0)];
 		[oldMapView.markerManager addMarker: theMarker AtLatLong: markerLocation];
+#ifdef DEBUG
+		NSLog(@"placed new marker should move %d", amUpdating);
+#endif
+		
 	}
 	else{
 		[oldMapView.markerManager moveMarker:theMarker AtLatLon: markerLocation];
+#ifdef DEBUG
+		NSLog(@"moved marker");
+#endif
+		
 	}
 }
 
@@ -683,8 +700,30 @@
 	CLLocationCoordinate2D targetCenter;
 	
 	targetCenter = theMap.mapCenter;
+	targetMinZoom = kDEFAULT_MIN_ZOOM;
+	targetZoom = kDEFAULT_STARTING_ZOOM;
+	if(theMap.minZoom != kDEFAULT_MIN_ZOOM)
+	{
+		targetZoom = fmin(theMap.minZoom + 1.0 , MAX_ZOOM);
+	}
+	if([theMap.layerID isEqualToString:kCOVERAGE_LAYER_ID])
+	{
+		targetZoom = theMap.minZoom + 1.0;
+	}
+#ifdef DEBUG
+	NSLog(@"setting targetZoom to %f (map.minZoom is %d, max_zoom is %d)", targetZoom, theMap.minZoom, MAX_ZOOM);
+#endif
+	/*
 	targetMinZoom = theMap.minZoom - 2.0;
-	targetZoom = fmin(theMap.minZoom + 1.0 , MAX_ZOOM);
+	if(theMap.minZoom == kDEFAULT_MIN_ZOOM)
+	{
+		targetZoom = kDEFAULT_STARTING_ZOOM;
+	}
+	else
+	{
+		targetZoom = fmin(theMap.minZoom + 1.0 , MAX_ZOOM);
+	}
+	 */
 	
 	if(targetMinZoom >= targetZoom)
 	{

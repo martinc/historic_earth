@@ -13,11 +13,19 @@
 #define kMAP_ENTRANCE_DURATION 0.5
 #define kMAP_EXIT_DURATION 0.5
 
+#define kDEFAULT_MIN_ZOOM 6
+#define kDEFAULT_STARTING_ZOOM 14
+
+#define MAX_ZOOM 18
+
 
 #define kLOCK_ENABLED @"kLOCK_ENABLED"
 #define kCOMPASS_ENABLED @"kCOMPASS_ENABLED"
 #define kSEARCH_ENABLED @"kSEARCH_ENABLED"
 
+#define kCOVERAGE_LAYER_ID @"topp:GIS_Coverage"
+
+#define kMARKER_IMAGE @"marker-brown.png"
 #define kVERIFY_REAL @"https://buy.itunes.apple.com/verifyReceipt"
 #define kVERIFY_SANDBOX @"https://sandbox.itunes.apple.com/verifyReceipt"
 
