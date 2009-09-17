@@ -481,7 +481,7 @@
 	}
 	
 
-		
+	[infoBarButton release];
 	[space release];
 	[item release];
 	

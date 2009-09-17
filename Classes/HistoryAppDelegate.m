@@ -55,13 +55,17 @@
 
 	
 	//View Controllers
+
+	//Always give full access now
+	[[NSUserDefaults standardUserDefaults] setBool:YES forKey:kSEARCH_ENABLED];
 	
 
-
+/*
 #ifdef BETA
 	//Give beta testers full access
 	[[NSUserDefaults standardUserDefaults] setBool:YES forKey:kSEARCH_ENABLED];
 #endif
+ */
 /*
 #ifdef DEBUG
 #endif

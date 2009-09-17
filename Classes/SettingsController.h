@@ -13,7 +13,7 @@
 
 	IBOutlet UILabel* cacheSizeLabel;
 	
-	IBOutlet UIButton* restoreButton;
+	//IBOutlet UIButton* restoreButton;
 
 	
 	BOOL networkAvailable;
@@ -32,7 +32,7 @@
 
 
 @property (nonatomic, retain) IBOutlet UILabel* cacheSizeLabel;
-@property (nonatomic, retain) IBOutlet UIButton* restoreButton;
+//@property (nonatomic, retain) IBOutlet UIButton* restoreButton;
 
 
 @end

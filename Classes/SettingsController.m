@@ -12,7 +12,7 @@
 
 @implementation SettingsController
 
-@synthesize cacheSizeLabel, restoreButton;
+@synthesize cacheSizeLabel; // restoreButton;
 
 
 
@@ -32,8 +32,8 @@
     [super viewDidLoad];
 	[self calculateSize];
 	
-	if(!networkAvailable)
-		restoreButton.enabled = NO;
+//	if(!networkAvailable)
+//		restoreButton.enabled = NO;
 	
 }
 
