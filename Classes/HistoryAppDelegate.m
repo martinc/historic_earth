@@ -322,7 +322,7 @@
 			NSString *serverStatus = [NSString stringWithContentsOfURL:[NSURL URLWithString:kSERVER_STATUS_URL] encoding:NSUTF8StringEncoding error:NULL];
 			if(serverStatus != nil)
 			{
-				if( serverRunning == YES && [serverStatus isEqualToString:@"0"] )
+				if( serverRunning == YES && [[serverStatus stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]  hasPrefix:@"0"] )
 				{
 #ifdef DEBUG
 					NSLog(@"server not ok");
@@ -335,7 +335,7 @@
 					[self performSelectorOnMainThread:@selector(serverDown)
 										   withObject:nil waitUntilDone:NO];
 				}
-				else if( serverRunning == NO && [serverStatus isEqualToString:@"1"] )
+				else if( serverRunning == NO && [[serverStatus stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]  hasPrefix:@"1"] )
 				{
 					serverRunning = YES;
 					valueChanged = YES;

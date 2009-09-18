@@ -66,7 +66,7 @@
 
 #define kFLAG_MAP_URL @"http://emergencestudios.com/historicearth/flag?"
 
-//	#define kSERVER_STATUS_URL @"http://www.emergencestudios.com/temp/status.txt"
+//#define kSERVER_STATUS_URL @"http://www.emergencestudios.com/temp/status.txt"
 #define kSERVER_STATUS_URL @"http://www.historicmapworks.com/iPhone/serverstatus.php"
 
 #define kSERVER_DOWN_TEXT @"Historic Earth servers are down for a short time as maps are being added and maintenance occurs.\n\nWe are continuously expanding the selection of available maps from our collection.\n\nIf you have any questions please call 207.879.4627 and ask to speak to the Historic Earth team."
