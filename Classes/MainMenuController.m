@@ -154,11 +154,14 @@
 	coverageMap.name = @"Coverage";
 	coverageMap.year = 2009;
 	CLLocationCoordinate2D center;
-	center.latitude = 41.866;
-	center.longitude = -72.936;
+	//center.latitude = 41.866;
+	//center.longitude = -72.936;
+	center.latitude = 37.603;
+	center.longitude = -96.028;
 	coverageMap.mapCenter = center;
-	coverageMap.minZoom = 4;
-	coverageMap.initialOpacity = 0.5;
+	//coverageMap.minZoom = 4;
+	coverageMap.minZoom = 2;
+	coverageMap.initialOpacity = 0.6;
 	
 	NSMutableArray* coverageMaps = [NSMutableArray arrayWithObject:coverageMap];
 	[coverageMap release];
