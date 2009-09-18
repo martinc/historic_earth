@@ -114,6 +114,8 @@
 	
 	//Server heartbeat
 	
+	serverRunning = YES;
+	
 	[NSThread detachNewThreadSelector: @selector(serverHeartbeat:) toTarget:self withObject:nil];	
 
 }
@@ -296,7 +298,6 @@
 {
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	heartBeat = [[NSThread currentThread] retain];
-	BOOL allGood = YES;
 	NSTimer *heartTimer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(pingServer) userInfo:nil repeats:YES]; 
 	
 	
@@ -306,9 +307,11 @@
 #endif
 	
 	BOOL firstCheck = YES;
+	BOOL valueChanged = NO;
+
 	NSDate* lastChecked = [NSDate date];
 		
-	while(![heartBeat isCancelled] && allGood)
+	while(![heartBeat isCancelled])
 	{
 		if(firstCheck || [lastChecked timeIntervalSinceNow] < -60)
 		{
@@ -319,30 +322,44 @@
 			NSString *serverStatus = [NSString stringWithContentsOfURL:[NSURL URLWithString:kSERVER_STATUS_URL] encoding:NSUTF8StringEncoding error:NULL];
 			if(serverStatus != nil)
 			{
-				if( [serverStatus isEqualToString:@"0"] )
+				if( serverRunning == YES && [serverStatus isEqualToString:@"0"] )
 				{
 #ifdef DEBUG
 					NSLog(@"server not ok");
 #endif
 					
-					
+					serverRunning = NO;
+					valueChanged = YES;
+
+
 					[self performSelectorOnMainThread:@selector(serverDown)
 										   withObject:nil waitUntilDone:NO];
-					allGood = NO;
 				}
+				else if( serverRunning == NO && [serverStatus isEqualToString:@"1"] )
+				{
+					serverRunning = YES;
+					valueChanged = YES;
+					
+					[self performSelectorOnMainThread:@selector(serverUp)
+										   withObject:nil waitUntilDone:NO];
+
+					
+				}
+				/*
 				else{
 					
 #ifdef DEBUG
 					NSLog(@"server ok");
 #endif
 				}
+				 */
 			}
 			
 			lastChecked = [NSDate date];
 			firstCheck = NO;
 		}
 		
-		if(allGood)
+		//if(valueChanged)
 			[NSThread sleepForTimeInterval: 0.25];
 		
 		
@@ -360,13 +377,36 @@
 - (void) serverDown
 {
 	
+	[main disableContent];
+	[navController popToRootViewControllerAnimated:YES];
+
+	
 	if(alert)
 		[alert release];
 	
-
 	
 	alert = [[UIAlertView alloc] initWithTitle:@"Adding Maps"
 								message:kSERVER_DOWN_TEXT delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+	
+	[alert show];
+	
+}
+
+
+
+- (void) serverUp
+{
+	
+	[main enableContent];
+	[navController popToRootViewControllerAnimated:YES];
+	
+	
+	if(alert)
+		[alert release];
+	
+	
+	alert = [[UIAlertView alloc] initWithTitle:@"Server Back"
+									   message:@"Historic Earth server access has been restored." delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
 	
 	[alert show];
 	

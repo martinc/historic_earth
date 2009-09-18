@@ -91,6 +91,15 @@
 			searchVisible = NO;
 
 		}
+		
+		//Set enabled/disabled buttons
+		
+		for(NSArray* sectionArray in mainMenuData){
+			for(NSMutableDictionary* theCell in sectionArray){
+				[theCell setObject:[NSNumber numberWithBool:YES] forKey:@"enabled"];
+			}
+		}
+
 
     }
     return self;
@@ -363,6 +372,15 @@
 	//NSLog(@"the icon size is %f,%f", theIcon.size.width, theIcon.size.height);
 	
 	cell.imageView.image = 	theIcon;
+	
+	
+	BOOL amIenabled = [[[[mainMenuData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"enabled"] boolValue];
+
+	if(!amIenabled){
+		cell.textLabel.textColor = [UIColor grayColor];
+		cell.selectionStyle = UITableViewCellSelectionStyleNone;
+	}
+	
 
     return cell;
 }
@@ -391,12 +409,17 @@
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	if(contentEnabled)
-		return indexPath;
+	//if(contentEnabled)
+	//	return indexPath;
 	
-	//Allow settings and about to go through without network connection
-	if( indexPath.section == 1 && (indexPath.row == 1 || indexPath.row == 2) )
+	
+	if([[[[mainMenuData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"enabled"] boolValue])
+	{
 		return indexPath;
+	}
+	//Allow settings and about and help to go through without network connection
+	//if( indexPath.section == 1 && (indexPath.row == 1 || indexPath.row == 2 || indexPath.row == 3) )
+	//	return indexPath;
 
 	
 	return nil;
@@ -407,10 +430,38 @@
 {
 	contentEnabled = YES;
 	
+	for(NSArray* sectionArray in mainMenuData){
+		for(NSMutableDictionary* theCell in sectionArray){
+			[theCell setObject:[NSNumber numberWithBool:YES] forKey:@"enabled"];
+		}
+	}
+	
+	[self.tableView reloadData];
+
+	
 }
 -(void) disableContent
 {
 	contentEnabled = NO;
+	
+	for(NSArray* sectionArray in mainMenuData){
+		for(NSMutableDictionary* theCell in sectionArray){
+			NSString* theController = [theCell objectForKey:@"controller"];
+			
+			if([theController isEqualToString:@"helpController"] ||
+			   [theController isEqualToString:@"settingsController"] ||
+			   [theController isEqualToString:@"aboutController"])
+			{
+				[theCell setObject:[NSNumber numberWithBool:YES] forKey:@"enabled"];
+			}
+			else{
+				[theCell setObject:[NSNumber numberWithBool:NO] forKey:@"enabled"];
+				
+			}
+		}
+	}
+	
+	[self.tableView reloadData];
 }
 
 

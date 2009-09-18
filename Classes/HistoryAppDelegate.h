@@ -40,6 +40,8 @@
 	SKProductsRequest *productsRequest;
 	
 	NSThread *heartBeat;
+	
+	BOOL serverRunning;
 }
 
 @property NetworkStatus remoteHostStatus;

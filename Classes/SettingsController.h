@@ -12,11 +12,16 @@
 @interface SettingsController : UIViewController {
 
 	IBOutlet UILabel* cacheSizeLabel;
+	IBOutlet UIActivityIndicatorView* spinner;
+
 	
 	//IBOutlet UIButton* restoreButton;
 
 	
 	BOOL networkAvailable;
+	
+	double cacheSize;
+	
 	
 }
 
@@ -32,6 +37,8 @@
 
 
 @property (nonatomic, retain) IBOutlet UILabel* cacheSizeLabel;
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView* spinner;
+
 //@property (nonatomic, retain) IBOutlet UIButton* restoreButton;
 
 

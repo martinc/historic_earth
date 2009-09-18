@@ -12,14 +12,17 @@
 
 @implementation SettingsController
 
-@synthesize cacheSizeLabel; // restoreButton;
+@synthesize cacheSizeLabel, spinner; // restoreButton;
 
 
 
 - (id) initHaveNetwork: (BOOL) haveNetwork {
+	
 
 	self = [super initWithNibName:@"SettingsController" bundle:nil];
 	
+	cacheSize = 0;
+
 	
 	networkAvailable = haveNetwork;
 	
@@ -48,6 +51,15 @@
 - (void) calculateSize
 {
 	
+	[NSThread detachNewThreadSelector: @selector(calculateSizeThread:) toTarget:self withObject:nil];	
+
+}
+
+- (void)calculateSizeThread:(NSString *)poststring
+{
+	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+	
+	
 	NSArray* paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
 	
 	NSString* folderPath = [paths objectAtIndex:0];
@@ -64,15 +76,29 @@
 		totalSize += [fattrib fileSize] / 1048576.0;
 	}
 	
+	NSNumber* theCacheSize = [NSNumber numberWithDouble:totalSize];
+	cacheSize = totalSize;
+
+	[self performSelectorOnMainThread:@selector(updateSize:) withObject:theCacheSize waitUntilDone:YES];
 	
-	cacheSizeLabel.text = [NSString stringWithFormat:@"%.1f MB", totalSize];
 	
 	/*
-	float memoryUsage = [[NSURLCache sharedURLCache] currentMemoryUsage] / 1048576.0;
-	float diskUsage = [[NSURLCache sharedURLCache] currentDiskUsage] / 1048576.0;
-	NSLog(@"NSURL cache using %f mb memory and %f mb disk", memoryUsage, diskUsage);
+	 float memoryUsage = [[NSURLCache sharedURLCache] currentMemoryUsage] / 1048576.0;
+	 float diskUsage = [[NSURLCache sharedURLCache] currentDiskUsage] / 1048576.0;
+	 NSLog(@"NSURL cache using %f mb memory and %f mb disk", memoryUsage, diskUsage);
 	 */
+	
+	
+	[pool drain];
 }
+
+- (void) updateSize: (NSNumber *) theSize 
+{
+	cacheSizeLabel.text = [NSString stringWithFormat:@"%.1f MB", [theSize doubleValue]];
+	[spinner stopAnimating];
+	cacheSizeLabel.hidden = NO;
+}
+
 
 - (IBAction) done
 {
@@ -203,6 +229,7 @@
 	// Release any retained subviews of the main view.
 	// e.g. self.myOutlet = nil;
 }
+
 
 
 - (void)dealloc {
