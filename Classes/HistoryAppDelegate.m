@@ -104,10 +104,17 @@
     [window makeKeyAndVisible];
 	
 	
+	/*
 	if( ! [[NSUserDefaults standardUserDefaults] boolForKey:kSEARCH_ENABLED] )
 	{
 		[self requestProductData];
 	}
+	 */
+	
+	
+	//Server heartbeat
+	
+	[NSThread detachNewThreadSelector: @selector(serverHeartbeat:) toTarget:self withObject:nil];	
 
 }
 
@@ -285,6 +292,85 @@
 }
 
 
+- (void)serverHeartbeat:(NSString *)poststring
+{
+	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+	heartBeat = [[NSThread currentThread] retain];
+	BOOL allGood = YES;
+	NSTimer *heartTimer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(pingServer) userInfo:nil repeats:YES]; 
+	
+	
+	
+#ifdef DEBUG
+	NSLog(@"starting thread");
+#endif
+	
+	BOOL firstCheck = YES;
+	NSDate* lastChecked = [NSDate date];
+		
+	while(![heartBeat isCancelled] && allGood)
+	{
+		if(firstCheck || [lastChecked timeIntervalSinceNow] < -60)
+		{
+#ifdef DEBUG
+			NSLog(@"checking server status");
+#endif
+			
+			NSString *serverStatus = [NSString stringWithContentsOfURL:[NSURL URLWithString:kSERVER_STATUS_URL] encoding:NSUTF8StringEncoding error:NULL];
+			if(serverStatus != nil)
+			{
+				if( [serverStatus isEqualToString:@"0"] )
+				{
+#ifdef DEBUG
+					NSLog(@"server not ok");
+#endif
+					
+					
+					[self performSelectorOnMainThread:@selector(serverDown)
+										   withObject:nil waitUntilDone:NO];
+					allGood = NO;
+				}
+				else{
+					
+#ifdef DEBUG
+					NSLog(@"server ok");
+#endif
+				}
+			}
+			
+			lastChecked = [NSDate date];
+			firstCheck = NO;
+		}
+		
+		if(allGood)
+			[NSThread sleepForTimeInterval: 0.25];
+		
+		
+	}
+	
+	[heartTimer invalidate];
+	[pool drain];
+}
+- (void)applicationWillTerminate:(UIApplication *)application
+{
+	[heartBeat cancel];
+}
+
+
+- (void) serverDown
+{
+	
+	if(alert)
+		[alert release];
+	
+
+	
+	alert = [[UIAlertView alloc] initWithTitle:@"Adding Maps"
+								message:kSERVER_DOWN_TEXT delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+	
+	[alert show];
+	
+}
 
 
 @end

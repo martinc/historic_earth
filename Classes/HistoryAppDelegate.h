@@ -38,8 +38,8 @@
 	
 	NSArray *products;
 	SKProductsRequest *productsRequest;
-
-
+	
+	NSThread *heartBeat;
 }
 
 @property NetworkStatus remoteHostStatus;

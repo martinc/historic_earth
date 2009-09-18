@@ -36,6 +36,11 @@
 	
 	UIBarButtonItem* shuffleButton;
 	UIBarButtonItem* reframeButton;
+	UIBarButtonItem* sliderBarItem;
+	UIBarButtonItem* infoBarButton;
+	UIBarButtonItem* space;
+	
+	NSArray* barItems;
 
 	
 	BOOL hasTouchMoved;

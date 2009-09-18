@@ -20,10 +20,12 @@
 #define LARGE_FRAME_SIZE 640.0
 
 
+#define SLIDER_WIDTH_PORTRAIT_SEARCH 175
+#define SLIDER_WIDTH_LANDSCAPE_SEARCH 340
+
+
 #define SLIDER_WIDTH_PORTRAIT 225
-#define SLIDER_WIDTH_PORTRAIT_SEARCH 195
 #define SLIDER_WIDTH_LANDSCAPE 390
-#define SLIDER_WIDTH_LANDSCAPE_SEARCH 360
 
 
 
@@ -313,10 +315,11 @@
 	masterView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	masterView.autoresizesSubviews = YES;
 	masterView.userInteractionEnabled = NO;
+	masterView.backgroundColor = [UIColor clearColor];
+	
 	[self.view addSubview:masterView];
 	
 	//debugging
-	masterView.backgroundColor = [UIColor clearColor];
 	
 		
 	locked = YES;
@@ -415,14 +418,14 @@
 
 	 */
 	 
-	 UIBarButtonItem* item = [[UIBarButtonItem alloc] initWithCustomView: slider];
+	sliderBarItem = [[UIBarButtonItem alloc] initWithCustomView: slider];
 
 	
-	//item.customView.bounds = CGRectMake(0, 0, 100, 100);
-	//item.width = 170;
+	//sliderBarItem.customView.bounds = CGRectMake(0, 0, 100, 100);
+	//sliderBarItem.width = 170;
 	
 
-	UIBarButtonItem* space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:NULL];
+	space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:NULL];
 							
 	/*
 	NSString* lockIconPath = [[NSBundle mainBundle] pathForResource:@"54-lock" ofType:@"png" inDirectory:@"Images"];
@@ -435,10 +438,10 @@
 	*/
 	
 	
-	infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
+	infoButton = [[UIButton buttonWithType:UIButtonTypeInfoLight] retain];
 	[infoButton addTarget:self action:@selector(showInfo) forControlEvents:UIControlEventTouchUpInside];
 	
-	UIBarButtonItem* infoBarButton = [[UIBarButtonItem alloc] initWithCustomView:infoButton];
+	infoBarButton = [[UIBarButtonItem alloc] initWithCustomView:infoButton];
 	infoBarButton.style = UIBarButtonItemStyleBordered;
 	//infoBarButton.target = self;
 	//infoBarButton.action = @selector(showInfo);
@@ -457,7 +460,6 @@
 													action:@selector(reframeSearch)
 					 ];
 	
-	NSArray* items;
 	
 	
 	UIDeviceOrientation orientation = self.interfaceOrientation;
@@ -472,28 +474,24 @@
 	if([[NSUserDefaults standardUserDefaults] boolForKey:kSEARCH_ENABLED])
 	{
 		slider.frame = CGRectMake(0,0, isLandscape ? SLIDER_WIDTH_LANDSCAPE_SEARCH : SLIDER_WIDTH_PORTRAIT_SEARCH ,20);
-		items = [[NSArray alloc] initWithObjects: shuffleButton, reframeButton, item,  infoBarButton, nil ];
+		barItems = [[NSArray alloc] initWithObjects: shuffleButton, space, reframeButton, space, sliderBarItem, space,  infoBarButton, nil ];
 	}
 	else
 	{
 		slider.frame = CGRectMake(0,0, isLandscape ? SLIDER_WIDTH_LANDSCAPE : SLIDER_WIDTH_PORTRAIT  ,20);
-		items = [[NSArray alloc] initWithObjects: shuffleButton, item, infoBarButton, nil ];
+		barItems = [[NSArray alloc] initWithObjects: shuffleButton, space, sliderBarItem, space, infoBarButton, nil ];
 	}
 	
 
-	[infoBarButton release];
-	[space release];
-	[item release];
 	
 	self.navigationController.toolbar.barStyle = self.navigationController.navigationBar.barStyle;
 	self.navigationController.toolbar.tintColor = self.navigationController.navigationBar.tintColor;
 	self.navigationController.toolbar.translucent = self.navigationController.navigationBar.translucent;
 	
 	
-	[self setToolbarItems:items animated: NO ];
+	[self setToolbarItems:barItems animated: NO ];
 
 	
-	[items release];
 	self.hidesBottomBarWhenPushed = NO;
 	
 	
@@ -1265,7 +1263,7 @@
 	
 	[[RMTileFactory primaryCache] empty];
 	
-	[self setToolbarItems: [NSArray array] animated:NO]; 
+//[self setToolbarItems: [NSArray array] animated:NO]; 
 
 	
 	[maps release];
@@ -1293,8 +1291,14 @@
 	[infoButton release];
 	[loadTime release];
 	
+	[sliderBarItem release];
+	[infoBarButton release];
+	[space release];
+	
+	
 	[locationManager release];
 	[compassIndicator release];
+	[barItems release];
 	
 	
 	[super dealloc];

@@ -35,7 +35,7 @@
 	//searchBar.tintColor = self.navigationController.navigationBar.tintColor;
 	searchBar.translucent = self.navigationController.navigationBar.translucent;
 	
-	searchBar.placeholder = @"Street, City, State";
+	searchBar.placeholder = @"Enter an Address, City, or Zip Code";
 	
 
 
@@ -90,7 +90,7 @@
 	NSString *searchText = searchBar.text;
 	
 	
-	
+	/*
 	NSArray *searchComponents = [searchText componentsSeparatedByString:@","];
 
 	
@@ -127,8 +127,10 @@
 
 	}
 	else{
-		/*
-		NSString *requestURL = [[NSString stringWithFormat:@"%@a=\"%@\"",
+	 
+	 */
+		
+		NSString *requestURL = [[NSString stringWithFormat:@"%@a=%@",
 								 kSEARCH_BY_ADDRESS_URL,
 								 searchText]
 								stringByAddingPercentEscapesUsingEncoding: NSASCIIStringEncoding];
@@ -138,16 +140,16 @@
 												timeoutInterval:15.0]];
 		
 		[[NSUserDefaults standardUserDefaults] setObject:searchText forKey:@"lastSearchText"];
-		*/
+
 		
-		
+		/*
 		UIAlertView* alert = [[[UIAlertView alloc] initWithTitle:@"Invalid Search"
 										   message:@"Please enter your address using two commas in the form Street, City, State." delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil] autorelease];
 
 		[alert show];
+		*/
 		
-		
-	}
+//	}
 	
 	[self doneSearching];
 	

@@ -31,7 +31,7 @@
 
 		
 		searchData =  [[NSMutableDictionary alloc] initWithObjectsAndKeys:
-						  @"Search by Address", @"name",
+						  @"Search", @"name",
 						  @"searchController", @"controller",
 						  searchIcon, @"image",
 					   nil];
