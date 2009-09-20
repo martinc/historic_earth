@@ -21,6 +21,8 @@
 	CLLocationCoordinate2D currentLocation;
 	
 	BOOL haveLoadedLocation;
+	
+	BOOL fromGeographicSearch;
 
 }
 

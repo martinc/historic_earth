@@ -1169,7 +1169,7 @@
 	 [[[CLLocation alloc] initWithLatitude:39.95249714905981 longitude:-75.16377925872803] autorelease]  
 			 fromLocation:nil];
 	
-	dummyLocationTimer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(dummyLocationMove) userInfo:nil repeats:YES];
+	//dummyLocationTimer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(dummyLocationMove) userInfo:nil repeats:YES];
 	
 	
 #else
@@ -1204,6 +1204,8 @@
 	[super viewWillAppear:animated];
 
 }
+
+/*
 - (void) dummyLocationMove
 {
 	
@@ -1217,6 +1219,7 @@
 
 	
 }
+*/
 
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
@@ -1228,7 +1231,7 @@
 	
 	
 #if TARGET_IPHONE_SIMULATOR
-	[dummyLocationTimer invalidate];	
+	//[dummyLocationTimer invalidate];	
 #else
 	[locationManager stopUpdatingLocation];
 #endif

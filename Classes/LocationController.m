@@ -7,6 +7,8 @@
 //
 
 #import "LocationController.h"
+#import "TargetConditionals.h"
+
 
 
 
@@ -23,6 +25,8 @@
 	
 	haveLoadedLocation = YES;
 	
+	fromGeographicSearch = YES;
+	
 	[self refreshData];
 	
 	return self;
@@ -32,6 +36,7 @@
 {
 	self = [super initWithStyle:style];
 	
+	fromGeographicSearch = NO;
 	haveLoadedLocation = NO;
 	[self startUpdates];
 	
@@ -82,9 +87,16 @@
 
 - (void)refreshData
 {
+	
+#if TARGET_IPHONE_SIMULATOR
 	//Sample Data
-	//currentLocation.longitude = -75.16377925872803;
-	//currentLocation.latitude =  39.95249714905981;
+	if(! fromGeographicSearch)
+	{
+		currentLocation.longitude = -74.013;
+		currentLocation.latitude =  40.705;
+	}
+#endif
+	
 	REQUEST_URL = [[NSString alloc] initWithFormat: @"%@lat=%f&long=%f", kLAT_LONG_SEARCH,
 				   currentLocation.latitude, currentLocation.longitude];
 	

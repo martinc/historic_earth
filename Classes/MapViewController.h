@@ -75,7 +75,7 @@
 	
 	BOOL amAnimating;
 	
-	NSTimer* dummyLocationTimer;
+	//NSTimer* dummyLocationTimer;
 	
 	NSDate* loadTime;
 	
