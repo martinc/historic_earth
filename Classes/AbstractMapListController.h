@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 #import "CustomButton.h"
 #import "MapViewController.h"
 #import "Three20/Three20.h"
@@ -29,7 +30,11 @@
 	NSURLConnection *theConnection;
 	
 	UILabel *statusLabel;
+	
+
 }
+
+@property (nonatomic,readonly) UILabel *statusLabel;
 
 - (void) refreshWithLocation: (CLLocationCoordinate2D) theLocation;
 

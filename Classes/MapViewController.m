@@ -11,6 +11,7 @@
 #import "LocationController.h"
 #import "TargetConditionals.h"
 #import "RMTileFactory.h"
+#import "Locator.h"
 
 #define kFilteringFactor 0.05
 
@@ -41,13 +42,19 @@
 
 
 // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
+	
+
+//- (id) initWithMaps: (NSMutableArray *) theMaps allowCompass: (BOOL)compassAllowed locationManager: (CLLocationManager *) locMan {
+
+
 - (id) initWithMaps: (NSMutableArray *) theMaps allowCompass: (BOOL)compassAllowed{
+
     if (self = [super initWithNibName:nil bundle:nil]) {
 		
 		currentRotation = 0.0;
 		compassRunning = NO;
 		amAnimating = NO;
-		canUpdateMarker = YES;
+		canUpdateMarker = NO;
 		
 		locked = [[NSUserDefaults standardUserDefaults] boolForKey:kLOCK_ENABLED];
 		compassEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:kCOMPASS_ENABLED] && compassAllowed;
@@ -58,9 +65,9 @@
 		currentMapIndex = 0;
 		
 		
-		locationManager = [[CLLocationManager alloc] init];
-		locationManager.delegate = self;
-		//locationManager.headingFilter = 1.0;
+		locationManager = [Locator sharedLocationManager];
+		//locationManager.delegate = self;
+		locationManager.headingFilter = 1.0;
 		
 		[[NSNotificationCenter defaultCenter] addObserver:self
 												 selector:@selector(updateSettings:)
@@ -1134,6 +1141,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
 	
+	locationManager.delegate = self;
+	
 	
 	UIDeviceOrientation orientation = self.interfaceOrientation;
 	UIDeviceOrientation deviceOrientation = [[UIDevice currentDevice] orientation];
@@ -1173,7 +1182,11 @@
 	
 	
 #else
-	[locationManager startUpdatingLocation];
+	
+	if( locationManager.locationServicesEnabled && canUpdateMarker )
+	{
+		[locationManager startUpdatingLocation];
+	}
 
 #endif
 	
@@ -1234,6 +1247,7 @@
 	//[dummyLocationTimer invalidate];	
 #else
 	[locationManager stopUpdatingLocation];
+	locationManager.delegate = nil;
 #endif
 	
 	if(compassRunning)
@@ -1299,7 +1313,6 @@
 	[space release];
 	
 	
-	[locationManager release];
 	[compassIndicator release];
 	[barItems release];
 	

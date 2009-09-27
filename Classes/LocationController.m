@@ -8,6 +8,7 @@
 
 #import "LocationController.h"
 #import "TargetConditionals.h"
+#import "Locator.h"
 
 
 
@@ -21,10 +22,11 @@
 {
 	self = [super initWithStyle:UITableViewStyleGrouped];
 	
+	
+	locationManager = [Locator sharedLocationManager];
+	
 	currentLocation = theLoc;
-	
 	haveLoadedLocation = YES;
-	
 	fromGeographicSearch = YES;
 	
 	[self refreshData];
@@ -36,6 +38,9 @@
 {
 	self = [super initWithStyle:style];
 	
+	locationManager = [Locator sharedLocationManager];
+
+	
 	fromGeographicSearch = NO;
 	haveLoadedLocation = NO;
 	[self startUpdates];
@@ -45,6 +50,16 @@
 	
 }
 
+- (void)viewDidLoad {
+
+	[super viewDidLoad];
+	
+	self.statusLabel.text = @"Determining your location...";
+	self.statusLabel.hidden = NO;
+	
+	self.title = @"My Location";
+}
+
 
 - (void) dealloc
 {
@@ -52,7 +67,11 @@
 	
 	[locationManager stopUpdatingLocation];
 	
-	[locationManager release];
+	if(startedUpdatingTime != nil)
+		[startedUpdatingTime release];
+	
+	if(bestLocation != nil)
+		[bestLocation release];
 
 	
 	[super dealloc];
@@ -60,21 +79,16 @@
 
 - (void)startUpdates
 {
-    // Create the location manager if this object does not
-    // already have one.
-    if (locationManager == nil)
-        locationManager = [[CLLocationManager alloc] init];
-	
-    locationManager.delegate = self;
-    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-	
-    // Set a movement threshold for new events
-    locationManager.distanceFilter = kCLDistanceFilterNone;
-	
-	
-	
-	[locationManager startUpdatingLocation];
 
+	locationManager.delegate = self;
+	
+	startedUpdatingTime = [[NSDate alloc] init];
+	[locationManager stopUpdatingLocation];
+	[locationManager startUpdatingLocation];
+	
+	
+	[self performSelector:@selector(determineLocation) withObject:nil afterDelay: 4.0 ];
+	
 	/*
 	if (locationManager.headingAvailable)
 	{
@@ -103,6 +117,12 @@
 #ifdef DEBUG
 	NSLog(REQUEST_URL);
 #endif
+	
+	self.statusLabel.text = @"Looking for maps...";
+	self.statusLabel.hidden = NO;
+	
+	[statusLabel setNeedsDisplay];
+
 			
 		[self loadDataWithRequest: [NSURLRequest requestWithURL:[NSURL URLWithString:REQUEST_URL]
 													cachePolicy:NSURLRequestUseProtocolCachePolicy
@@ -127,12 +147,41 @@
 		   fromLocation:(CLLocation *)oldLocation
 {
 	
-	currentLocation = newLocation.coordinate;
+#ifdef DEBUG
+	NSLog(@"received location that is %f seconds old, %f seconds since request, %f circle of accuracy",
+		  [newLocation.timestamp timeIntervalSinceNow], [startedUpdatingTime timeIntervalSinceNow], newLocation.horizontalAccuracy);
+#endif
 	
-	if(!haveLoadedLocation){
-		haveLoadedLocation = YES;
-		[self refreshData];		
+	if(bestLocation == nil)
+	{
+		bestLocation = [newLocation retain];
 	}
+	
+	BOOL accuracyIsBetter = newLocation.horizontalAccuracy < bestLocation.horizontalAccuracy;
+	BOOL accuracyIsBetterOrEqual = newLocation.horizontalAccuracy <= bestLocation.horizontalAccuracy;
+	BOOL isNotAncient = fabs([bestLocation.timestamp timeIntervalSinceNow]) < 5.0;
+	BOOL newLocIsReallyNewer = fabs([newLocation.timestamp timeIntervalSinceNow]) < fabs([bestLocation.timestamp timeIntervalSinceNow]);
+
+#ifdef DEBUG
+	NSLog(@"accuracyIsBetter? %d accuracyIsBetterOrEqual? %d isNotAncient? %d newLocIsReallyNewer? %d", accuracyIsBetter, accuracyIsBetterOrEqual, isNotAncient, newLocIsReallyNewer);
+#endif
+	
+	
+		if( !haveLoadedLocation || 
+		   isNotAncient &&
+		   (accuracyIsBetter ||
+		   (accuracyIsBetterOrEqual && newLocIsReallyNewer) ) )
+		{
+	#ifdef DEBUG
+			NSLog(@"setting location");
+	#endif
+			
+			haveLoadedLocation = YES;
+			[bestLocation release];
+			bestLocation = [newLocation retain];
+			currentLocation = newLocation.coordinate;
+		}
+	
     // If it's a relatively recent event, turn off updates to save power
  /*   NSDate* eventDate = newLocation.timestamp;
     NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
@@ -148,6 +197,36 @@
     // else skip the event and process the next one.
 }
 
+- (void) determineLocation
+{
+	
+	if(haveLoadedLocation)
+	{
+		[locationManager stopUpdatingLocation];
+		[self refreshData];
+	}
+	else
+	{
+		if(fabs([startedUpdatingTime timeIntervalSinceNow]) > 30.0)
+		{
+			statusLabel.hidden = NO;
+			statusLabel.text = @"Could not determine location.";
+			[loadingSpinner stopAnimating];
+		}
+		else
+		{
+			[self performSelector:@selector(determineLocation) withObject:nil afterDelay: 4.0];
+		}
+
+	}	
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+	statusLabel.hidden = YES;
+	
+	[super connectionDidFinishLoading:connection];
+}
 
 
 
@@ -162,6 +241,44 @@
 		// Do something with the event data.
 	}
 }
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+	
+	//can ignore kCLErrorLocationUnknown
+	
+	if([error code] == kCLErrorDenied)
+	{
+		
+		[locationManager stopUpdatingLocation];
+		
+		UIAlertView* locationDeniedAlert = [[UIAlertView alloc] initWithTitle:@"Location Required"
+																		message:@"In order to use the Map My Location feature, Historic Earth needs to be allowed to access your location."
+																	   delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+		
+		[locationDeniedAlert show];	
+		[locationDeniedAlert release];
+		
+				
+	}
+	
+	//kCLErrorDenied 
+	
+	//kCLErrorHeadingFailure
+	
+	
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+	//send back to main menu after location denied
+	
+	
+	[self.navigationController popToRootViewControllerAnimated: YES];
+	
+	
+}
+
 
 
 /*

@@ -19,6 +19,8 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
+	self.title = @"Search";
+	
 	
 	REQUEST_URL = kSEARCH_BY_ADDRESS_URL;
 

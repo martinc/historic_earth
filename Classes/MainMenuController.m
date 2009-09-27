@@ -7,6 +7,7 @@
 //
 
 #import "MainMenuController.h"
+#import "Locator.h"
 
 
 @implementation MainMenuController
@@ -99,6 +100,25 @@
 				[theCell setObject:[NSNumber numberWithBool:YES] forKey:@"enabled"];
 			}
 		}
+		
+		//If location services are disabled, disable Map My Location
+		
+		CLLocationManager* testLocManager = [Locator sharedLocationManager];
+		if(testLocManager.locationServicesEnabled == NO)
+		{
+			[[[mainMenuData objectAtIndex:0] objectAtIndex:0] setObject:[NSNumber numberWithBool:NO] forKey:@"enabled"];
+			
+			UIAlertView* locationDisabledAlert = [[UIAlertView alloc] initWithTitle:@"Location Services Disabled"
+																			message:@"Map My Location is disabled because Location Services are disabled for all applications on this device. Location Services can be enabled in the Settings app, under the General section."
+																		   delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+			
+			[locationDisabledAlert show];	
+			[locationDisabledAlert release];
+			
+			
+		}
+		//[testLocManager release];
+		
 
 
     }
@@ -178,6 +198,7 @@
 	MapViewController* mapview = [[MapViewController alloc] initWithMaps:coverageMaps allowCompass:NO];
 	[mapview loadMapAtIndex:0];
 
+	mapview.title = @"Coverage";
 	
 	[self.navigationController pushViewController: mapview animated:YES];
 	
@@ -279,6 +300,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 	[self.navigationController setNavigationBarHidden:YES animated: animated];
+	[self.navigationController setToolbarHidden:YES animated: animated];
+
 }
 
 /*

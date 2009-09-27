@@ -12,17 +12,20 @@
 
 
 
-@interface LocationController : AbstractMapListController <CLLocationManagerDelegate> {
+@interface LocationController : AbstractMapListController <CLLocationManagerDelegate, UIAlertViewDelegate> {
 
 	NSString *REQUEST_URL;
 	
 	CLLocationManager *locationManager;
 	
+	CLLocation *bestLocation;
 	CLLocationCoordinate2D currentLocation;
 	
 	BOOL haveLoadedLocation;
 	
 	BOOL fromGeographicSearch;
+	
+	NSDate *startedUpdatingTime;
 
 }
 

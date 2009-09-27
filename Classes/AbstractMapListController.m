@@ -14,7 +14,7 @@
 
 @implementation AbstractMapListController
 
-
+@synthesize statusLabel;
 
 /*
 
@@ -50,8 +50,14 @@
 */
 
 }
-
-
+/*
+- (id) initWithStyle:(UITableViewStyle)style
+{
+	self = [super initWithStyle:style];	
+	return self;
+	
+}
+*/
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
@@ -80,8 +86,11 @@
 	
 	[self.view addSubview:loadingSpinner];
 	
+	
+	
 	maps = [[NSMutableArray alloc] init];
 	mapController = [[MapViewController alloc] initWithMaps: maps];
+	//mapController = [[MapViewController alloc] initWithMaps: maps allowCompass: YES locationManager: locationManager];
 
 	[loadingSpinner startAnimating];
 
@@ -115,7 +124,8 @@
 	[maps removeAllObjects];
 	[self.tableView reloadData];
 	
-	statusLabel.hidden = YES;
+	if( ! [self isKindOfClass:[LocationController class]])
+		statusLabel.hidden = YES;
 	
 	// create the connection with the request
 	// and start loading the data
@@ -263,7 +273,7 @@
 						
 						if(theAtlasName && theBL && theTR && theLayer && theName && theYear && theMinZoom){
 							
-							BOOL hasLocation = YES;
+							//BOOL hasLocation = YES;
 							
 							Map* theMap = [[Map alloc] init];
 							
@@ -431,7 +441,10 @@
 			theAtlas.mapCenter = averageCenter;
 			
 			theAtlas.layerID = [layerIDS componentsJoinedByString:@","];
-			//NSLog(@"setting new atlas layer ID to %@", theAtlas.layerID);
+			
+#ifdef DEBUG
+			NSLog(@"setting new atlas layer ID to %@", theAtlas.layerID);
+#endif
 			theAtlas.name = [NSString stringWithFormat:@"%d Plate%@", [componentMaps count], [componentMaps count] > 1 ? @"s" : @"" ];
 
 			[atlases addObject:theAtlas];
@@ -530,6 +543,8 @@
 	NSLog(@"AbstractMapListController dealloc.");
 	
 #endif
+	
+	
 	
 	[mapController release];
 	[maps release];

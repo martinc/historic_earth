@@ -91,6 +91,8 @@
 
 - (id) initWithMaps: (NSMutableArray *) theMaps;
 - (id) initWithMaps: (NSMutableArray *) theMaps allowCompass: (BOOL)compassAllowed;
+//- (id) initWithMaps: (NSMutableArray *) theMaps allowCompass: (BOOL)compassAllowed locationManager: (CLLocationManager *) locMan;
+
 
 - (void) loadMapAtIndex: (int) theIndex;
 - (void) loadMapAtIndex: (int) theIndex withMarkerLocation: (CLLocationCoordinate2D) loc shouldUpdate: (BOOL) amUpdating;

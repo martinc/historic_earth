@@ -8,6 +8,7 @@
 
 #import "HistoryAppDelegate.h"
 #import "AbstractMapListController.h"
+#import "Locator.h"
 
 
 
@@ -290,6 +291,7 @@
 	if(productsRequest)
 		[productsRequest release];
 	
+	
     [super dealloc];
 }
 
@@ -307,7 +309,6 @@
 #endif
 	
 	BOOL firstCheck = YES;
-	BOOL valueChanged = NO;
 
 	NSDate* lastChecked = [NSDate date];
 		
@@ -329,7 +330,6 @@
 #endif
 					
 					serverRunning = NO;
-					valueChanged = YES;
 
 
 					[self performSelectorOnMainThread:@selector(serverDown)
@@ -338,7 +338,6 @@
 				else if( serverRunning == NO && [[serverStatus stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]  hasPrefix:@"1"] )
 				{
 					serverRunning = YES;
-					valueChanged = YES;
 					
 					[self performSelectorOnMainThread:@selector(serverUp)
 										   withObject:nil waitUntilDone:NO];
