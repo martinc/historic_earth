@@ -57,7 +57,12 @@
 	self.statusLabel.text = @"Determining your location...";
 	self.statusLabel.hidden = NO;
 	
-	self.title = @"My Location";
+	if(fromGeographicSearch)
+		self.title = @"Location";
+	else
+		self.title = @"My Location";
+
+
 }
 
 
