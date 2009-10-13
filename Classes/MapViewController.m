@@ -55,6 +55,7 @@
 		compassRunning = NO;
 		amAnimating = NO;
 		canUpdateMarker = NO;
+		isNewMapList = NO;
 		
 		locked = [[NSUserDefaults standardUserDefaults] boolForKey:kLOCK_ENABLED];
 		compassEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:kCOMPASS_ENABLED] && compassAllowed;
@@ -742,7 +743,7 @@
 		//NSLog(@"old map view frame %@ center %@", NSStringFromCGRect(oldmapFrame), NSStringFromCGPoint(oldmapCenter));
 
 		
-		if(locked || !shouldFadeOut) {
+		if((locked || !shouldFadeOut) && !isNewMapList) {
 			targetCenter = oldMapView.contents.mapCenter;
 			targetZoom = fmin(oldMapView.contents.zoom, MAX_ZOOM);
 			targetMinZoom = oldMapView.contents.minZoom;
@@ -794,13 +795,13 @@
 	//	[modernMapView release];
 //		modernMapView.contents.zoom = theMap.minZoom;
 		
-		if(!locked){
+		if((!locked) || isNewMapList){
 			
 			modernMapView.contents.zoom = targetZoom;
 			modernMapView.contents.mapCenter = targetCenter;
 			modernMapView.contents.minZoom = targetMinZoom;
 			
-			
+			isNewMapList = NO;
 			
 		}
 	}
@@ -1389,4 +1390,8 @@ CLLocationCoordinate2D theMapCenter;
 	
 }
 
+- (void) loadingNewMaps
+{
+	isNewMapList = YES;
+}
 @end

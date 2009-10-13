@@ -82,6 +82,8 @@
 	
 	BOOL canUpdateMarker;
 	
+	BOOL isNewMapList;
+	
 }
 
 @property (nonatomic, retain) NSMutableArray* maps;
@@ -115,5 +117,7 @@
 
 - (void) oldMapFadedOut;
 - (void) oldMapHoldAndRemove;
+
+- (void) loadingNewMaps;
 
 @end

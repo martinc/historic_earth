@@ -121,6 +121,11 @@
 - (void) loadDataWithRequest: (NSURLRequest *) theRequest
 {
 	
+	if([maps count] > 0){
+		[mapController loadingNewMaps];
+	}
+		 
+	
 	[maps removeAllObjects];
 	[self.tableView reloadData];
 	
@@ -455,6 +460,7 @@
 	}
 	
 	[atlases sortUsingSelector:@selector(mapOrder:)];
+		
 	
 	[maps removeAllObjects];
 	[maps addObjectsFromArray:atlases];
