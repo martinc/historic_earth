@@ -450,8 +450,9 @@
 #ifdef DEBUG
 			NSLog(@"setting new atlas layer ID to %@", theAtlas.layerID);
 #endif
-			theAtlas.name = [NSString stringWithFormat:@"%d Plate%@", [componentMaps count], [componentMaps count] > 1 ? @"s" : @"" ];
-
+			//theAtlas.name = [NSString stringWithFormat:@"%d Plate%@", [componentMaps count], [componentMaps count] > 1 ? @"s" : @"" ];
+			theAtlas.name = @"";
+			
 			[atlases addObject:theAtlas];
 			
 			[theAtlas release];
@@ -616,7 +617,8 @@
 	Map* theMap = [maps objectAtIndex:indexPath.row];
 	
 	cell.textLabel.text = [NSString stringWithFormat:@"%d",theMap.year];
-	cell.detailTextLabel.text = [NSString stringWithFormat:@"%@, %@",theMap.atlasName,theMap.name];
+	//cell.detailTextLabel.text = [NSString stringWithFormat:@"%@, %@",theMap.atlasName,theMap.name];
+	cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",theMap.atlasName];
 	//cell.detailTextLabel.text = theMap.atlasName;
 
 	cell.textLabel.textColor = [UIColor brownColor];
