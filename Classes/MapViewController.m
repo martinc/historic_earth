@@ -1342,6 +1342,7 @@
 	
 	[slider release];
 	[spinner release];
+	[onMapSpinner release];
 	[backForward release];
 	[barSpinner release];
 	[segmented release];
