@@ -30,11 +30,12 @@
 	
 	UISlider* slider;
 	UIActivityIndicatorView *spinner;
+	UIActivityIndicatorView *onMapSpinner;
 	UIBarButtonItem* backForward;
 	UIBarButtonItem* barSpinner;
 	UISegmentedControl* segmented;
 	
-	UIBarButtonItem* shuffleButton;
+	//UIBarButtonItem* shuffleButton;
 	UIBarButtonItem* reframeButton;
 	UIBarButtonItem* sliderBarItem;
 	UIBarButtonItem* infoBarButton;

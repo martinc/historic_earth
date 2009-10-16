@@ -21,8 +21,8 @@
 #define LARGE_FRAME_SIZE 640.0
 
 
-#define SLIDER_WIDTH_PORTRAIT_SEARCH 175
-#define SLIDER_WIDTH_LANDSCAPE_SEARCH 340
+#define SLIDER_WIDTH_PORTRAIT_SEARCH 215
+#define SLIDER_WIDTH_LANDSCAPE_SEARCH 390
 
 
 #define SLIDER_WIDTH_PORTRAIT 225
@@ -359,6 +359,12 @@
 	spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleWhite];
 	spinner.hidesWhenStopped = YES;
 	
+	onMapSpinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleWhite];
+	onMapSpinner.hidesWhenStopped = YES;	
+	onMapSpinner.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin;
+	
+	[self.view addSubview:onMapSpinner];
+
 
 	//	spinner.frame = CGRectMake(0, 0, 320, 100);
 	
@@ -456,11 +462,14 @@
 
 //	[self.navigationController.toolbar addSubview:infoButton];
 	
+	/*
 	shuffleButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"05-shuffle.png"]
 																						   style:UIBarButtonItemStylePlain
 																						  target:self
 																						  action:@selector(shuffleMaps)
 																			  ];
+	
+	 */
 	
 	reframeButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reframe.png"]
 													 style:UIBarButtonItemStylePlain
@@ -478,16 +487,23 @@
 	NSLog(@"mapviewcontroller opening with view frame %@", NSStringFromCGRect(self.view.frame));
 	NSLog(@"is landscape? %d device says? %d", isLandscape, deviceIsLandscape);
 #endif
+	
+	if(isLandscape)
+		onMapSpinner.center = CGPointMake(480 - 20, 20);
+	else
+		onMapSpinner.center = CGPointMake(320 - 20, 20);
+	
+
 
 	if([[NSUserDefaults standardUserDefaults] boolForKey:kSEARCH_ENABLED])
 	{
 		slider.frame = CGRectMake(0,0, isLandscape ? SLIDER_WIDTH_LANDSCAPE_SEARCH : SLIDER_WIDTH_PORTRAIT_SEARCH ,20);
-		barItems = [[NSArray alloc] initWithObjects: shuffleButton, space, reframeButton, space, sliderBarItem, space,  infoBarButton, nil ];
+		barItems = [[NSArray alloc] initWithObjects: reframeButton, space, sliderBarItem, space,  infoBarButton, nil ];
 	}
 	else
 	{
 		slider.frame = CGRectMake(0,0, isLandscape ? SLIDER_WIDTH_LANDSCAPE : SLIDER_WIDTH_PORTRAIT  ,20);
-		barItems = [[NSArray alloc] initWithObjects: shuffleButton, space, sliderBarItem, space, infoBarButton, nil ];
+		barItems = [[NSArray alloc] initWithObjects: sliderBarItem, space, infoBarButton, nil ];
 	}
 	
 
@@ -609,7 +625,13 @@
 	if(spinner){
 		self.navigationItem.rightBarButtonItem = barSpinner;
 		[spinner startAnimating];
+		
+		if(self.navigationController.navigationBar.hidden)
+		{
+			[onMapSpinner startAnimating];
+		}
 	}
+
 	
 }
 
@@ -618,6 +640,8 @@
 	if(spinner){
 		[spinner stopAnimating];
 		self.navigationItem.rightBarButtonItem = backForward;
+		
+		[onMapSpinner stopAnimating];
 	}
 	
 	//NSLog(@"tileLoaded");
@@ -696,7 +720,21 @@
 	[self updateArrows];
 	
 	
-	shuffleButton.enabled = ([theMap plateCount] > 1);
+	//shuffleButton.enabled = ([theMap plateCount] > 1);
+	
+	//BOOL shufflePresent = [self.toolbarItems containsObject:shuffleButton];
+	/*
+	if(shufflePresent && !shuffleButton.enabled)
+	{
+		NSMutableArray *newToolbar = [self.toolbarItems mutableCopy];
+		[newToolbar removeObjectAtIndex:[newToolbar indexOfObject:shuffleButton]];
+		[self setToolbarItems: newToolbar animated: NO];
+	}
+	else if(shufflePresent && !shuffleButton.enabled)
+	{
+		
+	}
+	*/	   
 
 	//NSLog(@"plate count is %d", [theMap plateCount]);
 	
@@ -1060,6 +1098,9 @@
 	
 	[UIView commitAnimations];
 	
+	[onMapSpinner stopAnimating];
+
+	
 }
 - (void) showChrome
 {
@@ -1172,7 +1213,7 @@
 	[self.navigationController setNavigationBarHidden:NO animated: animated];
 	[self.navigationController setToolbarHidden:NO animated: animated];
 	
-	shuffleButton.enabled = ([[maps objectAtIndex:currentMapIndex] plateCount] > 1);
+	//shuffleButton.enabled = ([[maps objectAtIndex:currentMapIndex] plateCount] > 1);
 
 #if TARGET_IPHONE_SIMULATOR
 	[self locationManager:nil didUpdateToLocation:
@@ -1304,7 +1345,7 @@
 	[backForward release];
 	[barSpinner release];
 	[segmented release];
-	[shuffleButton release];
+	//[shuffleButton release];
 	[reframeButton release];
 	[infoButton release];
 	[loadTime release];
