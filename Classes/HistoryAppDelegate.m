@@ -118,6 +118,9 @@
 	serverRunning = YES;
 	
 	[NSThread detachNewThreadSelector: @selector(serverHeartbeat:) toTarget:self withObject:nil];	
+	
+	
+	[Appirater appLaunched];
 
 }
 

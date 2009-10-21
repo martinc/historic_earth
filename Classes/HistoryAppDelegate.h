@@ -12,6 +12,7 @@
 #import "StoreObserver.h"
 #import "Reachability.h"
 #import "TargetConditionals.h"
+#import "Appirater.h"
 
 @class StoreObserver;
 
