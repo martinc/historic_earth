@@ -293,6 +293,17 @@
 									NSLog(@"setting map minZoom to %d", theMap.minZoom);
 								#endif
 							}
+							
+							//debug test for africa continent map 1633 topp:OL31
+							/*
+							#ifdef DEBUG
+								NSLog(@"debug setting minZoom to 2");
+								if([theMap.layerID isEqualToString:@"topp:OL31"]){
+										theMap.minZoom = 2;
+								}
+							#endif
+							*/
+							
 								
 							
 							NSArray* southWestStrings = [theBL componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];

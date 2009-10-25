@@ -54,13 +54,20 @@
 
 	[super viewDidLoad];
 	
-	self.statusLabel.text = @"Determining your location...";
-	self.statusLabel.hidden = NO;
 	
 	if(fromGeographicSearch)
+	{
 		self.title = @"Location";
+		self.statusLabel.text = @"Looking for maps...";
+		self.statusLabel.hidden = NO;
+
+	}
 	else
+	{
 		self.title = @"My Location";
+		self.statusLabel.text = @"Determining your location...";
+		self.statusLabel.hidden = NO;
+	}
 
 
 }
