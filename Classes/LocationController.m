@@ -17,6 +17,7 @@
 
 @implementation LocationController
 
+@synthesize fromGeographicSearch;
 
 - (id) initWithLocation:(CLLocationCoordinate2D) theLoc
 {
@@ -24,6 +25,7 @@
 	
 	
 	locationManager = [Locator sharedLocationManager];
+	[locationManager stopUpdatingLocation];
 	
 	currentLocation = theLoc;
 	haveLoadedLocation = YES;
@@ -135,11 +137,20 @@
 	
 	[statusLabel setNeedsDisplay];
 
-			
+	
+	if(!fromGeographicSearch){		
 		[self loadDataWithRequest: [NSURLRequest requestWithURL:[NSURL URLWithString:REQUEST_URL]
 													cachePolicy:NSURLRequestUseProtocolCachePolicy
 												timeoutInterval:15.0]
 				   searchLocation: currentLocation ];
+	}
+	else{
+		
+		[self loadDataWithRequest: [NSURLRequest requestWithURL:[NSURL URLWithString:REQUEST_URL]
+													cachePolicy:NSURLRequestUseProtocolCachePolicy
+												timeoutInterval:15.0] ];
+
+	}
 	
 }
 

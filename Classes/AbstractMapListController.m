@@ -685,8 +685,12 @@
 	
 	NSUInteger row = indexPath.row;
     if (row != NSNotFound) {
+		BOOL fromGeoSearch = NO;
+		if([self isKindOfClass:[LocationController class]])
+			if (((LocationController *)self).fromGeographicSearch)
+				fromGeoSearch = YES;
 		
-		if(haveLocation)
+		if(haveLocation && !fromGeoSearch)
 		{
 			BOOL shouldUpdateMarker = [self isKindOfClass:[LocationController class]];
 			[mapController loadMapAtIndex: indexPath.row withMarkerLocation: searchLocation shouldUpdate: shouldUpdateMarker];

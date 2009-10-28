@@ -185,11 +185,17 @@
 	CLLocationCoordinate2D center;
 	//center.latitude = 41.866;
 	//center.longitude = -72.936;
-	center.latitude = 37.603;
-	center.longitude = -96.028;
+	
+	//US Center with minZoom 2
+	//center.latitude = 37.603;
+	//center.longitude = -96.028;
+	
+	//international center with minZoom 0
+	center.latitude = 40.869575;
+	center.longitude = -21.496751;
 	coverageMap.mapCenter = center;
 	//coverageMap.minZoom = 4;
-	coverageMap.minZoom = 2;
+	coverageMap.minZoom = 0;
 	coverageMap.initialOpacity = 0.6;
 	
 	NSMutableArray* coverageMaps = [NSMutableArray arrayWithObject:coverageMap];

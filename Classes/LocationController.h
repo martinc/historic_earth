@@ -29,6 +29,8 @@
 
 }
 
+@property (nonatomic, readonly) BOOL fromGeographicSearch;
+
 - (void)startUpdates;
 
 - (id) initWithLocation:(CLLocationCoordinate2D) theLoc;

@@ -748,6 +748,7 @@
 	targetZoom = kDEFAULT_STARTING_ZOOM;
 	if(theMap.minZoom != kDEFAULT_MIN_ZOOM)
 	{
+		targetMinZoom = theMap.minZoom;
 		targetZoom = fmin(theMap.minZoom + 1.0 , MAX_ZOOM);
 	}
 	if([theMap.layerID isEqualToString:kCOVERAGE_LAYER_ID])
@@ -833,11 +834,13 @@
 	//	[modernMapView release];
 //		modernMapView.contents.zoom = theMap.minZoom;
 		
+		modernMapView.contents.minZoom = targetMinZoom;
+
+		
 		if((!locked) || isNewMapList){
 			
 			modernMapView.contents.zoom = targetZoom;
 			modernMapView.contents.mapCenter = targetCenter;
-			modernMapView.contents.minZoom = targetMinZoom;
 			
 			isNewMapList = NO;
 			
@@ -885,7 +888,10 @@
 		
 		
 		//id myTilesource = [[[HMWSource alloc] init] autorelease];
-		
+	
+#ifdef DEBUG
+	NSLog(@"initiating map with target zoom %f between minZoom %f and maxZoom", targetZoom, targetMinZoom, MAX_ZOOM);
+#endif	
 		oldMapView.contents = [[[RMMapContents alloc] initWithView:oldMapView
 													 tilesource:myTilesource
 												   centerLatLon:targetCenter
@@ -997,9 +1003,14 @@
 
 		[self hideChrome];
 	}
-	
-	for (RMMapView* mv in mapViews){
-		[mv touchesMoved:touches withEvent:event];
+	if([mapViews count] >= 1)
+	{
+			
+
+		for (RMMapView* mv in mapViews){
+			[mv touchesMoved:touches withEvent:event];
+		}
+		
 	}
 	/*
 	NSLog(@"touched moved, layer position delta: %f zoom delta: %f", 
