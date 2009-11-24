@@ -26,7 +26,10 @@
 	
 	NSMutableArray *plates;
 	
+	float diagonal;
 	
+	
+	int initialZoom;
 }
 
 
@@ -47,6 +50,10 @@
 
 @property (nonatomic, assign) int year;
 @property (nonatomic, assign) int minZoom;
+@property (nonatomic, assign) int initialZoom;
+
+@property (nonatomic, assign) float diagonal;
+
 @property (nonatomic, assign) RMSphericalTrapezium mapBounds;
 @property (nonatomic, readwrite) CLLocationCoordinate2D mapCenter;
 

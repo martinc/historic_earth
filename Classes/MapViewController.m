@@ -330,7 +330,7 @@
 	//debugging
 	
 		
-	locked = YES;
+	//locked = YES;
 	
 	//NSString *backarrow = @"◀";
 	//NSString *forwardarrow = @"▶";
@@ -746,17 +746,24 @@
 	targetCenter = theMap.mapCenter;
 	targetMinZoom = kDEFAULT_MIN_ZOOM;
 	targetZoom = kDEFAULT_STARTING_ZOOM;
-	if(theMap.minZoom != kDEFAULT_MIN_ZOOM)
+	
+	if(theMap.initialZoom != -1)
+	{
+		targetZoom = (float)theMap.initialZoom;
+		targetMinZoom = fmax( 1, theMap.initialZoom + 3 );
+	}
+	else if(theMap.minZoom != kDEFAULT_MIN_ZOOM)
 	{
 		targetMinZoom = theMap.minZoom;
 		targetZoom = fmin(theMap.minZoom + 1.0 , MAX_ZOOM);
 	}
+	
 	if([theMap.layerID isEqualToString:kCOVERAGE_LAYER_ID])
 	{
 		targetZoom = theMap.minZoom + 1.0;
 	}
 #ifdef DEBUG
-	NSLog(@"setting targetZoom to %f (map.minZoom is %d, max_zoom is %d)", targetZoom, theMap.minZoom, MAX_ZOOM);
+	NSLog(@"setting targetZoom to %f (map.minZoom is %d, max_zoom is MAX_ZOOM)", targetZoom, theMap.minZoom);
 #endif
 	/*
 	targetMinZoom = theMap.minZoom - 2.0;
@@ -770,9 +777,24 @@
 	}
 	 */
 	
-	if(targetMinZoom >= targetZoom)
+	if(targetMinZoom > targetZoom)
 	{
 		targetMinZoom = targetZoom - 3.0;
+	}
+	else if(targetMinZoom == targetZoom)
+	{
+		targetZoom += 0.05;
+	}
+	
+	
+	if(![theMap.layerID isEqualToString:kCOVERAGE_LAYER_ID])
+	{
+		if(targetMinZoom < 1.0)
+			targetMinZoom = 1.0;
+		
+		
+		if(targetZoom < 2.0)
+			targetZoom = 2.0;
 	}
 
 	if(oldMapView){
@@ -784,8 +806,11 @@
 		
 		if((locked || !shouldFadeOut) && !isNewMapList) {
 			targetCenter = oldMapView.contents.mapCenter;
-			targetZoom = fmin(oldMapView.contents.zoom, MAX_ZOOM);
-			targetMinZoom = oldMapView.contents.minZoom;
+			targetZoom = oldMapView.contents.zoom;
+			targetMinZoom = fmin( oldMapView.contents.minZoom, targetMinZoom );
+#ifdef DEBUG
+			NSLog(@"keeping old map position, targetZoom: %f targetMinZoom: %f locked: %d shouldFadeOut: %d isNewMapList: %d", targetZoom, targetMinZoom, locked, shouldFadeOut, isNewMapList);
+#endif
 
 		}
 		
@@ -890,7 +915,7 @@
 		//id myTilesource = [[[HMWSource alloc] init] autorelease];
 	
 #ifdef DEBUG
-	NSLog(@"initiating map with target zoom %f between minZoom %f and maxZoom", targetZoom, targetMinZoom, MAX_ZOOM);
+	NSLog(@"initiating map with target zoom %f between minZoom %f and maxZoom MAX_ZOOM", targetZoom, targetMinZoom);
 #endif	
 		oldMapView.contents = [[[RMMapContents alloc] initWithView:oldMapView
 													 tilesource:myTilesource
@@ -1012,13 +1037,14 @@
 		}
 		
 	}
-	/*
+/*	
 	NSLog(@"touched moved, layer position delta: %f zoom delta: %f", 
 		  fabs(oldMapView.contents.mapCenter.longitude -modernMapView.contents.mapCenter.longitude) +  fabs(oldMapView.contents.mapCenter.latitude -modernMapView.contents.mapCenter.latitude)
 		  ,  fabs(oldMapView.contents.zoom - modernMapView.contents.zoom));
-
-	NSLog(@"zooms: modern: %f Old: %f", modernMapView.contents.zoom, oldMapView.contents.zoom);
 */
+#ifdef DEBUG
+	NSLog(@"zoom level: %f map diagonal: %f", oldMapView.contents.zoom, ((Map *)[maps objectAtIndex:currentMapIndex]).diagonal);
+#endif
 }
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {

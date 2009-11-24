@@ -63,7 +63,6 @@
 		5B2F723C10268EE100676DBD /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B2F723410268EE100676DBD /* SBJsonBase.m */; };
 		5B2F723D10268EE100676DBD /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B2F723610268EE100676DBD /* SBJsonParser.m */; };
 		5B2F723E10268EE100676DBD /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B2F723810268EE100676DBD /* SBJsonWriter.m */; };
-		5B2F728F1026C98000676DBD /* Three20.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5B2F728E1026C98000676DBD /* Three20.bundle */; };
 		5B37B578103B1D1F008CF2FC /* marker-blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B37B577103B1D1F008CF2FC /* marker-blue.png */; };
 		5B443C09104C3442006F52F9 /* he_small_no_text.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B443C08104C3442006F52F9 /* he_small_no_text.png */; };
 		5B443C87104C6080006F52F9 /* 05-shuffle.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B443C86104C6080006F52F9 /* 05-shuffle.png */; };
@@ -209,7 +208,6 @@
 		5B2F723610268EE100676DBD /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
 		5B2F723710268EE100676DBD /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		5B2F723810268EE100676DBD /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
-		5B2F728E1026C98000676DBD /* Three20.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Three20.bundle; path = ../three20/src/Three20.bundle; sourceTree = SOURCE_ROOT; };
 		5B37B577103B1D1F008CF2FC /* marker-blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "marker-blue.png"; sourceTree = "<group>"; };
 		5B443C08104C3442006F52F9 /* he_small_no_text.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = he_small_no_text.png; path = Images/he_small_no_text.png; sourceTree = "<group>"; };
 		5B443C86104C6080006F52F9 /* 05-shuffle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "05-shuffle.png"; path = "Images/05-shuffle.png"; sourceTree = "<group>"; };
@@ -310,7 +308,6 @@
 			children = (
 				5BBBC5AE108FA65E00FD8C2A /* Rater */,
 				5B8D61891047806C00208F64 /* Default.png */,
-				5B2F728E1026C98000676DBD /* Three20.bundle */,
 				5B2F723F10268EE500676DBD /* JSON */,
 				5BCD502A102554840066772E /* MapView.xcodeproj */,
 				5B20C8D71022BBC90003FE62 /* paperbackground.png */,
@@ -626,7 +623,6 @@
 				5B20C8D81022BBC90003FE62 /* paperbackground.png in Resources */,
 				5B20C8F31022BD600003FE62 /* custombuttonpressed.png in Resources */,
 				5B20C8F41022BD600003FE62 /* custombuttonnormal.png in Resources */,
-				5B2F728F1026C98000676DBD /* Three20.bundle in Resources */,
 				5B37B578103B1D1F008CF2FC /* marker-blue.png in Resources */,
 				5B119350103B80E100A71E72 /* up.png in Resources */,
 				5B119351103B80E100A71E72 /* down.png in Resources */,

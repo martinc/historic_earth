@@ -66,6 +66,8 @@
 	dataLoaded = NO;
 	loadingResults = NO;
 	haveLocation = NO;
+	
+	receivedData = [[NSMutableData data] retain];
 
 	
 	
@@ -134,13 +136,13 @@
 	
 	// create the connection with the request
 	// and start loading the data
+	if(theConnection) [theConnection release];
 	theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
 	if (theConnection) {
 		// Create the NSMutableData that will hold
 		// the received data
 		// receivedData is declared as a method instance elsewhere
 		[loadingSpinner startAnimating];
-		receivedData=[[NSMutableData data] retain];
 		loadingResults = YES;
 
 		
@@ -175,14 +177,16 @@
   didFailWithError:(NSError *)error
 {
     // release the connection, and the data object
-    [theConnection release];
     // receivedData is declared as a method instance elsewhere
-    [receivedData release];
+    [receivedData setLength:0];
 	
     // inform the user
     NSLog(@"Connection failed! Error - %@ %@",
           [error localizedDescription],
           [[error userInfo] objectForKey:NSErrorFailingURLStringKey]);
+	
+	[theConnection release];
+
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
@@ -334,9 +338,11 @@
 								//	NSLog(@"defaulting to search location");
 									
 								}
-								
-								//NSLog(@"set corners to %f,%f %f,%f", mapBounds.southwest.latitude, mapBounds.southwest.longitude, mapBounds.northeast.latitude, mapBounds.northeast.longitude);
-								
+#ifdef DEBUG
+
+								NSLog(@"set corners to %f,%f %f,%f", mapBounds.southwest.latitude, mapBounds.southwest.longitude, mapBounds.northeast.latitude, mapBounds.northeast.longitude);
+#endif
+	
 							}
 							else{
 								NSLog(@"error parsing latlong bounds");
@@ -493,7 +499,7 @@
 	
     // release the connection, and the data object
     [theConnection release];
-    [receivedData release];
+  //  [receivedData release];
 }
 
 - (void) refreshWithLocation: (CLLocationCoordinate2D) theLocation
@@ -562,6 +568,7 @@
 	
 #endif
 	
+	[receivedData release];
 	
 	
 	[mapController release];
