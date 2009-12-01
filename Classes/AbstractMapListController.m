@@ -136,7 +136,7 @@
 	
 	// create the connection with the request
 	// and start loading the data
-	if(theConnection) [theConnection release];
+	//if(theConnection) [theConnection release];
 	theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
 	if (theConnection) {
 		// Create the NSMutableData that will hold

@@ -23,6 +23,8 @@
 #define kCOMPASS_ENABLED @"kCOMPASS_ENABLED"
 #define kSEARCH_ENABLED @"kSEARCH_ENABLED"
 
+#define kCOVERAGE_RECT @"kCOVERAGE_RECT"
+
 #define kCOVERAGE_LAYER_ID @"topp:GIS_Coverage"
 
 #define kMARKER_IMAGE @"marker-brown.png"

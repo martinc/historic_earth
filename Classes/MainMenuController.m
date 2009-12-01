@@ -191,11 +191,19 @@
 	//center.longitude = -96.028;
 	
 	//international center with minZoom 0
+	
+		
+
+			
 	center.latitude = 40.869575;
 	center.longitude = -21.496751;
 	coverageMap.mapCenter = center;
 	//coverageMap.minZoom = 4;
 	coverageMap.minZoom = 0;
+			
+		
+		
+
 	coverageMap.initialOpacity = 0.6;
 	
 	NSMutableArray* coverageMaps = [NSMutableArray arrayWithObject:coverageMap];

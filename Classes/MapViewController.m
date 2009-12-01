@@ -885,6 +885,7 @@
 		modernMapView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 		modernMapView.userInteractionEnabled = NO;
 
+
 		
 		[masterView addSubview: modernMapView];
 
@@ -959,6 +960,10 @@
 	
 	oldMapView.alpha = 0.0;
 	
+	
+
+	
+	
 	[masterView addSubview: oldMapView];
 
 	
@@ -980,6 +985,31 @@
 	
 	[self.view bringSubviewToFront: compassIndicator];
 
+	
+	
+	
+	//restore coverage rect from user defaults
+	
+	if([theMap.layerID isEqualToString:kCOVERAGE_LAYER_ID])
+	{
+		NSDictionary* rectDict = [[NSUserDefaults standardUserDefaults] objectForKey:kCOVERAGE_RECT];
+		if(rectDict != nil)
+		{			
+			CGRect theRect;
+			if(CGRectMakeWithDictionaryRepresentation(rectDict, &theRect))
+			{
+				RMProjectedRect newRect;
+				newRect.origin.easting = theRect.origin.x;
+				newRect.origin.northing = theRect.origin.y;
+				newRect.size.width = theRect.size.width;
+				newRect.size.height = theRect.size.height;
+				oldMapView.contents.projectedBounds = newRect;
+				modernMapView.contents.projectedBounds = newRect;
+
+				//NSLog(@"set coverage map projectedBounds to %@", NSStringFromCGRect(theRect));
+			}
+		}
+	}
 	
 	
 	
@@ -1333,6 +1363,16 @@
 	{
 		//NSLog(@"stopping compass on exit"); 
 		[self stopCompass];
+	}
+	
+	//save coverage rect to user defaults
+	
+	if([((Map *)[maps objectAtIndex:currentMapIndex]).layerID isEqualToString:kCOVERAGE_LAYER_ID])
+	{
+		RMProjectedRect proj = oldMapView.contents.projectedBounds;
+		CGRect projrect = CGRectMake(proj.origin.easting, proj.origin.northing, proj.size.width, proj.size.height);
+
+		[[NSUserDefaults standardUserDefaults] setObject:CGRectCreateDictionaryRepresentation(projrect) forKey:kCOVERAGE_RECT];
 	}
 
 
