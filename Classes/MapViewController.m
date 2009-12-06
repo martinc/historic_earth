@@ -21,12 +21,8 @@
 #define LARGE_FRAME_SIZE 640.0
 
 
-#define SLIDER_WIDTH_PORTRAIT_SEARCH 215
-#define SLIDER_WIDTH_LANDSCAPE_SEARCH 390
-
-
-#define SLIDER_WIDTH_PORTRAIT 225
-#define SLIDER_WIDTH_LANDSCAPE 390
+#define SLIDER_WIDTH_PORTRAIT_SEARCH 180
+#define SLIDER_WIDTH_LANDSCAPE_SEARCH 360
 
 
 
@@ -477,6 +473,21 @@
 													action:@selector(reframeSearch)
 					 ];
 	
+	//Favorites button
+	
+	favoriteButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"smallStar-unselected.png"]
+													 style:UIBarButtonItemStylePlain
+													target:self
+													action:@selector(setFavorite)
+					 ];
+	
+	selectedFavoriteButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"smallStar-selected.png"]
+													  style:UIBarButtonItemStylePlain
+													 target:self
+													 action:@selector(unsetFavorite)
+					  ];
+	
+	
 	
 	
 	UIDeviceOrientation orientation = self.interfaceOrientation;
@@ -494,18 +505,23 @@
 		onMapSpinner.center = CGPointMake(320 - 20, 20);
 	
 
-
+/*
 	if([[NSUserDefaults standardUserDefaults] boolForKey:kSEARCH_ENABLED])
 	{
+ */
+	
 		slider.frame = CGRectMake(0,0, isLandscape ? SLIDER_WIDTH_LANDSCAPE_SEARCH : SLIDER_WIDTH_PORTRAIT_SEARCH ,20);
-		barItems = [[NSArray alloc] initWithObjects: reframeButton, space, sliderBarItem, space,  infoBarButton, nil ];
-	}
+		barItems = [[NSArray alloc] initWithObjects: reframeButton, space, sliderBarItem, space,  infoBarButton, space, favoriteButton, nil ];
+
+	
+	/*
+}
 	else
 	{
 		slider.frame = CGRectMake(0,0, isLandscape ? SLIDER_WIDTH_LANDSCAPE : SLIDER_WIDTH_PORTRAIT  ,20);
 		barItems = [[NSArray alloc] initWithObjects: sliderBarItem, space, infoBarButton, nil ];
 	}
-	
+*/	
 
 	
 	self.navigationController.toolbar.barStyle = self.navigationController.navigationBar.barStyle;
@@ -541,6 +557,31 @@
 	 */
 	
 //	[self.navigationController setToolbarHidden:NO animated: YES];
+	
+}
+
+- (void) setFavorite
+{
+	
+	NSMutableArray* newToolbar = [NSMutableArray arrayWithArray: self.toolbarItems];
+	int favoriteIndex = [newToolbar indexOfObject:favoriteButton];
+	
+	[newToolbar removeObjectAtIndex:favoriteIndex];
+	[newToolbar insertObject:selectedFavoriteButton atIndex:favoriteIndex];
+	
+	[self setToolbarItems:newToolbar animated: NO];
+}
+
+- (void) unsetFavorite
+{
+	
+	NSMutableArray* newToolbar = [NSMutableArray arrayWithArray: self.toolbarItems];
+	int favoriteIndex = [newToolbar indexOfObject:selectedFavoriteButton];
+	
+	[newToolbar removeObjectAtIndex:favoriteIndex];
+	[newToolbar insertObject:favoriteButton atIndex:favoriteIndex];
+	
+	[self setToolbarItems:newToolbar animated: NO];
 	
 }
 
@@ -1261,18 +1302,10 @@
 	NSLog(@"mapviewcontroller viewWillAppear with view frame %@", NSStringFromCGRect(self.view.frame));
 	NSLog(@"viewWillAppear is landscape? %d device says? %d", isLandscape, deviceIsLandscape);
 #endif
-	if([[NSUserDefaults standardUserDefaults] boolForKey:kSEARCH_ENABLED])
-	{
-		slider.frame = CGRectMake(0,0, isLandscape ? SLIDER_WIDTH_LANDSCAPE_SEARCH : SLIDER_WIDTH_PORTRAIT_SEARCH ,20);
-		slider.superview.frame = CGRectMake(0,0, isLandscape ? SLIDER_WIDTH_LANDSCAPE_SEARCH : SLIDER_WIDTH_PORTRAIT_SEARCH ,20);
+	
 
-	}
-	else
-	{
-		slider.frame = CGRectMake(0,0, isLandscape ? SLIDER_WIDTH_LANDSCAPE : SLIDER_WIDTH_PORTRAIT  ,20);
-		slider.superview.frame = CGRectMake(0,0, isLandscape ? SLIDER_WIDTH_LANDSCAPE : SLIDER_WIDTH_PORTRAIT  ,20);
-
-	}
+	slider.frame = CGRectMake(0,0, isLandscape ? SLIDER_WIDTH_LANDSCAPE_SEARCH : SLIDER_WIDTH_PORTRAIT_SEARCH ,20);
+	slider.superview.frame = CGRectMake(0,0, isLandscape ? SLIDER_WIDTH_LANDSCAPE_SEARCH : SLIDER_WIDTH_PORTRAIT_SEARCH ,20);
 
 
 

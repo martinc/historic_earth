@@ -51,7 +51,7 @@
 						  locationIcon, @"image",
 						  nil],
 						 [NSMutableDictionary dictionaryWithObjectsAndKeys:
-						  @"Featured Locations", @"name",
+						  @"Featured & Favorites", @"name",
 						  @"featuredController", @"controller",
 						  featuredIcon, @"image",
 						  nil],

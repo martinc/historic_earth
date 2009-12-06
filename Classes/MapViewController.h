@@ -41,6 +41,10 @@
 	UIBarButtonItem* infoBarButton;
 	UIBarButtonItem* space;
 	
+	UIBarButtonItem* favoriteButton;
+	UIBarButtonItem* selectedFavoriteButton;
+
+	
 	NSArray* barItems;
 
 	
