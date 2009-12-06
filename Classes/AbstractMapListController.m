@@ -14,7 +14,7 @@
 
 @implementation AbstractMapListController
 
-@synthesize statusLabel;
+@synthesize statusLabel, currentMapList;
 
 /*
 
@@ -38,6 +38,8 @@
 - (void) viewWillAppear:(BOOL)animated {
 	
 	[self.navigationController setNavigationBarHidden:NO animated: YES];
+	[self.navigationController setToolbarHidden:NO animated:YES];
+
 /*	
 	UIDeviceOrientation deviceOrientation = [[UIDevice currentDevice] orientation];
 	UIDeviceOrientation controllerOrientation = self.interfaceOrientation;
@@ -72,7 +74,7 @@
 	
 	
 	self.title = @"Results";
-	self.hidesBottomBarWhenPushed = YES;
+	self.hidesBottomBarWhenPushed = NO;
 	self.tableView.backgroundColor = [UIColor clearColor];
 	self.tableView.separatorColor = [UIColor brownColor];
 
@@ -91,9 +93,17 @@
 	
 	
 	maps = [[NSMutableArray alloc] init];
+	
+	smallMaps = [[NSMutableArray alloc] init];
+	mediumMaps = [[NSMutableArray alloc] init];
+	largeMaps = [[NSMutableArray alloc] init];
+	
+	currentMapList = maps;
+	
+	
 	mapController = [[MapViewController alloc] initWithMaps: maps];
 	//mapController = [[MapViewController alloc] initWithMaps: maps allowCompass: YES locationManager: locationManager];
-
+	
 	[loadingSpinner startAnimating];
 
 	
@@ -107,7 +117,65 @@
 	statusLabel.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
 	
 	[self.view addSubview:statusLabel];
+	
+	
+	
+	// Add Map Size Filter to lower toolbar
+	
+	mapFilter = [[[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"All",@"Small",@"Medium",@"Large",nil]] autorelease];
+	mapFilter.segmentedControlStyle = UISegmentedControlStyleBar;
+	mapFilter.selectedSegmentIndex = 0;
+	mapFilter.tintColor = [UIColor darkGrayColor];
+	
+	[mapFilter setEnabled:NO forSegmentAtIndex:1];
+	[mapFilter setEnabled:NO forSegmentAtIndex:2];
+	[mapFilter setEnabled:NO forSegmentAtIndex:3];
+	
+	
+	[mapFilter setWidth:45.0 forSegmentAtIndex:0];
+	[mapFilter setWidth:75.0 forSegmentAtIndex:1];
+	[mapFilter setWidth:75.0 forSegmentAtIndex:2];
+	[mapFilter setWidth:75.0 forSegmentAtIndex:3];
 
+
+	
+	
+	[mapFilter addTarget:self action:@selector(mapFilterChanged) forControlEvents:UIControlEventValueChanged];
+	
+	
+	UIBarButtonItem* bbitem = [[[UIBarButtonItem alloc] initWithCustomView: mapFilter] autorelease];
+
+	UIBarButtonItem* spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:NULL];
+
+	
+	self.toolbarItems = [NSArray arrayWithObjects:spacer,bbitem,spacer,nil];
+	
+
+	
+}
+
+
+- (void) mapFilterChanged
+{	
+	switch (mapFilter.selectedSegmentIndex) {
+		case 1:
+			currentMapList = smallMaps;
+			break;
+		case 2:
+			currentMapList = mediumMaps;
+			break;
+		case 3:
+			currentMapList = largeMaps;
+			break;
+		default:
+			currentMapList = maps;
+			break;
+	}
+	
+	[mapController loadingNewMaps];
+	mapController.maps = currentMapList; 
+	
+	[self.tableView reloadData];
 	
 }
 
@@ -406,7 +474,7 @@
 	
 	// Grouping
 	
-#if(1)
+#if(0)
 	
 	
 	NSMutableDictionary *atlasNames = [NSMutableDictionary dictionaryWithCapacity:5];
@@ -477,17 +545,103 @@
 		}
 	}
 	
-	[atlases sortUsingSelector:@selector(mapOrder:)];
 		
-	
-	[maps removeAllObjects];
-	[maps addObjectsFromArray:atlases];
+
+//	[atlases sortUsingSelector:@selector(mapOrder:)];
+//	[maps removeAllObjects];
+//	[maps addObjectsFromArray:atlases];
 	
 	[atlases release];
 	
 	
 #endif
+	
+	
+	// Divide maps into bins
+	
+	[smallMaps removeAllObjects];
+	[mediumMaps removeAllObjects];
+	[largeMaps removeAllObjects];
+	
+	BOOL smallMapsEmpty = YES;
+	BOOL mediumMapsEmpty = YES;
+	BOOL largeMapsEmpty = YES;
+
+	
+	for(Map* m in maps)
+	{
+		int theZoom = m.initialZoom;
+		if (theZoom == -1) theZoom = m.minZoom;
 		
+		if(theZoom < 6)
+		{
+			[largeMaps addObject: m];
+			largeMapsEmpty = NO;
+		}
+		else if(theZoom < 12)
+		{
+			[mediumMaps addObject: m];
+			mediumMapsEmpty = NO;
+		}
+		else {
+			[smallMaps addObject: m];
+			smallMapsEmpty = NO;
+		}
+	}
+	
+	/*
+	if([maps count] == 0)
+		[mapFilter setTitle:@"All" forSegmentAtIndex:0];
+	else
+		[mapFilter setTitle:[NSString stringWithFormat:@"All (%d)",[maps count]] forSegmentAtIndex:0];	
+*/
+	 
+	if(smallMapsEmpty)
+		[mapFilter setTitle:@"Small" forSegmentAtIndex:1];
+	else
+		[mapFilter setTitle:[NSString stringWithFormat:@"Small (%d)",[smallMaps count]] forSegmentAtIndex:1];
+
+	if(mediumMapsEmpty)
+		[mapFilter setTitle:@"Medium" forSegmentAtIndex:2];
+	else
+		[mapFilter setTitle:[NSString stringWithFormat:@"Medium (%d)",[mediumMaps count]] forSegmentAtIndex:2];
+
+	if(largeMapsEmpty)
+		[mapFilter setTitle:@"Large" forSegmentAtIndex:3];
+	else
+		[mapFilter setTitle:[NSString stringWithFormat:@"Large (%d)",[largeMaps count]] forSegmentAtIndex:3];
+	
+	
+	[mapFilter setEnabled: (!smallMapsEmpty) forSegmentAtIndex:1];
+	[mapFilter setEnabled:!mediumMapsEmpty forSegmentAtIndex:2];
+	[mapFilter setEnabled:!largeMapsEmpty forSegmentAtIndex:3];
+	
+	
+	//if only one section is represented, disable all
+	
+	if( ( !smallMapsEmpty ) &&  (mediumMapsEmpty && largeMapsEmpty))
+	{
+		mapFilter.selectedSegmentIndex = 1;
+		[mapFilter setEnabled:NO forSegmentAtIndex:0];
+	}
+	else if( (!mediumMapsEmpty) && (smallMapsEmpty && largeMapsEmpty))
+	{
+		mapFilter.selectedSegmentIndex = 2;
+		[mapFilter setEnabled:NO forSegmentAtIndex:0];
+	}
+	else if( (!largeMapsEmpty) && (mediumMapsEmpty && smallMapsEmpty))
+	{
+		mapFilter.selectedSegmentIndex = 3;
+		[mapFilter setEnabled:NO forSegmentAtIndex:0];
+	}
+	else
+	{
+		[mapFilter setEnabled:YES forSegmentAtIndex:0];
+		mapFilter.selectedSegmentIndex = 0;
+	}
+
+	
+
 	
 	loadingResults = NO;
 	dataLoaded = YES;
@@ -595,7 +749,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	
 
-		return [maps count];
+		return [currentMapList count];
 
 
 }
@@ -632,7 +786,7 @@
 	 
 	 */
 	
-	Map* theMap = [maps objectAtIndex:indexPath.row];
+	Map* theMap = [currentMapList objectAtIndex:indexPath.row];
 	
 	cell.textLabel.text = [NSString stringWithFormat:@"%d",theMap.year];
 	//cell.detailTextLabel.text = [NSString stringWithFormat:@"%@, %@",theMap.atlasName,theMap.name];
@@ -690,7 +844,8 @@
 {
 
 	
-	NSUInteger row = indexPath.row;
+	NSUInteger row = [maps indexOfObject:[currentMapList objectAtIndex: indexPath.row]];
+	
     if (row != NSNotFound) {
 		BOOL fromGeoSearch = NO;
 		if([self isKindOfClass:[LocationController class]])

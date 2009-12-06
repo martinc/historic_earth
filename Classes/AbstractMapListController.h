@@ -19,6 +19,13 @@
 	
 	NSMutableArray *maps;
 	
+	NSMutableArray* smallMaps;
+	NSMutableArray* mediumMaps;
+	NSMutableArray* largeMaps;
+	
+	NSMutableArray* currentMapList;
+
+	
 	NSMutableData *receivedData;
 	
 	BOOL loadingResults;
@@ -31,10 +38,14 @@
 	
 	UILabel *statusLabel;
 	
+	UISegmentedControl* mapFilter;
+	
 
 }
 
-@property (nonatomic,readonly) UILabel *statusLabel;
+@property (nonatomic,readonly) UILabel* statusLabel;
+
+@property (nonatomic, readonly) NSMutableArray* currentMapList;
 
 - (void) refreshWithLocation: (CLLocationCoordinate2D) theLocation;
 
