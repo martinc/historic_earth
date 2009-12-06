@@ -397,7 +397,7 @@
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 	cell.textLabel.backgroundColor = [UIColor clearColor];
 	
-	cell.textLabel.font = [UIFont fontWithName:@"Georgia" size:14.0];
+	cell.textLabel.font = [UIFont fontWithName:@"Georgia" size:15.0];
 	cell.textLabel.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
 	//cell.indentationWidth = 20.0;
 	//cell.indentationLevel = 1;
