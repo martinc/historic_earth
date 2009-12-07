@@ -793,10 +793,8 @@
 	cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",theMap.atlasName];
 	//cell.detailTextLabel.text = theMap.atlasName;
 
-	cell.textLabel.textColor = [UIColor brownColor];
 
 	cell.textLabel.font = [UIFont fontWithName:@"Georgia" size:26.0];
-	cell.detailTextLabel.textColor = [UIColor grayColor];
 
 	cell.detailTextLabel.font = [UIFont fontWithName:@"Georgia" size:12.0];
 

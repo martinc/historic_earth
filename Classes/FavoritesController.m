@@ -204,6 +204,12 @@
 	cell.detailTextLabel.backgroundColor = [UIColor clearColor];
 	
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+	
+	cell.textLabel.font = [UIFont fontWithName:@"Georgia" size:14.0];
+	
+	cell.detailTextLabel.font = [UIFont fontWithName:@"Georgia" size:12.0];
+	cell.detailTextLabel.textColor = [UIColor brownColor];
+	
 
 	/*
 	cell.textLabel.textColor = [UIColor brownColor];
