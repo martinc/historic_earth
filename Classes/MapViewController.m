@@ -640,18 +640,29 @@
 	
 }
 
+
+- (void) turnOffFavorite
+{
+	if([self.toolbarItems containsObject:selectedFavoriteButton]){
+		NSMutableArray* newToolbar = [NSMutableArray arrayWithArray: self.toolbarItems];
+		int favoriteIndex = [newToolbar indexOfObject:selectedFavoriteButton];
+		
+		[newToolbar removeObjectAtIndex:favoriteIndex];
+		[newToolbar insertObject:favoriteButton atIndex:favoriteIndex];
+		
+		[self setToolbarItems:newToolbar animated: NO];
+	}
+	
+	
+}
+
 - (void) unsetFavorite
 {
 	
-	NSMutableArray* newToolbar = [NSMutableArray arrayWithArray: self.toolbarItems];
-	int favoriteIndex = [newToolbar indexOfObject:selectedFavoriteButton];
-	
-	[newToolbar removeObjectAtIndex:favoriteIndex];
-	[newToolbar insertObject:favoriteButton atIndex:favoriteIndex];
-	
-	[self setToolbarItems:newToolbar animated: NO];
-	
+	[self turnOffFavorite];
 }
+
+
 
 - (void) reframeSearch
 {
@@ -813,6 +824,8 @@
 	
 	Map *theMap = [maps objectAtIndex:currentMapIndex];
 	if(!theMap) return;
+	
+	[self turnOffFavorite];
 	
 	/*
 	NSCalendar *gregorian = [[NSCalendar alloc]
@@ -1112,8 +1125,8 @@
 				newRect.origin.northing = theRect.origin.y;
 				newRect.size.width = theRect.size.width;
 				newRect.size.height = theRect.size.height;
-				oldMapView.contents.projectedBounds = newRect;
-				modernMapView.contents.projectedBounds = newRect;
+				
+				[self setProjectedBounds:newRect];
 
 				//NSLog(@"set coverage map projectedBounds to %@", NSStringFromCGRect(theRect));
 			}
@@ -1122,6 +1135,13 @@
 	
 	
 	
+}
+
+- (void) setProjectedBounds: (RMProjectedRect) newRect
+{
+	oldMapView.contents.projectedBounds = newRect;
+	modernMapView.contents.projectedBounds = newRect;
+
 }
 
 - (void) oldMapHoldAndRemove

@@ -8,6 +8,7 @@
 
 #import "FavoritesController.h"
 #import "HistoryAppDelegate.h"
+#import "MapViewController.h"
 
 
 @implementation FavoritesController
@@ -17,9 +18,9 @@
     // Override initWithStyle: if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
     if (self = [super initWithStyle:style]) {
 		
-		favorites = [[NSMutableArray alloc] initWithCapacity:5];;
+		favorites = [[NSMutableArray alloc] initWithCapacity:5];
 
-		
+		maps = [[NSMutableArray alloc] initWithCapacity:5];
 		
 		
 		context = [(HistoryAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
@@ -52,6 +53,13 @@
 				
 				
 				favorites = mutableFetchResults;
+				
+				[maps removeAllObjects];
+				
+				for(NSManagedObject* fav in favorites)
+				{
+					[maps addObject:[fav valueForKey:@"map"]];
+				}
 				
 			}
 			
@@ -237,11 +245,39 @@
 	return 85.0;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here. Create and push another view controller.
-	// AnotherViewController *anotherViewController = [[AnotherViewController alloc] initWithNibName:@"AnotherView" bundle:nil];
-	// [self.navigationController pushViewController:anotherViewController];
-	// [anotherViewController release];
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	
+	
+	NSUInteger row = indexPath.row;
+	
+    if (row != NSNotFound) {
+		
+		
+		MapViewController* mapview = [[[MapViewController alloc] initWithMaps:maps] autorelease];
+		
+		[mapview loadMapAtIndex:row];
+		
+		RMProjectedRect newMapBounds;
+		
+		NSManagedObject* newMapBoundsRect = [[favorites objectAtIndex:indexPath.row] valueForKey:@"mapLocation"];
+		
+		
+		newMapBounds.origin.easting = [[newMapBoundsRect valueForKeyPath:@"origin.x"] doubleValue];
+		newMapBounds.origin.northing = [[newMapBoundsRect valueForKeyPath:@"origin.y"] doubleValue];
+		newMapBounds.size.width = [[newMapBoundsRect valueForKeyPath:@"size.x"] doubleValue];
+		newMapBounds.size.height = [[newMapBoundsRect valueForKeyPath:@"size.y"] doubleValue];
+		
+		
+		[mapview setProjectedBounds: newMapBounds];
+
+		
+        [[self navigationController] pushViewController:mapview animated:YES];
+		
+		[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+		
+    }
+	
 }
 
 

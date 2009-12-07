@@ -31,6 +31,9 @@
 	
 	
 	int initialZoom;
+	
+	NSManagedObjectContext* theContext;
+
 }
 
 

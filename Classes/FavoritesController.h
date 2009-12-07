@@ -14,6 +14,8 @@
 	
 	NSMutableArray* favorites;
 	
+	NSMutableArray* maps;
+	
 	NSManagedObjectContext* context;
 
 }

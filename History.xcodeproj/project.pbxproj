@@ -85,6 +85,7 @@
 		5B8D7C5010CC500B002729AB /* Map.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 5B8D7C4F10CC500B002729AB /* Map.xcdatamodel */; };
 		5B8D7CDB10CC784F002729AB /* FavoritesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B8D7CD910CC784F002729AB /* FavoritesController.m */; };
 		5B8D7CDC10CC784F002729AB /* FavoritesController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B8D7CDA10CC784F002729AB /* FavoritesController.xib */; };
+		5B8D7ED410CCC962002729AB /* Map.xcdatamodel in Resources */ = {isa = PBXBuildFile; fileRef = 5B8D7C4F10CC500B002729AB /* Map.xcdatamodel */; };
 		5B8F1D2D10448E3E00DF8D8E /* he_large.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B8F1D2A10448E3E00DF8D8E /* he_large.png */; };
 		5B8F1D2E10448E3E00DF8D8E /* he_mainmenu.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B8F1D2B10448E3E00DF8D8E /* he_mainmenu.png */; };
 		5B8F1D2F10448E3E00DF8D8E /* he_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B8F1D2C10448E3E00DF8D8E /* he_small.png */; };
@@ -647,6 +648,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B8D7ED410CCC962002729AB /* Map.xcdatamodel in Resources */,
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
 				2899E5220DE3E06400AC0155 /* HistoryViewController.xib in Resources */,
 				5B20C8D81022BBC90003FE62 /* paperbackground.png in Resources */,

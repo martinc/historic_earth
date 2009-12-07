@@ -125,4 +125,7 @@
 
 - (void) loadingNewMaps;
 
+- (void) setProjectedBounds: (RMProjectedRect) newRect;
+
+
 @end

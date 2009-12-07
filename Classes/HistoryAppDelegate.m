@@ -40,8 +40,8 @@
 	
 	//Core Data
 	
-	NSManagedObjectContext *context = [self managedObjectContext];
-    if (!context) {
+	managedObjectContext = [self managedObjectContext];
+    if (!managedObjectContext) {
         // Handle the error.
     }
     // Pass the managed object context to the view controller.

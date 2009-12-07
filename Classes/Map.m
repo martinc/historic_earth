@@ -17,7 +17,8 @@
 - (id) init
 {
 	
-	NSManagedObjectContext* theContext = [(HistoryAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
+	theContext = [(HistoryAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
+	
 
 	self = [NSEntityDescription insertNewObjectForEntityForName:@"Map" inManagedObjectContext:theContext];
 	initialOpacity = 1.0;
@@ -108,18 +109,110 @@ float originShift = 2 * M_PI * 6378137 / 2.0;
 
 	
 }
+/*
+- (void)setMapBoundsRect:(NSManagedObject *) newMapBoundsRect
+{
+	[super setValue:newMapBoundsRect forKey:@"mapBoundsRect"];
+
+	RMSphericalTrapezium newMapBounds;
+	
+	newMapBounds.northeast.longitude = [[newMapBoundsRect valueForKey:@"origin.x"] doubleValue];
+	newMapBounds.northeast.latitude = [[newMapBoundsRect valueForKey:@"origin.y"] doubleValue];
+	newMapBounds.southwest.longitude = [[newMapBoundsRect valueForKey:@"size.x"] doubleValue];
+	newMapBounds.southwest.latitude = [[newMapBoundsRect valueForKey:@"size.y"] doubleValue];
+
+	mapBounds = newMapBounds;
+	
+}
+*/
+/*
+- (CLLocationCoordinate2D) mapCenter
+{
+	NSManagedObject* theCenter = [self valueForKey:@"mapCenterVector"];
+	
+	CLLocationCoordinate2D centerCoords;
+	
+	centerCoords.longitude = [[theCenter valueForKey:@"x"] doubleValue];
+	centerCoords.latitude = [[theCenter valueForKey:@"y"] doubleValue];
+	
+	return centerCoords;
+	
+}
+ */
+
+
+- (void)setMapCenter:(CLLocationCoordinate2D) newMapCenter
+{
+
+	mapCenter = newMapCenter;
+	
+	if(theContext == nil)
+		theContext = [(HistoryAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
+
+	
+	NSManagedObject *theMapCenter = [NSEntityDescription insertNewObjectForEntityForName:@"Vector" inManagedObjectContext:theContext];
+	[theMapCenter setValue:[NSNumber numberWithDouble:mapCenter.longitude] forKey:@"x"];
+	[theMapCenter setValue:[NSNumber numberWithDouble:mapCenter.latitude] forKey:@"y"];
+	
+	[self setValue:theMapCenter forKey:@"mapCenterVector"];
+	
+}
+/*
+- (void)setMapBoundsRect:(NSManagedObject *) newRect
+{
+
+	
+	mapCenter = newMapCenter;
+	
+	if(theContext == nil)
+		theContext = [(HistoryAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
+	
+	
+	NSManagedObject *theMapCenter = [NSEntityDescription insertNewObjectForEntityForName:@"Vector" inManagedObjectContext:theContext];
+	[theMapCenter setValue:[NSNumber numberWithDouble:mapCenter.longitude] forKey:@"x"];
+	[theMapCenter setValue:[NSNumber numberWithDouble:mapCenter.latitude] forKey:@"y"];
+	
+	[self setValue:theMapCenter forKey:@"mapCenterVector"];
+	
+}
+ */
+
+- (void)awakeFromFetch
+{
+    [super awakeFromFetch];
+	
+	
+	NSManagedObject* theCenter = [self valueForKey:@"mapCenterVector"];
+	
+	CLLocationCoordinate2D centerCoords;
+	
+	centerCoords.longitude = [[theCenter valueForKey:@"x"] doubleValue];
+	centerCoords.latitude = [[theCenter valueForKey:@"y"] doubleValue];
+	
+	mapCenter = centerCoords;
+	
+	
+	NSManagedObject* newMapBoundsRect = [self valueForKey:@"mapBoundsRect"];
+
+	RMSphericalTrapezium newMapBounds;
+	
+	newMapBounds.northeast.longitude = [[newMapBoundsRect valueForKeyPath:@"origin.x"] doubleValue];
+	newMapBounds.northeast.latitude = [[newMapBoundsRect valueForKeyPath:@"origin.y"] doubleValue];
+	newMapBounds.southwest.longitude = [[newMapBoundsRect valueForKeyPath:@"size.x"] doubleValue];
+	newMapBounds.southwest.latitude = [[newMapBoundsRect valueForKeyPath:@"size.y"] doubleValue];
+	
+	mapBounds = newMapBounds;
+	
+	
+	
+}
 
 
 - (void) setMapBounds:(RMSphericalTrapezium) newMapBounds
 {
-	[self willChangeValueForKey:@"mapBounds"];
-	mapBounds = newMapBounds;
-	[self didChangeValueForKey:@"mapBounds"];
 
-	[self willChangeValueForKey:@"mapCenter"];
-	mapCenter.longitude = (mapBounds.northeast.longitude + mapBounds.southwest.longitude) / 2.0;
-	mapCenter.latitude = (mapBounds.northeast.latitude + mapBounds.southwest.latitude) / 2.0;
-	[self didChangeValueForKey:@"mapCenter"];
+	mapBounds = newMapBounds;
+
 
 
 	
@@ -146,8 +239,15 @@ float originShift = 2 * M_PI * 6378137 / 2.0;
 	
 	
 	
+	NSDictionary* entities = [[NSManagedObjectModel mergedModelFromBundles:nil] entitiesByName];
+	for(NSString* key in [entities allKeys])
+	{
+		NSLog(@"have entity: %@", key);
+	}
 	
-	NSManagedObjectContext* theContext = [(HistoryAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
+	if(theContext == nil)
+		theContext = [(HistoryAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
+	
 		
 	
 	NSManagedObject *theMapOrigin = [NSEntityDescription insertNewObjectForEntityForName:@"Vector" inManagedObjectContext:theContext];
@@ -166,13 +266,23 @@ float originShift = 2 * M_PI * 6378137 / 2.0;
 	[self setValue:theMapRect forKey:@"mapBoundsRect"];
 	
 	
+	CLLocationCoordinate2D newCenterCoord;
+	
+	newCenterCoord.longitude = (mapBounds.northeast.longitude + mapBounds.southwest.longitude) / 2.0;
+	newCenterCoord.latitude = (mapBounds.northeast.latitude + mapBounds.southwest.latitude) / 2.0;
+	
+	[self setMapCenter:newCenterCoord];
+	
+		
+	//[self setValue:theMapRect forKey:@"mapBoundsRect"];
+
+/*	
 	NSManagedObject *theMapCenter = [NSEntityDescription insertNewObjectForEntityForName:@"Vector" inManagedObjectContext:theContext];
 	[theMapCenter setValue:[NSNumber numberWithDouble:mapCenter.longitude] forKey:@"x"];
 	[theMapCenter setValue:[NSNumber numberWithDouble:mapCenter.latitude] forKey:@"y"];
 
-	
 	[self setValue:theMapCenter forKey:@"mapCenterVector"];
-
+*/
 }
 
 - (NSComparisonResult) mapOrder: (Map *) anotherMap
