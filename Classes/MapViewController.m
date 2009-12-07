@@ -6,6 +6,9 @@
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
+#import <CoreData/CoreData.h>
+
+#import "HistoryAppDelegate.h"
 #import "MapViewController.h"
 #import "AbstractMapListController.h"
 #import "LocationController.h"
@@ -570,6 +573,71 @@
 	[newToolbar insertObject:selectedFavoriteButton atIndex:favoriteIndex];
 	
 	[self setToolbarItems:newToolbar animated: NO];
+	
+	NSManagedObjectContext* theContext = [(HistoryAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
+	
+	Map* theMap = [maps objectAtIndex:currentMapIndex];
+
+	RMProjectedRect currentRect = [modernMapView.contents projectedBounds];
+	
+	
+	NSManagedObject *theMapOrigin = [NSEntityDescription insertNewObjectForEntityForName:@"Vector" inManagedObjectContext:theContext];
+	NSManagedObject *theMapSize = [NSEntityDescription insertNewObjectForEntityForName:@"Vector" inManagedObjectContext:theContext];
+	
+	[theMapOrigin setValue:[NSNumber numberWithDouble: currentRect.origin.easting] forKey:@"x"];
+	[theMapOrigin setValue:[NSNumber numberWithDouble: currentRect.origin.northing] forKey:@"y"];
+	[theMapSize setValue:[NSNumber numberWithDouble: currentRect.size.width] forKey:@"x"];
+	[theMapSize setValue:[NSNumber numberWithDouble: currentRect.size.height] forKey:@"y"];
+	
+	NSManagedObject *theMapRect = [NSEntityDescription insertNewObjectForEntityForName:@"Rectangle" inManagedObjectContext:theContext];
+	
+	[theMapRect setValue:theMapOrigin forKey:@"origin"];
+	[theMapRect setValue:theMapSize forKey:@"size"];
+	
+	
+	NSManagedObject *theFavorite = [NSEntityDescription insertNewObjectForEntityForName:@"Favorite" inManagedObjectContext:theContext];
+
+	[theFavorite setValue:theMapRect forKey:@"mapLocation"];
+	[theFavorite setValue:theMap forKey:@"map"];
+	[theFavorite setValue:[NSDate date] forKey:@"creationDate"];
+	
+	
+	NSError *error;
+	if (![theContext save:&error]) {
+		// Handle the error.
+		NSLog(@"Failed to save to data store: %@", [error localizedDescription]);
+		NSArray* detailedErrors = [[error userInfo] objectForKey:NSDetailedErrorsKey];
+		if(detailedErrors != nil && [detailedErrors count] > 0) {
+			for(NSError* detailedError in detailedErrors) {
+				NSLog(@"  DetailedError: %@", [detailedError userInfo]);
+			}
+		}
+		else {
+			NSLog(@"  %@", [error userInfo]);
+		}
+	}
+	else {
+		NSLog(@"successfully saved favorite into persistent store");
+	}
+
+	
+	
+	
+	/*
+	Event *event = (Event *)[NSEntityDescription insertNewObjectForEntityForName:@"Event" inManagedObjectContext:managedObjectContext];
+
+	
+	NSManagedObjectModel *managedObjectModel =
+	[[context persistentStoreCoordinator] managedObjectModel];
+	NSEntityDescription *entity =
+	[[managedObjectModel entitiesByName] objectForKey:entityName];
+	NSManagedObject *newObject = [[NSManagedObject alloc]
+								  initWithEntity:entity insertIntoManagedObjectContext:context];
+	return [newObject autorelease];
+	
+	*/
+	
+	
 }
 
 - (void) unsetFavorite
@@ -1037,7 +1105,7 @@
 		if(rectDict != nil)
 		{			
 			CGRect theRect;
-			if(CGRectMakeWithDictionaryRepresentation(rectDict, &theRect))
+			if(CGRectMakeWithDictionaryRepresentation((CFDictionaryRef) rectDict, &theRect))
 			{
 				RMProjectedRect newRect;
 				newRect.origin.easting = theRect.origin.x;
@@ -1405,7 +1473,7 @@
 		RMProjectedRect proj = oldMapView.contents.projectedBounds;
 		CGRect projrect = CGRectMake(proj.origin.easting, proj.origin.northing, proj.size.width, proj.size.height);
 
-		[[NSUserDefaults standardUserDefaults] setObject:CGRectCreateDictionaryRepresentation(projrect) forKey:kCOVERAGE_RECT];
+		[[NSUserDefaults standardUserDefaults] setObject:(NSDictionary *)CGRectCreateDictionaryRepresentation(projrect) forKey:kCOVERAGE_RECT];
 	}
 
 

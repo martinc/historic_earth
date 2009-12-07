@@ -51,8 +51,13 @@
 						  locationIcon, @"image",
 						  nil],
 						 [NSMutableDictionary dictionaryWithObjectsAndKeys:
-						  @"Featured & Favorites", @"name",
+						  @"Featured", @"name",
 						  @"featuredController", @"controller",
+						  featuredIcon, @"image",
+						  nil],
+						 [NSMutableDictionary dictionaryWithObjectsAndKeys:
+						  @"Favorites", @"name",
+						  @"favoritesController", @"controller",
 						  featuredIcon, @"image",
 						  nil],
 						 nil],
@@ -86,7 +91,7 @@
 		
 			searchVisible = YES;
 			[[mainMenuData objectAtIndex:0] insertObject: searchData
-												 atIndex:2];
+												 atIndex:[[mainMenuData objectAtIndex:0] count] ];
 		}
 		else{
 			searchVisible = NO;
@@ -148,6 +153,12 @@
 	[self.navigationController pushViewController: [[[FeaturedController alloc] initWithStyle:UITableViewStyleGrouped] autorelease]
 										 animated:YES];	
 }
+- (void) favoritesController
+{
+	[self.navigationController pushViewController: [[[FavoritesController alloc] initWithStyle:UITableViewStyleGrouped] autorelease]
+										 animated:YES];	
+}
+
 - (void) settingsController
 {
 	[self.navigationController pushViewController: [[[SettingsController alloc] initHaveNetwork:contentEnabled] autorelease]

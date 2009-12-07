@@ -7,11 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 #import "RMMapView.h"
 
 
 
-@interface Map : NSObject {
+@interface Map : NSManagedObject {
 	
 	
 	NSString *layerID, *atlasName, *name;

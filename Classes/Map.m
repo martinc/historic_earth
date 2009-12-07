@@ -7,6 +7,7 @@
 //
 
 #import "Map.h"
+#import "HistoryAppDelegate.h"
 
 
 @implementation Map
@@ -15,7 +16,10 @@
 
 - (id) init
 {
-	self = [super init];
+	
+	NSManagedObjectContext* theContext = [(HistoryAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
+
+	self = [NSEntityDescription insertNewObjectForEntityForName:@"Map" inManagedObjectContext:theContext];
 	initialOpacity = 1.0;
 	initialZoom = -1;
 	
@@ -105,17 +109,18 @@ float originShift = 2 * M_PI * 6378137 / 2.0;
 	
 }
 
- 
-
 
 - (void) setMapBounds:(RMSphericalTrapezium) newMapBounds
 {
-	
+	[self willChangeValueForKey:@"mapBounds"];
 	mapBounds = newMapBounds;
-	
+	[self didChangeValueForKey:@"mapBounds"];
+
+	[self willChangeValueForKey:@"mapCenter"];
 	mapCenter.longitude = (mapBounds.northeast.longitude + mapBounds.southwest.longitude) / 2.0;
 	mapCenter.latitude = (mapBounds.northeast.latitude + mapBounds.southwest.latitude) / 2.0;
-	
+	[self didChangeValueForKey:@"mapCenter"];
+
 
 	
 	CGPoint neXY = [self LatLonToMeters:mapBounds.northeast];
@@ -139,6 +144,35 @@ float originShift = 2 * M_PI * 6378137 / 2.0;
 	NSLog(@"map diagonal is %f, current minZoom is %d, calculated zoom is %d", metersDiagonal, minZoom, initialZoom);
 #endif
 	
+	
+	
+	
+	NSManagedObjectContext* theContext = [(HistoryAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
+		
+	
+	NSManagedObject *theMapOrigin = [NSEntityDescription insertNewObjectForEntityForName:@"Vector" inManagedObjectContext:theContext];
+	NSManagedObject *theMapSize = [NSEntityDescription insertNewObjectForEntityForName:@"Vector" inManagedObjectContext:theContext];
+
+	[theMapOrigin setValue:[NSNumber numberWithDouble: mapBounds.northeast.longitude] forKey:@"x"];
+	[theMapOrigin setValue:[NSNumber numberWithDouble:mapBounds.northeast.latitude] forKey:@"y"];
+	[theMapSize setValue:[NSNumber numberWithDouble:mapBounds.southwest.longitude] forKey:@"x"];
+	[theMapSize setValue:[NSNumber numberWithDouble:mapBounds.southwest.latitude] forKey:@"y"];
+	
+	NSManagedObject *theMapRect = [NSEntityDescription insertNewObjectForEntityForName:@"Rectangle" inManagedObjectContext:theContext];
+	
+	[theMapRect setValue:theMapOrigin forKey:@"origin"];
+	[theMapRect setValue:theMapSize forKey:@"size"];
+	
+	[self setValue:theMapRect forKey:@"mapBoundsRect"];
+	
+	
+	NSManagedObject *theMapCenter = [NSEntityDescription insertNewObjectForEntityForName:@"Vector" inManagedObjectContext:theContext];
+	[theMapCenter setValue:[NSNumber numberWithDouble:mapCenter.longitude] forKey:@"x"];
+	[theMapCenter setValue:[NSNumber numberWithDouble:mapCenter.latitude] forKey:@"y"];
+
+	
+	[self setValue:theMapCenter forKey:@"mapCenterVector"];
+
 }
 
 - (NSComparisonResult) mapOrder: (Map *) anotherMap
@@ -178,7 +212,24 @@ float originShift = 2 * M_PI * 6378137 / 2.0;
 	return [[self.layerID componentsSeparatedByString:@","] count];
 }
 
+- (void)setNilValueForKey:(NSString *)theKey
+{
+    if ([theKey isEqualToString:@"mapBounds"]) {
+		mapBounds.northeast.latitude = 0.0;
+		mapBounds.northeast.longitude = 0.0;
+		mapBounds.southwest.latitude = 0.0;
+		mapBounds.southwest.longitude = 0.0;
+    }
+    else if ([theKey isEqualToString:@"mapCenter"]) {
+		mapCenter.longitude = 0.0;
+		mapCenter.latitude = 0.0;
+    }
+	else
+        [super setNilValueForKey:theKey];
+}
+ 
 
+/*
 - (void)dealloc {
 	
 	[plates release];
@@ -192,5 +243,6 @@ float originShift = 2 * M_PI * 6378137 / 2.0;
 	
     [super dealloc];
 }
+ */
 
 @end

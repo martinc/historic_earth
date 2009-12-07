@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
 #import <StoreKit/StoreKit.h>
 #import "MainMenuController.h"
 #import "StoreObserver.h"
@@ -43,11 +44,22 @@
 	NSThread *heartBeat;
 	
 	BOOL serverRunning;
+	
+	
+	NSManagedObjectModel *managedObjectModel;
+    NSManagedObjectContext *managedObjectContext;	    
+    NSPersistentStoreCoordinator *persistentStoreCoordinator;
+	
 }
 
 @property NetworkStatus remoteHostStatus;
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
+
+@property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
+@property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+
 
 
 - (void)initStatus;
@@ -59,6 +71,9 @@
 - (void) showAlertWithText: (NSString*) thetext;
 
 - (void) requestProductData;
+
+- (NSString *)applicationDocumentsDirectory;
+
 
 
 @end
