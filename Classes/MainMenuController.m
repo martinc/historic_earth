@@ -51,15 +51,15 @@
 						  locationIcon, @"image",
 						  nil],
 						 [NSMutableDictionary dictionaryWithObjectsAndKeys:
-						  @"Featured", @"name",
-						  @"featuredController", @"controller",
+						  @"Featured & Favorites", @"name",
+						  @"ffSwitcherController", @"controller",
 						  featuredIcon, @"image",
 						  nil],
-						 [NSMutableDictionary dictionaryWithObjectsAndKeys:
+						/* [NSMutableDictionary dictionaryWithObjectsAndKeys:
 						  @"Favorites", @"name",
 						  @"favoritesController", @"controller",
 						  featuredIcon, @"image",
-						  nil],
+						  nil], */
 						 nil],
 						[NSMutableArray arrayWithObjects:
 						 [NSMutableDictionary dictionaryWithObjectsAndKeys:
@@ -147,6 +147,11 @@
 										 animated: YES];
 	
 
+}
+- (void) ffSwitcherController
+{
+	[self.navigationController pushViewController: [[[FFSwitcherController alloc] init] autorelease]
+										 animated:YES];	
 }
 - (void) featuredController
 {

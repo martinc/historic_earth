@@ -18,6 +18,7 @@
 #import "PurchaseController.h"
 #import "HelpController.h"
 #import "FavoritesController.h"
+#import "FFSwitcherController.h"
 
 
 @interface MainMenuController : UITableViewController {

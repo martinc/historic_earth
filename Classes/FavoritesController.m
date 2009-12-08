@@ -110,7 +110,6 @@
 	//																				action:@selector(startEditing)];
 
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-     self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated
@@ -127,6 +126,9 @@
 	
 	[self.navigationController setNavigationBarHidden:NO animated: YES];
 	[self.navigationController setToolbarHidden:YES animated:YES];
+	
+	self.parentViewController.navigationItem.rightBarButtonItem = self.editButtonItem;
+
 
 }
 

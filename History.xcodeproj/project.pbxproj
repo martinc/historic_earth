@@ -23,6 +23,8 @@
 		5B040854103A4D2900F7C25B /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B040853103A4D2900F7C25B /* Reachability.m */; };
 		5B040873103A5AD700F7C25B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B040872103A5AD700F7C25B /* SystemConfiguration.framework */; };
 		5B047016104CD77F001C7DA1 /* CoverageFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B047015104CD77F001C7DA1 /* CoverageFetcher.m */; };
+		5B04705710CE1B2800C4891C /* FFSwitcherController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B04705510CE1B2800C4891C /* FFSwitcherController.m */; };
+		5B04705810CE1B2800C4891C /* FFSwitcherController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B04705610CE1B2800C4891C /* FFSwitcherController.xib */; };
 		5B04705F104CF2A6001C7DA1 /* vintage-paper.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B04705E104CF2A6001C7DA1 /* vintage-paper.png */; };
 		5B119350103B80E100A71E72 /* up.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B11934E103B80E100A71E72 /* up.png */; };
 		5B119351103B80E100A71E72 /* down.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B11934F103B80E100A71E72 /* down.png */; };
@@ -162,6 +164,9 @@
 		5B040872103A5AD700F7C25B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		5B047014104CD77F001C7DA1 /* CoverageFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoverageFetcher.h; sourceTree = "<group>"; };
 		5B047015104CD77F001C7DA1 /* CoverageFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoverageFetcher.m; sourceTree = "<group>"; };
+		5B04705410CE1B2800C4891C /* FFSwitcherController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFSwitcherController.h; sourceTree = "<group>"; };
+		5B04705510CE1B2800C4891C /* FFSwitcherController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFSwitcherController.m; sourceTree = "<group>"; };
+		5B04705610CE1B2800C4891C /* FFSwitcherController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FFSwitcherController.xib; sourceTree = "<group>"; };
 		5B04705E104CF2A6001C7DA1 /* vintage-paper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "vintage-paper.png"; path = "Images/vintage-paper.png"; sourceTree = "<group>"; };
 		5B11934E103B80E100A71E72 /* up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = up.png; sourceTree = "<group>"; };
 		5B11934F103B80E100A71E72 /* down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down.png; sourceTree = "<group>"; };
@@ -489,6 +494,9 @@
 				5B8D7CD810CC784F002729AB /* FavoritesController.h */,
 				5B8D7CD910CC784F002729AB /* FavoritesController.m */,
 				5B8D7CDA10CC784F002729AB /* FavoritesController.xib */,
+				5B04705410CE1B2800C4891C /* FFSwitcherController.h */,
+				5B04705510CE1B2800C4891C /* FFSwitcherController.m */,
+				5B04705610CE1B2800C4891C /* FFSwitcherController.xib */,
 			);
 			name = Favorites;
 			sourceTree = "<group>";
@@ -706,6 +714,7 @@
 				5B8D7B4110CB9B75002729AB /* smallStar-selected.png in Resources */,
 				5B8D7B4210CB9B75002729AB /* smallStar-unselected.png in Resources */,
 				5B8D7CDC10CC784F002729AB /* FavoritesController.xib in Resources */,
+				5B04705810CE1B2800C4891C /* FFSwitcherController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -751,6 +760,7 @@
 				5BBBC5B2108FA66D00FD8C2A /* Appirater.m in Sources */,
 				5B8D7C5010CC500B002729AB /* Map.xcdatamodel in Sources */,
 				5B8D7CDB10CC784F002729AB /* FavoritesController.m in Sources */,
+				5B04705710CE1B2800C4891C /* FFSwitcherController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
