@@ -264,15 +264,21 @@
 		
 		[mapview loadMapAtIndex:row];
 		
+		NSManagedObject* theFavorite = [favorites objectAtIndex:row];
+		
+		
+
+		NSString* viewportString = [theFavorite valueForKey:@"viewportBoundsString"];
+		
+		CGRect newMapBoundsRect = CGRectFromString(viewportString);
+		
 		RMProjectedRect newMapBounds;
+
 		
-		NSManagedObject* newMapBoundsRect = [[favorites objectAtIndex:indexPath.row] valueForKey:@"mapLocation"];
-		
-		
-		newMapBounds.origin.easting = [[newMapBoundsRect valueForKeyPath:@"origin.x"] doubleValue];
-		newMapBounds.origin.northing = [[newMapBoundsRect valueForKeyPath:@"origin.y"] doubleValue];
-		newMapBounds.size.width = [[newMapBoundsRect valueForKeyPath:@"size.x"] doubleValue];
-		newMapBounds.size.height = [[newMapBoundsRect valueForKeyPath:@"size.y"] doubleValue];
+		newMapBounds.origin.easting = newMapBoundsRect.origin.x;
+		newMapBounds.origin.northing = newMapBoundsRect.origin.y;
+		newMapBounds.size.width = newMapBoundsRect.size.width;
+		newMapBounds.size.height = newMapBoundsRect.size.height;
 		
 		
 		[mapview setProjectedBounds: newMapBounds];

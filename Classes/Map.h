@@ -44,7 +44,6 @@
 - (int) plateCount;
 
 
-
 @property (nonatomic, readonly) NSMutableArray *plates;
 
 
@@ -59,9 +58,14 @@
 @property (nonatomic, assign) float diagonal;
 
 @property (nonatomic, assign) RMSphericalTrapezium mapBounds;
-@property (nonatomic, readwrite) CLLocationCoordinate2D mapCenter;
+@property (nonatomic, assign) CLLocationCoordinate2D mapCenter;
 
 @property (nonatomic, assign) float initialOpacity;
+
+//Core data
+@property (nonatomic, retain) NSString *mapBoundsRectString;
+@property (nonatomic, retain) NSString *mapCenterPointString;
+
 
 
 @end

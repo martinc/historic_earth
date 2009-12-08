@@ -581,6 +581,12 @@
 	RMProjectedRect currentRect = [modernMapView.contents projectedBounds];
 	
 	
+	
+	CGRect viewPortRect = CGRectMake(currentRect.origin.easting, currentRect.origin.northing,
+									 currentRect.size.width, currentRect.size.height);
+	
+	
+	/*
 	NSManagedObject *theMapOrigin = [NSEntityDescription insertNewObjectForEntityForName:@"Vector" inManagedObjectContext:theContext];
 	NSManagedObject *theMapSize = [NSEntityDescription insertNewObjectForEntityForName:@"Vector" inManagedObjectContext:theContext];
 	
@@ -593,11 +599,16 @@
 	
 	[theMapRect setValue:theMapOrigin forKey:@"origin"];
 	[theMapRect setValue:theMapSize forKey:@"size"];
-	
+	*/
 	
 	NSManagedObject *theFavorite = [NSEntityDescription insertNewObjectForEntityForName:@"Favorite" inManagedObjectContext:theContext];
 
-	[theFavorite setValue:theMapRect forKey:@"mapLocation"];
+	NSString* rectString = NSStringFromCGRect(viewPortRect);
+	
+	//[theFavorite setPrimitiveValue:rectValue forKey:@"viewportBounds"];
+	[theFavorite setValue:rectString forKey:@"viewportBoundsString"];
+
+//	[theFavorite setValue:theMapRect forKey:@"mapLocation"];
 	[theFavorite setValue:theMap forKey:@"map"];
 	[theFavorite setValue:[NSDate date] forKey:@"creationDate"];
 	
