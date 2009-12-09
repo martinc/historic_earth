@@ -357,6 +357,9 @@
 							
 							Map* theMap = [NSEntityDescription insertNewObjectForEntityForName:@"Map" inManagedObjectContext:theContext];
 
+							[theContext assignObject:theMap toPersistentStore:
+							 [((HistoryAppDelegate *)[[UIApplication sharedApplication] delegate]) inMemoryStore]];
+
 							
 							//Map* theMap = [[Map alloc] init];
 							

@@ -603,6 +603,15 @@
 	
 	NSManagedObject *theFavorite = [NSEntityDescription insertNewObjectForEntityForName:@"Favorite" inManagedObjectContext:theContext];
 
+	[theContext assignObject:theFavorite toPersistentStore:
+	 [((HistoryAppDelegate *)[[UIApplication sharedApplication] delegate]) diskStore]];
+
+	[theContext assignObject:theMap toPersistentStore:
+	 [((HistoryAppDelegate *)[[UIApplication sharedApplication] delegate]) diskStore]];
+
+	
+	
+	
 	NSString* rectString = NSStringFromCGRect(viewPortRect);
 	
 	//[theFavorite setPrimitiveValue:rectValue forKey:@"viewportBounds"];
