@@ -20,6 +20,7 @@
 #import "FavoritesController.h"
 #import "FFSwitcherController.h"
 
+@class HistoryAppDelegate;
 
 @interface MainMenuController : UITableViewController {
 	

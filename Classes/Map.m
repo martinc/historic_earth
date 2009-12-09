@@ -16,19 +16,23 @@
 
 @dynamic mapBoundsRectString, mapCenterPointString;
 
-- (id) init
+- (void) awakeFromInsert
 {
-	
-	theContext = [(HistoryAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
+    [super awakeFromInsert];
+
+
+//	theContext = [(HistoryAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
 	
 
-	self = [NSEntityDescription insertNewObjectForEntityForName:@"Map" inManagedObjectContext:theContext];
+	//self = [NSEntityDescription insertNewObjectForEntityForName:@"Map" inManagedObjectContext:theContext];
 	initialOpacity = 1.0;
 	initialZoom = -1;
 	
 	plates = [[NSMutableArray alloc] initWithCapacity:1];
 	
-	return self;
+	self.mapBoundsRectString = NSStringFromCGRect(CGRectMake(0, 0, 0, 0));
+	
+//	return self;
 }
 
 

@@ -11,6 +11,7 @@
 #import "Three20/Three20.h"
 #import "UIKit/UITableView.h"
 #import "LocationController.h"
+#import "HistoryAppDelegate.h"
 
 @implementation AbstractMapListController
 
@@ -330,8 +331,10 @@
 
 				
 				[maps removeAllObjects];
+				
+				NSManagedObjectContext* theContext = [(HistoryAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
 
-			
+
 				for(NSDictionary* mapData in theMaps){
 				
 					if(mapData){
@@ -352,7 +355,10 @@
 							
 							//BOOL hasLocation = YES;
 							
-							Map* theMap = [[Map alloc] init];
+							Map* theMap = [NSEntityDescription insertNewObjectForEntityForName:@"Map" inManagedObjectContext:theContext];
+
+							
+							//Map* theMap = [[Map alloc] init];
 							
 							theMap.layerID = theLayer;
 							theMap.atlasName = theAtlasName;

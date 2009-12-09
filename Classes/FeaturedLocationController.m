@@ -13,11 +13,12 @@
 
 
 
-- (id)initWithLocations: (NSMutableArray *) locs atIndex: (int) theIndex
+- (id)initWithLocations: (NSMutableArray *) locs atIndex: (int) theIndex withNavController: (UINavigationController *) theNavController
 {
 
 	self = [super initWithStyle:UITableViewStyleGrouped];
 	
+	navController = theNavController;
 	locations = [locs retain];
 	currentLocationIndex = theIndex;
 	
@@ -39,6 +40,15 @@
 											timeoutInterval:15.0]];
 	
 	
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+
+	[mapController loadMapAtIndex: indexPath.row];
+
+	[navController pushViewController:mapController animated:YES];
 }
 
 -(void)dealloc

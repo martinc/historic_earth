@@ -17,7 +17,12 @@
 	NSMutableArray* maps;
 	
 	NSManagedObjectContext* context;
+	
+	UINavigationController* navController;
 
 }
+
+- (void) fetchData;
+
 
 @end

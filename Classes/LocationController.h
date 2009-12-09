@@ -26,6 +26,7 @@
 	BOOL fromGeographicSearch;
 	
 	NSDate *startedUpdatingTime;
+	
 
 }
 

@@ -23,7 +23,12 @@
 	NSMutableData *receivedData;
 	NSURLConnection *theConnection;
 	
+	UINavigationController* navController;
 	
+	
+
 }
+
+- (id) initWithNavController: (UINavigationController *) theNavController;
 
 @end

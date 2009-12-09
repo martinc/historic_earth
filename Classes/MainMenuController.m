@@ -192,8 +192,11 @@
 										 animated:YES];	
 	 */
 
+	NSManagedObjectContext* theContext = [(HistoryAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
+	Map* coverageMap = [NSEntityDescription insertNewObjectForEntityForName:@"Map" inManagedObjectContext:theContext];
 	
-	Map* coverageMap = [[Map alloc] init];
+	
+	//Map* coverageMap = [[Map alloc] init];
 	coverageMap.layerID = kCOVERAGE_LAYER_ID;
 	coverageMap.atlasName = @"Coverage Area";
 	coverageMap.name = @"Coverage";
@@ -223,7 +226,7 @@
 	coverageMap.initialOpacity = 0.6;
 	
 	NSMutableArray* coverageMaps = [NSMutableArray arrayWithObject:coverageMap];
-	[coverageMap release];
+	//[coverageMap release];
 	
 	MapViewController* mapview = [[MapViewController alloc] initWithMaps:coverageMaps allowCompass:NO];
 	[mapview loadMapAtIndex:0];

@@ -11,14 +11,16 @@
 
 @implementation FeaturedController
 
-/*
-- (id)initWithStyle:(UITableViewStyle)style {
+- (id) initWithNavController: (UINavigationController *) theNavController{
     // Override initWithStyle: if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-    if (self = [super initWithStyle:style]) {
+    if (self = [super initWithStyle:UITableViewStyleGrouped]) {
+		
+		navController = theNavController;
+		
     }
     return self;
 }
-*/
+
 
 
 - (void)viewDidLoad {
@@ -343,8 +345,9 @@
 	
 	FeaturedLocationController* featuredLocationController = [[FeaturedLocationController alloc] initWithLocations: 
 																										   ((LocationGroup *)[groups objectAtIndex:indexPath.section]).locations 
-																										   atIndex: indexPath.row];
-	[self.navigationController pushViewController:featuredLocationController animated:YES];
+																										   atIndex: indexPath.row
+																								 withNavController: navController];
+	[navController pushViewController:featuredLocationController animated:YES];
 	[featuredLocationController release];
 	
 	[self.tableView deselectRowAtIndexPath:indexPath animated:YES];

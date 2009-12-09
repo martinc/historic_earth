@@ -17,7 +17,17 @@
 	FavoritesController* favorites;
 	
 	UISegmentedControl* switcher;
-
+	
+	int initialSegment;
+	
+	BOOL firstLoad;
+	
+	UIViewController* currentController;
 }
+
+-(CGRect) correctedRect;
+
+-(void) updateView;
+
 
 @end

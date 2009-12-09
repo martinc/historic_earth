@@ -14,56 +14,22 @@
 @implementation FavoritesController
 
 
-- (id)initWithStyle:(UITableViewStyle)style {
+- (id)initWithNavController: (UINavigationController *) theNavController {
     // Override initWithStyle: if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-    if (self = [super initWithStyle:style]) {
+    if (self = [super initWithStyle:UITableViewStyleGrouped]) {
 		
 		favorites = [[NSMutableArray alloc] initWithCapacity:5];
 
 		maps = [[NSMutableArray alloc] initWithCapacity:5];
 		
+		navController = theNavController;
+		
 		
 		context = [(HistoryAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
 		
+		[self fetchData];
 		
-		NSDictionary* fetchRequests = [[NSManagedObjectModel mergedModelFromBundles:nil] fetchRequestTemplatesByName];
-		
-		for(NSString* k in [fetchRequests allKeys])
-		{
-			NSFetchRequest* request = [fetchRequests objectForKey:k];
-			
-			NSError *error;
-			NSMutableArray *mutableFetchResults = [[context executeFetchRequest:request error:&error] mutableCopy];
-			if (mutableFetchResults == nil) {
-				// Handle the error.
-				NSLog(@"error fetching key %@", k);
-			}
-			
-			
-			NSLog(@"fetch request name: %@ count: %d", k, [mutableFetchResults count]);
-			
-			if ([k isEqualToString:@"allFavoritesRequest"])
-			{
-				
-				NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"creationDate" ascending:NO];
-				NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
-				[request setSortDescriptors:sortDescriptors];
-				[sortDescriptors release];
-				[sortDescriptor release];
-				
-				
-				favorites = mutableFetchResults;
-				
-				[maps removeAllObjects];
-				
-				for(NSManagedObject* fav in favorites)
-				{
-					[maps addObject:[fav valueForKey:@"map"]];
-				}
-				
-			}
-			
-		}
+
 
 		/*
 		NSFetchRequest *request = [[NSFetchRequest alloc] init];
@@ -96,6 +62,51 @@
     return self;
 }
 
+- (void) fetchData
+{
+	
+	NSDictionary* fetchRequests = [[NSManagedObjectModel mergedModelFromBundles:nil] fetchRequestTemplatesByName];
+
+	for(NSString* k in [fetchRequests allKeys])
+	{
+		NSFetchRequest* request = [fetchRequests objectForKey:k];
+		
+		NSError *error;
+		NSMutableArray *mutableFetchResults = [[context executeFetchRequest:request error:&error] mutableCopy];
+		if (mutableFetchResults == nil) {
+			// Handle the error.
+			NSLog(@"error fetching key %@", k);
+		}
+		
+		
+		NSLog(@"fetch request name: %@ count: %d", k, [mutableFetchResults count]);
+		
+		if ([k isEqualToString:@"allFavoritesRequest"])
+		{
+			
+			NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"creationDate" ascending:NO];
+			NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+			[request setSortDescriptors:sortDescriptors];
+			[sortDescriptors release];
+			[sortDescriptor release];
+			
+			
+			favorites = mutableFetchResults;
+			
+			[maps removeAllObjects];
+			
+			for(NSManagedObject* fav in favorites)
+			{
+				[maps addObject:[fav valueForKey:@"map"]];
+			}
+			
+			[self.tableView reloadData];
+			
+		}
+		
+	}
+	
+}
 
 
 - (void)viewDidLoad {
@@ -116,6 +127,8 @@
 {
 	[super setEditing:editing animated:animated];
 	
+
+	
 	
 }
 
@@ -127,7 +140,7 @@
 	[self.navigationController setNavigationBarHidden:NO animated: YES];
 	[self.navigationController setToolbarHidden:YES animated:YES];
 	
-	self.parentViewController.navigationItem.rightBarButtonItem = self.editButtonItem;
+	
 
 
 }
@@ -213,6 +226,7 @@
 	cell.detailTextLabel.textColor = [UIColor brownColor];
 	
 
+	cell.showsReorderControl = YES;
 	/*
 	cell.textLabel.textColor = [UIColor brownColor];
 	
@@ -227,6 +241,38 @@
     return cell;
 }
 
+- (BOOL)tableView:(UITableView *)tableview canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+	return YES;	
+}
+
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+	
+	int sourceRow = fromIndexPath.row;
+	int destRow = toIndexPath.row;
+	
+	if(destRow > sourceRow)
+	{
+		[favorites insertObject:[favorites objectAtIndex:sourceRow] atIndex:destRow];
+		[favorites removeObjectAtIndex:sourceRow];
+		[maps insertObject:[maps objectAtIndex:sourceRow] atIndex:destRow];
+		[maps removeObjectAtIndex:sourceRow];
+
+	}
+	else
+	{
+		NSManagedObject *sourceFav = [favorites objectAtIndex:sourceRow];
+		[favorites removeObjectAtIndex:sourceRow];
+		[favorites insertObject:sourceFav atIndex:destRow];
+		
+		Map *sourceMap = [maps objectAtIndex:sourceRow];
+		[maps removeObjectAtIndex:sourceRow];
+		[maps insertObject:sourceMap atIndex:destRow];
+		
+	}
+
+	
+	
+}
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
 	
@@ -286,7 +332,8 @@
 		[mapview setProjectedBounds: newMapBounds];
 
 		
-        [[self navigationController] pushViewController:mapview animated:YES];
+		
+       [navController pushViewController:mapview animated:YES];
 		
 		[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 		

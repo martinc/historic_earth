@@ -17,10 +17,12 @@
 	NSMutableArray* locations;
 	int currentLocationIndex;
 	
+	UINavigationController* navController;
+	
 }
 
 - (void) loadData;
 
-- (id)initWithLocations: (NSMutableArray *) locs atIndex: (int) theIndex;
+- (id)initWithLocations: (NSMutableArray *) locs atIndex: (int) theIndex withNavController: (UINavigationController *) theNavController;
 
 @end
