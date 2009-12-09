@@ -109,6 +109,7 @@
 		5BD69FAD105ED87000959AF3 /* help-full.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BD69FAB105ED87000959AF3 /* help-full.png */; };
 		5BD69FAE105ED87000959AF3 /* help-light.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BD69FAC105ED87000959AF3 /* help-light.png */; };
 		5BD6A067106009E900959AF3 /* marker-brown.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BD6A066106009E900959AF3 /* marker-brown.png */; };
+		5BE289B710D032620058D496 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BE289B610D032620058D496 /* MessageUI.framework */; };
 		5BE9E387104A29950087539C /* marker-crosshair.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BE9E386104A29950087539C /* marker-crosshair.png */; };
 		5BF87E5B10366A3800787B2A /* PurchaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BF87E5A10366A3800787B2A /* PurchaseController.m */; };
 		5BF87E8B1036783300787B2A /* StoreObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BF87E8A1036783300787B2A /* StoreObserver.m */; };
@@ -275,6 +276,7 @@
 		5BD69FAB105ED87000959AF3 /* help-full.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "help-full.png"; path = "Images/help-full.png"; sourceTree = "<group>"; };
 		5BD69FAC105ED87000959AF3 /* help-light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "help-light.png"; path = "Images/help-light.png"; sourceTree = "<group>"; };
 		5BD6A066106009E900959AF3 /* marker-brown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "marker-brown.png"; path = "Images/marker-brown.png"; sourceTree = "<group>"; };
+		5BE289B610D032620058D496 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		5BE9E386104A29950087539C /* marker-crosshair.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "marker-crosshair.png"; path = "Images/marker-crosshair.png"; sourceTree = "<group>"; };
 		5BF87E5910366A3800787B2A /* PurchaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PurchaseController.h; sourceTree = "<group>"; };
 		5BF87E5A10366A3800787B2A /* PurchaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurchaseController.m; sourceTree = "<group>"; };
@@ -298,6 +300,7 @@
 				5B040873103A5AD700F7C25B /* SystemConfiguration.framework in Frameworks */,
 				5B8D636F1048978300208F64 /* libxml2.dylib in Frameworks */,
 				5B8D7B9710CBA851002729AB /* CoreData.framework in Frameworks */,
+				5BE289B710D032620058D496 /* MessageUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,6 +352,7 @@
 				5B8D636E1048978300208F64 /* libxml2.dylib */,
 				5B0233A0105A2687001A12CD /* Entitlements.plist */,
 				5B8D7B9610CBA851002729AB /* CoreData.framework */,
+				5BE289B610D032620058D496 /* MessageUI.framework */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";

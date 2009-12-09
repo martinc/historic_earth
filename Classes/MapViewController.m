@@ -24,8 +24,8 @@
 #define LARGE_FRAME_SIZE 640.0
 
 
-#define SLIDER_WIDTH_PORTRAIT_SEARCH 180
-#define SLIDER_WIDTH_LANDSCAPE_SEARCH 360
+#define SLIDER_WIDTH_PORTRAIT_SEARCH 160
+#define SLIDER_WIDTH_LANDSCAPE_SEARCH 320
 
 
 
@@ -484,6 +484,8 @@
 													action:@selector(setFavorite)
 					 ];
 	
+	UIBarButtonItem* shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(share)];
+	
 	selectedFavoriteButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"smallStar-selected.png"]
 													  style:UIBarButtonItemStylePlain
 													 target:self
@@ -514,7 +516,7 @@
  */
 	
 		slider.frame = CGRectMake(0,0, isLandscape ? SLIDER_WIDTH_LANDSCAPE_SEARCH : SLIDER_WIDTH_PORTRAIT_SEARCH ,20);
-		barItems = [[NSArray alloc] initWithObjects: reframeButton, space, sliderBarItem, space,  infoBarButton, space, favoriteButton, nil ];
+		barItems = [[NSArray alloc] initWithObjects: reframeButton, space, sliderBarItem, space,  infoBarButton, space, favoriteButton, space, shareButton, nil ];
 
 	
 	/*
@@ -601,6 +603,17 @@
 	[theMapRect setValue:theMapSize forKey:@"size"];
 	*/
 	
+	
+	CGRect screenRect = [[UIScreen mainScreen] bounds];
+	UIGraphicsBeginImageContext(screenRect.size);
+	[masterView.layer renderInContext:UIGraphicsGetCurrentContext()];
+	UIImage *sShot = UIGraphicsGetImageFromCurrentImageContext();
+	UIGraphicsEndImageContext();
+	UIImageWriteToSavedPhotosAlbum (sShot, nil, nil, nil);
+	
+	NSData *theImageData = UIImagePNGRepresentation(sShot);
+	
+	
 	NSManagedObject *theFavorite = [NSEntityDescription insertNewObjectForEntityForName:@"Favorite" inManagedObjectContext:theContext];
 
 	[theContext assignObject:theFavorite toPersistentStore:
@@ -608,8 +621,6 @@
 
 	[theContext assignObject:theMap toPersistentStore:
 	 [((HistoryAppDelegate *)[[UIApplication sharedApplication] delegate]) diskStore]];
-
-	
 	
 	
 	NSString* rectString = NSStringFromCGRect(viewPortRect);
@@ -621,6 +632,8 @@
 	[theFavorite setValue:theMap forKey:@"map"];
 	[theFavorite setValue:[NSDate date] forKey:@"creationDate"];
 	
+	[theFavorite setValue:theImageData forKey:@"screenshotData"];
+
 	
 	NSError *error;
 	if (![theContext save:&error]) {
@@ -680,6 +693,63 @@
 {
 	
 	[self turnOffFavorite];
+}
+
+
+- (void) share
+{
+	
+	if([MFMailComposeViewController canSendMail])
+	{
+		Map *theMap = [maps objectAtIndex:currentMapIndex];
+	
+		CGRect screenRect = [[UIScreen mainScreen] bounds];
+		UIGraphicsBeginImageContext(screenRect.size);
+		[masterView.layer renderInContext:UIGraphicsGetCurrentContext()];
+		UIImage *sShot = UIGraphicsGetImageFromCurrentImageContext();
+		UIGraphicsEndImageContext();
+		UIImageWriteToSavedPhotosAlbum (sShot, nil, nil, nil);
+		
+		NSData *theImageData = UIImagePNGRepresentation(sShot);
+		
+		MFMailComposeViewController* mailController = [[[MFMailComposeViewController alloc] init] autorelease];
+		
+		[mailController addAttachmentData:theImageData mimeType:@"image/png" fileName:@"HistoricEarthMap.png"];
+		
+		[mailController setSubject:[NSString stringWithFormat:@"Greetings from %d!", theMap.year]];
+		 
+		CLLocationCoordinate2D currentCenter = oldMapView.contents.mapCenter;
+																					  
+		NSString* messageTxt = [NSString stringWithFormat:@"Check out this cool map I found!\n\n\n---------------\nMap: %@\nLatitude: %0.3f Longitude: %0.3f\nSent from the Historic Earth App\nhttp://emergencestudios.com/historicearth",
+								theMap.name, currentCenter.latitude, currentCenter.longitude];
+
+		
+		[mailController setMessageBody: messageTxt isHTML:NO];
+		
+		mailController.mailComposeDelegate = self;
+
+		
+		
+		[self presentModalViewController:mailController animated:YES];
+		
+	}
+		
+	else {
+		UIAlertView* alert = [[[UIAlertView alloc] initWithTitle:@"E-mail not supported"
+														 message:@"Sorry, sending email on your device is not supported."
+														delegate:nil cancelButtonTitle:nil otherButtonTitles:@"ok",nil] autorelease];
+		
+		[alert show];
+		}
+	
+}
+
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
+{
+	
+	[self dismissModalViewControllerAnimated:YES];
+	
+	
 }
 
 
@@ -794,7 +864,6 @@
 		[fadingOutView release];
 		fadingOutView = nil;
 	}
-	
 		
 	
 }
@@ -1395,7 +1464,13 @@
 	
 	// Release any cached data, images, etc that aren't in use.
 }
-
+ 
+/*
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	
+}
+ */
 
 - (void)viewWillAppear:(BOOL)animated {
 	

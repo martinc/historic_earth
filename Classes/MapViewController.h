@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
+
 #import "RMMapView.h"
 #import "RMCloudMadeMapSource.h"
 #import "RMOpenStreetMapSource.h"
@@ -18,7 +20,7 @@
 
 
 
-@interface MapViewController : UIViewController <CLLocationManagerDelegate> {
+@interface MapViewController : UIViewController <CLLocationManagerDelegate, MFMailComposeViewControllerDelegate> {
 	
 	UIView *masterView;
 	
