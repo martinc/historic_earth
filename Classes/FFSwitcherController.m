@@ -32,6 +32,8 @@
 									[NSArray arrayWithObjects: @"Featured", @"Favorites", nil]];
 		
 	switcher.segmentedControlStyle = UISegmentedControlStyleBar;
+	switcher.tintColor = [UIColor darkGrayColor];
+
 	
 	initialSegment = [[NSUserDefaults standardUserDefaults] integerForKey:@"featuredFavoritesState"];
 	
@@ -43,12 +45,17 @@
 	switcher.selectedSegmentIndex = initialSegment;
 	
 	
-	[switcher setWidth:80.0 forSegmentAtIndex:0];
-	[switcher setWidth:80.0 forSegmentAtIndex:1];
+	[switcher setWidth:120.0 forSegmentAtIndex:0];
+	[switcher setWidth:120.0 forSegmentAtIndex:1];
 	
 	[switcher addTarget:self action:@selector(updateView) forControlEvents:UIControlEventValueChanged];
 	
-	self.navigationItem.titleView = switcher;
+	//self.navigationItem.titleView = switcher;
+	
+	UIBarButtonItem* spacer = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:NULL] autorelease];
+	UIBarButtonItem* switcherItem = [[[UIBarButtonItem alloc] initWithCustomView:switcher] autorelease];
+	
+	self.toolbarItems = [NSArray arrayWithObjects:spacer,switcherItem,spacer,nil];
 	
 	featured = [[FeaturedController alloc] initWithNavController:self.navigationController];
 	favorites = [[FavoritesController alloc] initWithNavController:self.navigationController];
@@ -65,9 +72,12 @@
 {
 	float navBarHeight = self.navigationController.navigationBar.frame.size.height;
 	
+	float toolbarHeight = self.navigationController.toolbar.frame.size.height;
+
+	
 	CGRect windowFrame = self.view.window.frame;
 	
-	CGRect theRect = CGRectMake(0, navBarHeight, windowFrame.size.width, windowFrame.size.height - navBarHeight);
+	CGRect theRect = CGRectMake(0, navBarHeight, windowFrame.size.width, windowFrame.size.height - navBarHeight - toolbarHeight);
 	
 //	NSLog(@"windowFrame: %@ correctedRect: %@",
 //		  NSStringFromCGRect(windowFrame), NSStringFromCGRect(theRect));
@@ -93,6 +103,8 @@
 
 
 		self.navigationItem.rightBarButtonItem = nil;
+		
+		self.title = @"Featured";
 
 	}
 	else
@@ -105,6 +117,9 @@
 		favorites.view.frame = [self correctedRect];
 
 		self.navigationItem.rightBarButtonItem = favorites.editButtonItem;
+		
+		self.title = @"Favorites";
+
 
 	}
 	
@@ -129,11 +144,10 @@
 	[super viewWillAppear:animated];
 	
 	[self.navigationController setNavigationBarHidden:NO animated:YES];
-	
-	
+	[self.navigationController setToolbarHidden:NO animated:YES];
+
 	
 	[favorites fetchData];
-	
 
 }
 
