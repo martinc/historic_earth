@@ -264,6 +264,9 @@
     // receivedData is declared as a method instance elsewhere
     //NSLog(@"Succeeded! Received %d bytes of data",[receivedData length]);
 	
+	NSManagedObjectContext* theContext = [(HistoryAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
+
+	
 	NSString* dataString =  [[NSString alloc]
 						  initWithData: receivedData
 						  encoding: NSUTF8StringEncoding];
@@ -332,7 +335,6 @@
 				
 				[maps removeAllObjects];
 				
-				NSManagedObjectContext* theContext = [(HistoryAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
 
 
 				for(NSDictionary* mapData in theMaps){
@@ -355,10 +357,31 @@
 							
 							//BOOL hasLocation = YES;
 							
-							Map* theMap = [NSEntityDescription insertNewObjectForEntityForName:@"Map" inManagedObjectContext:theContext];
+							//check first if map exists in dataStore
+							
+							NSFetchRequest *fetchRequest = [[NSManagedObjectModel mergedModelFromBundles:nil]
+															fetchRequestFromTemplateWithName:@"specificMapRequest"
+															substitutionVariables:[NSDictionary dictionaryWithObject:theLayer forKey:@"theLayer"]];
+							
+														
+							Map* theMap;
+							
+							NSArray* matchingResults = [theContext executeFetchRequest:fetchRequest error:NULL];
+							if ([matchingResults count] == 0) {
+								
+								theMap = [NSEntityDescription insertNewObjectForEntityForName:@"Map" inManagedObjectContext:theContext];
+								
+								//[theContext assignObject:theMap toPersistentStore:
+								 //[((HistoryAppDelegate *)[[UIApplication sharedApplication] delegate]) inMemoryStore]];
+								NSLog(@"didn't find map in datastore");
+							}
+							else
+							{
+								theMap = [matchingResults objectAtIndex:0];
+								NSLog(@"found map in datastore");
 
-							[theContext assignObject:theMap toPersistentStore:
-							 [((HistoryAppDelegate *)[[UIApplication sharedApplication] delegate]) inMemoryStore]];
+							}
+							
 
 							
 							//Map* theMap = [[Map alloc] init];
@@ -647,6 +670,27 @@
 	{
 		[mapFilter setEnabled:YES forSegmentAtIndex:0];
 		mapFilter.selectedSegmentIndex = 0;
+	}
+	
+	//save datastore
+	
+	
+	NSError *error;
+	if (![theContext save:&error]) {
+		// Handle the error.
+		NSLog(@"Failed to save to data store: %@", [error localizedDescription]);
+		NSArray* detailedErrors = [[error userInfo] objectForKey:NSDetailedErrorsKey];
+		if(detailedErrors != nil && [detailedErrors count] > 0) {
+			for(NSError* detailedError in detailedErrors) {
+				NSLog(@"  DetailedError: %@", [detailedError userInfo]);
+			}
+		}
+		else {
+			NSLog(@"  %@", [error userInfo]);
+		}
+	}
+	else {
+		NSLog(@"successfully saved favorite into persistent store");
 	}
 
 	

@@ -65,46 +65,45 @@
 - (void) fetchData
 {
 	
-	NSDictionary* fetchRequests = [[NSManagedObjectModel mergedModelFromBundles:nil] fetchRequestTemplatesByName];
+	NSFetchRequest* fetchRequest = [[NSManagedObjectModel mergedModelFromBundles:nil] fetchRequestTemplateForName:@"allFavoritesRequest"];
 
-	for(NSString* k in [fetchRequests allKeys])
-	{
-		NSFetchRequest* request = [fetchRequests objectForKey:k];
-		
 		NSError *error;
-		NSMutableArray *mutableFetchResults = [[context executeFetchRequest:request error:&error] mutableCopy];
+		NSMutableArray *mutableFetchResults = [[context executeFetchRequest:fetchRequest error:&error] mutableCopy];
 		if (mutableFetchResults == nil) {
 			// Handle the error.
-			NSLog(@"error fetching key %@", k);
+			NSLog(@"error fetching allFavoritesRequest");
 		}
 		
 		
-		NSLog(@"fetch request name: %@ count: %d", k, [mutableFetchResults count]);
-		
-		if ([k isEqualToString:@"allFavoritesRequest"])
-		{
-			
-			NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"creationDate" ascending:NO];
-			NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
-			[request setSortDescriptors:sortDescriptors];
-			[sortDescriptors release];
-			[sortDescriptor release];
-			
-			
-			favorites = mutableFetchResults;
-			
-			[maps removeAllObjects];
-			
-			for(NSManagedObject* fav in favorites)
-			{
-				[maps addObject:[fav valueForKey:@"map"]];
-			}
-			
-			[self.tableView reloadData];
-			
-		}
-		
+	NSLog(@"total of %d favorites", [mutableFetchResults count]);
+	
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"creationDate" ascending:NO];
+	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+	[fetchRequest setSortDescriptors:sortDescriptors];
+	[sortDescriptors release];
+	[sortDescriptor release];
+	
+	
+	favorites = mutableFetchResults;
+	
+	[maps removeAllObjects];
+	
+	for(NSManagedObject* fav in favorites)
+	{
+		[maps addObject:[fav valueForKey:@"map"]];
 	}
+	
+	[self.tableView reloadData];
+		  
+		  
+		  //find out how many maps
+		  
+		fetchRequest = [[NSManagedObjectModel mergedModelFromBundles:nil] fetchRequestTemplateForName:@"allMapsRequest"];
+
+		 NSLog(@"map count: %d", [context countForFetchRequest:fetchRequest error:NULL]);
+		
+		
+	
 	
 }
 

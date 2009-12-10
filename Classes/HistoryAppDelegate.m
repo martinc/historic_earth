@@ -19,7 +19,7 @@
 
 @synthesize remoteHostStatus;
 
-@synthesize inMemoryStore;
+//@synthesize inMemoryStore;
 @synthesize diskStore;
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {    
@@ -495,7 +495,7 @@
     }
 	
 	error = nil;
-	
+	/*
 	//Ignore that it is called an "NSPersistentStore", it is not persisted
 	inMemoryStore = [persistentStoreCoordinator addPersistentStoreWithType:NSInMemoryStoreType configuration:nil URL:nil options:nil error:&error];
 	
@@ -506,6 +506,7 @@
 		NSLog(@"Unresolved error with memory store %@, %@", error, [error userInfo]);
 
 	}
+	 */
 
 	
     return persistentStoreCoordinator;
