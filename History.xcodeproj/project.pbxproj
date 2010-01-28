@@ -441,10 +441,10 @@
 		5B22B676103D06780026281D /* Featured Locations */ = {
 			isa = PBXGroup;
 			children = (
-				5B22B5F9103CB5BF0026281D /* FeaturedController.h */,
-				5B22B5FA103CB5BF0026281D /* FeaturedController.m */,
 				5B22B603103CB6EE0026281D /* FeaturedLocationController.h */,
 				5B22B604103CB6EE0026281D /* FeaturedLocationController.m */,
+				5B22B5F9103CB5BF0026281D /* FeaturedController.h */,
+				5B22B5FA103CB5BF0026281D /* FeaturedController.m */,
 				5B22B608103CB91D0026281D /* Location.h */,
 				5B22B609103CB91D0026281D /* Location.m */,
 				5B8F1D531044A29B00DF8D8E /* LocationGroup.h */,

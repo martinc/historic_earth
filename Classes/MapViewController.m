@@ -24,8 +24,8 @@
 #define LARGE_FRAME_SIZE 640.0
 
 
-#define SLIDER_WIDTH_PORTRAIT_SEARCH 160
-#define SLIDER_WIDTH_LANDSCAPE_SEARCH 320
+#define SLIDER_WIDTH_PORTRAIT_SEARCH 180
+#define SLIDER_WIDTH_LANDSCAPE_SEARCH 340
 
 
 
@@ -516,7 +516,7 @@
  */
 	
 		slider.frame = CGRectMake(0,0, isLandscape ? SLIDER_WIDTH_LANDSCAPE_SEARCH : SLIDER_WIDTH_PORTRAIT_SEARCH ,20);
-		barItems = [[NSArray alloc] initWithObjects: reframeButton, space, sliderBarItem, space,  infoBarButton, space, favoriteButton, space, shareButton, nil ];
+		barItems = [[NSArray alloc] initWithObjects: space, reframeButton, space, sliderBarItem, space,  infoBarButton, space, favoriteButton, space, /*shareButton,*/ nil ];
 
 	
 	/*
@@ -764,7 +764,7 @@
 	
 	UIViewController* mainMenu = [[self.navigationController viewControllers] objectAtIndex:0];
 	
-	LocationController* newSearch = [[[LocationController alloc] initWithLocation: oldMapView.contents.mapCenter ] autorelease];
+	LocationController* newSearch = [[LocationController alloc] initWithLocation: oldMapView.contents.mapCenter ];
 	
 	[self.navigationController setNavigationBarHidden:YES animated: YES];
 	[self.navigationController setToolbarHidden:YES animated: YES];

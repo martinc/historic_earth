@@ -25,8 +25,10 @@
 
 #define kCOVERAGE_RECT @"kCOVERAGE_RECT"
 
-#define kCOVERAGE_LAYER_ID @"topp:GIS_Coverage"
+//#define kCOVERAGE_LAYER_ID @"topp:GIS_Coverage"
+#define kCOVERAGE_LAYER_ID @"topp:large_inter,topp:small_inter"
 
+//LAYERS=topp%3Alarge_inter%2Ctopp%3Asmall_inter
 #define kMARKER_IMAGE @"marker-brown.png"
 #define kVERIFY_REAL @"https://buy.itunes.apple.com/verifyReceipt"
 #define kVERIFY_SANDBOX @"https://sandbox.itunes.apple.com/verifyReceipt"

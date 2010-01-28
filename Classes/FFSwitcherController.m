@@ -29,7 +29,7 @@
 	currentController = nil;
 	
 	switcher = [[UISegmentedControl alloc] initWithItems:
-									[NSArray arrayWithObjects: @"Featured", @"Favorites", nil]];
+									[NSArray arrayWithObjects: @"Featured", @"My Favorites", @"Popular", nil]];
 		
 	switcher.segmentedControlStyle = UISegmentedControlStyleBar;
 	switcher.tintColor = [UIColor darkGrayColor];
@@ -45,8 +45,10 @@
 	switcher.selectedSegmentIndex = initialSegment;
 	
 	
-	[switcher setWidth:120.0 forSegmentAtIndex:0];
+	[switcher setWidth:90.0 forSegmentAtIndex:0];
 	[switcher setWidth:120.0 forSegmentAtIndex:1];
+	[switcher setWidth:90.0 forSegmentAtIndex:2];
+
 	
 	[switcher addTarget:self action:@selector(updateView) forControlEvents:UIControlEventValueChanged];
 	

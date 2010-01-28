@@ -135,7 +135,8 @@
 		[plateList appendFormat:@"%@,", plate.name];
 	}
 	//Delete last comma
-	[plateList deleteCharactersInRange: NSMakeRange([plateList length]-1, 1)];
+	if([plateList length] > 0)
+		[plateList deleteCharactersInRange: NSMakeRange([plateList length]-1, 1)];
 	
 	
 	CLLocationCoordinate2D theCenter = mapViewController.oldMapView.contents.mapCenter;	

@@ -195,8 +195,8 @@
 	NSManagedObjectContext* theContext = [(HistoryAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
 	Map* coverageMap = [NSEntityDescription insertNewObjectForEntityForName:@"Map" inManagedObjectContext:theContext];
 	
-	[theContext assignObject:coverageMap toPersistentStore:
-	 [((HistoryAppDelegate *)[[UIApplication sharedApplication] delegate]) inMemoryStore]];
+	//[theContext assignObject:coverageMap toPersistentStore:
+	 //[((HistoryAppDelegate *)[[UIApplication sharedApplication] delegate]) inMemoryStore]];
 	
 
 	//Map* coverageMap = [[Map alloc] init];
