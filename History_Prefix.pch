@@ -7,6 +7,8 @@
     #import <UIKit/UIKit.h>
 #endif
 
+#define LogMethod() NSLog(@"%s logged method call: -[%@ %s] (line %d)", _cmd, self, _cmd, __LINE__)
+
 
 #define kSINGLE_TOUCH_DELAY 0.25
 

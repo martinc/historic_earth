@@ -16,6 +16,9 @@
 - (id)initWithStyle:(UITableViewStyle)style {
     if (self = [super initWithStyle:style]) {
 		
+		LogMethod();
+
+		
 		contentEnabled = YES;
 		
 
@@ -31,11 +34,6 @@
 
 
 		
-		searchData =  [[NSMutableDictionary alloc] initWithObjectsAndKeys:
-						  @"Search", @"name",
-						  @"searchController", @"controller",
-						  searchIcon, @"image",
-					   nil];
 
 		additionContentData = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
 					 @"Additional Content", @"name",
@@ -60,7 +58,13 @@
 						  @"favoritesController", @"controller",
 						  featuredIcon, @"image",
 						  nil], */
+						 [[NSMutableDictionary alloc] initWithObjectsAndKeys:
+						  @"Search", @"name",
+						  @"searchController", @"controller",
+						  searchIcon, @"image",
+						  nil],
 						 nil],
+						
 						[NSMutableArray arrayWithObjects:
 						 [NSMutableDictionary dictionaryWithObjectsAndKeys:
 						  @"Coverage Area", @"name",
@@ -86,17 +90,20 @@
 						nil];
 		//Enable search always for development
 		//if([[NSUserDefaults standardUserDefaults] boolForKey:@"searchEnabled"])
+		
+		searchVisible = YES;
+
+		/*
 		if([[NSUserDefaults standardUserDefaults] boolForKey:kSEARCH_ENABLED])
 		{
 		
-			searchVisible = YES;
 			[[mainMenuData objectAtIndex:0] insertObject: searchData
 												 atIndex:[[mainMenuData objectAtIndex:0] count] ];
 		}
 		else{
 			searchVisible = NO;
 
-		}
+		}*/
 		
 		//Set enabled/disabled buttons
 		
@@ -248,12 +255,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-
+	LogMethod();
 	
 	
 	self.title = @"Menu";
 	
-	self.view.backgroundColor = [UIColor clearColor];
+	self.tableView.backgroundColor = [UIColor clearColor];
 	
 	self.hidesBottomBarWhenPushed = YES;
 	
@@ -274,8 +281,10 @@
 	headerImageView.frame = CGRectMake(0, 0, 320, 130);
 	headerImageView.contentMode = UIViewContentModeBottom;
 	headerImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-		
-	self.tableView.tableHeaderView = headerImageView;
+	
+	//BUG: iPad crashes here
+	//NSLog(@"main menu data has %d sections", [mainMenuData count]);
+	//self.tableView.tableHeaderView = headerImageView;
 	
 	[headerImageView release];
 	
@@ -288,7 +297,7 @@
 
 }
 
-
+/*
 - (void) makeSearchAppear
 {
 
@@ -317,6 +326,7 @@
 
 	}
 }
+ */
 
 -(void) addStoreWithProduct: (SKProduct *) theProduct
 {
@@ -334,6 +344,8 @@
 
 
 - (void)viewWillAppear:(BOOL)animated {
+	LogMethod();
+
     [super viewWillAppear:animated];
 	[self.navigationController setNavigationBarHidden:YES animated: animated];
 	[self.navigationController setToolbarHidden:YES animated: animated];
@@ -380,19 +392,22 @@
 #pragma mark Table view methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+	LogMethod();
     return [mainMenuData count];
 }
 
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+	LogMethod();
     return [[mainMenuData objectAtIndex:section] count];
 }
 
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+	LogMethod();
+
     static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -567,9 +582,10 @@
 
 
 - (void)dealloc {
+	LogMethod();
+
     [super dealloc];
 	
-	[searchData release];
 	[additionContentData release];
 	[mainMenuData release];
 	

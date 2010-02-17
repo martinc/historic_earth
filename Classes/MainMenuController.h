@@ -27,7 +27,6 @@
 	BOOL contentEnabled;
 	
 	NSMutableArray* mainMenuData;
-	NSMutableDictionary* searchData;
 	NSMutableDictionary* additionContentData;
 	
 	BOOL searchVisible;
@@ -35,7 +34,7 @@
 	SKProduct* product;
 }
 
--(void) makeSearchAppear;
+//-(void) makeSearchAppear;
 
 -(void) addStoreWithProduct: (SKProduct *) theProduct;
 

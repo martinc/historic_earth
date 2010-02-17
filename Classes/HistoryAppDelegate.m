@@ -152,7 +152,7 @@
 - (void) insertSearch
 {
 
-	[main makeSearchAppear];
+	//[main makeSearchAppear];
 
 	
 }
