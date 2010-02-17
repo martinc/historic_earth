@@ -18,6 +18,15 @@
     // Override initWithStyle: if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
     if (self = [super initWithStyle:UITableViewStyleGrouped]) {
 		
+		
+		instructions = [[UILabel alloc] initWithFrame:CGRectMake(20.0, 60, 280.0, 60.0)];
+		instructions.numberOfLines = 6;
+		instructions.font = [UIFont fontWithName:@"Georgia" size:16.0];
+		instructions.textAlignment = UITextAlignmentCenter;
+		instructions.backgroundColor = [UIColor clearColor];
+		instructions.text = @"While browsing, tap the star on the lower right to save the map and location you're looking at.";
+		instructions.tag = 66;
+		
 		favorites = [[NSMutableArray alloc] initWithCapacity:5];
 
 		maps = [[NSMutableArray alloc] initWithCapacity:5];
@@ -29,6 +38,7 @@
 		
 		[self fetchData];
 		
+
 
 
 		/*
@@ -67,6 +77,13 @@
 	
 	NSFetchRequest* fetchRequest = [[NSManagedObjectModel mergedModelFromBundles:nil] fetchRequestTemplateForName:@"allFavoritesRequest"];
 
+	
+	NSSortDescriptor* sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"order" ascending:NO];
+	NSArray* sortDescriptors = [[[NSArray alloc] initWithObjects: sortDescriptor, nil] autorelease];
+	[fetchRequest setSortDescriptors:sortDescriptors];
+	[sortDescriptor release];
+	
+	
 		NSError *error;
 		NSMutableArray *mutableFetchResults = [[context executeFetchRequest:fetchRequest error:&error] mutableCopy];
 		if (mutableFetchResults == nil) {
@@ -77,12 +94,13 @@
 		
 	NSLog(@"total of %d favorites", [mutableFetchResults count]);
 	
+	/*
 	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"creationDate" ascending:NO];
 	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
 	[fetchRequest setSortDescriptors:sortDescriptors];
 	[sortDescriptors release];
 	[sortDescriptor release];
-	
+	*/
 	
 	favorites = mutableFetchResults;
 	
@@ -91,6 +109,7 @@
 	for(NSManagedObject* fav in favorites)
 	{
 		[maps addObject:[fav valueForKey:@"map"]];
+		NSLog(@"fav order is %f", [[fav valueForKey:@"order"] doubleValue]);
 	}
 	
 	[self.tableView reloadData];
@@ -100,9 +119,37 @@
 		  
 		fetchRequest = [[NSManagedObjectModel mergedModelFromBundles:nil] fetchRequestTemplateForName:@"allMapsRequest"];
 
-		 NSLog(@"map count: %d", [context countForFetchRequest:fetchRequest error:NULL]);
+	int mapCount = [context countForFetchRequest:fetchRequest error:NULL];
+	
+		 NSLog(@"map count: %d", mapCount);
+	
+	
+	
+	NSLog(@"favorites count is %d", [favorites count]);
+	
+	if ([favorites count] > 0) {
+		NSLog(@"turning edit button on");
+		navController.topViewController.navigationItem.rightBarButtonItem = self.editButtonItem;
 		
+		UILabel* instructs = (UILabel *)[self.view viewWithTag:66];
 		
+		if(instructs){
+			[instructs removeFromSuperview];
+			
+			self.tableView.scrollEnabled = YES;
+		}
+	}
+	else {
+		NSLog(@"turning edit button off");
+		navController.topViewController.navigationItem.rightBarButtonItem = nil;
+
+		
+		self.tableView.scrollEnabled = NO;
+		
+		[self.view addSubview:instructions];
+	}
+		
+
 	
 	
 }
@@ -131,7 +178,8 @@
 	
 }
 
-
+/*
+DOESN'T GET CALLED
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -139,10 +187,13 @@
 	[self.navigationController setNavigationBarHidden:NO animated: YES];
 	[self.navigationController setToolbarHidden:YES animated:YES];
 	
+
+	
 	
 
 
 }
+ */
 
 /*
 - (void)viewDidAppear:(BOOL)animated {
@@ -226,6 +277,7 @@
 	
 
 	cell.showsReorderControl = YES;
+	
 	/*
 	cell.textLabel.textColor = [UIColor brownColor];
 	
@@ -240,14 +292,60 @@
     return cell;
 }
 
+
 - (BOOL)tableView:(UITableView *)tableview canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
 	return YES;	
 }
-
+ 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+	
 	
 	int sourceRow = fromIndexPath.row;
 	int destRow = toIndexPath.row;
+	
+	NSLog(@"move row from %d to %d", sourceRow, destRow);
+	
+	BOOL isFirst = destRow <= 0;
+	BOOL isLast = destRow >= [favorites count] - 1;
+	
+	NSManagedObject* theFavorite = [favorites objectAtIndex:sourceRow];
+	
+	NSManagedObject* favBefore = nil;
+	NSManagedObject* favAfter = nil;
+	
+	double theOrder = [[theFavorite valueForKey:@"order"] doubleValue];
+	
+	if (!isFirst) {
+		favBefore = [favorites objectAtIndex:destRow - 1];
+	}
+	if (!isLast) {
+		favAfter = [favorites objectAtIndex:destRow];
+	}
+	
+	if (favBefore && favAfter) {
+		double beforeOrder = [[favBefore valueForKey:@"order"] doubleValue];
+		double afterOrder = [[favAfter valueForKey:@"order"] doubleValue];
+		
+		theOrder = (beforeOrder + afterOrder)/2.0;
+	}
+	else if (favBefore && !favAfter) {
+		double order = [[favBefore valueForKey:@"order"] doubleValue];
+		theOrder = order - 1.0;
+	}
+	else if (!favBefore && favAfter) {
+		double order = [[favAfter valueForKey:@"order"] doubleValue];
+		theOrder = order + 1.0;
+	}
+	
+	[theFavorite setValue:[NSNumber numberWithDouble:theOrder] forKey:@"order"];
+	
+	
+	[context save:NULL];
+
+	NSLog(@"saved new value to %f", theOrder);
+
+	
+	/*
 	
 	if(destRow > sourceRow)
 	{
@@ -268,10 +366,10 @@
 		[maps insertObject:sourceMap atIndex:destRow];
 		
 	}
-
-	
-	
+	 
+	 */
 }
+ 
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
 	

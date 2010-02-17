@@ -604,6 +604,9 @@
 	*/
 	
 	
+	//screenshot for sharing - not implementing now
+	
+	/*
 	CGRect screenRect = [[UIScreen mainScreen] bounds];
 	UIGraphicsBeginImageContext(screenRect.size);
 	[masterView.layer renderInContext:UIGraphicsGetCurrentContext()];
@@ -612,7 +615,7 @@
 	UIImageWriteToSavedPhotosAlbum (sShot, nil, nil, nil);
 	
 	NSData *theImageData = UIImagePNGRepresentation(sShot);
-	
+	*/
 	
 	NSManagedObject *theFavorite = [NSEntityDescription insertNewObjectForEntityForName:@"Favorite" inManagedObjectContext:theContext];
 
@@ -625,17 +628,53 @@
 	
 	NSString* rectString = NSStringFromCGRect(viewPortRect);
 	
-	//[theFavorite setPrimitiveValue:rectValue forKey:@"viewportBounds"];
 	[theFavorite setValue:rectString forKey:@"viewportBoundsString"];
-
-//	[theFavorite setValue:theMapRect forKey:@"mapLocation"];
 	[theFavorite setValue:theMap forKey:@"map"];
 	[theFavorite setValue:[NSDate date] forKey:@"creationDate"];
+	//[theFavorite setValue:theImageData forKey:@"screenshotData"];
 	
-	[theFavorite setValue:theImageData forKey:@"screenshotData"];
+	//get max order number
+	
+	double myOrder = 0.0;
+	
+	NSExpression *keyPathExpression = [NSExpression expressionForKeyPath:@"order"];
+	NSExpression *maxOrderExpression = [NSExpression expressionForFunction:@"max:"
+																  arguments:[NSArray arrayWithObject:keyPathExpression]];
+	NSExpressionDescription *expressionDescription = [[[NSExpressionDescription alloc] init] autorelease];
+	[expressionDescription setName:@"maxOrder"];
+	[expressionDescription setExpression:maxOrderExpression];
+	[expressionDescription setExpressionResultType:NSDoubleAttributeType];
+
+	NSFetchRequest *maxRequest = [[NSFetchRequest alloc] init];
+	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Favorite" inManagedObjectContext:theContext];
+	[maxRequest setEntity:entity];
+	[maxRequest setResultType:NSDictionaryResultType];
+	[maxRequest setPropertiesToFetch:[NSArray arrayWithObject:expressionDescription]];
+	
+
+	NSError *error = nil;
+	NSArray *maxObjects = [theContext executeFetchRequest:maxRequest error:&error];
+	if (maxObjects == nil) {
+		// Handle the error.
+		NSLog(@"error getting max order");
+	}
+	else {
+		if ([maxObjects count] > 0) {
+			//NSLog(@"maxObjects: %@", [maxObjects description]);
+			double theMaxOrder = [(NSNumber *)[[maxObjects objectAtIndex:0] valueForKey:@"maxOrder"] doubleValue];
+			myOrder = theMaxOrder + 1.0;
+		}
+	}
+
+	//setting order
+	
+	NSLog(@"setting order to %f", myOrder);
+	
+	[theFavorite setValue:[NSNumber numberWithDouble:myOrder] forKey:@"order"];
+
 
 	
-	NSError *error;
+	error = nil;
 	if (![theContext save:&error]) {
 		// Handle the error.
 		NSLog(@"Failed to save to data store: %@", [error localizedDescription]);

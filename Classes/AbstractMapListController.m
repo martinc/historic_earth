@@ -40,6 +40,8 @@
 	
 	[self.navigationController setNavigationBarHidden:NO animated: YES];
 	[self.navigationController setToolbarHidden:NO animated:YES];
+	
+	[self.tableView reloadData];
 
 /*	
 	UIDeviceOrientation deviceOrientation = [[UIDevice currentDevice] orientation];

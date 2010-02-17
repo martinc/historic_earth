@@ -19,6 +19,8 @@
 	NSManagedObjectContext* context;
 	
 	UINavigationController* navController;
+	
+	UILabel* instructions;
 
 }
 
