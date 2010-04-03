@@ -31,7 +31,7 @@
 
 @implementation MapViewController
 
-@synthesize maps, currentMapIndex, oldMapView;
+@synthesize maps, currentMapIndex, oldMapView, currentMapID;
 
 - (id) initWithMaps: (NSMutableArray *) theMaps
 {
@@ -60,7 +60,7 @@
 		compassEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:kCOMPASS_ENABLED] && compassAllowed;
 
         
-		maps = [theMaps retain];
+		self.maps = theMaps;
 		
 		currentMapIndex = 0;
 		
@@ -484,7 +484,7 @@
 													action:@selector(setFavorite)
 					 ];
 	
-	UIBarButtonItem* shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(share)];
+	//UIBarButtonItem* shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(share)];
 	
 	selectedFavoriteButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"smallStar-selected.png"]
 													  style:UIBarButtonItemStylePlain
@@ -567,14 +567,8 @@
 
 - (void) setFavorite
 {
+	[self turnOnFavorite];
 	
-	NSMutableArray* newToolbar = [NSMutableArray arrayWithArray: self.toolbarItems];
-	int favoriteIndex = [newToolbar indexOfObject:favoriteButton];
-	
-	[newToolbar removeObjectAtIndex:favoriteIndex];
-	[newToolbar insertObject:selectedFavoriteButton atIndex:favoriteIndex];
-	
-	[self setToolbarItems:newToolbar animated: NO];
 	
 	NSManagedObjectContext* theContext = [(HistoryAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
 	
@@ -668,7 +662,7 @@
 
 	//setting order
 	
-	NSLog(@"setting order to %f", myOrder);
+	//NSLog(@"setting order to %f", myOrder);
 	
 	[theFavorite setValue:[NSNumber numberWithDouble:myOrder] forKey:@"order"];
 
@@ -689,10 +683,12 @@
 		}
 	}
 	else {
-		NSLog(@"successfully saved favorite into persistent store");
+		//NSLog(@"successfully saved favorite into persistent store");
 	}
 
 	
+	//[expressionDescription release];
+	//[maxRequest release];
 	
 	
 	/*
@@ -713,6 +709,27 @@
 }
 
 
+- (void) turnOnFavorite
+{
+	NSLog(@"running turnOnFavorite");
+	NSMutableArray* newToolbar = [NSMutableArray arrayWithArray: self.toolbarItems];
+	
+	if([newToolbar containsObject:favoriteButton]){
+		
+		NSLog(@"turning on favorite");
+
+
+		int favoriteIndex = [newToolbar indexOfObject:favoriteButton];
+		
+		[newToolbar removeObjectAtIndex:favoriteIndex];
+		[newToolbar insertObject:selectedFavoriteButton atIndex:favoriteIndex];
+		
+		[self setToolbarItems:newToolbar animated: NO];
+		
+	}
+	
+}
+
 - (void) turnOffFavorite
 {
 	if([self.toolbarItems containsObject:selectedFavoriteButton]){
@@ -724,14 +741,36 @@
 		
 		[self setToolbarItems:newToolbar animated: NO];
 	}
-	
-	
 }
 
 - (void) unsetFavorite
 {
 	
 	[self turnOffFavorite];
+	
+	
+	//remove this map from favorites
+	
+	NSManagedObjectContext* theContext = [(HistoryAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
+
+	
+	Map* theMap = [maps objectAtIndex:currentMapIndex];
+	
+	NSMutableSet* favorites = [theMap mutableSetValueForKey:@"favorites"];
+	
+	NSLog(@"favorites count is %d", [favorites count]);
+	
+	
+	for(NSManagedObject* fave in favorites)
+	{
+		[theContext deleteObject:fave];
+	}
+	
+	[theContext save:NULL];
+	
+
+	
+	
 }
 
 
@@ -808,9 +847,13 @@
 	[self.navigationController setNavigationBarHidden:YES animated: YES];
 	[self.navigationController setToolbarHidden:YES animated: YES];
 	
+	//[self.navigationController pushViewController:newSearch animated:YES];
+	
 	
 	[self.navigationController setViewControllers:[NSArray arrayWithObjects:mainMenu,newSearch,nil] animated:YES];
 	 
+
+	[newSearch release];
 
 	
 	
@@ -953,7 +996,15 @@
 	Map *theMap = [maps objectAtIndex:currentMapIndex];
 	if(!theMap) return;
 	
-	[self turnOffFavorite];
+	self.currentMapID = theMap.layerID;
+
+	
+	
+	NSMutableSet* favorites = [theMap mutableSetValueForKey:@"favorites"];
+	if([favorites count] > 0)
+		[self turnOnFavorite];
+	else
+		[self turnOffFavorite];
 	
 	/*
 	NSCalendar *gregorian = [[NSCalendar alloc]
@@ -1576,6 +1627,15 @@
 		//NSLog(@"set to masterView.frame to %@ center to %@", NSStringFromCGRect(masterView.frame), NSStringFromCGPoint(masterView.center));
 	}
 
+	Map *theMap = [maps objectAtIndex:currentMapIndex];
+	
+	
+	NSMutableSet* favorites = [theMap mutableSetValueForKey:@"favorites"];
+	if([favorites count] > 0)
+		[self turnOnFavorite];
+	else
+		[self turnOffFavorite];
+	
 	
 
 	[super viewWillAppear:animated];
@@ -1622,13 +1682,16 @@
 	
 	//save coverage rect to user defaults
 	
-	if([((Map *)[maps objectAtIndex:currentMapIndex]).layerID isEqualToString:kCOVERAGE_LAYER_ID])
+	if([currentMapID isEqualToString:kCOVERAGE_LAYER_ID])
 	{
 		RMProjectedRect proj = oldMapView.contents.projectedBounds;
 		CGRect projrect = CGRectMake(proj.origin.easting, proj.origin.northing, proj.size.width, proj.size.height);
 
 		[[NSUserDefaults standardUserDefaults] setObject:(NSDictionary *)CGRectCreateDictionaryRepresentation(projrect) forKey:kCOVERAGE_RECT];
 	}
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+
 
 
 }
@@ -1639,10 +1702,8 @@
 	// e.g. self.myOutlet = nil;
 	
 	
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	
 	
-	if(theMarker) [theMarker release];
 }
 
 
@@ -1656,8 +1717,10 @@
 	
 //[self setToolbarItems: [NSArray array] animated:NO]; 
 
+	if(theMarker) [theMarker release];
+
 	
-	[maps release];
+	self.maps = nil;
 	[mapViews release];
 	
 	if(oldMapView)
@@ -1691,9 +1754,17 @@
 	[compassIndicator release];
 	[barItems release];
 	
+#ifdef DEBUG 
+	NSLog(@"MapviewController dealloc end custom.");
+#endif
+	
 	
 	[super dealloc];
 
+	
+#ifdef DEBUG 
+	NSLog(@"MapviewController dealloc end super.");
+#endif
 	
 }
 

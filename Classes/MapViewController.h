@@ -91,9 +91,14 @@
 	
 	BOOL isNewMapList;
 	
+	NSString* currentMapID;
+	
 }
 
-@property (nonatomic, retain) NSMutableArray* maps;
+@property (nonatomic, readwrite) NSMutableArray* maps;
+
+@property (nonatomic, retain) NSString* currentMapID;
+
 @property (nonatomic, readonly) int currentMapIndex;
 @property (nonatomic, readonly) RMMapView* oldMapView;
 
