@@ -95,12 +95,12 @@
 	
 }
 
-@property (nonatomic, readwrite) NSMutableArray* maps;
+@property (nonatomic, retain) NSMutableArray* maps;
 
 @property (nonatomic, retain) NSString* currentMapID;
 
-@property (nonatomic, readonly) int currentMapIndex;
-@property (nonatomic, readonly) RMMapView* oldMapView;
+@property (nonatomic, assign, readonly) int currentMapIndex;
+@property (nonatomic, retain, readonly) RMMapView* oldMapView;
 
 
 - (id) initWithMaps: (NSMutableArray *) theMaps;
@@ -133,6 +133,10 @@
 - (void) loadingNewMaps;
 
 - (void) setProjectedBounds: (RMProjectedRect) newRect;
+
+- (void) turnOnFavorite;
+- (void) turnOffFavorite;
+- (void) unsetFavorite;
 
 
 @end

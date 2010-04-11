@@ -133,8 +133,9 @@
 	
 	[NSThread detachNewThreadSelector: @selector(serverHeartbeat:) toTarget:self withObject:nil];	
 	
+	//disabling this rating shit
 	
-	[Appirater appLaunched];
+	//[Appirater appLaunched];
 
 }
 

@@ -711,12 +711,12 @@
 
 - (void) turnOnFavorite
 {
-	NSLog(@"running turnOnFavorite");
+	//NSLog(@"running turnOnFavorite");
 	NSMutableArray* newToolbar = [NSMutableArray arrayWithArray: self.toolbarItems];
 	
 	if([newToolbar containsObject:favoriteButton]){
 		
-		NSLog(@"turning on favorite");
+		//NSLog(@"turning on favorite");
 
 
 		int favoriteIndex = [newToolbar indexOfObject:favoriteButton];
@@ -758,7 +758,7 @@
 	
 	NSMutableSet* favorites = [theMap mutableSetValueForKey:@"favorites"];
 	
-	NSLog(@"favorites count is %d", [favorites count]);
+	//NSLog(@"favorites count is %d", [favorites count]);
 	
 	
 	for(NSManagedObject* fave in favorites)

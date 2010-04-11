@@ -92,7 +92,7 @@
 		}
 		
 		
-	NSLog(@"total of %d favorites", [mutableFetchResults count]);
+	//NSLog(@"total of %d favorites", [mutableFetchResults count]);
 	
 	/*
 	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"creationDate" ascending:NO];
@@ -109,7 +109,7 @@
 	for(NSManagedObject* fav in favorites)
 	{
 		[maps addObject:[fav valueForKey:@"map"]];
-		NSLog(@"fav order is %f", [[fav valueForKey:@"order"] doubleValue]);
+		//NSLog(@"fav order is %f", [[fav valueForKey:@"order"] doubleValue]);
 	}
 	
 	[self.tableView reloadData];
@@ -121,14 +121,14 @@
 
 	int mapCount = [context countForFetchRequest:fetchRequest error:NULL];
 	
-		 NSLog(@"map count: %d", mapCount);
+		// NSLog(@"map count: %d", mapCount);
 	
 	
 	
-	NSLog(@"favorites count is %d", [favorites count]);
+	//NSLog(@"favorites count is %d", [favorites count]);
 	
 	if ([favorites count] > 0) {
-		NSLog(@"turning edit button on");
+		//NSLog(@"turning edit button on");
 		navController.topViewController.navigationItem.rightBarButtonItem = self.editButtonItem;
 		
 		UILabel* instructs = (UILabel *)[self.view viewWithTag:66];
@@ -140,7 +140,7 @@
 		}
 	}
 	else {
-		NSLog(@"turning edit button off");
+		//NSLog(@"turning edit button off");
 		navController.topViewController.navigationItem.rightBarButtonItem = nil;
 
 		
@@ -303,7 +303,7 @@ DOESN'T GET CALLED
 	int sourceRow = fromIndexPath.row;
 	int destRow = toIndexPath.row;
 	
-	NSLog(@"move row from %d to %d", sourceRow, destRow);
+	//NSLog(@"move row from %d to %d", sourceRow, destRow);
 	
 	BOOL isFirst = destRow <= 0;
 	BOOL isLast = destRow >= [favorites count] - 1;
@@ -342,7 +342,7 @@ DOESN'T GET CALLED
 	
 	[context save:NULL];
 
-	NSLog(@"saved new value to %f", theOrder);
+	//NSLog(@"saved new value to %f", theOrder);
 
 	
 	/*

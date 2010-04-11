@@ -81,7 +81,7 @@
 							 theRect.southwest.longitude, theRect.southwest.latitude, theRect.northeast.longitude, theRect.northeast.latitude]
 							stringByAddingPercentEscapesUsingEncoding: NSASCIIStringEncoding];
 	
-	NSLog(@"request URL is: \"%@\"", requestURL);
+	//NSLog(@"request URL is: \"%@\"", requestURL);
 	
 	
 	

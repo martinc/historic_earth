@@ -102,7 +102,6 @@
 		5BCD483D1025538D0066772E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BCD483C1025538D0066772E /* QuartzCore.framework */; };
 		5BCD503F102554980066772E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BCD503E102554980066772E /* CoreLocation.framework */; };
 		5BCD504A102555D00066772E /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BCD5049102555D00066772E /* MapViewController.m */; };
-		5BCD507110255B880066772E /* libMapView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BCD5039102554840066772E /* libMapView.a */; };
 		5BCD51BB102570360066772E /* MainMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BCD51BA102570360066772E /* MainMenuController.m */; };
 		5BD69FA1105ED62B00959AF3 /* question-mark.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BD69FA0105ED62B00959AF3 /* question-mark.png */; };
 		5BD69FA8105ED66700959AF3 /* HelpController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BD69FA7105ED66700959AF3 /* HelpController.m */; };
@@ -110,6 +109,7 @@
 		5BD69FAE105ED87000959AF3 /* help-light.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BD69FAC105ED87000959AF3 /* help-light.png */; };
 		5BD6A067106009E900959AF3 /* marker-brown.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BD6A066106009E900959AF3 /* marker-brown.png */; };
 		5BE289B710D032620058D496 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BE289B610D032620058D496 /* MessageUI.framework */; };
+		5BE50331116EC96A008C7759 /* libMapView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BCD5039102554840066772E /* libMapView.a */; };
 		5BE9E387104A29950087539C /* marker-crosshair.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BE9E386104A29950087539C /* marker-crosshair.png */; };
 		5BF87E5B10366A3800787B2A /* PurchaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BF87E5A10366A3800787B2A /* PurchaseController.m */; };
 		5BF87E8B1036783300787B2A /* StoreObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BF87E8A1036783300787B2A /* StoreObserver.m */; };
@@ -290,12 +290,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BE50331116EC96A008C7759 /* libMapView.a in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
 				5BCD483D1025538D0066772E /* QuartzCore.framework in Frameworks */,
 				5BCD503F102554980066772E /* CoreLocation.framework in Frameworks */,
-				5BCD507110255B880066772E /* libMapView.a in Frameworks */,
 				5B7F3E1A10360CE500114D2D /* StoreKit.framework in Frameworks */,
 				5B040873103A5AD700F7C25B /* SystemConfiguration.framework in Frameworks */,
 				5B8D636F1048978300208F64 /* libxml2.dylib in Frameworks */,
@@ -910,8 +910,8 @@
 					"-all_load",
 				);
 				PREBINDING = NO;
-				PROVISIONING_PROFILE = "86D7A650-4D42-4FF3-915C-0AF143A3E2D5";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "86D7A650-4D42-4FF3-915C-0AF143A3E2D5";
+				PROVISIONING_PROFILE = "A935268D-ACA8-4665-9B1C-71F869A4F9D8";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A935268D-ACA8-4665-9B1C-71F869A4F9D8";
 				SDKROOT = iphoneos3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

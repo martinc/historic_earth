@@ -221,12 +221,14 @@ float originShift = 2 * M_PI * 6378137 / 2.0;
 #endif
 	
 	
-	
+	/*
+	 
 	NSDictionary* entities = [[NSManagedObjectModel mergedModelFromBundles:nil] entitiesByName];
 	for(NSString* key in [entities allKeys])
 	{
 		NSLog(@"have entity: %@", key);
 	}
+	 */
 	
 	
 	

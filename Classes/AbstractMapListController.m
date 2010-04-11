@@ -375,12 +375,12 @@
 								
 								//[theContext assignObject:theMap toPersistentStore:
 								 //[((HistoryAppDelegate *)[[UIApplication sharedApplication] delegate]) inMemoryStore]];
-								NSLog(@"didn't find map in datastore");
+								//NSLog(@"didn't find map in datastore");
 							}
 							else
 							{
 								theMap = [matchingResults objectAtIndex:0];
-								NSLog(@"found map in datastore");
+								//NSLog(@"found map in datastore");
 
 							}
 							
@@ -691,9 +691,9 @@
 			NSLog(@"  %@", [error userInfo]);
 		}
 	}
-	else {
-		NSLog(@"successfully saved favorite into persistent store");
-	}
+	/*else {
+		//NSLog(@"successfully saved favorite into persistent store");
+	}*/
 
 	
 
